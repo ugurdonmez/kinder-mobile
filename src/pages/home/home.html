@@ -5,6 +5,7 @@
   </ion-navbar>
 
 </ion-header>
+
 <ion-content padding>
     
     <ion-grid>
@@ -14,7 +15,12 @@
             <ion-col width-33>Student photo</ion-col>
         </ion-row>
         <ion-row class="row-25">
-            <ion-col width-33>Calender</ion-col>
+            <ion-col width-33 class="center-class">
+                <div class="home-icon-button-div" (click)="openCalender(p)">
+                    <ion-icon class="icon-class" ios="ios-calendar" md="md-calendar"></ion-icon>
+                    <p>Calender</p>
+                </div>
+            </ion-col>
             <ion-col width-33>Attendence</ion-col>
             <ion-col width-33>Message</ion-col>
         </ion-row>

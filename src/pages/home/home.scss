@@ -5,3 +5,30 @@ page-home {
 .row-25 {
     height: 25%;
 }
+
+.home-icon-button-div {
+    text-align: center;
+    
+    ion-icon {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        width: 100%;
+        float: left;
+    }
+    
+    p {
+        margin-top: -7%;
+        font-size: 200%;
+        width: 100%;
+        float: left;
+    }
+    
+}
+
+.center-class {
+    text-align: center;
+}
+
+.icon-class {
+    font-size: 1500%;
+}
