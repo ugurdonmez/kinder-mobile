@@ -1,3 +1,52 @@
+<!--
+
+<ion-content padding>
+  <form [formGroup]="loginForm" (submit)="loginUser()" novalidate>
+
+    <ion-item>
+      <ion-label stacked>Email</ion-label>
+      <ion-input #email formControlName="email" type="email" (change)="elementChanged(email)"
+        placeholder="Your email address"
+        [class.invalid]="!loginForm.controls.email.valid &&
+          (emailChanged || submitAttempt)"></ion-input>
+    </ion-item>
+    <ion-item class="error-message" *ngIf="!loginForm.controls.email.valid  &&
+      (emailChanged || submitAttempt)">
+      <p>Please enter a valid email.</p>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Password</ion-label>
+      <ion-input #password formControlName="password" type="password"
+        (change)="elementChanged(password)"
+        placeholder="Your password"
+        [class.invalid]="!loginForm.controls.password.valid &&
+          (passwordChanged || submitAttempt)"></ion-input>
+    </ion-item>
+    <ion-item class="error-message" *ngIf="!loginForm.controls.password.valid  &&
+      (passwordChanged || submitAttempt)">
+      <p>Your password needs more than 6 characters.</p>
+    </ion-item>
+
+    <button ion-button block type="submit">
+      Login
+    </button>
+
+  </form>
+
+  <button ion-button block clear (click)="goToResetPassword()">
+    I forgot my password 🙁
+  </button>
+
+  <button ion-button block clear (click)="createAccount()">
+    Create a new account
+  </button>
+
+</ion-content>
+-->
+
+
+
 <ion-content class="login-content" padding>
   <ion-row class="logo-row">
     <ion-col></ion-col>
@@ -7,17 +56,24 @@
     <ion-col></ion-col>
   </ion-row>
   <div class="login-box">
-    <form (ngSubmit)="login()" #registerForm="ngForm">
+    <form [formGroup]="loginForm" (submit)="loginUser()" novalidate>
       <ion-row>
         <ion-col>
           <ion-list inset>
 
             <ion-item>
-              <ion-input type="text" placeholder="Email" name="email" [(ngModel)]="registerCredentials.email" required></ion-input>
+                <ion-input #email formControlName="email" type="email" (change)="elementChanged(email)"
+        placeholder="Your email address"
+        [class.invalid]="!loginForm.controls.email.valid &&
+          (emailChanged || submitAttempt)"></ion-input>
             </ion-item>
 
             <ion-item>
-              <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="registerCredentials.password" required></ion-input>
+              <ion-input #password formControlName="password" type="password"
+        (change)="elementChanged(password)"
+        placeholder="Your password"
+        [class.invalid]="!loginForm.controls.password.valid &&
+          (passwordChanged || submitAttempt)"></ion-input>
             </ion-item>
 
           </ion-list>
@@ -26,11 +82,20 @@
 
       <ion-row>
         <ion-col class="signup-col">
-          <button ion-button class="submit-btn" full type="submit" [disabled]="!registerForm.form.valid">Login</button>
-          <button ion-button class="register-btn" block clear (click)="createAccount()">Create New Account</button>
+          <button ion-button block type="submit">
+      Login
+    </button>
         </ion-col>
       </ion-row>
 
     </form>
+
+      <button ion-button block clear (click)="goToResetPassword()">
+    I forgot my password 🙁
+  </button>
+
+  <button ion-button block clear (click)="createAccount()">
+    Create a new account
+  </button>
   </div>
 </ion-content>
