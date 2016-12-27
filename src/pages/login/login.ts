@@ -57,22 +57,23 @@ export class LoginPage {
             console.log(this.loginForm.value);
         } else {
             this.authData.loginUser(this.loginForm.value.email,
-            this.loginForm.value.password).then( authData => {
-                this.nav.setRoot(HomePage);
-            }, error => {
-                this.loading.dismiss().then( () => {
-                    let alert = this.alertCtrl.create({
-                        message: error.message,
-                        buttons: [
-                            {
-                                text: "Ok",
-                                role: 'cancel'
-                            }
-                        ]
+                                    this.loginForm.value.password)
+                .then( authData => {
+                    this.nav.setRoot(HomePage);
+                }, error => {
+                    this.loading.dismiss().then( () => {
+                        let alert = this.alertCtrl.create({
+                            message: error.message,
+                            buttons: [
+                                {
+                                    text: "Ok",
+                                    role: 'cancel'
+                                }
+                            ]
+                        });
+                        alert.present();
                     });
-                    alert.present();
                 });
-            });
 
             this.loading = this.loadingCtrl.create({
                 dismissOnPageChange: true,
