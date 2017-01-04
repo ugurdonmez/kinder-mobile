@@ -23,15 +23,13 @@ export class RegisterPage {
     loading;
 
     constructor(public nav: NavController, public authData: AuthData,
-      public formBuilder: FormBuilder, public loadingCtrl: LoadingController,
-      public alertCtrl: AlertController) {
+                public formBuilder: FormBuilder, public loadingCtrl: LoadingController,
+                public alertCtrl: AlertController) {
 
-      this.signupForm = formBuilder.group({
-        email: ['', Validators.compose([Validators.required,
-          EmailValidator.isValid])],
-          password: ['', Validators.compose([Validators.minLength(6),
-          Validators.required])]
-      });
+        this.signupForm = formBuilder.group({
+            email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
+            password: ['', Validators.compose([Validators.minLength(6), Validators.required])]
+        });
     }
 
     /**
@@ -54,6 +52,9 @@ export class RegisterPage {
         if (!this.signupForm.valid){
             console.log(this.signupForm.value);
         } else {
+
+            // check that email is already saved in under database user table
+
             this.authData.signupUser(this.signupForm.value.email,
                 this.signupForm.value.password).then(() => {
                     this.nav.setRoot(HomePage);
