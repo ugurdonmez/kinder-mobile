@@ -8,6 +8,7 @@ import { MenuController } from 'ionic-angular';
 
 import { AuthData } from '../../providers/auth-data';
 import { LoginPage } from '../login/login';
+import { SchoolAdminBranchesPage } from '../school-admin-branches/school-admin-branches';
 
 
 @Component({
@@ -25,6 +26,9 @@ export class HomePage {
 
     openCalender(page) {
 
+        console.log('open calender');
+        console.log(page);
+
         this.navCtrl.push(CalenderPage);
     }
 
@@ -39,6 +43,12 @@ export class HomePage {
                     console.log('logout error!');
                 });
                 */
+    }
+
+    open(page) {
+        console.log(page);
+
+        this.navCtrl.push(page.component);
     }
 
     /*
