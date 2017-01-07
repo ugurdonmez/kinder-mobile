@@ -4,6 +4,7 @@ export interface BranchModel {
     name: string;
     manager: string;
     manager_tel: string;
+    address: string;
     classes: Array<string>;
 
 }

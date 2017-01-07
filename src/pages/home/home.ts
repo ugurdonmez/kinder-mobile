@@ -9,6 +9,7 @@ import { MenuController } from 'ionic-angular';
 import { AuthData } from '../../providers/auth-data';
 import { LoginPage } from '../login/login';
 import { SchoolAdminBranchesPage } from '../school-admin-branches/school-admin-branches';
+import { SchoolAdminAddUpdateBranchPage } from '../school-admin-add-update-branch/school-admin-add-update-branch';
 
 
 @Component({
@@ -35,26 +36,17 @@ export class HomePage {
     logout() {
         console.log('logout clicked');
         this.authData.logoutUser();
-        /*
-                .then( authData => {
-                    console.log('logout success!');
-                    this.navCtrl.setRoot(LoginPage);
-                }, error => {
-                    console.log('logout error!');
-                });
-                */
     }
 
-    open(page) {
-        console.log(page);
+    openSchoolAdminBranch(page) {
+        console.log('open school admin branch')
 
-        this.navCtrl.push(page.component);
+        this.navCtrl.push(SchoolAdminBranchesPage);
     }
 
-    /*
-    openMenu() {
-        this.menuCtrl.open();
-    }
-    */
+    openSchoolAdminBranchUpdate(page) {
+        console.log('open school admin branch')
 
+        this.navCtrl.push(SchoolAdminAddUpdateBranchPage);
+    }
 }
