@@ -13,6 +13,7 @@ export class AuthData {
         af.auth.subscribe( user => {
             if (user) {
                 this.fireAuth = user.auth;
+                console.log("User:");
                 console.log(user);
             }
         });
@@ -32,6 +33,14 @@ export class AuthData {
 
     signupUser(newEmail: string, newPassword: string): any {
         return this.af.auth.createUser({ email: newEmail, password: newPassword });
+    }
+
+    getUserId(): any{
+        var userId;
+        userId = this.fireAuth.email.split("@")[0];
+        console.log ("user id is: " + userId);
+        return userId
+
     }
 
 }
