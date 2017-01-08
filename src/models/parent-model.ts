@@ -1,4 +1,4 @@
-export interface ParentModel {
+export class ParentModel {
     id: string;
     name: string;
     surname: string;

@@ -1,4 +1,4 @@
-export interface StudentModel {
+export class StudentModel {
     id: string;
     name: string;
     surname: string;
