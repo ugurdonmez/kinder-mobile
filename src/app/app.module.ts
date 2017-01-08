@@ -13,6 +13,7 @@ import { ResetPasswordPage } from '../pages/reset-password/reset-password';
 import { CalenderPage } from '../pages/calender/calender';
 import { SchoolAdminBranchesPage } from '../pages/school-admin-branches/school-admin-branches';
 import { SchoolAdminAddUpdateBranchPage } from '../pages/school-admin-add-update-branch/school-admin-add-update-branch';
+import { SchoolAdminAddUpdateClassPage } from '../pages/school-admin-add-update-class/school-admin-add-update-class';
 
 // Importing provider
 import { AuthData } from '../providers/auth-data';
@@ -44,7 +45,8 @@ const myFirebaseAuthConfig = {
         ResetPasswordPage,
         RegisterPage,
         SchoolAdminBranchesPage,
-        SchoolAdminAddUpdateBranchPage
+        SchoolAdminAddUpdateBranchPage,
+        SchoolAdminAddUpdateClassPage
     ],
     imports: [
         IonicModule.forRoot(MyApp),
@@ -60,7 +62,8 @@ const myFirebaseAuthConfig = {
         ResetPasswordPage,
         RegisterPage,
         SchoolAdminBranchesPage,
-        SchoolAdminAddUpdateBranchPage
+        SchoolAdminAddUpdateBranchPage,
+        SchoolAdminAddUpdateClassPage
     ],
     providers: [
         {provide: ErrorHandler, useClass: IonicErrorHandler},
