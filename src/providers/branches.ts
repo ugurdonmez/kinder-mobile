@@ -3,13 +3,14 @@ import 'rxjs/add/operator/map';
 
 import { AngularFire } from 'angularfire2';
 import {BranchModel} from '../models/branch-model';
+import { AuthData } from './auth-data';
 
 @Injectable()
 export class Branches {
 
     branches: any;
 
-    constructor(public af: AngularFire) {
+    constructor(public af: AngularFire, public authData: AuthData){
         this.branches = af.database.list('/branches');
     }
 
@@ -23,8 +24,13 @@ export class Branches {
     }
 
     public addBranch(branch: BranchModel) {
-        this.branches.push(branch)
+        var pushedBranch = this.branches.push(branch);
+        var branchId = pushedBranch.key;
+        //console.log("branchId: " + branchId);
 
+        var userId = this.authData.getUserId();
+        var user_branches = this.af.database.list('/user-branches/'+userId);
+        user_branches.push({'branchId':branchId});
     }
 
     public updateBranch(branch: BranchModel) {
