@@ -24,6 +24,7 @@ export class Branches {
 
     public addBranch(branch: BranchModel) {
         this.branches.push(branch)
+
     }
 
     public updateBranch(branch: BranchModel) {

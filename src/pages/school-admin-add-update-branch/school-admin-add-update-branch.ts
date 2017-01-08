@@ -9,27 +9,17 @@ import { ClassModel } from '../../models/class-model';
 @Component({
   selector: 'page-school-admin-add-update-branch',
   templateUrl: 'school-admin-add-update-branch.html',
-    providers: [Branches, BranchModel]
+    providers: [Branches]
 })
 
 export class SchoolAdminAddUpdateBranchPage {
-    mockBranchModel: BranchModel;
+    mockBranch: BranchModel = new BranchModel();
 
     classes: Array<ClassModel> = []
 
     constructor(public navCtrl: NavController, public branches: Branches) {
         this.importClassesMock();
-
-        this.mockBranchModel = new BranchModel();
-        this.mockBranchModel.name = "mockName";
-        this.mockBranchModel.manager = "mockmanager";
-        this.mockBranchModel.manager_tel = "mockmanager_tel";
-        this.mockBranchModel.address = "mockaddress";
-        this.mockBranchModel.classes = [
-            "mocksample1",
-            "mocksample2",
-            "mocksample3",
-        ];
+        this.importBranchMock();
     }
 
     ionViewDidLoad() {
@@ -38,7 +28,7 @@ export class SchoolAdminAddUpdateBranchPage {
 
     addNewBranch(){
         //console.log("addNewBranch() triggered.");
-        this.branches.addBranch(this.mockBranchModel);
+        this.branches.addBranch(this.mockBranch);
     }
 
     importClassesMock() {
@@ -77,4 +67,15 @@ export class SchoolAdminAddUpdateBranchPage {
         this.classes.push(c3);
     }
 
+    importBranchMock() {
+        this.mockBranch.name = "mockName";
+        this.mockBranch.manager = "mockmanager";
+        this.mockBranch.manager_tel = "mockmanager_tel";
+        this.mockBranch.address = "mockaddress";
+        this.mockBranch.classes = [
+            "mocksample1",
+            "mocksample2",
+            "mocksample3",
+        ];
+    }
 }

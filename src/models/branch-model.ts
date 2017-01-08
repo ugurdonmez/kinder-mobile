@@ -1,4 +1,4 @@
-export interface BranchModel {
+export class BranchModel {
     id: string;
     name: string;
     manager: string;
