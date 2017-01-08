@@ -1,9 +1,3 @@
-<!--
-  Generated template for the SchoolAdminTeachers page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
@@ -14,5 +8,20 @@
 
 
 <ion-content padding>
+    <ion-list>
 
+        <button ion-item *ngFor="let item of teachers">
+            <div>
+                <h2>{{item.name}}</h2>
+                <p>{{item.manager}}</p>
+                <p>{{item.manager_tel}}</p>
+            </div>
+
+            <div item-right>
+                <p>{{item.address}}</p>
+            </div>
+        </button>
+    </ion-list>
+
+    <ion-icon class="teacher-add-circle-icon" ios="ios-add-circle" md="md-add-circle"></ion-icon>
 </ion-content>

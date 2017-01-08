@@ -1,22 +1,26 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
-/*
-  Generated class for the SchoolAdminTeachers page.
+import { TeacherModel } from '../../models/teacher-model';
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-school-admin-teachers',
   templateUrl: 'school-admin-teachers.html'
 })
 export class SchoolAdminTeachersPage {
 
-  constructor(public navCtrl: NavController) {}
+    teachers: Array<TeacherModel> = []
 
-  ionViewDidLoad() {
-    console.log('Hello SchoolAdminTeachersPage Page');
-  }
+    constructor(public navCtrl: NavController) {
+        this.importTeachersMock();
+    }
+
+    ionViewDidLoad() {
+        console.log('Hello SchoolAdminTeachersPage Page');
+    }
+
+    importTeachersMock() {
+
+    }
 
 }

@@ -10,6 +10,7 @@ import { AuthData } from '../../providers/auth-data';
 import { LoginPage } from '../login/login';
 import { SchoolAdminBranchesPage } from '../school-admin-branches/school-admin-branches';
 import { SchoolAdminAddUpdateBranchPage } from '../school-admin-add-update-branch/school-admin-add-update-branch';
+import { SchoolAdminTeachersPage } from '../school-admin-teachers/school-admin-teachers';
 
 
 @Component({
@@ -48,5 +49,11 @@ export class HomePage {
         console.log('open school admin branch')
 
         this.navCtrl.push(SchoolAdminAddUpdateBranchPage);
+    }
+
+    openSchoolAdminTeachers(page) {
+        console.log('open school admin teachers')
+
+        this.navCtrl.push(SchoolAdminTeachersPage);
     }
 }
