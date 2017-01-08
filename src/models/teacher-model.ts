@@ -2,8 +2,7 @@ export interface TeacherModel {
     id: string;
     name: string;
     surname: string;
-    branch_id: string;
-    class_id: string;
+    branch_class: Array<string>;
     notes: string;
     photo_url: string;
 }
