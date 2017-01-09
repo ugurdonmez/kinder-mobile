@@ -2,12 +2,13 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 import { BranchModel } from '../../models/branch-model';
-
+import {Branches} from '../../providers/branches'
 
 
 @Component({
   selector: 'page-school-admin-branches',
-  templateUrl: 'school-admin-branches.html'
+  templateUrl: 'school-admin-branches.html',
+    providers: [Branches]
 })
 
 
@@ -15,8 +16,10 @@ export class SchoolAdminBranchesPage {
 
     branches: Array<BranchModel> = []
 
-    constructor(public navCtrl: NavController) {
+    constructor(public navCtrl: NavController, public branchesProvider: Branches) {
         this.importBranchesMock();
+        branchesProvider.getBranch("-K_zkAEp-Oi0glququHy");
+
     }
 
     ionViewDidLoad() {

@@ -15,12 +15,15 @@ export class Branches {
     }
 
     public getUserBranches() {
-
+        //this comment will be deleted when this method is completed
+        var userId = this.authData.getUserId();
+        var user_branches = this.af.database.list('/user-branches/'+userId);
+        //this comment will be deleted when this method is completed
     }
 
     public getBranch(branchId: string) {
-        // branch = this.branches.object('/branches/'+branchId);
-        // console.log(branch.name)
+        var fetchedBranch = this.af.database.object('/branches/' + branchId);
+        return fetchedBranch;
     }
 
     public addBranch(branch: BranchModel) {
