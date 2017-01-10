@@ -11,14 +11,17 @@
     <ion-list>
 
         <button ion-item *ngFor="let item of teachers">
+            <div item-left>
+                <p>{{item.name}}</p>
+                <p>{{item.surname}}</p>
+            </div>
+
             <div>
-                <h2>{{item.name}}</h2>
-                <p>{{item.manager}}</p>
-                <p>{{item.manager_tel}}</p>
+                <p>{{item.branches}}</p>
             </div>
 
             <div item-right>
-                <p>{{item.address}}</p>
+                <p *ngFor="let item-class of item.classes">{{item-class}}</p>
             </div>
         </button>
     </ion-list>

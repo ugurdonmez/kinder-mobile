@@ -20,7 +20,19 @@ export class SchoolAdminTeachersPage {
     }
 
     importTeachersMock() {
+        let t1: TeacherModel = {
+            id: 'id1',
+            name: 'ali',
+            surname: 'donmez',
+            classes: ['class a', 'class b'],
+            branches: ['eryaman', 'cankaya'],
+            notes: '',
+            photo_url: ''
+        };
 
+        console.log(t1);
+
+        this.teachers.push(t1);
     }
 
 }
