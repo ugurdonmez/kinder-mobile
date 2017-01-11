@@ -17,11 +17,11 @@
             </div>
 
             <div>
-                <p>{{item.branches}}</p>
+                <p *ngFor="let branch of item.branches">{{branch}}</p>
             </div>
 
             <div item-right>
-                <p *ngFor="let item-class of item.classes">{{item-class}}</p>
+                <p *ngFor="let class of item.classes">{{class}}</p>
             </div>
         </button>
     </ion-list>
