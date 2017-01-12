@@ -15,8 +15,6 @@ export class Branches {
     }
 
     public getUserBranches(callback) {
-        //this comment will be deleted when this method is completed
-
         let branchCursors : any[] = [];
         var userId = this.authData.getUserId();
 
@@ -24,67 +22,16 @@ export class Branches {
         // console.log("user_branch_ids:");
         // console.log(user_branch_ids);
 
-
-        var branchIds;
-        // console.log("icindekiler");
-        // user_branch_ids.subscribe(snapshots=>console.log(snapshots));
         user_branch_ids.subscribe(snapshots=>{
             snapshots.forEach(
                 snapshot=>{
                     // console.log(snapshot.val().branchId);
                     branchCursors.push(snapshot.val().branchId);
                 });
-            // console.log("branchCursors:")
             // console.log(branchCursors)
             callback(branchCursors)
         }
         )
-
-
-
-
-
-
-
-        // user_branch_ids.subscribe(snapshots=>{
-        //     snapshots.forEach(snapshot=>{
-        //
-        //         console.log(snapshot.val);
-        //     })
-        // });
-
-        // user_branch_ids.subscribe(snapshots=>{
-        //     snapshots.forEach(snapshot=>{
-        //         let key = snapshot.val
-        //         console.log("key: "+key);
-        //         var userBranchSnapshot = this.af.database.object('/branches/', {preserveSnapshot: false})
-        //         branchCursors.push(userBranchSnapshot)
-        //
-        //     }
-        //     )
-        // }
-        // );
-
-        // console.log("branchCursors:");
-        // console.log(branchCursors);
-        //
-        // console.log("branches:");
-        // var branchData;
-        // for (branchData in branchCursors){
-        //     console.log(branchData);
-        // }
-        // branchCursors.subscribe(
-        //     snapshots=>{
-        //         snapshots.forEach(snapshot=>
-        //         {
-        //             console.log(snapshot.val);
-        //         })
-        //     }
-        // )
-        // for (let user_branch_id of user_branch_ids)
-        // {
-        //
-        // }
     }
 
     public getBranch(branchId: string) {
