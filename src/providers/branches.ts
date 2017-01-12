@@ -49,6 +49,6 @@ export class Branches {
     }
 
     public updateBranch(branch: BranchModel) {
-
+        this.af.database.object('/branches/'+branch.id).set(branch);
     }
 }
