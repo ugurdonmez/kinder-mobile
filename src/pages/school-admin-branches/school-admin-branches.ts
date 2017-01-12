@@ -20,6 +20,15 @@ export class SchoolAdminBranchesPage {
         this.importBranchesMock();
         branchesProvider.getBranch("-K_zkAEp-Oi0glququHy");
 
+        //to get a result, branchesProvider.getUserBranches() function should be called like below.
+        var userBranchArray
+        branchesProvider.getUserBranches(function(userBranchArray){
+            console.log(userBranchArray)
+        })
+
+
+
+
     }
 
     ionViewDidLoad() {
