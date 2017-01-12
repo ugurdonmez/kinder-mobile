@@ -35,8 +35,7 @@ export class Branches {
     }
 
     public getBranch(branchId: string) {
-        var fetchedBranch = this.af.database.object('/branches/' + branchId);
-        return fetchedBranch;
+        return this.af.database.object('/branches/' + branchId);
     }
 
     public addBranch(branch: BranchModel) {

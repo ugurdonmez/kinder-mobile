@@ -30,9 +30,20 @@ export class SchoolAdminTeachersPage {
             photo_url: ''
         };
 
+        let t2: TeacherModel = {
+            id: 'id1',
+            name: 'ali',
+            surname: 'donmez',
+            classes: ['class a', 'class b', 'class c', 'class d'],
+            branches: ['eryaman', 'cankaya', 'kecioren', 'maltepe'],
+            notes: '',
+            photo_url: ''
+        };
+
         console.log(t1);
 
         this.teachers.push(t1);
+        this.teachers.push(t2);
     }
 
 }
