@@ -11,7 +11,7 @@ import { LoginPage } from '../login/login';
 import { SchoolAdminBranchesPage } from '../school-admin-branches/school-admin-branches';
 import { SchoolAdminAddUpdateBranchPage } from '../school-admin-add-update-branch/school-admin-add-update-branch';
 import { SchoolAdminTeachersPage } from '../school-admin-teachers/school-admin-teachers';
-
+import { SchoolAdminAddUpdateClassPage } from '../school-admin-add-update-class/school-admin-add-update-class';
 
 @Component({
   selector: 'page-home',
@@ -55,5 +55,11 @@ export class HomePage {
         console.log('open school admin teachers')
 
         this.navCtrl.push(SchoolAdminTeachersPage);
+    }
+
+    openSchoolAdminClasses(page) {
+        console.log('open school admin classes')
+
+        this.navCtrl.push(SchoolAdminAddUpdateClassPage);
     }
 }
