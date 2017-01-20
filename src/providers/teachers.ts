@@ -40,7 +40,7 @@ export class Teachers {
     }
 
     public addTeacher(teacher: TeacherModel) {
-        var pushedTeacher = this.teachers.push(teacher);
+        this.teachers.push(teacher);
 
 
         // TODO ugur hoca'nin github'dan issue #6'ya verecegi yanita gore asagidaki kisim geri eklenebilir

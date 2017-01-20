@@ -19,7 +19,7 @@ export class Students {
     }
 
     public addStudent(student: StudentModel) {
-        var pushedStudent = this.students.push(student);
+        this.students.push(student);
     }
 
     public updateStudent(student: StudentModel) {

@@ -7,7 +7,7 @@ import { CalenderPage } from '../calender/calender';
 import { MenuController } from 'ionic-angular';
 
 import { AuthData } from '../../providers/auth-data';
-import { LoginPage } from '../login/login';
+// import { LoginPage } from '../login/login';
 import { SchoolAdminBranchesPage } from '../school-admin-branches/school-admin-branches';
 import { SchoolAdminAddUpdateBranchPage } from '../school-admin-add-update-branch/school-admin-add-update-branch';
 import { SchoolAdminTeachersPage } from '../school-admin-teachers/school-admin-teachers';

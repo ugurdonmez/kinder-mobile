@@ -19,7 +19,7 @@ export class Parents {
     }
 
     public addParent(parent: ParentModel) {
-        var pushedParent = this.parents.push(parent);
+        this.parents.push(parent);
     }
 
     public updateParent(parent: ParentModel) {
