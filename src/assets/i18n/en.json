@@ -1,0 +1,7 @@
+{
+  "title" : "Internationalization Example",
+  "segment": {
+    "Hello": "Hello",
+    "Good Bye": "Good Bye"
+  }
+}

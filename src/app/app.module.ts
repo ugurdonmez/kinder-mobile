@@ -21,6 +21,10 @@ import { AuthData } from '../providers/auth-data';
 
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 
+// Localization
+import { TranslateModule, TranslateStaticLoader, TranslateLoader } from 'ng2-translate/ng2-translate';
+import { Http } from "@angular/http";
+
 // AF2 Settings
 export const firebaseConfig = {
     apiKey: "AIzaSyC3ZHNBANkIOGZsJwv4iZyhqUzXnYrz2sk",
@@ -33,7 +37,11 @@ export const firebaseConfig = {
 const myFirebaseAuthConfig = {
     provider: AuthProviders.Password,
     method: AuthMethods.Password
-}
+};
+
+export function createTranslateLoader(http: Http) {
+    return new TranslateStaticLoader(http, 'assets/i18n', '.json');
+};
 
 
 @NgModule({
@@ -52,7 +60,12 @@ const myFirebaseAuthConfig = {
     ],
     imports: [
         IonicModule.forRoot(MyApp),
-        AngularFireModule.initializeApp(firebaseConfig, myFirebaseAuthConfig)
+        AngularFireModule.initializeApp(firebaseConfig, myFirebaseAuthConfig),
+        TranslateModule.forRoot({
+            provide: TranslateLoader,
+            useFactory: (createTranslateLoader),
+            deps: [Http]
+        })
     ],
     bootstrap: [IonicApp],
     entryComponents: [
