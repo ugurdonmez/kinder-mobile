@@ -1,7 +1,11 @@
 {
-  "title" : "Internationalization Example",
-  "segment": {
-    "Hello": "Merhaba",
-    "Good Bye": "Hoscakal"
+  "Classes": "Sınıflar",
+  "Name": "İsim",
+  "Telephone": "Telefon",
+  "Manager": "Yönetici",
+  "Manager Mail": "Yönetici E-postası",
+  "Manager Telephone": "Yönetici Telefonu",
+  "Add Update Branch": "Branch Ekle ve Düzenle",
+  "SchoolAdminAddUpdateBranchPage": {
   }
 }
