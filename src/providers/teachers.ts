@@ -39,6 +39,10 @@ export class Teachers {
         return this.af.database.object('/teachers/' + teacherId);
     }
 
+    public getAllTeachers() {
+        return this.af.database.list('/teachers/');
+    }
+
     public addTeacher(teacher: TeacherModel) {
         this.teachers.push(teacher);
 
@@ -54,4 +58,13 @@ export class Teachers {
     public updateTeacher(teacher: TeacherModel) {
         this.af.database.object('/teachers/'+teacher.id).set(teacher);
     }
+
+    public addClassToTeacher(teacherId: string, classId:string){
+
+    }
+
+    public addBranchToTeacher(teacherId: string, branchId:string){
+
+    }
+
 }
