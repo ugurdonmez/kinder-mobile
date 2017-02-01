@@ -38,6 +38,10 @@ export class Branches {
         return this.af.database.object('/branches/' + branchId);
     }
 
+    public getAllBranches(){
+        return this.af.database.list('/branches/');
+    }
+
     public addBranch(branch: BranchModel) {
         var pushedBranch = this.branches.push(branch);
         var branchId = pushedBranch.key;
