@@ -4,20 +4,23 @@ import { Branches } from '../../providers/branches';
 import {BranchModel} from '../../models/branch-model';
 
 import { ClassModel } from '../../models/class-model';
+import {Translator} from "../../app/translator";
+import {TranslateService} from "ng2-translate";
 
 
 @Component({
   selector: 'page-school-admin-add-update-branch',
   templateUrl: 'school-admin-add-update-branch.html',
-    providers: [Branches]
+    providers: [Branches, Translator]
 })
 
 export class SchoolAdminAddUpdateBranchPage {
     mockBranch: BranchModel = new BranchModel();
+    classes: Array<ClassModel> = [];
+    translate: TranslateService;
 
-    classes: Array<ClassModel> = []
-
-    constructor(public navCtrl: NavController, public branches: Branches) {
+    constructor(public navCtrl: NavController, public branches: Branches, public translator: Translator) {
+        this.translate = translator.translatePipe;
         this.importClassesMock();
         this.importBranchMock();
     }
