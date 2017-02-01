@@ -60,7 +60,8 @@ export class Teachers {
     }
 
     public addClassToTeacher(teacherId: string, classId:string){
-
+        let teacherClassesList = af.database.list('/teachers/' + teacherId + 'classes')
+        teacherClassesList.push(classId)
     }
 
     public addBranchToTeacher(teacherId: string, branchId:string){
