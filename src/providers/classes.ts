@@ -39,10 +39,14 @@ export class Classes {
     }
 
     public addClass(_class: ClassModel) {
+        // this.classes.push(classProvider);
         var pushedClass = this.classes.push(_class);
         var classId = pushedClass.key;
         //console.log("classId: " + classId);
+        return classId
+    }
 
+    public registerUserToClass(classId: string){
         var userId = this.authData.getUserId();
         var user_classes = this.af.database.list('/user-classes/'+userId);
         user_classes.push({'classId':classId});
