@@ -60,13 +60,13 @@ export class Teachers {
     }
 
     public addClassToTeacher(teacherId: string, classId:string){
-        let teacherClassesList = af.database.list('/teachers/' + teacherId + 'classes')
-        teacherClassesList.push(classId)
+        let teacherClassesList = this.af.database.list('/teachers/' + teacherId + '/classes');
+        teacherClassesList.push(classId);
     }
 
     public addBranchToTeacher(teacherId: string, branchId:string){
-        let teacherClassesList = af.database.list('/teachers/' + teacherId + 'branches')
-        teacherClassesList.push(branchId)
+        let teacherClassesList = this.af.database.list('/teachers/' + teacherId + '/branches');
+        teacherClassesList.push(branchId);
     }
 
 }

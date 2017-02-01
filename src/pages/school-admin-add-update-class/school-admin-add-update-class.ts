@@ -2,19 +2,37 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 import { ClassModel } from '../../models/class-model';
+// import { TeacherModel } from '../../models/teacher-model';
 import { Classes } from '../../providers/classes';
+import { Teachers } from '../../providers/teachers';
+import {Validators, FormBuilder} from "@angular/forms";
+import {IntegerValidator} from '../../validators/integer';
 
 
 @Component({
     selector: 'page-school-admin-add-update-class',
     templateUrl: 'school-admin-add-update-class.html',
-    providers: [Classes]
+    providers: [Classes, Teachers]
 })
 
 export class SchoolAdminAddUpdateClassPage {
     randomMockClass: ClassModel;
+    classDetailsForm: any;
+    allTeachers: any;
 
-    constructor(public navCtrl: NavController, public _class: Classes) {
+    constructor(public navCtrl: NavController, public classProvider: Classes, public formBuilder: FormBuilder,
+                public teacherProvider: Teachers) {
+        this.classDetailsForm = formBuilder.group(
+            {
+                'name': ['', Validators.minLength(1)],
+                'teacher_id': ['', Validators.minLength(1)],
+                'current': [0],
+                'age': [, Validators.compose([IntegerValidator.isValid, Validators.minLength(1)])],
+                'maximum': [, Validators.compose([IntegerValidator.isValid, Validators.minLength(1)])]
+            }
+        );
+        this.allTeachers = this.teacherProvider.getAllTeachers();
+        // console.log(this.teacher);
     }
 
     ionViewDidLoad() {
@@ -22,20 +40,29 @@ export class SchoolAdminAddUpdateClassPage {
     }
 
     addNewClass(){
-        //getClass test
-        console.log(this._class.getClass("-KaSzyajwg5kuPNpFRpp"));
+        this.classDetailsForm.value.age = Number(this.classDetailsForm.value.age);
+        this.classDetailsForm.value.maximum = Number(this.classDetailsForm.value.maximum);
+        //console.log(this.classDetailsForm.value);
+        var classId = this.classProvider.addClass(this.classDetailsForm.value);
+        var teacherId = this.classDetailsForm.value.teacher_id;
+        this.teacherProvider.addClassToTeacher(teacherId, classId);
+    }
 
-        //updateClass test
+    classProviderTests(){
+        // getClass test
+        console.log(this.classProvider.getClass("-KaSzyajwg5kuPNpFRpp"));
+
+        // updateClass test
         this.generateRandomMockClass();
         this.randomMockClass.id = "-KaSzyajwg5kuPNpFRpp";
-        this._class.updateClass(this.randomMockClass);
+        this.classProvider.updateClass(this.randomMockClass);
 
-        //addClass test
+        // addClass test
         this.generateRandomMockClass();
-        this._class.addClass(this.randomMockClass);
+        this.classProvider.addClass(this.randomMockClass);
 
-        //getUserClasses test
-        this._class.getUserClasses(function(userClassArray){
+        // getUserClasses test
+        this.classProvider.getUserClasses(function(userClassArray){
             console.log(userClassArray)
         })
     }

@@ -9,30 +9,33 @@
 
 
 <ion-content padding>
+    <form [formGroup]="classDetailsForm">
+        <ion-list>
+            <ion-item>
+                <ion-label>Name</ion-label>
+                <ion-input type="text" formControlName="name"></ion-input>
+            </ion-item>
 
-    <ion-list>
-        <ion-item>
-            <ion-label>Name</ion-label>
-            <ion-input type="text"></ion-input>
-        </ion-item>
+            <ion-item>
+                <ion-label>Teacher</ion-label>
+                <ion-select formControlName="teacher_id">
+                    <ion-option *ngFor="let a_teacher of allTeachers | async" [value]="a_teacher.$key">{{a_teacher.name}}</ion-option>
+                </ion-select>
+            </ion-item>
 
-        <ion-item>
-            <ion-label>Teacher</ion-label>
-            <ion-input type="text"></ion-input>
-        </ion-item>
+            <ion-item>
+                <ion-label>Age</ion-label>
+                <ion-input type="number" formControlName="age"></ion-input>
+            </ion-item>
 
-        <ion-item>
-            <ion-label>Age</ion-label>
-            <ion-input type="text"></ion-input>
-        </ion-item>
+            <ion-item>
+                <ion-label>Total Size</ion-label>
+                <ion-input type="number" formControlName="maximum"></ion-input>
+            </ion-item>
+        </ion-list>
 
-        <ion-item>
-            <ion-label>Total Size</ion-label>
-            <ion-input type="text"></ion-input>
-        </ion-item>
+        <ion-icon class="school-add-circle-icon" ios="ios-add-circle" md="md-add-circle" (click)="addNewClass()"></ion-icon>
 
-    </ion-list>
-
-    <ion-icon class="school-add-circle-icon" ios="ios-add-circle" md="md-add-circle" (click)="addNewClass()"></ion-icon>
+    </form>
 
 </ion-content>
