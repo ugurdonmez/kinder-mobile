@@ -14,6 +14,7 @@ import { CalenderPage } from '../pages/calender/calender';
 import { SchoolAdminBranchesPage } from '../pages/school-admin-branches/school-admin-branches';
 import { SchoolAdminAddUpdateBranchPage } from '../pages/school-admin-add-update-branch/school-admin-add-update-branch';
 import { SchoolAdminAddUpdateClassPage } from '../pages/school-admin-add-update-class/school-admin-add-update-class';
+import { SchoolAdminAddUpdateTeacherPage } from '../pages/school-admin-add-update-teacher/school-admin-add-update-teacher';
 import { SchoolAdminTeachersPage } from '../pages/school-admin-teachers/school-admin-teachers';
 
 // Importing provider
@@ -56,6 +57,7 @@ export function createTranslateLoader(http: Http) {
         SchoolAdminBranchesPage,
         SchoolAdminAddUpdateBranchPage,
         SchoolAdminAddUpdateClassPage,
+        SchoolAdminAddUpdateTeacherPage,
         SchoolAdminTeachersPage
     ],
     imports: [
@@ -79,6 +81,7 @@ export function createTranslateLoader(http: Http) {
         SchoolAdminBranchesPage,
         SchoolAdminAddUpdateBranchPage,
         SchoolAdminAddUpdateClassPage,
+        SchoolAdminAddUpdateTeacherPage,
         SchoolAdminTeachersPage
     ],
     providers: [
