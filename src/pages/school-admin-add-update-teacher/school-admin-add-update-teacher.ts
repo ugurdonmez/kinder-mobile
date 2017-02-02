@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import {Validators, FormBuilder} from "@angular/forms";
+import { Teachers } from '../../providers/teachers';
+import { SchoolAdminTeachersPage } from '../school-admin-teachers/school-admin-teachers';
 
 /*
   Generated class for the SchoolAdminAddUpdateTeacher page.
@@ -9,14 +12,34 @@ import { NavController } from 'ionic-angular';
 */
 @Component({
   selector: 'page-school-admin-add-update-teacher',
-  templateUrl: 'school-admin-add-update-teacher.html'
+  templateUrl: 'school-admin-add-update-teacher.html',
+    providers: [Teachers]
 })
 export class SchoolAdminAddUpdateTeacherPage {
+    teacherDetailsForm: any;
 
-  constructor(public navCtrl: NavController) {}
+  constructor(public navCtrl: NavController, public formBuilder: FormBuilder,
+              public teacherProvider: Teachers) {
+      this.teacherDetailsForm = formBuilder.group(
+          {
+              'name': ['', Validators.minLength(1)],
+              'surname': ['', Validators.minLength(1)],
+              'notes': [''],
+              'photoUrl': ['http://thegadgetfreaks.com/wp-content/uploads/2015/05/Anon-Woman.jpg']
+          }
+      );
+
+  }
 
   ionViewDidLoad() {
     console.log('Hello SchoolAdminAddUpdateTeacherPage Page');
   }
+
+    addNewTeacher(){
+        this.teacherProvider.addTeacher(this.teacherDetailsForm.value);
+        this.navCtrl.pop();
+        this.navCtrl.pop();
+        this.navCtrl.push(SchoolAdminTeachersPage);
+    }
 
 }

@@ -9,4 +9,34 @@
 
 <ion-content padding>
 
+  <form [formGroup]="teacherDetailsForm">
+    <ion-list>
+      <ion-item>
+        <ion-label>Name</ion-label>
+        <ion-input type="text" formControlName="name"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Surname</ion-label>
+        <ion-input type="text" formControlName="surname"></ion-input>
+      </ion-item>
+
+
+        <ion-item>
+            <ion-label>Notes</ion-label>
+            <ion-input type="text" formControlName="notes"></ion-input>
+        </ion-item>
+
+
+        <ion-item>
+            <!--TODO: put an upload feature here-->
+            <ion-label>Photo Url</ion-label>
+            <ion-input type="text" formControlName="photoUrl"></ion-input>
+        </ion-item>
+
+
+    <ion-icon class="school-add-circle-icon" ios="ios-add-circle" md="md-add-circle" (click)="addNewTeacher()"></ion-icon>
+
+        </ion-list>
+  </form>
 </ion-content>
