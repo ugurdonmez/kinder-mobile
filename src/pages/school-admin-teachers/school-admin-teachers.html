@@ -10,21 +10,21 @@
 <ion-content padding>
     <ion-list>
 
-        <button ion-item *ngFor="let item of teachers">
+        <button ion-item *ngFor="let teacher of allTeachers">
             <div item-left>
-                <p>{{item.name}}</p>
-                <p>{{item.surname}}</p>
+                <p>{{teacher.name}}</p>
+                <p>{{teacher.surname}}</p>
             </div>
 
-            <div>
-                <p *ngFor="let branch of item.branches">{{branch}}</p>
-            </div>
+            <!--<div>-->
+                <!--<p *ngFor="let branch of item.branches">{{branch}}</p>-->
+            <!--</div>-->
 
             <div item-right>
-                <p *ngFor="let class of item.classes">{{class}}</p>
+                <p *ngFor="let _class of teacher.classes">{{(_class | async)?.name}}</p>
             </div>
         </button>
     </ion-list>
 
-    <ion-icon class="teacher-add-circle-icon" ios="ios-add-circle" md="md-add-circle" (click)="addNewTeacher()"></ion-icon>
+    <ion-icon class="teacher-add-circle-icon" ios="ios-add-circle" md="md-add-circle" (click)="openSchoolAdminAddUpdateTeacher(p)"></ion-icon>
 </ion-content>
