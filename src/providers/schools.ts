@@ -32,7 +32,7 @@ export class Schools {
     }
 
     public addSchool(school: SchoolModel) {
-        this.schools.push(school);
+        return this.schools.push(school).key;
     }
 
     public updateSchool(school: SchoolModel) {
