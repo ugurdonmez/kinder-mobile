@@ -100,14 +100,14 @@ export class SchoolAdminTeachersPage {
     //     this.teachers.push(t2);
     // }
 
-    private generateRandomMockTeacher() {
-        this.randomMockTeacher = new TeacherModel();
-
-        this.randomMockTeacher.name = (function(n){return eval("["+Array(n).join("String.fromCharCode(65+~~(Math.random()*61)),")+",'']").join("");}(8));
-        this.randomMockTeacher.surname = (function(n){return eval("["+Array(n).join("String.fromCharCode(65+~~(Math.random()*61)),")+",'']").join("");}(8));
-        this.randomMockTeacher.branches = ["mockBranchId1", "mockBranchId2", "mockBranchId3"];
-        this.randomMockTeacher.classes = ["mockClassId1", "mockClassId2"];
-        this.randomMockTeacher.notes = "some notes here";
-        this.randomMockTeacher.photo_url = "http://cliparts.co/cliparts/qiB/AgG/qiBAgGrjT.jpg";
-    }
+    // private generateRandomMockTeacher() {
+    //     this.randomMockTeacher = new TeacherModel();
+    //
+    //     this.randomMockTeacher.name = (function(n){return eval("["+Array(n).join("String.fromCharCode(65+~~(Math.random()*61)),")+",'']").join("");}(8));
+    //     this.randomMockTeacher.surname = (function(n){return eval("["+Array(n).join("String.fromCharCode(65+~~(Math.random()*61)),")+",'']").join("");}(8));
+    //     this.randomMockTeacher.branches = ["mockBranchId1", "mockBranchId2", "mockBranchId3"];
+    //     this.randomMockTeacher.classes = ["mockClassId1", "mockClassId2"];
+    //     this.randomMockTeacher.notes = "some notes here";
+    //     this.randomMockTeacher.photo_url = "http://cliparts.co/cliparts/qiB/AgG/qiBAgGrjT.jpg";
+    // }
 }
