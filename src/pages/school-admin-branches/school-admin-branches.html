@@ -9,7 +9,7 @@
 
 <ion-content class="page-school-admin-branches">
     <ion-list>
-        <button ion-item *ngFor="let branch of allBranches | async">
+        <button ion-item *ngFor="let branch of allBranches | async" (click)="openBranchPage(branch.$key)">
             <div>
                 <h2>{{branch.name}}</h2>
                 <p>{{branch.manager}}</p>
