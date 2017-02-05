@@ -1,0 +1,46 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{(branch | async).name}} Schools</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="page-school-admin-schools">
+    <ion-grid>
+        <ion-row>
+            <ion-col width-25>Manager</ion-col>
+            <ion-col>{{(branch | async).manager}}</ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col width-25>Manager Phone</ion-col>
+            <ion-col>{{(branch | async).manager_tel}}</ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col width-25>Address</ion-col>
+            <ion-col>{{(branch | async).address}}</ion-col>
+        </ion-row>
+
+    </ion-grid>
+
+    <!--TODO Schools header here-->
+    <!--<ion-list>-->
+        <!--<ion-list-header>Schools</ion-list-header>-->
+        <!--<button *ngFor="let school of allSchools | async" (click)="openSchoolPage(school.$key)">-->
+            <!--<div>-->
+                <!--&lt;!&ndash;ion-item&ndash;&gt;-->
+                <!--<h2>{{school.name}}</h2>-->
+                <!--<p>{{school.manager}}</p>-->
+                <!--<p>{{school.manager_tel}}</p>-->
+            <!--</div>-->
+
+            <!--<div item-right>-->
+                <!--<p>{{school.address}}</p>-->
+            <!--</div>-->
+        <!--</button>-->
+    <!--</ion-list>-->
+
+    <ion-icon class="school-add-circle-icon" ios="ios-add-circle" md="md-add-circle" (click)="openSchoolAdminSchoolAdd(p)"></ion-icon>
+
+</ion-content>
