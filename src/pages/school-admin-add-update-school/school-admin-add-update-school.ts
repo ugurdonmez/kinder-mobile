@@ -7,7 +7,6 @@ import { ClassModel } from '../../models/class-model';
 import {Translator} from "../../app/translator";
 import {TranslateService} from "ng2-translate";
 import {FormBuilder, Validators} from "@angular/forms";
-import {IntegerValidator} from "../../validators/integer";
 import {EmailValidator} from "../../validators/email";
 import {Branches} from "../../providers/branches";
 

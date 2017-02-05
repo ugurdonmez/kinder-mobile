@@ -4,7 +4,6 @@ import {NavController, NavParams} from 'ionic-angular';
 import {Schools} from '../../providers/schools'
 import {Branches} from "../../providers/branches";
 import {FirebaseObjectObservable} from "angularfire2";
-import {SchoolAdminAddUpdateSchoolPage} from "../school-admin-add-update-school/school-admin-add-update-school";
 
 @Component({
   selector: 'page-school-admin-schools',
