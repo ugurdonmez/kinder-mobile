@@ -1,0 +1,70 @@
+
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>{{"Add Update School" | translate}}</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <form [formGroup]="schoolDetailsForm">
+        <ion-list>
+            <ion-item>
+                <ion-label>School Name</ion-label>
+                <ion-input type="text" formControlName="name"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Building Address</ion-label>
+                <ion-input type="text" formControlName="buildingAddress"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Logo URL</ion-label>
+                <ion-input type="text" formControlName="logoURL"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Manager Name</ion-label>
+                <ion-input type="text" formControlName="managerName"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Manager Tel</ion-label>
+                <ion-input type="text" formControlName="managerTel"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Activation Email</ion-label>
+                <ion-input type="text" formControlName="activationEmail"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>School Telephone</ion-label>
+                <ion-input type="text" formControlName="schoolTelephone"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Second Contact Person Name</ion-label>
+                <ion-input type="text" formControlName="secondContactPersonName"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Second Contact Person Tel</ion-label>
+                <ion-input type="text" formControlName="secondContactTelNo"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Activated</ion-label>
+                <ion-select formControlName="isActivated">
+                    <ion-option [value]="True">True</ion-option>
+                    <ion-option [value]="False">False</ion-option>
+                </ion-select>
+            </ion-item>
+            <!--[disabled]="!schoolDetailsForm.valid"-->
+            <ion-icon class="school-add-circle-icon" ios="ios-add-circle" md="md-add-circle" (click)="addNewSchool()"></ion-icon>
+        </ion-list>
+    </form>
+</ion-content>
