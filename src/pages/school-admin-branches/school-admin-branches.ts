@@ -37,31 +37,31 @@ export class SchoolAdminBranchesPage {
         this.navCtrl.push(SchoolAdminAddUpdateBranchPage);
     }
 
-    public branchesProviderTests(){
-        // this.importBranchesMock();
-        this.branchesProvider.getBranch("-K_zkAEp-Oi0glququHy");
+    // public branchesProviderTests(){
+    //     // this.importBranchesMock();
+    //     this.branchesProvider.getBranch("-K_zkAEp-Oi0glququHy");
+    //
+    //     var randomMockBranch: BranchModel;
+    //     randomMockBranch = this.generateRandomMockBranch();
+    //     this.branchesProvider.updateBranch(randomMockBranch);
+    //
+    //     //to get a result, this.branchesProvider.getUserBranches() function should be called like below.
+    //     this.branchesProvider.getUserBranches(function(userBranchArray){
+    //         console.log(userBranchArray)
+    //     })
+    // }
 
-        var randomMockBranch: BranchModel;
-        randomMockBranch = this.generateRandomMockBranch();
-        this.branchesProvider.updateBranch(randomMockBranch);
-
-        //to get a result, this.branchesProvider.getUserBranches() function should be called like below.
-        this.branchesProvider.getUserBranches(function(userBranchArray){
-            console.log(userBranchArray)
-        })
-    }
-
-    private generateRandomMockBranch() : BranchModel {
-        //(function(n){return eval("["+Array(n).join("String.fromCharCode(65+~~(Math.random()*61)),")+",'']").join("");}(8));
-        var randommockbranch: BranchModel = {
-            id: '-KaEb4MP8RkvicvOcQih',
-            name: (function(n){return eval("["+Array(n).join("String.fromCharCode(65+~~(Math.random()*61)),")+",'']").join("");}(8)),
-            manager: (function(n){return eval("["+Array(n).join("String.fromCharCode(65+~~(Math.random()*61)),")+",'']").join("");}(8)),
-            manager_tel: (function(n){return eval("["+Array(n).join("String.fromCharCode(65+~~(Math.random()*61)),")+",'']").join("");}(8)),
-            address: (function(n){return eval("["+Array(n).join("String.fromCharCode(65+~~(Math.random()*61)),")+",'']").join("");}(8)),
-            classes: [(function(n){return eval("["+Array(n).join("String.fromCharCode(65+~~(Math.random()*61)),")+",'']").join("");}(8)), 'cid3']
-        };
-
-        return randommockbranch
-    }
+    // private generateRandomMockBranch() : BranchModel {
+    //     //(function(n){return eval("["+Array(n).join("String.fromCharCode(65+~~(Math.random()*61)),")+",'']").join("");}(8));
+    //     var randommockbranch: BranchModel = {
+    //         id: '-KaEb4MP8RkvicvOcQih',
+    //         name: (function(n){return eval("["+Array(n).join("String.fromCharCode(65+~~(Math.random()*61)),")+",'']").join("");}(8)),
+    //         manager: (function(n){return eval("["+Array(n).join("String.fromCharCode(65+~~(Math.random()*61)),")+",'']").join("");}(8)),
+    //         manager_tel: (function(n){return eval("["+Array(n).join("String.fromCharCode(65+~~(Math.random()*61)),")+",'']").join("");}(8)),
+    //         address: (function(n){return eval("["+Array(n).join("String.fromCharCode(65+~~(Math.random()*61)),")+",'']").join("");}(8)),
+    //         classes: [(function(n){return eval("["+Array(n).join("String.fromCharCode(65+~~(Math.random()*61)),")+",'']").join("");}(8)), 'cid3']
+    //     };
+    //
+    //     return randommockbranch
+    // }
 }
