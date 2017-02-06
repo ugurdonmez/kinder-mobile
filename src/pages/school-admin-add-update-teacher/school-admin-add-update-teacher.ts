@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import {Validators, FormBuilder} from "@angular/forms";
 import { Teachers } from '../../providers/teachers';
-import { SchoolAdminTeachersPage } from '../school-admin-teachers/school-admin-teachers';
 
 /*
   Generated class for the SchoolAdminAddUpdateTeacher page.

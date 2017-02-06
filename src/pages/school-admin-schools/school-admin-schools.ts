@@ -4,6 +4,8 @@ import {NavController, NavParams} from 'ionic-angular';
 import {Schools} from '../../providers/schools'
 import {Branches} from "../../providers/branches";
 import {FirebaseObjectObservable} from "angularfire2";
+import {SchoolAdminClassesPage} from "../school-admin-classes/school-admin-classes";
+import {SchoolAdminAddUpdateSchoolPage} from "../school-admin-add-update-school/school-admin-add-update-school";
 
 @Component({
   selector: 'page-school-admin-schools',
@@ -30,11 +32,11 @@ export class SchoolAdminSchoolsPage {
 
     openSchoolPage(schoolId){
         console.log('goes to class list of that school with schoolId:' + schoolId);
-        // this.navCtrl.push()
+        this.navCtrl.push(SchoolAdminClassesPage, {'schoolId':schoolId})
     }
 
     openSchoolAdminSchoolAdd() {
         console.log('adds new school to branch with branchId: ' + this.branchId);
-        // this.navCtrl.push( school ekleme  , {'schoolId':this.schoolId});
+        this.navCtrl.push( SchoolAdminAddUpdateSchoolPage , {'branchId':this.branchId});
     }
 }

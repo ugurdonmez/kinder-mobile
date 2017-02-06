@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import {NavController, NavParams} from 'ionic-angular';
 
 import { ClassModel } from '../../models/class-model';
 // import { TeacherModel } from '../../models/teacher-model';
@@ -7,28 +7,32 @@ import { Classes } from '../../providers/classes';
 import { Teachers } from '../../providers/teachers';
 import {Validators, FormBuilder} from "@angular/forms";
 import {IntegerValidator} from '../../validators/integer';
+import {Schools} from "../../providers/schools";
 
 
 @Component({
     selector: 'page-school-admin-add-update-class',
     templateUrl: 'school-admin-add-update-class.html',
-    providers: [Classes, Teachers]
+    providers: [Classes, Teachers, Schools]
 })
 
 export class SchoolAdminAddUpdateClassPage {
     randomMockClass: ClassModel;
     classDetailsForm: any;
     allTeachers: any;
+    schoolId: string;
 
     constructor(public navCtrl: NavController, public classProvider: Classes, public formBuilder: FormBuilder,
-                public teacherProvider: Teachers) {
+                public teacherProvider: Teachers, private navParams: NavParams, private schoolsProvider: Schools) {
+        this.schoolId = navParams.get('schoolId');
         this.classDetailsForm = formBuilder.group(
             {
                 'name': ['', Validators.minLength(1)],
                 'teacher_id': ['', Validators.minLength(1)],
                 'current': [0],
                 'age': [, Validators.compose([IntegerValidator.isValid, Validators.minLength(1)])],
-                'maximum': [, Validators.compose([IntegerValidator.isValid, Validators.minLength(1)])]
+                'maximum': [, Validators.compose([IntegerValidator.isValid, Validators.minLength(1)])],
+                'schoolId': [this.schoolId]
             }
         );
         this.allTeachers = this.teacherProvider.getAllTeachers();
@@ -46,6 +50,8 @@ export class SchoolAdminAddUpdateClassPage {
         var classId = this.classProvider.addClass(this.classDetailsForm.value);
         var teacherId = this.classDetailsForm.value.teacher_id;
         this.teacherProvider.addClassToTeacher(teacherId, classId);
+        this.schoolsProvider.addClassToSchool(this.schoolId, classId);
+        this.navCtrl.pop();
     }
 
     classProviderTests(){
