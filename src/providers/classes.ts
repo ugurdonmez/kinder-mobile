@@ -55,4 +55,13 @@ export class Classes {
     public updateClass(_class: ClassModel) {
         this.af.database.object('/classes/'+_class.id).set(_class);
     }
+
+    getClassesOfSchool(schoolId: string) {
+        return this.af.database.list('/classes', {
+            query: {
+                orderByChild: 'schoolId',
+                equalTo: schoolId
+            }
+        });
+    }
 }

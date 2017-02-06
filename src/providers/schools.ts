@@ -38,4 +38,9 @@ export class Schools {
     public updateSchool(school: SchoolModel) {
         this.af.database.object('/schools/'+school.id).set(school);
     }
+
+    addClassToSchool(schoolId: string, classId: string) {
+        let schoolClasssList = this.af.database.list('/schools/' + schoolId + '/classes');
+        schoolClasssList.push(classId);
+    }
 }
