@@ -57,6 +57,7 @@ export class SchoolAdminAddUpdateSchoolPage {
             // this.schoolDetailsForm.value.maximum = Number(this.classDetailsForm.value.maximum);
             let schoolId = this.schoolsProvider.addSchool(this.schoolDetailsForm.value);
             this.branchesProvider.addSchoolToBranch(this.branchId, schoolId);
+            this.navCtrl.pop();
         }
         else{
             let alert = this.alertCtrl.create({

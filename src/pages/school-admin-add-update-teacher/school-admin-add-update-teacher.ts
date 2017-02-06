@@ -38,8 +38,6 @@ export class SchoolAdminAddUpdateTeacherPage {
     addNewTeacher(){
         this.teacherProvider.addTeacher(this.teacherDetailsForm.value);
         this.navCtrl.pop();
-        this.navCtrl.pop();
-        this.navCtrl.push(SchoolAdminTeachersPage);
     }
 
 }
