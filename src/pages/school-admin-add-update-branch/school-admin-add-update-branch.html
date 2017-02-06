@@ -9,55 +9,59 @@
 
 
 <ion-content padding>
+    <form [formGroup]="branchDetailsForm">
+        <ion-list>
+            <ion-item>
+                <ion-label>{{"Name" | translate}}</ion-label>
+                <ion-input type="text" formControlName="name"></ion-input>
+            </ion-item>
 
-    <ion-list>
+            <ion-item>
+                <ion-label>{{"Telephone" | translate}}</ion-label>
+                <ion-input type="text" formControlName="tel"></ion-input>
+            </ion-item>
 
-        <ion-item>
-            <ion-label>{{"Name" | translate}}</ion-label>
-            <ion-input type="text"></ion-input>
-        </ion-item>
+            <ion-item>
+                <ion-label>{{"Manager" | translate}}</ion-label>
+                <ion-input type="text" formControlName="manager"></ion-input>
+            </ion-item>
 
-        <ion-item>
-            <ion-label>{{"Telephone" | translate}}</ion-label>
-            <ion-input type="text"></ion-input>
-        </ion-item>
+            <ion-item>
+                <ion-label>{{"Manager Mail" | translate}}</ion-label>
+                <ion-input type="text" formControlName="manager_mail"></ion-input>
+            </ion-item>
 
-        <ion-item>
-            <ion-label>{{"Manager" | translate}}</ion-label>
-            <ion-input type="text"></ion-input>
-        </ion-item>
+            <ion-item>
+                <ion-label>{{"Manager Telephone" | translate}}</ion-label>
+                <ion-input type="text" formControlName="manager_tel"></ion-input>
+            </ion-item>
 
-        <ion-item>
-            <ion-label>{{"Manager Mail" | translate}}</ion-label>
-            <ion-input type="text"></ion-input>
-        </ion-item>
+            <ion-item>
+                <ion-label>{{"Address" | translate}}</ion-label>
+                <ion-input type="text" formControlName="address"></ion-input>
+            </ion-item>
+        </ion-list>
+    </form>
 
-        <ion-item>
-            <ion-label>{{"Manager Telephone" | translate}}</ion-label>
-            <ion-input type="text"></ion-input>
-        </ion-item>
+    <!--<h1 class="classes-title">{{"Classes" | translate}}</h1>-->
 
-    </ion-list>
+    <!--<ion-list>-->
+        <!--<button ion-item *ngFor="let item of classes">-->
 
-    <h1 class="classes-title">{{"Classes" | translate}}</h1>
+            <!--<div item-left>-->
+                <!--<h2 >{{item.name}}</h2>-->
+            <!--</div>-->
 
-    <ion-list>
-        <button ion-item *ngFor="let item of classes">
+            <!--<div>-->
+                <!--<p>{{item.teacher_name}}</p>-->
+                <!--<p>{{item.age}}</p>-->
+            <!--</div>-->
 
-            <div item-left>
-                <h2 >{{item.name}}</h2>
-            </div>
-
-            <div>
-                <p>{{item.teacher_name}}</p>
-                <p>{{item.age}}</p>
-            </div>
-
-            <div item-right>
-                {{item.current}} / {{item.maximum}}
-            </div>
-        </button>
-    </ion-list>
+            <!--<div item-right>-->
+                <!--{{item.current}} / {{item.maximum}}-->
+            <!--</div>-->
+        <!--</button>-->
+    <!--</ion-list>-->
 
     <ion-icon class="school-add-circle-icon" ios="ios-add-circle" md="md-add-circle" (click)="addNewBranch()"></ion-icon>
 
