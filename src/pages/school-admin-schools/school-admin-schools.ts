@@ -6,6 +6,7 @@ import {Branches} from "../../providers/branches";
 import {FirebaseObjectObservable} from "angularfire2";
 import {SchoolAdminClassesPage} from "../school-admin-classes/school-admin-classes";
 import {SchoolAdminAddUpdateSchoolPage} from "../school-admin-add-update-school/school-admin-add-update-school";
+import {SchoolAdminEditBranchPage} from "../school-admin-edit-branch/school-admin-edit-branch";
 
 @Component({
   selector: 'page-school-admin-schools',
@@ -38,5 +39,9 @@ export class SchoolAdminSchoolsPage {
     openSchoolAdminSchoolAdd() {
         console.log('adds new school to branch with branchId: ' + this.branchId);
         this.navCtrl.push( SchoolAdminAddUpdateSchoolPage , {'branchId':this.branchId});
+    }
+
+    openSchoolAdminEditBranchPage(branchId: string){
+        this.navCtrl.push( SchoolAdminEditBranchPage , {'branchId':this.branchId});
     }
 }

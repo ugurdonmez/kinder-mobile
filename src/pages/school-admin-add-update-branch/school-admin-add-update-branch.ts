@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import {NavController, AlertController} from 'ionic-angular';
 import { Branches } from '../../providers/branches';
-import {BranchModel} from '../../models/branch-model';
 
 import { ClassModel } from '../../models/class-model';
 import {Translator} from "../../app/translator";
 import {TranslateService} from "ng2-translate";
 import {FormBuilder, Validators} from "@angular/forms";
+import {EmailValidator} from "../../validators/email";
 
 
 @Component({
@@ -28,7 +28,7 @@ export class SchoolAdminAddUpdateBranchPage {
                 'name': ['', Validators.required],
                 'tel': ['', Validators.required],
                 'manager': ['', Validators.required],
-                'manager_mail': ['', Validators.required],
+                'manager_mail': ['', Validators.compose([Validators.required, EmailValidator.isValid])],
                 'manager_tel': ['', Validators.required],
                 'address': ['', Validators.required]
             }
