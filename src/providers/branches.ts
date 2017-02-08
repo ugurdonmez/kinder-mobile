@@ -60,4 +60,8 @@ export class Branches {
         let branchSchoolsList = this.af.database.list('/branches/' + branchId + '/schools');
         branchSchoolsList.push(schoolId);
     }
+
+    deleteBranch(branchId: string){
+        this.af.database.object('/branches/' + branchId).remove();
+    }
 }
