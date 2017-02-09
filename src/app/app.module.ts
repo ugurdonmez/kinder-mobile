@@ -21,6 +21,7 @@ import {SchoolAdminAddUpdateSchoolPage} from "../pages/school-admin-add-update-s
 import {SchoolAdminClassesPage} from "../pages/school-admin-classes/school-admin-classes";
 import {SchoolAdminEditBranchPage} from "../pages/school-admin-edit-branch/school-admin-edit-branch";
 import {SchoolAdminEditSchoolPage} from "../pages/school-admin-edit-school/school-admin-edit-school";
+import {SchoolAdminTeacherDetailsPage} from "../pages/school-admin-teacher-details/school-admin-teacher-details";
 
 // Importing provider
 import { AuthData } from '../providers/auth-data';
@@ -68,7 +69,8 @@ export function createTranslateLoader(http: Http) {
         SchoolAdminAddUpdateSchoolPage,
         SchoolAdminClassesPage,
         SchoolAdminEditBranchPage,
-        SchoolAdminEditSchoolPage
+        SchoolAdminEditSchoolPage,
+        SchoolAdminTeacherDetailsPage
     ],
     imports: [
         IonicModule.forRoot(MyApp),
@@ -97,7 +99,8 @@ export function createTranslateLoader(http: Http) {
         SchoolAdminAddUpdateSchoolPage,
         SchoolAdminClassesPage,
         SchoolAdminEditBranchPage,
-        SchoolAdminEditSchoolPage
+        SchoolAdminEditSchoolPage,
+        SchoolAdminTeacherDetailsPage
     ],
     providers: [
         {provide: ErrorHandler, useClass: IonicErrorHandler},
