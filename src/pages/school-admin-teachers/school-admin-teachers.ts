@@ -12,8 +12,8 @@ import {Classes} from "../../providers/classes";
   templateUrl: 'school-admin-teachers.html',
     providers: [Teachers, Classes]
 })
-export class SchoolAdminTeachersPage {
 
+export class SchoolAdminTeachersPage {
     randomMockTeacher: TeacherModel;
     allTeachers: any;
     teacher: any;
@@ -43,9 +43,6 @@ export class SchoolAdminTeachersPage {
 
     ionViewDidLoad() {
         console.log('Hello SchoolAdminTeachersPage Page');
-    }
-
-    addNewTeacher(){
     }
 
     openSchoolAdminAddUpdateTeacher(page) {

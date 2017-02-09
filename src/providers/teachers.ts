@@ -59,14 +59,4 @@ export class Teachers {
         this.af.database.object('/teachers/'+teacher.id).set(teacher);
     }
 
-    public addClassToTeacher(teacherId: string, classId:string){
-        let teacherClassesList = this.af.database.list('/teachers/' + teacherId + '/classes');
-        teacherClassesList.push(classId);
-    }
-
-    public addBranchToTeacher(teacherId: string, branchId:string){
-        let teacherClassesList = this.af.database.list('/teachers/' + teacherId + '/branches');
-        teacherClassesList.push(branchId);
-    }
-
 }
