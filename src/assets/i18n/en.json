@@ -8,6 +8,11 @@
   "Add Update Branch": "Add Update Branch",
   "Edit Branch": "Edit Branch",
   "Address": "Address",
-  "SchoolAdminAddUpdateBranchPage": {
+
+  "Photo URL": "Photo URL",
+  "Notes": "Notes",
+  "Teacher":{
+    "Name": "Name",
+    "Surname": "Surname"
   }
 }

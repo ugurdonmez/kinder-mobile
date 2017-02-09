@@ -8,6 +8,12 @@
   "Add Update Branch": "Branch Ekle ve Düzenle",
   "Edit Branch": "Branch Düzenle",
   "Address": "Adres",
-  "SchoolAdminAddUpdateBranchPage": {
+
+  "Photo URL": "Fotograf URL'i",
+  "Notes": "Notlar",
+  "Teacher":{
+    "Name": "Adı",
+    "Surname": "Soyadı"
   }
+
 }

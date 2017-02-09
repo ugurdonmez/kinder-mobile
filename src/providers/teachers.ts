@@ -55,6 +55,10 @@ export class Teachers {
         // user_teachers.push({'teacherId':teacherId});
     }
 
+    deleteTeacher(teacherId: string){
+        this.af.database.object('/teachers/' + teacherId).remove();
+    }
+
     public updateTeacher(teacher: TeacherModel) {
         this.af.database.object('/teachers/'+teacher.id).set(teacher);
     }

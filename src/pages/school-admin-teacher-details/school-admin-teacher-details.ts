@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 
-import {Schools} from '../../providers/schools'
 import {Teachers} from "../../providers/teachers";
 import {FirebaseObjectObservable} from "angularfire2";
-// import {SchoolAdminEditTeacherPage} from "../school-admin-edit-teacher/school-admin-edit-teacher";
+import {SchoolAdminEditTeacherPage} from "../school-admin-edit-teacher/school-admin-edit-teacher";
 
 @Component({
   selector: 'page-school-admin-teacher-details',
@@ -24,6 +23,6 @@ export class SchoolAdminTeacherDetailsPage {
     }
 
     openSchoolAdminEditTeacherPage(teacherId: string){
-        // this.navCtrl.push( SchoolAdminEditTeacherPage , {'teacherId':this.teacherId});
+        this.navCtrl.push( SchoolAdminEditTeacherPage , {'teacherId':this.teacherId});
     }
 }

@@ -31,6 +31,7 @@ import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 // Localization
 import { TranslateModule, TranslateStaticLoader, TranslateLoader } from 'ng2-translate/ng2-translate';
 import { Http } from "@angular/http";
+import {SchoolAdminEditTeacherPage} from "../pages/school-admin-edit-teacher/school-admin-edit-teacher";
 
 // AF2 Settings
 export const firebaseConfig = {
@@ -70,7 +71,8 @@ export function createTranslateLoader(http: Http) {
         SchoolAdminClassesPage,
         SchoolAdminEditBranchPage,
         SchoolAdminEditSchoolPage,
-        SchoolAdminTeacherDetailsPage
+        SchoolAdminTeacherDetailsPage,
+        SchoolAdminEditTeacherPage
     ],
     imports: [
         IonicModule.forRoot(MyApp),
@@ -100,7 +102,8 @@ export function createTranslateLoader(http: Http) {
         SchoolAdminClassesPage,
         SchoolAdminEditBranchPage,
         SchoolAdminEditSchoolPage,
-        SchoolAdminTeacherDetailsPage
+        SchoolAdminTeacherDetailsPage,
+        SchoolAdminEditTeacherPage
     ],
     providers: [
         {provide: ErrorHandler, useClass: IonicErrorHandler},
