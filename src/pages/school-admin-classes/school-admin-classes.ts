@@ -6,6 +6,7 @@ import {FirebaseObjectObservable} from "angularfire2";
 import {Classes} from "../../providers/classes";
 import { SchoolAdminAddUpdateClassPage } from '../school-admin-add-update-class/school-admin-add-update-class';
 import {Teachers} from "../../providers/teachers";
+import {SchoolAdminEditSchoolPage} from "../school-admin-edit-school/school-admin-edit-school";
 
 @Component({
   selector: 'page-school-admin-classes',
@@ -44,5 +45,9 @@ export class SchoolAdminClassesPage {
         let teacher = this.teachersProvider.getTeacher(teacherId);
         console.log(teacher);
         return teacher;
+    }
+
+    openSchoolAdminEditSchoolPage(schoolId: string){
+        this.navCtrl.push( SchoolAdminEditSchoolPage , {'schoolId':this.schoolId});
     }
 }

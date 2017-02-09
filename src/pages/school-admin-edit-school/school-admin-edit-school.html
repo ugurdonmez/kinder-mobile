@@ -1,0 +1,93 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{"Edit School" | translate}}: {{(school | async).name}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <form [formGroup]="schoolDetailsForm">
+        <ion-list>
+            <ion-item>
+                <ion-label>School Name</ion-label>
+                <ion-input type="text" formControlName="name"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Building Address</ion-label>
+                <ion-input type="text" formControlName="buildingAddress"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Logo URL</ion-label>
+                <ion-input type="text" formControlName="logoURL"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Manager Name</ion-label>
+                <ion-input type="text" formControlName="managerName"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Manager Tel</ion-label>
+                <ion-input type="text" formControlName="managerTel"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Activation Email</ion-label>
+                <ion-input type="text" formControlName="activationEmail"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>School Telephone</ion-label>
+                <ion-input type="text" formControlName="schoolTelephone"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Second Contact Person Name</ion-label>
+                <ion-input type="text" formControlName="secondContactPersonName"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Second Contact Person Tel</ion-label>
+                <ion-input type="text" formControlName="secondContactTelNo"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Activated</ion-label>
+                <ion-select formControlName="isActivated">
+                    <ion-option [value]="true">True</ion-option>
+                    <ion-option [value]="false">False</ion-option>
+                </ion-select>
+            </ion-item>
+        </ion-list>
+    </form>
+
+    <!--<h1 class="classes-title">{{"Classes" | translate}}</h1>-->
+
+    <!--<ion-list>-->
+        <!--<button ion-item *ngFor="let item of classes">-->
+
+            <!--<div item-left>-->
+                <!--<h2 >{{item.name}}</h2>-->
+            <!--</div>-->
+
+            <!--<div>-->
+                <!--<p>{{item.teacher_name}}</p>-->
+                <!--<p>{{item.age}}</p>-->
+            <!--</div>-->
+
+            <!--<div item-right>-->
+                <!--{{item.current}} / {{item.maximum}}-->
+            <!--</div>-->
+        <!--</button>-->
+    <!--</ion-list>-->
+    <ion-footer>
+        <button ion-button full color="danger" (click)="deleteSchool()">Delete</button>
+        <button ion-button full (click)="updateSchool()">Save</button>
+    </ion-footer>
+
+</ion-content>

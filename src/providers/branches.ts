@@ -57,8 +57,8 @@ export class Branches {
     }
 
     addSchoolToBranch(branchId: string, schoolId: string) {
-        let branchSchoolsList = this.af.database.list('/branches/' + branchId + '/schools');
-        branchSchoolsList.push(schoolId);
+        // let branchSchoolsList = this.af.database.list('/branches/' + branchId + '/schools');
+        // branchSchoolsList.push(schoolId);
     }
 
     deleteBranch(branchId: string){

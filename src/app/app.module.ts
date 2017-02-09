@@ -19,6 +19,8 @@ import { SchoolAdminTeachersPage } from '../pages/school-admin-teachers/school-a
 import { SchoolAdminSchoolsPage } from '../pages/school-admin-schools/school-admin-schools';
 import {SchoolAdminAddUpdateSchoolPage} from "../pages/school-admin-add-update-school/school-admin-add-update-school";
 import {SchoolAdminClassesPage} from "../pages/school-admin-classes/school-admin-classes";
+import {SchoolAdminEditBranchPage} from "../pages/school-admin-edit-branch/school-admin-edit-branch";
+import {SchoolAdminEditSchoolPage} from "../pages/school-admin-edit-school/school-admin-edit-school";
 
 // Importing provider
 import { AuthData } from '../providers/auth-data';
@@ -28,7 +30,6 @@ import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 // Localization
 import { TranslateModule, TranslateStaticLoader, TranslateLoader } from 'ng2-translate/ng2-translate';
 import { Http } from "@angular/http";
-import {SchoolAdminEditBranchPage} from "../pages/school-admin-edit-branch/school-admin-edit-branch";
 
 // AF2 Settings
 export const firebaseConfig = {
@@ -66,7 +67,8 @@ export function createTranslateLoader(http: Http) {
         SchoolAdminSchoolsPage,
         SchoolAdminAddUpdateSchoolPage,
         SchoolAdminClassesPage,
-        SchoolAdminEditBranchPage
+        SchoolAdminEditBranchPage,
+        SchoolAdminEditSchoolPage
     ],
     imports: [
         IonicModule.forRoot(MyApp),
@@ -94,7 +96,8 @@ export function createTranslateLoader(http: Http) {
         SchoolAdminSchoolsPage,
         SchoolAdminAddUpdateSchoolPage,
         SchoolAdminClassesPage,
-        SchoolAdminEditBranchPage
+        SchoolAdminEditBranchPage,
+        SchoolAdminEditSchoolPage
     ],
     providers: [
         {provide: ErrorHandler, useClass: IonicErrorHandler},

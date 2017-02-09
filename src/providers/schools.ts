@@ -40,7 +40,11 @@ export class Schools {
     }
 
     addClassToSchool(schoolId: string, classId: string) {
-        let schoolClasssList = this.af.database.list('/schools/' + schoolId + '/classes');
-        schoolClasssList.push(classId);
+        // let schoolClasssList = this.af.database.list('/schools/' + schoolId + '/classes');
+        // schoolClasssList.push(classId);
+    }
+
+    deleteSchool(schoolId: string){
+        this.af.database.object('/schools/' + schoolId).remove();
     }
 }

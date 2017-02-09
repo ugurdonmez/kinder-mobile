@@ -2,6 +2,9 @@
 
   <ion-navbar>
     <ion-title>{{(school | async).name}} Classes</ion-title>
+      <ion-buttons end>
+          <button ion-button end (click)="openSchoolAdminEditSchoolPage(schoolId)">Edit</button>
+      </ion-buttons>
   </ion-navbar>
 
 </ion-header>
