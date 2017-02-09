@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{(school | async).name}} Classes</ion-title>
+    <ion-title>School: {{(school | async).name}}</ion-title>
       <ion-buttons end>
           <button ion-button end (click)="openSchoolAdminEditSchoolPage(schoolId)">Edit</button>
       </ion-buttons>

@@ -2,7 +2,7 @@
 
   <ion-navbar>
     <ion-title>
-        {{(branch | async).name}} Schools
+        Branch: {{(branch | async).name}}
     </ion-title>
       <ion-buttons end>
           <button ion-button end (click)="openSchoolAdminEditBranchPage(branchId)">Edit</button>

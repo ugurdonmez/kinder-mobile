@@ -46,6 +46,7 @@ export class SchoolAdminAddUpdateClassPage {
     addNewClass(){
         this.classDetailsForm.value.age = Number(this.classDetailsForm.value.age);
         this.classDetailsForm.value.maximum = Number(this.classDetailsForm.value.maximum);
+        this.classProvider.addClass(this.classDetailsForm.value);
         this.navCtrl.pop();
     }
 
