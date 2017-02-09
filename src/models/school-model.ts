@@ -5,7 +5,6 @@ export class SchoolModel {
     membershipStart: number;
     buildingAddress: string;
     branchId: string;
-    classes: Array<string>;
     isActivated: boolean;
     logoURL: string;
     managerName: string;
