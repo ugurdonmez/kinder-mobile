@@ -7,6 +7,7 @@ import {Classes} from "../../providers/classes";
 import { SchoolAdminAddUpdateClassPage } from '../school-admin-add-update-class/school-admin-add-update-class';
 import {Teachers} from "../../providers/teachers";
 import {SchoolAdminEditSchoolPage} from "../school-admin-edit-school/school-admin-edit-school";
+import {SchoolAdminClassDetailsPage} from "../school-admin-class-details/school-admin-class-details";
 
 @Component({
   selector: 'page-school-admin-classes',
@@ -32,8 +33,8 @@ export class SchoolAdminClassesPage {
     }
 
     openClassPage(classId){
-        console.log('goes to class list of that school with classId:' + classId);
-        // this.navCtrl.push()
+        // console.log('goes to class list of that school with classId:' + classId);
+        this.navCtrl.push(SchoolAdminClassDetailsPage, {'classId': classId})
     }
 
     openSchoolAdminClassAdd() {

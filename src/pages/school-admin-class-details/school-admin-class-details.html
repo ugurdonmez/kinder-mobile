@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+        Class: {{(_class | async).name}}
+    </ion-title>
+      <ion-buttons end>
+          <button ion-button end (click)="openSchoolAdminEditClassPage(classId)">Edit</button>
+      </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="page-school-admin-class-details">
+    <ion-grid>
+        <ion-row>
+            <ion-col width-25>Age</ion-col>
+            <ion-col>{{(_class | async).age}}</ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col width-25>Capacity</ion-col>
+            <ion-col>{{(_class | async).current}}/{{(_class | async).maximum}}</ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col width-25>Teacher</ion-col>
+            <ion-col>{{teacherName}}</ion-col>
+        </ion-row>
+    </ion-grid>
+
+
+    <!--<h1 class="classes-title">Classes</h1>-->
+
+    <!--<ion-list>-->
+        <!--<button ion-item *ngFor="let school of allSchoolsOfTeacher | async" (click)="openSchoolPage(school.$key)">-->
+            <!--<div>-->
+                <!--&lt;!&ndash;ion-item&ndash;&gt;-->
+                <!--<h2>{{school.name}}</h2>-->
+                <!--<p>{{school.managerName}}</p>-->
+                <!--<p>{{school.managerTel}}</p>-->
+            <!--</div>-->
+
+            <!--<div item-right>-->
+                <!--<p>{{school.buildingAddress}}</p>-->
+                <!--<p>{{school.schoolTelephone}}</p>-->
+            <!--</div>-->
+        <!--</button>-->
+    <!--</ion-list>-->
+
+</ion-content>

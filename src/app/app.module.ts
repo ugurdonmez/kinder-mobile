@@ -22,6 +22,9 @@ import {SchoolAdminClassesPage} from "../pages/school-admin-classes/school-admin
 import {SchoolAdminEditBranchPage} from "../pages/school-admin-edit-branch/school-admin-edit-branch";
 import {SchoolAdminEditSchoolPage} from "../pages/school-admin-edit-school/school-admin-edit-school";
 import {SchoolAdminTeacherDetailsPage} from "../pages/school-admin-teacher-details/school-admin-teacher-details";
+import {SchoolAdminEditTeacherPage} from "../pages/school-admin-edit-teacher/school-admin-edit-teacher";
+import {SchoolAdminClassDetailsPage} from "../pages/school-admin-class-details/school-admin-class-details";
+import {SchoolAdminEditClassPage} from "../pages/school-admin-edit-class/school-admin-edit-class";
 
 // Importing provider
 import { AuthData } from '../providers/auth-data';
@@ -31,7 +34,6 @@ import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 // Localization
 import { TranslateModule, TranslateStaticLoader, TranslateLoader } from 'ng2-translate/ng2-translate';
 import { Http } from "@angular/http";
-import {SchoolAdminEditTeacherPage} from "../pages/school-admin-edit-teacher/school-admin-edit-teacher";
 
 // AF2 Settings
 export const firebaseConfig = {
@@ -72,7 +74,9 @@ export function createTranslateLoader(http: Http) {
         SchoolAdminEditBranchPage,
         SchoolAdminEditSchoolPage,
         SchoolAdminTeacherDetailsPage,
-        SchoolAdminEditTeacherPage
+        SchoolAdminEditTeacherPage,
+        SchoolAdminClassDetailsPage,
+        SchoolAdminEditClassPage
     ],
     imports: [
         IonicModule.forRoot(MyApp),
@@ -103,7 +107,9 @@ export function createTranslateLoader(http: Http) {
         SchoolAdminEditBranchPage,
         SchoolAdminEditSchoolPage,
         SchoolAdminTeacherDetailsPage,
-        SchoolAdminEditTeacherPage
+        SchoolAdminEditTeacherPage,
+        SchoolAdminClassDetailsPage,
+        SchoolAdminEditClassPage
     ],
     providers: [
         {provide: ErrorHandler, useClass: IonicErrorHandler},
