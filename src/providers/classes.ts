@@ -64,4 +64,8 @@ export class Classes {
             }
         });
     }
+
+    deleteClass(classId: string){
+        this.af.database.object('/classes/' + classId).remove();
+    }
 }

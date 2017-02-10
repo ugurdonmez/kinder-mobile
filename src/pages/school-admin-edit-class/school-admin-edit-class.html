@@ -1,0 +1,42 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{"Edit Class" | translate}}: {{(_class | async).name}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <form [formGroup]="classDetailsForm">
+        <ion-list>
+            <ion-item>
+                <ion-label>Name</ion-label>
+                <ion-input type="text" formControlName="name"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Teacher</ion-label>
+                <ion-select formControlName="teacher_id">
+                    <ion-option *ngFor="let a_teacher of allTeachers | async" [value]="a_teacher.$key">{{a_teacher?.name}}</ion-option>
+                </ion-select>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Age</ion-label>
+                <ion-input type="number" formControlName="age"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Total Size</ion-label>
+                <ion-input type="number" formControlName="maximum"></ion-input>
+            </ion-item>
+        </ion-list>
+    </form>
+
+    <ion-footer>
+        <button ion-button full color="danger" (click)="deleteClass()">Delete</button>
+        <button ion-button full (click)="updateClass()">Save</button>
+    </ion-footer>
+
+</ion-content>
