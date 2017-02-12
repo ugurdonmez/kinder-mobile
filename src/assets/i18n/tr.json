@@ -14,6 +14,10 @@
   "Teacher":{
     "Name": "Adı",
     "Surname": "Soyadı"
-  }
+  },
+  "Email": "E-Posta",
+  "User Role": "Kullanıcı Rolü",
+  "Invite People": "Insanlari Davet Et"
+  "Branch Admin": "Branch Yoneticisi"
 
 }

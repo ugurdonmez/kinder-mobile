@@ -14,5 +14,9 @@
   "Teacher":{
     "Name": "Name",
     "Surname": "Surname"
-  }
+  },
+  "Email": "Email",
+  "User Role": "User Role",
+  "Invite People": "Invite People",
+  "Branch Admin": "Branch Admin"
 }

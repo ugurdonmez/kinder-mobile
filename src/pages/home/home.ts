@@ -12,6 +12,7 @@ import { SchoolAdminBranchesPage } from '../school-admin-branches/school-admin-b
 import { SchoolAdminAddUpdateBranchPage } from '../school-admin-add-update-branch/school-admin-add-update-branch';
 import { SchoolAdminTeachersPage } from '../school-admin-teachers/school-admin-teachers';
 import { SchoolAdminAddUpdateClassPage } from '../school-admin-add-update-class/school-admin-add-update-class';
+import {InviteOthersPage} from "../invite-others/invite-others";
 
 @Component({
   selector: 'page-home',
@@ -61,5 +62,9 @@ export class HomePage {
         console.log('open school admin classes')
 
         this.navCtrl.push(SchoolAdminAddUpdateClassPage);
+    }
+
+    openInvitePeople(page) {
+        this.navCtrl.push(InviteOthersPage);
     }
 }
