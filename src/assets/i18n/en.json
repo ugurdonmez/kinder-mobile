@@ -14,5 +14,82 @@
   "Teacher":{
     "Name": "Name",
     "Surname": "Surname"
-  }
+  },
+  "Attendance": "Attendance",
+  "Albums": "Albums",
+  "Calendar": "Calendar",
+  "Daily Parent Feedback": "Daily Parent Feedback",
+  "Daily Teacher Feedback": "Daily Teacher Feedback",
+  "Home Page": "Home Page",
+  "School name": "School name",
+  "School logo": "School logo",
+  "Student photo": "Student photo",
+  "Message": "Message",
+  "Weekly Menu": "Weekly Menu",
+  "Albulms": "Albulms",
+  "Homeworks": "Homeworks",
+  "Activity Plan": "Activity Plan",
+  "Teacher Feedback": "Teacher Feedback",
+  "Parent Feedback": "Parent Feedback",
+  "Branches": "Branches",
+  "Teachers": "Teachers",
+  "Login": "Login",
+  "I forgot my password 🙁": "I forgot my password 🙁",
+  "Create a new account": "Create a new account",
+  "Create an Account": "Create an Account",
+  "Email": "Email",
+  "Please enter a valid email.": "Please enter a valid email.",
+  "Password": "Password",
+  "Your password needs more than 6 characters.": "Your password needs more than 6 characters.",
+
+
+
+  "Add Update School": "Add Update School",
+  "School Name": "School Name",
+  "Building Address": "Building Address",
+  "Logo URL": "Logo URL",
+  "Manager Name": "Manager Name",
+  "Manager Tel": "Manager Tel",
+  "Activation Email": "Activation Email",
+  "School Telephone": "School Telephone",
+  "Second Contact Person Name": "Second Contact Person Name",
+  "Second Contact Person Tel": "Second Contact Person Tel",
+  "Activated": "Activated",
+  "True": "True",
+  "False": "False",
+  "School Admin Add Update Students": "School Admin Add Update Students",
+  "School Admin Add Update Teacher": "School Admin Add Update Teacher",
+  "Surname": "Surname",
+  "Photo Url": "Photo Url",
+  "Edit": "Edit",
+  "Age": "Age",
+  "Capacity": "Capacity",
+  "TeacherStr": "Teacher",
+  "Class: ": "Class: ",
+  "Activated Status": "Activated Status",
+  "School": "School",
+  "Delete": "Delete",
+  "Save": "Save",
+  "Total Size": "Total Size",
+  "Schools": "Schools",
+  "School Admin Students": "School Admin Students",
+  "School Admin Teachers": "School Admin Teachers",
+  "Member Area": "Member Area",
+  "Welcome inside": "Welcome inside",
+  "Your Email is": "Your Email is",
+  "Weekly Activity Plan": "Weekly Activity Plan",
+  "Weekly Menu": "Weekly Menu"
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

@@ -4,11 +4,14 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { AuthData } from '../../providers/auth-data';
 // import { LoginPage } from '../login/login';
 import { EmailValidator } from '../../validators/email';
+import {Translator} from "../../app/translator";
+import {TranslateService} from "ng2-translate";
 
 
 @Component({
   selector: 'page-reset-password',
-  templateUrl: 'reset-password.html'
+  templateUrl: 'reset-password.html',
+    providers: [Translator]
 })
 export class ResetPasswordPage {
 
@@ -16,10 +19,12 @@ export class ResetPasswordPage {
     emailChanged: boolean = false;
     passwordChanged: boolean = false;
     submitAttempt: boolean = false;
+    private translate: TranslateService;
 
 
     constructor(public authData: AuthData, public formBuilder: FormBuilder,
-                public nav: NavController, public alertCtrl: AlertController) {
+                public nav: NavController, public alertCtrl: AlertController, public translator: Translator) {
+        this.translate = translator.translatePipe;
 
         this.resetPasswordForm = formBuilder.group({
             email: ['', Validators.compose([Validators.required,EmailValidator.isValid])]

@@ -11,10 +11,13 @@ import { AuthData } from '../../providers/auth-data';
 import { ResetPasswordPage } from '../reset-password/reset-password';
 
 import { EmailValidator } from '../../validators/email';
+import {Translator} from "../../app/translator";
+import {TranslateService} from "ng2-translate";
 
 @Component({
     selector: 'page-login',
-    templateUrl: 'login.html'
+    templateUrl: 'login.html',
+    providers: [Translator]
 })
 
 
@@ -25,11 +28,12 @@ export class LoginPage {
     passwordChanged: boolean = false;
     submitAttempt: boolean = false;
     loading: any;
+    private translate: TranslateService;
 
     constructor(public nav: NavController, public authData: AuthData,
                 public formBuilder: FormBuilder, public alertCtrl: AlertController,
-                public loadingCtrl: LoadingController) {
-
+                public loadingCtrl: LoadingController, public translator: Translator) {
+        this.translate = translator.translatePipe;
         this.loginForm = formBuilder.group({
             email: ['', Validators.compose([Validators.required,
                                             EmailValidator.isValid])],

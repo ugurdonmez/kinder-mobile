@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import {Translator} from "../../app/translator";
+import {TranslateService} from "ng2-translate";
 
 /*
   Generated class for the Homeworks page.
@@ -9,11 +11,13 @@ import { NavController } from 'ionic-angular';
 */
 @Component({
   selector: 'page-homeworks',
-  templateUrl: 'homeworks.html'
+  templateUrl: 'homeworks.html',
+  providers: [Translator]
 })
 export class HomeworksPage {
-
-  constructor(public navCtrl: NavController) {}
+  private translate: TranslateService;
+  constructor(public navCtrl: NavController, public translator: Translator) {
+    this.translate = translator.translatePipe;}
 
   ionViewDidLoad() {
     console.log('Hello HomeworksPage Page');

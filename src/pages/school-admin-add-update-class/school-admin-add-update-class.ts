@@ -8,12 +8,14 @@ import { Teachers } from '../../providers/teachers';
 import {Validators, FormBuilder} from "@angular/forms";
 import {IntegerValidator} from '../../validators/integer';
 import {Schools} from "../../providers/schools";
+import {Translator} from "../../app/translator";
+import {TranslateService} from "ng2-translate";
 
 
 @Component({
     selector: 'page-school-admin-add-update-class',
     templateUrl: 'school-admin-add-update-class.html',
-    providers: [Classes, Teachers, Schools]
+    providers: [Classes, Teachers, Schools, Translator]
 })
 
 export class SchoolAdminAddUpdateClassPage {
@@ -21,9 +23,12 @@ export class SchoolAdminAddUpdateClassPage {
     classDetailsForm: any;
     allTeachers: any;
     schoolId: string;
+    private translate: TranslateService;
 
     constructor(public navCtrl: NavController, public classProvider: Classes, public formBuilder: FormBuilder,
-                public teacherProvider: Teachers, private navParams: NavParams, private schoolsProvider: Schools) {
+                public teacherProvider: Teachers, private navParams: NavParams, private schoolsProvider: Schools,
+                public translator: Translator) {
+        this.translate = translator.translatePipe;
         this.schoolId = navParams.get('schoolId');
         this.classDetailsForm = formBuilder.group(
             {

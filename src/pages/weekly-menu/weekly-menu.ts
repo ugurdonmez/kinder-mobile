@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import {Translator} from "../../app/translator";
+import {TranslateService} from "ng2-translate";
 
 /*
   Generated class for the WeeklyMenu page.
@@ -9,11 +11,15 @@ import { NavController } from 'ionic-angular';
 */
 @Component({
   selector: 'page-weekly-menu',
-  templateUrl: 'weekly-menu.html'
+  templateUrl: 'weekly-menu.html',
+    providers: [Translator]
 })
 export class WeeklyMenuPage {
+  private translate: TranslateService;
 
-  constructor(public navCtrl: NavController) {}
+  constructor(public navCtrl: NavController, public translator: Translator) {
+    this.translate = translator.translatePipe;
+  }
 
   ionViewDidLoad() {
     console.log('Hello WeeklyMenuPage Page');

@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Home Page</ion-title>
+    <ion-title>{{"Home Page" | translate}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -11,9 +11,9 @@
 
     <ion-grid>
         <ion-row class="row-25">
-            <ion-col width-33>School name</ion-col>
-            <ion-col width-33>School logo</ion-col>
-            <ion-col width-33>Student photo</ion-col>
+            <ion-col width-33>{{"School name" | translate}}</ion-col>
+            <ion-col width-33>{{"School logo" | translate}}</ion-col>
+            <ion-col width-33>{{"Student photo" | translate}}</ion-col>
         </ion-row>
         <ion-row class="row-25">
             <ion-col width-33 class="center-class">
@@ -22,27 +22,27 @@
                     <p>Calender</p>
                 </div>
             </ion-col>
-            <ion-col width-33>Attendence</ion-col>
-            <ion-col width-33>Message</ion-col>
+            <ion-col width-33>{{"Attendance" | translate}}</ion-col>
+            <ion-col width-33>{{"Message" | translate}}</ion-col>
         </ion-row>
         <ion-row class="row-25">
-            <ion-col width-33>Weekly Menu</ion-col>
-            <ion-col width-33>Albulms</ion-col>
-            <ion-col width-33>Homeworks</ion-col>
+            <ion-col width-33>{{"Weekly Menu" | translate}}</ion-col>
+            <ion-col width-33>{{"Albulms" | translate}}</ion-col>
+            <ion-col width-33>{{"Homeworks" | translate}}</ion-col>
         </ion-row>
         <ion-row class="row-25">
-            <ion-col width-33>Activity Plan</ion-col>
-            <ion-col width-33>Teacher Feedback</ion-col>
-            <ion-col width-33>Parent Feedback</ion-col>
+            <ion-col width-33>{{"Activity Plan" | translate}}</ion-col>
+            <ion-col width-33>{{"Teacher Feedback" | translate}}</ion-col>
+            <ion-col width-33>{{"Parent Feedback" | translate}}</ion-col>
         </ion-row>
         <ion-row class="row-25">
-            <ion-col width-33 (click)="logout()">Activity Plan</ion-col>
+            <ion-col width-33 (click)="logout()">{{"Activity Plan" | translate}}</ion-col>
         </ion-row>
         <ion-row class="row-25">
-            <ion-col width-33 (click)="openSchoolAdminBranch(p)">Branches</ion-col>
+            <ion-col width-33 (click)="openSchoolAdminBranch(p)">{{"Branches" | translate}}</ion-col>
         </ion-row>
         <ion-row class="row-25">
-            <ion-col width-33 (click)="openSchoolAdminTeachers(p)">Teachers</ion-col>
+            <ion-col width-33 (click)="openSchoolAdminTeachers(p)">{{"Teachers" | translate}}</ion-col>
         </ion-row>
     </ion-grid>
 

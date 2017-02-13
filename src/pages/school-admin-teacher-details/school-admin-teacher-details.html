@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-        Teacher: {{(teacher | async).name}}
+        {{"TeacherStr" | translate}}: {{(teacher | async).name}}
     </ion-title>
       <ion-buttons end>
           <button ion-button end (click)="openSchoolAdminEditTeacherPage(teacherId)">Edit</button>
@@ -13,19 +13,19 @@
 <ion-content class="page-school-admin-schools">
     <ion-grid>
         <ion-row>
-            <ion-col width-25>Name</ion-col>
+            <ion-col width-25>{{"Name" | translate}}</ion-col>
             <ion-col>{{(teacher | async).name}}</ion-col>
         </ion-row>
         <ion-row>
-            <ion-col width-25>Surname</ion-col>
+            <ion-col width-25>{{"Surname" | translate}}</ion-col>
             <ion-col>{{(teacher | async).surname}}</ion-col>
         </ion-row>
         <ion-row>
-            <ion-col width-25>Notes</ion-col>
+            <ion-col width-25>{{"Notes" | translate}}</ion-col>
             <ion-col>{{(teacher | async).notes}}</ion-col>
         </ion-row>
         <ion-row>
-            <ion-col width-25>Photo URL</ion-col>
+            <ion-col width-25>{{"Photo URL" | translate}}</ion-col>
             <ion-col>{{(teacher | async).photoUrl}}</ion-col>
         </ion-row>
     </ion-grid>

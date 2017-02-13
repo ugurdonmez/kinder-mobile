@@ -12,18 +12,22 @@ import { SchoolAdminBranchesPage } from '../school-admin-branches/school-admin-b
 import { SchoolAdminAddUpdateBranchPage } from '../school-admin-add-update-branch/school-admin-add-update-branch';
 import { SchoolAdminTeachersPage } from '../school-admin-teachers/school-admin-teachers';
 import { SchoolAdminAddUpdateClassPage } from '../school-admin-add-update-class/school-admin-add-update-class';
+import {TranslateService} from "ng2-translate";
+import {Translator} from "../../app/translator";
 
 @Component({
   selector: 'page-home',
-  templateUrl: 'home.html'
+  templateUrl: 'home.html',
+    providers: [Translator]
 })
 
 export class HomePage {
-
+    private translate: TranslateService;
     constructor(public navCtrl: NavController,
                 public menuCtrl: MenuController,
-                public authData: AuthData) {
-
+                public authData: AuthData,
+                public translator: Translator) {
+        this.translate = translator.translatePipe;
     }
 
     openCalender(page) {

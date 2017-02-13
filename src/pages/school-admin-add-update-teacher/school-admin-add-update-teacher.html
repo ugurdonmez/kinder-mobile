@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>school-admin-add-update-teacher</ion-title>
+    <ion-title>{{"School Admin Add Update Teacher" | translate}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -12,25 +12,25 @@
   <form [formGroup]="teacherDetailsForm">
     <ion-list>
       <ion-item>
-        <ion-label>Name</ion-label>
+        <ion-label>{{"Name" | translate}}</ion-label>
         <ion-input type="text" formControlName="name"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label>Surname</ion-label>
+        <ion-label>{{"Surname" | translate}}</ion-label>
         <ion-input type="text" formControlName="surname"></ion-input>
       </ion-item>
 
 
         <ion-item>
-            <ion-label>Notes</ion-label>
+            <ion-label>{{"Notes" | translate}}</ion-label>
             <ion-input type="text" formControlName="notes"></ion-input>
         </ion-item>
 
 
         <ion-item>
             <!--TODO: put an upload feature here-->
-            <ion-label>Photo Url</ion-label>
+            <ion-label>{{"Photo Url" | translate}}</ion-label>
             <ion-input type="text" formControlName="photoUrl"></ion-input>
         </ion-item>
 

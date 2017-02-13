@@ -5,20 +5,24 @@ import {Branches} from '../../providers/branches'
 
 import { SchoolAdminAddUpdateBranchPage } from '../school-admin-add-update-branch/school-admin-add-update-branch';
 import { SchoolAdminSchoolsPage} from "../school-admin-schools/school-admin-schools";
+import {Translator} from "../../app/translator";
+import {TranslateService} from "ng2-translate";
 
 
 @Component({
   selector: 'page-school-admin-branches',
   templateUrl: 'school-admin-branches.html',
-    providers: [Branches]
+    providers: [Branches, Translator]
 })
 
 
 export class SchoolAdminBranchesPage {
 
     allBranches: any;
+    private translate: TranslateService;
 
-    constructor(public navCtrl: NavController, public branchesProvider: Branches) {
+    constructor(public navCtrl: NavController, public branchesProvider: Branches, public translator: Translator) {
+        this.translate = translator.translatePipe;
         this.allBranches = this.branchesProvider.getAllBranches();
     }
 
