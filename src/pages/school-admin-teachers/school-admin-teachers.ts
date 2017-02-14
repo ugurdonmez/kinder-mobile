@@ -7,20 +7,24 @@ import {Teachers} from "../../providers/teachers";
 import { SchoolAdminAddUpdateTeacherPage } from '../school-admin-add-update-teacher/school-admin-add-update-teacher'
 import {Classes} from "../../providers/classes";
 import {SchoolAdminTeacherDetailsPage} from "../school-admin-teacher-details/school-admin-teacher-details";
+import {Translator} from "../../app/translator";
+import {TranslateService} from "ng2-translate";
 
 @Component({
   selector: 'page-school-admin-teachers',
   templateUrl: 'school-admin-teachers.html',
-    providers: [Teachers, Classes]
+    providers: [Teachers, Classes, Translator]
 })
 
 export class SchoolAdminTeachersPage {
     randomMockTeacher: TeacherModel;
     allTeachers: any;
     teacher: any;
+    private translate: TranslateService;
 
     constructor(public navCtrl: NavController, public teachersProvider: Teachers,
-    classProvider: Classes) {
+    classProvider: Classes, public translator: Translator) {
+        this.translate = translator.translatePipe;
         let fetchedTeachers = teachersProvider.getAllTeachers();
         // this.allTeachers = teachersProvider.getAllTeachers();
         this.allTeachers = [];

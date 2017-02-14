@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import {Validators, FormBuilder} from "@angular/forms";
 import { Teachers } from '../../providers/teachers';
+import {Translator} from "../../app/translator";
+import {TranslateService} from "ng2-translate";
 
 /*
   Generated class for the SchoolAdminAddUpdateTeacher page.
@@ -12,13 +14,15 @@ import { Teachers } from '../../providers/teachers';
 @Component({
   selector: 'page-school-admin-add-update-teacher',
   templateUrl: 'school-admin-add-update-teacher.html',
-    providers: [Teachers]
+    providers: [Teachers, Translator]
 })
 export class SchoolAdminAddUpdateTeacherPage {
     teacherDetailsForm: any;
+    private translate: TranslateService;
 
   constructor(public navCtrl: NavController, public formBuilder: FormBuilder,
-              public teacherProvider: Teachers) {
+              public teacherProvider: Teachers, public translator: Translator) {
+      this.translate = translator.translatePipe;
       this.teacherDetailsForm = formBuilder.group(
           {
               'name': ['', Validators.minLength(1)],

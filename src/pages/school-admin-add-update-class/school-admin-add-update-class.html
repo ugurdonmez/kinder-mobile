@@ -2,7 +2,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>school-admin-add-update-class</ion-title>
+    <ion-title>{{"School Admin Add Update Class" | translate}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -12,24 +12,24 @@
     <form [formGroup]="classDetailsForm">
         <ion-list>
             <ion-item>
-                <ion-label>Name</ion-label>
+                <ion-label>{{"Name" | translate}}</ion-label>
                 <ion-input type="text" formControlName="name"></ion-input>
             </ion-item>
 
             <ion-item>
-                <ion-label>Teacher</ion-label>
+                <ion-label>{{"TeacherStr" | translate}}</ion-label>
                 <ion-select formControlName="teacher_id">
                     <ion-option *ngFor="let a_teacher of allTeachers | async" [value]="a_teacher.$key">{{a_teacher.name}}</ion-option>
                 </ion-select>
             </ion-item>
 
             <ion-item>
-                <ion-label>Age</ion-label>
+                <ion-label>{{"Age" | translate}}</ion-label>
                 <ion-input type="number" formControlName="age"></ion-input>
             </ion-item>
 
             <ion-item>
-                <ion-label>Total Size</ion-label>
+                <ion-label>{{"Total Size" | translate}}</ion-label>
                 <ion-input type="number" formControlName="maximum"></ion-input>
             </ion-item>
         </ion-list>

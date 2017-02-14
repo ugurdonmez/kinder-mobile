@@ -2,7 +2,7 @@
 
   <ion-navbar>
     <ion-title>
-        Branch: {{(branch | async).name}}
+        {{(branch | async).name}}
     </ion-title>
       <ion-buttons end>
           <button ion-button end (click)="openSchoolAdminEditBranchPage(branchId)">Edit</button>
@@ -16,22 +16,22 @@
 <ion-content class="page-school-admin-schools">
     <ion-grid>
         <ion-row>
-            <ion-col width-25>Manager</ion-col>
+            <ion-col width-25>{{"Manager" | translate}}</ion-col>
             <ion-col>{{(branch | async).manager}}</ion-col>
         </ion-row>
         <ion-row>
-            <ion-col width-25>Manager Phone</ion-col>
+            <ion-col width-25>{{"Manager Telephone" | translate}}</ion-col>
             <ion-col>{{(branch | async).manager_tel}}</ion-col>
         </ion-row>
         <ion-row>
-            <ion-col width-25>Address</ion-col>
+            <ion-col width-25>{{"Address" | translate}}</ion-col>
             <ion-col>{{(branch | async).address}}</ion-col>
         </ion-row>
 
     </ion-grid>
 
 
-    <h1 class="schools-title">Schools</h1>
+    <h1 class="schools-title">{{"Schools" | translate}}</h1>
 
     <ion-list>
         <button ion-item *ngFor="let school of allSchoolsOfBranch | async" (click)="openSchoolPage(school.$key)">

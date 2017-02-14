@@ -7,11 +7,14 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { AuthData } from '../../providers/auth-data';
 import { EmailValidator } from '../../validators/email';
 import { HomePage } from '../home/home';
+import {Translator} from "../../app/translator";
+import {TranslateService} from "ng2-translate";
 
 
 @Component({
     selector: 'page-register',
-    templateUrl: 'register.html'
+    templateUrl: 'register.html',
+    providers: [Translator]
 })
 
 export class RegisterPage {
@@ -21,10 +24,12 @@ export class RegisterPage {
     passwordChanged: boolean = false;
     submitAttempt: boolean = false;
     loading;
+    private translate: TranslateService;
 
     constructor(public nav: NavController, public authData: AuthData,
                 public formBuilder: FormBuilder, public loadingCtrl: LoadingController,
-                public alertCtrl: AlertController) {
+                public alertCtrl: AlertController, public translator: Translator) {
+        this.translate = translator.translatePipe;
 
         this.signupForm = formBuilder.group({
             email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],

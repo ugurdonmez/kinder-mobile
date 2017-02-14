@@ -3,6 +3,7 @@ import 'rxjs/add/operator/map';
 
 import { AngularFire } from 'angularfire2';
 
+
 @Injectable()
 export class AuthData {
 
@@ -31,7 +32,9 @@ export class AuthData {
     }
 
     signupUser(newEmail: string, newPassword: string): any {
-        return this.af.auth.createUser({ email: newEmail, password: newPassword });
+        let response = this.af.auth.createUser({ email: newEmail, password: newPassword });
+        this.addUserToUsersCollectionIfNotExist(newEmail);
+        return response;
     }
 
     getUserId(): any{
@@ -43,5 +46,26 @@ export class AuthData {
 
     newInvitation(email: string, userRole: string) {
         this.af.database.list('/invited-users/' + userRole).push(email);
+    }
+
+    addUserToUsersCollectionIfNotExist(userMail: string): any {
+        let userId = userMail.split("@")[0];
+        let userObject = this.af.database.object('/users/'+ userId);
+
+        userObject.subscribe( snapshot => {
+            console.log(snapshot.val);
+            if (snapshot.val === null){
+                userObject.set({
+                    email: userMail,
+                    role: "unknown"
+                });
+            }
+        });
+    }
+
+    getUserRole(): any {
+        let userId = this.getUserId();
+        let userRole = this.af.database.object('/users/'+ userId + "/role");
+        return userRole
     }
 }

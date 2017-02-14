@@ -1,9 +1,9 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>School: {{(school | async).name}}</ion-title>
+    <ion-title>{{"School" | translate}}: {{(school | async).name}}</ion-title>
       <ion-buttons end>
-          <button ion-button end (click)="openSchoolAdminEditSchoolPage(schoolId)">Edit</button>
+          <button ion-button end (click)="openSchoolAdminEditSchoolPage(schoolId)">{{"Edit" | translate}}</button>
       </ion-buttons>
   </ion-navbar>
 
@@ -13,54 +13,54 @@
 <ion-content class="page-school-admin-classes">
     <ion-grid>
         <ion-row>
-            <ion-col width-25>Building Address</ion-col>
+            <ion-col width-25>{{"Building Address" | translate}}</ion-col>
             <ion-col>{{(school | async).buildingAddress}}</ion-col>
         </ion-row>
         <ion-row>
-            <ion-col width-25>Manager Name</ion-col>
+            <ion-col width-25>{{"Manager Name" | translate}}</ion-col>
             <ion-col>{{(school | async).managerName}}</ion-col>
         </ion-row>
 
         <ion-row>
-            <ion-col width-25>Manager Tel</ion-col>
+            <ion-col width-25>{{"Manager Tel" | translate}}</ion-col>
             <ion-col>{{(school | async).managerTel}}</ion-col>
         </ion-row>
         <ion-row>
-            <ion-col width-25>Activation Email</ion-col>
+            <ion-col width-25>{{"Activation Email" | translate}}</ion-col>
             <ion-col>{{(school | async).activationEmail}}</ion-col>
         </ion-row>
         <ion-row>
-            <ion-col width-25>School Telephone</ion-col>
+            <ion-col width-25>{{"School Telephone" | translate}}</ion-col>
             <ion-col>{{(school | async).schoolTelephone}}</ion-col>
         </ion-row>
         <ion-row>
-            <ion-col width-25>Second Contact Person Name</ion-col>
+            <ion-col width-25>{{"Second Contact Person Name" | translate}}</ion-col>
             <ion-col>{{(school | async).secondContactPersonName}}</ion-col>
         </ion-row>
         <ion-row>
-            <ion-col width-25>Second Contact Person Tel</ion-col>
+            <ion-col width-25>{{"Second Contact Person Tel" | translate}}</ion-col>
             <ion-col>{{(school | async).secondContactTelNo}}</ion-col>
         </ion-row>
         <ion-row>
-            <ion-col width-25>Activated Status</ion-col>
+            <ion-col width-25>{{"Activated Status" | translate}}</ion-col>
             <ion-col>{{(school | async).isActivated}}</ion-col>
         </ion-row>
         <ion-row>
-            <ion-col width-25>Address</ion-col>
+            <ion-col width-25>{{"Address" | translate}}</ion-col>
             <ion-col>{{(school | async).address}}</ion-col>
         </ion-row>
     </ion-grid>
 
 
-    <h1 class="classes-title">Classes</h1>
+    <h1 class="classes-title">{{"Classes" | translate}}</h1>
 
     <ion-list>
         <button ion-item *ngFor="let _class of allClassesOfSchool | async" (click)="openClassPage(_class.$key)">
             <div>
                 <!--ion-item-->
                 <h2>{{_class.name}}</h2>
-                <p>Age: {{_class.age}}</p>
-                <p>Capacity: {{_class.current}}/{{_class.maximum}}</p>
+                <p>{{"Age" | translate}}: {{_class.age}}</p>
+                <p>{{"Capacity" | translate}}: {{_class.current}}/{{_class.maximum}}</p>
             </div>
 
             <!--<div item-right>-->

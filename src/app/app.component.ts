@@ -6,6 +6,8 @@ import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 
 import { AngularFire } from 'angularfire2';
+import {TeacherHomePage} from "../pages/teacher-home/teacher-home";
+import {AuthData} from "../providers/auth-data";
 
 @Component({
     template: `<ion-nav [root]="rootPage"></ion-nav>`
@@ -13,10 +15,21 @@ import { AngularFire } from 'angularfire2';
 export class MyApp {
     rootPage: any;
 
-    constructor(platform: Platform, af: AngularFire) {
+    constructor(platform: Platform, af: AngularFire, private authData: AuthData) {
         af.auth.subscribe( user => {
             if (user) {
-                this.rootPage = HomePage;
+                this.authData.getUserRole().subscribe(
+                    snapshot => {
+                        console.log("user role:");
+                        console.log(snapshot);
+                        if (snapshot.$value === "teacher"){
+                            this.rootPage = TeacherHomePage;
+                        }
+                        else{
+                            this.rootPage = HomePage;
+                        }
+                    }
+                )
             } else {
                 this.rootPage = LoginPage;
             }

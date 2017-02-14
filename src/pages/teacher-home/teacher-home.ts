@@ -12,33 +12,22 @@ import { SchoolAdminBranchesPage } from '../school-admin-branches/school-admin-b
 import { SchoolAdminAddUpdateBranchPage } from '../school-admin-add-update-branch/school-admin-add-update-branch';
 import { SchoolAdminTeachersPage } from '../school-admin-teachers/school-admin-teachers';
 import { SchoolAdminAddUpdateClassPage } from '../school-admin-add-update-class/school-admin-add-update-class';
-import {InviteOthersPage} from "../invite-others/invite-others";
 import {TranslateService} from "ng2-translate";
 import {Translator} from "../../app/translator";
-import {TeacherHomePage} from "../teacher-home/teacher-home";
 
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html',
+  selector: 'page-teacher-home',
+  templateUrl: 'teacher-home.html',
     providers: [Translator]
 })
 
-export class HomePage {
+export class TeacherHomePage {
     private translate: TranslateService;
     constructor(public navCtrl: NavController,
                 public menuCtrl: MenuController,
                 public authData: AuthData,
                 public translator: Translator) {
         this.translate = translator.translatePipe;
-        this.authData.getUserRole().subscribe(
-            snapshot => {
-                console.log("user role:");
-                console.log(snapshot);
-                if (snapshot.$value === "teacher"){
-                    this.navCtrl.setRoot(TeacherHomePage);
-                }
-            }
-        )
     }
 
     openCalender(page) {
@@ -76,9 +65,5 @@ export class HomePage {
         console.log('open school admin classes')
 
         this.navCtrl.push(SchoolAdminAddUpdateClassPage);
-    }
-
-    openInvitePeople(page) {
-        this.navCtrl.push(InviteOthersPage);
     }
 }

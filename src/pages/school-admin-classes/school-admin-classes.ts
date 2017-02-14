@@ -8,11 +8,13 @@ import { SchoolAdminAddUpdateClassPage } from '../school-admin-add-update-class/
 import {Teachers} from "../../providers/teachers";
 import {SchoolAdminEditSchoolPage} from "../school-admin-edit-school/school-admin-edit-school";
 import {SchoolAdminClassDetailsPage} from "../school-admin-class-details/school-admin-class-details";
+import {Translator} from "../../app/translator";
+import {TranslateService} from "ng2-translate";
 
 @Component({
   selector: 'page-school-admin-classes',
   templateUrl: 'school-admin-classes.html',
-    providers: [Schools, Classes, Teachers]
+    providers: [Schools, Classes, Teachers, Translator]
 })
 
 
@@ -20,9 +22,11 @@ export class SchoolAdminClassesPage {
     private schoolId: string;
     private allClassesOfSchool: any;
     private school: FirebaseObjectObservable<any>;
+    private translate: TranslateService;
 
     constructor(public navCtrl: NavController, public schoolsProvider: Schools, public classesProvider: Classes,
-                private navParams: NavParams, private teachersProvider: Teachers) {
+                private navParams: NavParams, private teachersProvider: Teachers, public translator: Translator) {
+        this.translate = translator.translatePipe;
         this.schoolId = navParams.get('schoolId');
         this.school = schoolsProvider.getSchool(this.schoolId);
         this.allClassesOfSchool = this.classesProvider.getClassesOfSchool(this.schoolId);

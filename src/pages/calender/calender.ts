@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import {Translator} from "../../app/translator";
+import {TranslateService} from "ng2-translate";
 
 /*
   Generated class for the Calender page.
@@ -9,11 +11,15 @@ import { NavController } from 'ionic-angular';
 */
 @Component({
   selector: 'page-calender',
-  templateUrl: 'calender.html'
+  templateUrl: 'calender.html',
+    providers: [Translator]
 })
 export class CalenderPage {
+  private translate: TranslateService;
 
-  constructor(public navCtrl: NavController) {}
+  constructor(public navCtrl: NavController, public translator: Translator) {
+    this.translate = translator.translatePipe;
+  }
 
   ionViewDidLoad() {
     console.log('Hello CalenderPage Page');
