@@ -17,6 +17,7 @@ import {AuthData} from "../../providers/auth-data";
 export class InviteOthersPage {
     translate: TranslateService;
     inviteOthersForm: any;
+    private myUserRole: any;
 
     constructor(public navCtrl: NavController, public formBuilder: FormBuilder,
                 public translator: Translator, public alertCtrl: AlertController, public authData: AuthData) {
@@ -27,6 +28,9 @@ export class InviteOthersPage {
                 'userRole': ['', Validators.required]
             }
         );
+        this.authData.getUserRole().subscribe(snapshot => {
+            this.myUserRole = snapshot.$value;
+        });
     }
 
     ionViewDidLoad() {

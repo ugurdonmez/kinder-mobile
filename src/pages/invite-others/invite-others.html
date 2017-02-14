@@ -19,7 +19,12 @@
             <ion-item>
                 <ion-label>{{"User Role" | translate}}</ion-label>
                 <ion-select formControlName="userRole">
-                    <ion-option value="branch-admin">{{"Branch Admin" | translate}}</ion-option>
+                    <ion-option *ngIf="myUserRole == 'developer'" value="developer">Developer</ion-option>
+                    <ion-option *ngIf="myUserRole == 'developer'" value="branch-admin">{{"Branch Admin" | translate}}</ion-option>
+                    <ion-option *ngIf="myUserRole == 'developer' || myUserRole == 'branch-admin'"
+                                value="school-admin">{{"School Admin" | translate}}</ion-option>
+                    <ion-option *ngIf="myUserRole == 'developer' || myUserRole == 'branch-admin' || myUserRole == 'school-admin'"
+                                value="teacher">{{"TeacherStr" | translate}}</ion-option>
                 </ion-select>
             </ion-item>
         </ion-list>
