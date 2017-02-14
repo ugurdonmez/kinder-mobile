@@ -45,13 +45,13 @@ export class AuthData {
 
     }
 
-    addUserToUsersCollectionIfNotExist(userMail: string) {
+    addUserToUsersCollectionIfNotExist(userMail: string): any {
         let userId = userMail.split("@")[0];
         let userObject = this.af.database.object('/users/'+ userId);
 
         userObject.subscribe( snapshot => {
             console.log(snapshot.val);
-            if (snapshot.val === null){
+            if (snapshot.val == null){
                 userObject.set({
                     email: userMail,
                     role: "unknown"
