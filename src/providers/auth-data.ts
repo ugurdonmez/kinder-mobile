@@ -37,19 +37,33 @@ export class AuthData {
         return response;
     }
 
-    getUserId(): any{
+    getUserId(emailAddress?: string): any{
         var userId;
-        userId = this.fireAuth.email.split("@")[0];
-        console.log ("user id is: " + userId);
+        var email;
+        if (emailAddress){
+            email = emailAddress;
+        }
+        else{
+            email = this.fireAuth.email;
+        }
+        userId = email.split('.').join("").split("@")[0];
+
+        // console.log ("user id is: " + userId);
         return userId
     }
 
     newInvitation(email: string, userRole: string) {
-        this.af.database.list('/invited-users/' + userRole).push(email);
+        let userId = this.getUserId(email)
+        console.log("userIdTry: " + userId);
+        let userObject = this.af.database.object('/users/'+ userId);
+        userObject.set({
+            email: email,
+            role: userRole
+        });
     }
 
     addUserToUsersCollectionIfNotExist(userMail: string): any {
-        let userId = userMail.split("@")[0];
+        let userId = this.getUserId(userMail);
         let userObject = this.af.database.object('/users/'+ userId);
 
         userObject.subscribe( snapshot => {
