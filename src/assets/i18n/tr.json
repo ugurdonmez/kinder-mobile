@@ -8,7 +8,6 @@
   "Add Update Branch": "Branch Ekle ve Düzenle",
   "Edit Branch": "Branch Düzenle",
   "Address": "Adres",
-
   "Photo URL": "Fotograf URL'i",
   "Notes": "Notlar",
   "Teacher":{
@@ -43,9 +42,6 @@
   "Please enter a valid email.": "Lütfen geçerli bir e-posta adresi girin.",
   "Password": "Şifre",
   "Your password needs more than 6 characters.": "Şifreniz 6 karakterden uzun olmalı.",
-
-
-
   "Add Update School": "Okul Ekle ve Güncelle",
   "School Name": "Okul Adı",
   "Building Address": "Bina Adresi",
@@ -82,5 +78,4 @@
   "Weekly Activity Plan": "Haftalık aktivite planı",
   "Weekly Menu": "Haftalık Menü",
   "Logout": "Çıkış yap"
-
 }

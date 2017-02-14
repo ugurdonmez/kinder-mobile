@@ -8,7 +8,6 @@
   "Add Update Branch": "Add Update Branch",
   "Edit Branch": "Edit Branch",
   "Address": "Address",
-
   "Photo URL": "Photo URL",
   "Notes": "Notes",
   "Teacher":{
@@ -41,13 +40,9 @@
   "I forgot my password 🙁": "I forgot my password 🙁",
   "Create a new account": "Create a new account",
   "Create an Account": "Create an Account",
-  "Email": "Email",
   "Please enter a valid email.": "Please enter a valid email.",
   "Password": "Password",
   "Your password needs more than 6 characters.": "Your password needs more than 6 characters.",
-
-
-
   "Add Update School": "Add Update School",
   "School Name": "School Name",
   "Building Address": "Building Address",
@@ -82,19 +77,5 @@
   "Welcome inside": "Welcome inside",
   "Your Email is": "Your Email is",
   "Weekly Activity Plan": "Weekly Activity Plan",
-  "Weekly Menu": "Weekly Menu",
   "Logout": "Logout"
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
