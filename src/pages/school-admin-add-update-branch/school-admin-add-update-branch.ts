@@ -7,6 +7,7 @@ import {Translator} from "../../app/translator";
 import {TranslateService} from "ng2-translate";
 import {FormBuilder, Validators} from "@angular/forms";
 import {EmailValidator} from "../../validators/email";
+import {HomePage} from "../home/home";
 
 
 @Component({
@@ -45,7 +46,7 @@ export class SchoolAdminAddUpdateBranchPage {
 
         if (this.branchDetailsForm.valid){
             this.branches.addBranch(this.branchDetailsForm.value);
-            this.navCtrl.pop();
+            this.navCtrl.setRoot(HomePage);
         }
         else{
             let alert = this.alertCtrl.create({

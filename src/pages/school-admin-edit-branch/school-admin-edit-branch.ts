@@ -6,6 +6,7 @@ import { ClassModel } from '../../models/class-model';
 import {Translator} from "../../app/translator";
 import {TranslateService} from "ng2-translate";
 import {FormBuilder, Validators} from "@angular/forms";
+import {HomePage} from "../home/home";
 
 
 @Component({
@@ -77,8 +78,7 @@ export class SchoolAdminEditBranchPage {
                 text: 'Ok',
                 handler: () => {
                     this.branchesProvider.deleteBranch(this.branchId);
-                    this.navCtrl.pop();
-                    this.navCtrl.pop();
+                    this.navCtrl.setRoot(HomePage);
                 }
             }
         ]

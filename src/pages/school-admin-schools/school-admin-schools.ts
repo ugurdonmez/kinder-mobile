@@ -9,6 +9,7 @@ import {SchoolAdminAddUpdateSchoolPage} from "../school-admin-add-update-school/
 import {SchoolAdminEditBranchPage} from "../school-admin-edit-branch/school-admin-edit-branch";
 import {Translator} from "../../app/translator";
 import {TranslateService} from "ng2-translate";
+import {HomePage} from "../home/home";
 
 @Component({
   selector: 'page-school-admin-schools',
@@ -28,6 +29,13 @@ export class SchoolAdminSchoolsPage {
         this.translate = translator.translatePipe;
         this.branchId = navParams.get('branchId');
         this.branch = branchesProvider.getBranch(this.branchId);
+
+        this.branch.subscribe(snapshot => {
+            if(snapshot === null){
+                console.log(snapshot === null);
+                this.navCtrl.setRoot(HomePage);
+            }
+        });
         this.allSchoolsOfBranch = this.schoolsProvider.getSchoolsOfBranch(this.branchId);
     }
 

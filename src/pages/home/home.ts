@@ -16,11 +16,13 @@ import {InviteOthersPage} from "../invite-others/invite-others";
 import {TranslateService} from "ng2-translate";
 import {Translator} from "../../app/translator";
 import {TeacherHomePage} from "../teacher-home/teacher-home";
+import {SchoolAdminSchoolsPage} from "../school-admin-schools/school-admin-schools";
+import {Branches} from "../../providers/branches";
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
-    providers: [Translator]
+    providers: [Translator, Branches]
 })
 
 export class HomePage {
@@ -28,7 +30,8 @@ export class HomePage {
     constructor(public navCtrl: NavController,
                 public menuCtrl: MenuController,
                 public authData: AuthData,
-                public translator: Translator) {
+                public translator: Translator,
+                private branchesProvider: Branches) {
         this.translate = translator.translatePipe;
         this.authData.getUserRole().subscribe(
             snapshot => {
@@ -36,6 +39,18 @@ export class HomePage {
                 console.log(snapshot);
                 if (snapshot.$value === "teacher"){
                     this.navCtrl.setRoot(TeacherHomePage);
+                }
+                else if (snapshot.$value === "branch-admin"){
+                    branchesProvider.getUserBranches().subscribe(snapshot => {
+                        if (snapshot.length > 0){
+                            console.log("snapshot:");
+                            console.log(snapshot);
+                            this.navCtrl.setRoot(SchoolAdminSchoolsPage, {'branchId': snapshot[0].$key});
+                        }
+                        else{
+                            this.navCtrl.setRoot(SchoolAdminAddUpdateBranchPage);
+                        }
+                    })
                 }
             }
         )

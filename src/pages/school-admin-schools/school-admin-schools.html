@@ -2,7 +2,7 @@
 
   <ion-navbar>
     <ion-title>
-        {{(branch | async).name}}
+        {{(branch | async)?.name}}
     </ion-title>
       <ion-buttons end>
           <button ion-button end (click)="openSchoolAdminEditBranchPage(branchId)">Edit</button>
@@ -17,15 +17,15 @@
     <ion-grid>
         <ion-row>
             <ion-col width-25>{{"Manager" | translate}}</ion-col>
-            <ion-col>{{(branch | async).manager}}</ion-col>
+            <ion-col>{{(branch | async)?.manager}}</ion-col>
         </ion-row>
         <ion-row>
             <ion-col width-25>{{"Manager Telephone" | translate}}</ion-col>
-            <ion-col>{{(branch | async).manager_tel}}</ion-col>
+            <ion-col>{{(branch | async)?.manager_tel}}</ion-col>
         </ion-row>
         <ion-row>
             <ion-col width-25>{{"Address" | translate}}</ion-col>
-            <ion-col>{{(branch | async).address}}</ion-col>
+            <ion-col>{{(branch | async)?.address}}</ion-col>
         </ion-row>
 
     </ion-grid>
@@ -37,7 +37,7 @@
         <button ion-item *ngFor="let school of allSchoolsOfBranch | async" (click)="openSchoolPage(school.$key)">
             <div>
                 <!--ion-item-->
-                <h2>{{school.name}}</h2>
+                <h2>{{school?.name}}</h2>
                 <p>{{school.managerName}}</p>
                 <p>{{school.managerTel}}</p>
             </div>

@@ -55,7 +55,7 @@ export class SchoolAdminAddUpdateSchoolPage {
         if (this.schoolDetailsForm.valid){
             this.schoolDetailsForm.value.isActivated = Boolean(this.schoolDetailsForm.value.isActivated);
             // this.schoolDetailsForm.value.maximum = Number(this.classDetailsForm.value.maximum);
-            let schoolId = this.schoolsProvider.addSchool(this.schoolDetailsForm.value);
+            this.schoolsProvider.addSchool(this.schoolDetailsForm.value);
             this.navCtrl.pop();
         }
         else{
