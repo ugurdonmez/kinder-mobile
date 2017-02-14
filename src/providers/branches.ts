@@ -57,6 +57,8 @@ export class Branches {
     }
 
     addSchoolToBranch(branchId: string, schoolId: string) {
+        // schoollar zaten branch'larini tutuyor, buna gerek yok o yuzden.
+        // duplicate data olunca duzenlemeler, silmeler eklemeler biraz zor oluyor.
         // let branchSchoolsList = this.af.database.list('/branches/' + branchId + '/schools');
         // branchSchoolsList.push(schoolId);
     }
