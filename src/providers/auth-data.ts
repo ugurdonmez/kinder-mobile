@@ -51,12 +51,18 @@ export class AuthData {
 
         userObject.subscribe( snapshot => {
             console.log(snapshot.val);
-            if (snapshot.val == null){
+            if (snapshot.val === null){
                 userObject.set({
                     email: userMail,
                     role: "unknown"
                 });
             }
         });
+    }
+
+    getUserRole(): any {
+        let userId = this.getUserId();
+        let userRole = this.af.database.object('/users/'+ userId + "/role");
+        return userRole
     }
 }
