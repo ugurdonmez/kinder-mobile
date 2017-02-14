@@ -13,6 +13,7 @@ import { ResetPasswordPage } from '../reset-password/reset-password';
 import { EmailValidator } from '../../validators/email';
 import {Translator} from "../../app/translator";
 import {TranslateService} from "ng2-translate";
+import {TeacherHomePage} from "../teacher-home/teacher-home";
 
 @Component({
     selector: 'page-login',
