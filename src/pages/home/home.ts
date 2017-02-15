@@ -31,6 +31,10 @@ import {SchoolAdminClassesPage} from "../school-admin-classes/school-admin-class
 export class HomePage {
     private translate: TranslateService;
     private myUserRole: string;
+    private doesUserHasSchool: boolean;
+    private doesUserHasBranch: boolean;
+    private userSchool: any;
+    private userBranch: any;
 
 
     constructor(public navCtrl: NavController,
@@ -41,6 +45,8 @@ export class HomePage {
                 private schoolsProvider: Schools) {
         this.translate = translator.translatePipe;
         this.loadUserRole();
+        this.loadDoesUserHasSchool();
+        this.loadDoesUserHasBranch();
         this.authData.getUserRole().subscribe(
             snapshot => {
                 if (snapshot.$value === "teacher"){
@@ -97,29 +103,49 @@ export class HomePage {
         });
     }
 
-    private openMyBranch(page){
-        this.branchesProvider.getUserBranches().subscribe(snapshot => {
-            if (snapshot.length > 0){
-                this.navCtrl.push(SchoolAdminSchoolsPage, {'branchId': snapshot[0].$key});
-            }
-            else{
-                this.navCtrl.push(SchoolAdminAddUpdateBranchPage);
-            }
+    private openMyBranch(): any{
+        this.navCtrl.push(SchoolAdminSchoolsPage, {'branchId': this.userBranch.$key});
+    }
+
+    private createMyBranch(){
+        this.navCtrl.push(SchoolAdminAddUpdateBranchPage);
+    }
+
+    private openMySchool(): any{
+        this.navCtrl.push(SchoolAdminClassesPage, {'schoolId': this.userSchool.$key});
+    }
+
+    private createMySchool(){
+        this.authData.getUser().subscribe(snapshot => {
+            this.navCtrl.push(SchoolAdminAddUpdateSchoolPage, {'branchId': snapshot.branchId});
         })
     }
 
-    private openMySchool(page){
+    private loadDoesUserHasSchool() {
         this.schoolsProvider.getUserSchools().subscribe(snapshot => {
             if (snapshot.length > 0){
-                this.navCtrl.push(SchoolAdminClassesPage, {'schoolId': snapshot[0].$key});
+                this.doesUserHasSchool = (snapshot.length > 0);
+                console.log("user has school.");
+                this.userSchool = snapshot[0]
             }
             else{
-                this.authData.getUser().subscribe(snapshot => {
-                    this.navCtrl.push(SchoolAdminAddUpdateSchoolPage, {'branchId': snapshot.branchId});
-                })
-
+                this.doesUserHasSchool = (snapshot.length > 0);
+                console.log("user has no school.")
             }
         })
     }
 
+    private loadDoesUserHasBranch() {
+        this.branchesProvider.getUserBranches().subscribe(snapshot => {
+            if (snapshot.length > 0){
+                this.doesUserHasBranch = (snapshot.length > 0);
+                console.log("user has branch.");
+                this.userBranch = snapshot[0]
+            }
+            else{
+                this.doesUserHasBranch = (snapshot.length > 0);
+                console.log("user has no branch.")
+            }
+        })
+    }
 }

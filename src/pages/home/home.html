@@ -41,11 +41,17 @@
         <!--<ion-row class="row-25">-->
             <!--<ion-col width-33 (click)="logout()">{{"Logout" | translate}}</ion-col>-->
         <!--</ion-row>-->
-        <ion-row *ngIf="myUserRole=='branch-admin'" class="row-25">
-            <ion-col width-33 (click)="openMyBranch(p)">{{"My Branch" | translate}}</ion-col>
+        <ion-row *ngIf="myUserRole=='branch-admin' && doesUserHasBranch" class="row-25">
+            <ion-col width-33 (click)="openMyBranch()">{{"My Branch" | translate}}</ion-col>
         </ion-row>
-        <ion-row *ngIf="myUserRole=='school-admin'" class="row-25">
-            <ion-col width-33 (click)="openMySchool(p)">{{"My School" | translate}}</ion-col>
+        <ion-row *ngIf="myUserRole=='branch-admin' && (doesUserHasBranch==false)" class="row-25">
+            <ion-col width-33 (click)="createMyBranch()">{{"Create My Branch" | translate}}</ion-col>
+        </ion-row>
+        <ion-row *ngIf="myUserRole=='school-admin' && (doesUserHasSchool==true)" class="row-25">
+            <ion-col width-33 (click)="openMySchool()">{{"My School" | translate}}</ion-col>
+        </ion-row>
+        <ion-row *ngIf="myUserRole=='school-admin' && (doesUserHasSchool == false)" class="row-25">
+            <ion-col width-33 (click)="createMySchool()">{{"Create My School" | translate}}</ion-col>
         </ion-row>
         <ion-row *ngIf="myUserRole=='developer'" class="row-25">
             <ion-col width-33 (click)="openSchoolAdminBranch(p)">{{"Branches" | translate}}</ion-col>
