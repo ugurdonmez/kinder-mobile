@@ -8,7 +8,7 @@ export class Translator {
     constructor(public translatePipe: TranslateService){
         translatePipe.setDefaultLang('en');
 
-        console.log(window.navigator.language);
+        // console.log(window.navigator.language);
         if (window.navigator.language.includes("tr")){
             translatePipe.use('tr');
         }

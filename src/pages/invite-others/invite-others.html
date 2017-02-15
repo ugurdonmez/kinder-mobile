@@ -27,6 +27,13 @@
                                 value="teacher">{{"TeacherStr" | translate}}</ion-option>
                 </ion-select>
             </ion-item>
+            <!---->
+            <ion-item *ngIf="inviteOthersForm.value.userRole=='school-admin' && myUserRole=='developer'">
+                <ion-label>{{"Branch" | translate}}</ion-label>
+                <ion-select formControlName="branchId">
+                    <ion-option *ngFor="let a_branch of allBranches | async" [value]="a_branch.$key">{{a_branch.name}}</ion-option>
+                </ion-select>
+            </ion-item>
         </ion-list>
     </form>
 

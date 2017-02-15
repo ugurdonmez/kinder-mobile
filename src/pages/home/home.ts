@@ -18,39 +18,33 @@ import {Translator} from "../../app/translator";
 import {TeacherHomePage} from "../teacher-home/teacher-home";
 import {SchoolAdminSchoolsPage} from "../school-admin-schools/school-admin-schools";
 import {Branches} from "../../providers/branches";
+import {Schools} from "../../providers/schools";
+import {SchoolAdminAddUpdateSchoolPage} from "../school-admin-add-update-school/school-admin-add-update-school";
+import {SchoolAdminClassesPage} from "../school-admin-classes/school-admin-classes";
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
-    providers: [Translator, Branches]
+    providers: [Translator, Branches, Schools]
 })
 
 export class HomePage {
     private translate: TranslateService;
+    private myUserRole: string;
+
+
     constructor(public navCtrl: NavController,
                 public menuCtrl: MenuController,
                 public authData: AuthData,
                 public translator: Translator,
-                private branchesProvider: Branches) {
+                private branchesProvider: Branches,
+                private schoolsProvider: Schools) {
         this.translate = translator.translatePipe;
+        this.loadUserRole();
         this.authData.getUserRole().subscribe(
             snapshot => {
-                console.log("user role:");
-                console.log(snapshot);
                 if (snapshot.$value === "teacher"){
                     this.navCtrl.setRoot(TeacherHomePage);
-                }
-                else if (snapshot.$value === "branch-admin"){
-                    branchesProvider.getUserBranches().subscribe(snapshot => {
-                        if (snapshot.length > 0){
-                            console.log("snapshot:");
-                            console.log(snapshot);
-                            this.navCtrl.setRoot(SchoolAdminSchoolsPage, {'branchId': snapshot[0].$key});
-                        }
-                        else{
-                            this.navCtrl.setRoot(SchoolAdminAddUpdateBranchPage);
-                        }
-                    })
                 }
             }
         )
@@ -96,4 +90,36 @@ export class HomePage {
     openInvitePeople(page) {
         this.navCtrl.push(InviteOthersPage);
     }
+
+    private loadUserRole() {
+        this.authData.getUser().subscribe(snapshot => {
+            this.myUserRole = snapshot.role;
+        });
+    }
+
+    private openMyBranch(page){
+        this.branchesProvider.getUserBranches().subscribe(snapshot => {
+            if (snapshot.length > 0){
+                this.navCtrl.push(SchoolAdminSchoolsPage, {'branchId': snapshot[0].$key});
+            }
+            else{
+                this.navCtrl.push(SchoolAdminAddUpdateBranchPage);
+            }
+        })
+    }
+
+    private openMySchool(page){
+        this.schoolsProvider.getUserSchools().subscribe(snapshot => {
+            if (snapshot.length > 0){
+                this.navCtrl.push(SchoolAdminClassesPage, {'schoolId': snapshot[0].$key});
+            }
+            else{
+                this.authData.getUser().subscribe(snapshot => {
+                    this.navCtrl.push(SchoolAdminAddUpdateSchoolPage, {'branchId': snapshot.branchId});
+                })
+
+            }
+        })
+    }
+
 }

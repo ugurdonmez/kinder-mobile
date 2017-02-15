@@ -6,31 +6,39 @@ import {TranslateService} from "ng2-translate";
 import {FormBuilder, Validators} from "@angular/forms";
 import {EmailValidator} from "../../validators/email";
 import {AuthData} from "../../providers/auth-data";
+import {Branches} from "../../providers/branches";
+import {FirebaseListObservable} from "angularfire2";
 
 
 @Component({
   selector: 'page-invite-others',
   templateUrl: 'invite-others.html',
-    providers: [Translator]
+    providers: [Translator, Branches]
 })
 
 export class InviteOthersPage {
     translate: TranslateService;
     inviteOthersForm: any;
     private myUserRole: any;
+    private branchIdOfUser: string;
+    private allBranches: FirebaseListObservable<any[]>;
 
     constructor(public navCtrl: NavController, public formBuilder: FormBuilder,
-                public translator: Translator, public alertCtrl: AlertController, public authData: AuthData) {
+                public translator: Translator, public alertCtrl: AlertController, public authData: AuthData,
+                private branchesProvider: Branches) {
         this.translate = translator.translatePipe;
-        this.inviteOthersForm = formBuilder.group(
-            {
-                'email': ['', EmailValidator.isValid],
-                'userRole': ['', Validators.required]
-            }
-        );
+        this.loadBranchIdOfUser();
+        this.allBranches = this.branchesProvider.getAllBranches();
         this.authData.getUserRole().subscribe(snapshot => {
             this.myUserRole = snapshot.$value;
         });
+        this.inviteOthersForm = formBuilder.group(
+            {
+                'email': ['', EmailValidator.isValid],
+                'userRole': ['', Validators.required],
+                'branchId': [this.branchIdOfUser]
+            }
+        );
     }
 
     ionViewDidLoad() {
@@ -40,7 +48,19 @@ export class InviteOthersPage {
     inviteUserFormSubmit(){
         if (this.inviteOthersForm.valid){
             //invite user code here
-            this.authData.newInvitation(this.inviteOthersForm.value.email, this.inviteOthersForm.value.userRole);
+            if(this.inviteOthersForm.value.userRole == "school-admin"){
+                this.authData.newInvitation({
+                    email: this.inviteOthersForm.value.email,
+                    role: this.inviteOthersForm.value.userRole,
+                    branchId: this.inviteOthersForm.value.branchId
+                });
+            }
+            else{
+                this.authData.newInvitation({
+                    email: this.inviteOthersForm.value.email,
+                    role: this.inviteOthersForm.value.userRole
+                });
+            }
             this.navCtrl.pop();
         }
         else{
@@ -52,5 +72,18 @@ export class InviteOthersPage {
             alert.present();
         }
 
+    }
+
+    private loadBranchIdOfUser() {
+        if(this.myUserRole==="branch-admin"){
+            this.branchesProvider.getUserBranches().subscribe(snapshot => {
+                if (snapshot.length > 0) {
+                    this.branchIdOfUser = snapshot[0].$key;
+                }
+                else{
+                    this.branchIdOfUser = "";
+                }
+            })
+        }
     }
 }

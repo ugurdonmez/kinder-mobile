@@ -10,6 +10,7 @@ import {SchoolAdminEditSchoolPage} from "../school-admin-edit-school/school-admi
 import {SchoolAdminClassDetailsPage} from "../school-admin-class-details/school-admin-class-details";
 import {Translator} from "../../app/translator";
 import {TranslateService} from "ng2-translate";
+import {HomePage} from "../home/home";
 
 @Component({
   selector: 'page-school-admin-classes',
@@ -29,6 +30,13 @@ export class SchoolAdminClassesPage {
         this.translate = translator.translatePipe;
         this.schoolId = navParams.get('schoolId');
         this.school = schoolsProvider.getSchool(this.schoolId);
+        this.school.subscribe(snapshot => {
+            if(snapshot === null){
+                console.log(snapshot === null);
+                this.navCtrl.setRoot(HomePage);
+            }
+        });
+
         this.allClassesOfSchool = this.classesProvider.getClassesOfSchool(this.schoolId);
     }
 

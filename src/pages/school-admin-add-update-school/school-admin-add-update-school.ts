@@ -9,13 +9,16 @@ import {TranslateService} from "ng2-translate";
 import {FormBuilder, Validators} from "@angular/forms";
 import {EmailValidator} from "../../validators/email";
 import {Branches} from "../../providers/branches";
+import {HomePage} from "../home/home";
+import {AuthData} from "../../providers/auth-data";
+import {SchoolAdminClassesPage} from "../school-admin-classes/school-admin-classes";
 
 
 
 @Component({
     selector: 'page-school-admin-add-update-school',
     templateUrl: 'school-admin-add-update-school.html',
-    providers: [Schools, Translator, Branches]
+    providers: [Schools, Translator, Branches, AuthData]
 })
 
 export class SchoolAdminAddUpdateSchoolPage {
@@ -27,7 +30,7 @@ export class SchoolAdminAddUpdateSchoolPage {
 
     constructor(public navCtrl: NavController, public schoolsProvider: Schools, public translator: Translator,
                 public formBuilder: FormBuilder, private navParams: NavParams, public alertCtrl: AlertController,
-                public branchesProvider: Branches) {
+                public branchesProvider: Branches, private authData: AuthData) {
         this.branchId = navParams.get('branchId');
         this.schoolDetailsForm = formBuilder.group(
             {
@@ -55,8 +58,16 @@ export class SchoolAdminAddUpdateSchoolPage {
         if (this.schoolDetailsForm.valid){
             this.schoolDetailsForm.value.isActivated = Boolean(this.schoolDetailsForm.value.isActivated);
             // this.schoolDetailsForm.value.maximum = Number(this.classDetailsForm.value.maximum);
-            this.schoolsProvider.addSchool(this.schoolDetailsForm.value);
-            this.navCtrl.pop();
+            let newSchoolId = this.schoolsProvider.addSchool(this.schoolDetailsForm.value);
+            this.authData.getUser().subscribe( snapshot => {
+                if(snapshot.role === "school-admin"){//user is school admin
+                    this.navCtrl.setRoot(HomePage);
+                    this.navCtrl.push(SchoolAdminClassesPage, {schoolId: newSchoolId});
+                }
+                else{
+                    this.navCtrl.pop();
+                }
+            })
         }
         else{
             let alert = this.alertCtrl.create({
@@ -66,5 +77,10 @@ export class SchoolAdminAddUpdateSchoolPage {
             });
             alert.present();
         }
+    }
+
+    logout() {
+        console.log('logout clicked');
+        this.authData.logoutUser();
     }
 }

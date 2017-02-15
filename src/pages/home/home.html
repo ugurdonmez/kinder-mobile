@@ -2,6 +2,9 @@
 
   <ion-navbar>
     <ion-title>{{"Home Page" | translate}}</ion-title>
+      <ion-buttons end>
+          <button ion-button end (click)="logout()">{{"Logout" | translate}}</button>
+      </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -10,12 +13,12 @@
 <ion-content padding>
 
     <ion-grid>
-        <ion-row class="row-25">
+        <ion-row *ngIf="myUserRole=='developer'" class="row-25">
             <ion-col width-33>{{"School name" | translate}}</ion-col>
             <ion-col width-33>{{"School logo" | translate}}</ion-col>
             <ion-col width-33>{{"Student photo" | translate}}</ion-col>
         </ion-row>
-        <ion-row class="row-25">
+        <ion-row *ngIf="myUserRole=='developer'" class="row-25">
             <ion-col width-33 class="center-class">
                 <div class="home-icon-button-div" (click)="openCalender(p)">
                     <ion-icon class="icon-class" ios="ios-calendar" md="md-calendar"></ion-icon>
@@ -25,26 +28,32 @@
             <ion-col width-33>{{"Attendance" | translate}}</ion-col>
             <ion-col width-33>{{"Message" | translate}}</ion-col>
         </ion-row>
-        <ion-row class="row-25">
+        <ion-row *ngIf="myUserRole=='developer'" class="row-25">
             <ion-col width-33>{{"Weekly Menu" | translate}}</ion-col>
             <ion-col width-33>{{"Albulms" | translate}}</ion-col>
             <ion-col width-33>{{"Homeworks" | translate}}</ion-col>
         </ion-row>
-        <ion-row class="row-25">
+        <ion-row *ngIf="myUserRole=='developer'" class="row-25">
             <ion-col width-33>{{"Activity Plan" | translate}}</ion-col>
             <ion-col width-33>{{"Teacher Feedback" | translate}}</ion-col>
             <ion-col width-33>{{"Parent Feedback" | translate}}</ion-col>
         </ion-row>
-        <ion-row class="row-25">
-            <ion-col width-33 (click)="logout()">{{"Logout" | translate}}</ion-col>
+        <!--<ion-row class="row-25">-->
+            <!--<ion-col width-33 (click)="logout()">{{"Logout" | translate}}</ion-col>-->
+        <!--</ion-row>-->
+        <ion-row *ngIf="myUserRole=='branch-admin'" class="row-25">
+            <ion-col width-33 (click)="openMyBranch(p)">{{"My Branch" | translate}}</ion-col>
         </ion-row>
-        <ion-row class="row-25">
+        <ion-row *ngIf="myUserRole=='school-admin'" class="row-25">
+            <ion-col width-33 (click)="openMySchool(p)">{{"My School" | translate}}</ion-col>
+        </ion-row>
+        <ion-row *ngIf="myUserRole=='developer'" class="row-25">
             <ion-col width-33 (click)="openSchoolAdminBranch(p)">{{"Branches" | translate}}</ion-col>
         </ion-row>
-        <ion-row class="row-25">
+        <ion-row *ngIf="myUserRole=='developer'" class="row-25">
             <ion-col width-33 (click)="openSchoolAdminTeachers(p)">{{"Teachers" | translate}}</ion-col>
         </ion-row>
-        <ion-row class="row-25">
+        <ion-row *ngIf="myUserRole=='developer' || myUserRole=='branch-admin'" class="row-25">
             <ion-col width-33 (click)="openInvitePeople(p)">Invite People</ion-col>
         </ion-row>
 

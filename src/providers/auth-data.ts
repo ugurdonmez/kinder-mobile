@@ -52,14 +52,12 @@ export class AuthData {
         return userId
     }
 
-    newInvitation(email: string, userRole: string) {
-        let userId = this.getUserId(email)
+    // newInvitation(email: string, userRole: string, branchId?: string) {
+    newInvitation(invitationJson) {
+        let userId = this.getUserId(invitationJson.email);
         console.log("userIdTry: " + userId);
         let userObject = this.af.database.object('/users/'+ userId);
-        userObject.set({
-            email: email,
-            role: userRole
-        });
+        userObject.set(invitationJson);
     }
 
     addUserToUsersCollectionIfNotExist(userMail: string): any {
@@ -81,5 +79,10 @@ export class AuthData {
         let userId = this.getUserId();
         let userRole = this.af.database.object('/users/'+ userId + "/role");
         return userRole
+    }
+
+    getUser(): any{
+        let userId = this.getUserId();
+        return this.af.database.object('/users/'+userId);
     }
 }

@@ -8,6 +8,7 @@ import {TranslateService} from "ng2-translate";
 import {FormBuilder, Validators} from "@angular/forms";
 import {EmailValidator} from "../../validators/email";
 import {HomePage} from "../home/home";
+import {AuthData} from "../../providers/auth-data";
 
 
 @Component({
@@ -22,7 +23,7 @@ export class SchoolAdminAddUpdateBranchPage {
     branchDetailsForm: any;
 
     constructor(public navCtrl: NavController, public branches: Branches, public formBuilder: FormBuilder,
-                public translator: Translator, public alertCtrl: AlertController) {
+                public translator: Translator, public alertCtrl: AlertController, private authData: AuthData) {
         this.translate = translator.translatePipe;
         this.branchDetailsForm = formBuilder.group(
             {
@@ -57,5 +58,10 @@ export class SchoolAdminAddUpdateBranchPage {
             alert.present();
         }
 
+    }
+
+    logout() {
+        console.log('logout clicked');
+        this.authData.logoutUser();
     }
 }

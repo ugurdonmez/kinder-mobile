@@ -32,6 +32,7 @@ export class Schools {
     }
 
     public addSchool(school: SchoolModel) {
+        school.adminUserId = this.authData.getUserId();
         return this.schools.push(school).key;
     }
 
@@ -46,5 +47,16 @@ export class Schools {
 
     deleteSchool(schoolId: string){
         this.af.database.object('/schools/' + schoolId).remove();
+    }
+
+    public getUserSchools() {
+        var userId = this.authData.getUserId();
+
+        return this.af.database.list('/schools', {
+            query: {
+                orderByChild: 'adminUserId',
+                equalTo: userId
+            }
+        });
     }
 }

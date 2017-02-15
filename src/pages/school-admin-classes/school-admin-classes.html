@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{"School" | translate}}: {{(school | async).name}}</ion-title>
+    <ion-title>{{"School" | translate}}: {{(school | async)?.name}}</ion-title>
       <ion-buttons end>
           <button ion-button end (click)="openSchoolAdminEditSchoolPage(schoolId)">{{"Edit" | translate}}</button>
       </ion-buttons>
@@ -14,36 +14,36 @@
     <ion-grid>
         <ion-row>
             <ion-col width-25>{{"Building Address" | translate}}</ion-col>
-            <ion-col>{{(school | async).buildingAddress}}</ion-col>
+            <ion-col>{{(school | async)?.buildingAddress}}</ion-col>
         </ion-row>
         <ion-row>
             <ion-col width-25>{{"Manager Name" | translate}}</ion-col>
-            <ion-col>{{(school | async).managerName}}</ion-col>
+            <ion-col>{{(school | async)?.managerName}}</ion-col>
         </ion-row>
 
         <ion-row>
             <ion-col width-25>{{"Manager Tel" | translate}}</ion-col>
-            <ion-col>{{(school | async).managerTel}}</ion-col>
+            <ion-col>{{(school | async)?.managerTel}}</ion-col>
         </ion-row>
         <ion-row>
             <ion-col width-25>{{"Activation Email" | translate}}</ion-col>
-            <ion-col>{{(school | async).activationEmail}}</ion-col>
+            <ion-col>{{(school | async)?.activationEmail}}</ion-col>
         </ion-row>
         <ion-row>
             <ion-col width-25>{{"School Telephone" | translate}}</ion-col>
-            <ion-col>{{(school | async).schoolTelephone}}</ion-col>
+            <ion-col>{{(school | async)?.schoolTelephone}}</ion-col>
         </ion-row>
         <ion-row>
             <ion-col width-25>{{"Second Contact Person Name" | translate}}</ion-col>
-            <ion-col>{{(school | async).secondContactPersonName}}</ion-col>
+            <ion-col>{{(school | async)?.secondContactPersonName}}</ion-col>
         </ion-row>
         <ion-row>
             <ion-col width-25>{{"Second Contact Person Tel" | translate}}</ion-col>
-            <ion-col>{{(school | async).secondContactTelNo}}</ion-col>
+            <ion-col>{{(school | async)?.secondContactTelNo}}</ion-col>
         </ion-row>
         <ion-row>
             <ion-col width-25>{{"Activated Status" | translate}}</ion-col>
-            <ion-col>{{(school | async).isActivated}}</ion-col>
+            <ion-col>{{(school | async)?.isActivated}}</ion-col>
         </ion-row>
     </ion-grid>
 

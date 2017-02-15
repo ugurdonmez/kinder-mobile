@@ -6,13 +6,15 @@ import { ClassModel } from '../../models/class-model';
 import {Translator} from "../../app/translator";
 import {TranslateService} from "ng2-translate";
 import {FormBuilder, Validators} from "@angular/forms";
+import {HomePage} from "../home/home";
+import {AuthData} from "../../providers/auth-data";
 // import {EmailValidator} from "../../validators/email";
 
 
 @Component({
   selector: 'page-school-admin-edit-school',
   templateUrl: 'school-admin-edit-school.html',
-    providers: [Schools, Translator]
+    providers: [Schools, Translator, AuthData]
 })
 
 export class SchoolAdminEditSchoolPage {
@@ -24,7 +26,8 @@ export class SchoolAdminEditSchoolPage {
 
 
     constructor(public navCtrl: NavController, public schoolsProvider: Schools, public formBuilder: FormBuilder,
-                public translator: Translator, public alertCtrl: AlertController, private navParams: NavParams) {
+                public translator: Translator, public alertCtrl: AlertController, private navParams: NavParams,
+                private authData: AuthData) {
         this.schoolId = navParams.get('schoolId');
         this.school = this.schoolsProvider.getSchool(this.schoolId);
         this.translate = translator.translatePipe;
@@ -83,8 +86,15 @@ export class SchoolAdminEditSchoolPage {
                 text: 'Ok',
                 handler: () => {
                     this.schoolsProvider.deleteSchool(this.schoolId);
-                    this.navCtrl.pop();
-                    this.navCtrl.pop();
+                    this.authData.getUser().subscribe( snapshot => {
+                        if(snapshot.role == "school-admin"){//user is school admin
+                            this.navCtrl.setRoot(HomePage);
+                        }
+                        else{
+                            this.navCtrl.pop();
+                            this.navCtrl.pop();
+                        }
+                    });
                 }
             }
         ]
