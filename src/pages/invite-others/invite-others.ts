@@ -49,19 +49,30 @@ export class InviteOthersPage {
         if (this.inviteOthersForm.valid){
             //invite user code here
             if(this.inviteOthersForm.value.userRole == "school-admin"){
-                this.authData.newInvitation({
-                    email: this.inviteOthersForm.value.email,
-                    role: this.inviteOthersForm.value.userRole,
-                    branchId: this.inviteOthersForm.value.branchId
-                });
+                if(this.inviteOthersForm.value.branchId===null){
+                    let alert = this.alertCtrl.create({
+                        title: 'Cannot Submit!',
+                        subTitle: 'Branch Unknown.',
+                        buttons: ['OK']
+                    });
+                    alert.present();
+                }
+                else{
+                    this.authData.newInvitation({
+                        email: this.inviteOthersForm.value.email,
+                        role: this.inviteOthersForm.value.userRole,
+                        branchId: this.inviteOthersForm.value.branchId
+                    });
+                    this.navCtrl.pop();
+                }
             }
             else{
                 this.authData.newInvitation({
                     email: this.inviteOthersForm.value.email,
                     role: this.inviteOthersForm.value.userRole
                 });
+                this.navCtrl.pop();
             }
-            this.navCtrl.pop();
         }
         else{
             let alert = this.alertCtrl.create({
