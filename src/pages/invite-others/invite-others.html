@@ -25,6 +25,8 @@
                                 value="school-admin">{{"School Admin" | translate}}</ion-option>
                     <ion-option *ngIf="myUserRole == 'developer' || myUserRole == 'branch-admin' || myUserRole == 'school-admin'"
                                 value="teacher">{{"TeacherStr" | translate}}</ion-option>
+                    <ion-option *ngIf="myUserRole == 'developer' || myUserRole == 'branch-admin' || myUserRole == 'school-admin' || myUserRole == 'teacher'"
+                                value="student">{{"Student" | translate}}</ion-option>
                 </ion-select>
             </ion-item>
             <!---->
