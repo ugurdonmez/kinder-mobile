@@ -12,6 +12,9 @@
 
         <button ion-item *ngFor="let teacher of allTeachers" (click)="openTeacherPage(teacher.$key)">
             <div item-left>
+                <img class="teacher-thumbnail" src="{{teacher.profileImageUrl}}"/>
+            </div>
+            <div>
                 <p>{{teacher.name}}</p>
                 <p>{{teacher.surname}}</p>
             </div>

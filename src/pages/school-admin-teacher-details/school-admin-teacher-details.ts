@@ -18,15 +18,23 @@ export class SchoolAdminTeacherDetailsPage {
     private teacherId: string;
     private teacher: FirebaseObjectObservable<any>;
     private translate: TranslateService;
+    private profileImageUrl: string;
 
     constructor(public navCtrl: NavController, public teachersProvider: Teachers,
                 private navParams: NavParams, public translator: Translator) {
         this.translate = translator.translatePipe;
         this.teacherId = navParams.get('teacherId');
         this.teacher = teachersProvider.getTeacher(this.teacherId);
+        this.loadImage();
     }
 
     openSchoolAdminEditTeacherPage(teacherId: string){
         this.navCtrl.push( SchoolAdminEditTeacherPage , {'teacherId':this.teacherId});
+    }
+
+    loadImage(){
+        this.teacher.subscribe(snapshot => {
+            this.profileImageUrl = snapshot.profileImageUrl;
+        })
     }
 }

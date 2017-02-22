@@ -5,12 +5,16 @@ import { AngularFire } from 'angularfire2';
 import {TeacherModel} from '../models/teacher-model';
 import { AuthData } from './auth-data';
 
+import {Camera} from "ionic-native";
+import {AlertController} from "ionic-angular";
+import * as firebase from 'firebase';
+
 @Injectable()
 export class Teachers {
 
     teachers: any;
 
-    constructor(public af: AngularFire, public authData: AuthData){
+    constructor(public af: AngularFire, public authData: AuthData, private alertCtrl: AlertController){
         this.teachers = af.database.list('/teachers');
     }
 
@@ -44,7 +48,7 @@ export class Teachers {
     }
 
     public addTeacher(teacher: TeacherModel) {
-        this.teachers.push(teacher);
+        return this.teachers.push(teacher).key;
 
 
         // TODO ugur hoca'nin github'dan issue #6'ya verecegi yanita gore asagidaki kisim geri eklenebilir
@@ -62,5 +66,57 @@ export class Teachers {
     public updateTeacher(teacher: TeacherModel) {
         this.af.database.object('/teachers/'+teacher.id).set(teacher);
     }
+
+    public newPhoto(teacherId:string){
+        {
+            var imageSource;
+            let confirm = this.alertCtrl.create({
+                title: 'Image source?',
+                message: '',
+                buttons: [
+                    {
+                        text: 'CAMERA',
+                        handler: () => {
+                            imageSource = Camera.PictureSourceType.CAMERA;
+                            this.uploadImage(imageSource, teacherId);
+                        }
+                    },
+                    {
+                        text: 'SAVEDPHOTOALBUM',
+                        handler: () => {
+                            imageSource = Camera.PictureSourceType.SAVEDPHOTOALBUM;
+                            this.uploadImage(imageSource, teacherId);
+                        }
+                    },
+                    {
+                        text: 'PHOTOLIBRARY',
+                        handler: () => {
+                            imageSource = Camera.PictureSourceType.PHOTOLIBRARY;
+                            this.uploadImage(imageSource, teacherId);
+                        }
+                    }
+                ]
+            });
+            confirm.present();
+        }
+    }
+
+    private uploadImage(imageSource: any, teacherId:string): any{
+        Camera.getPicture({sourceType : imageSource}).then((image) => {
+            var imageData = image;
+            var profilePictureRef = firebase.storage().ref('/teacher-images/namedByTeacherId/').child(teacherId+"_"+new Date().getDate() + " @ " + new Date().getTime());
+            profilePictureRef.putString(imageData, 'base64', {contentType: 'image/png'})
+                .then((savedPicture) => {
+                    this.af.database.object('/teachers/'+teacherId+"/profileImageUrl")
+                        .set(savedPicture.downloadURL);
+                });
+        }, (err) => {
+            // Handle error
+        });
+    }
+
+    // public getProfileImageUrl(teacherId: string): any{
+    //     return firebase.storage().ref('/teacher-images/namedByTeacherId/').child(teacherId);
+    //     }
 
 }

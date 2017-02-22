@@ -10,8 +10,16 @@
 </ion-header>
 
 
-<ion-content class="page-school-admin-schools">
+<ion-content class="page-school-admin-teacher-details">
     <ion-grid>
+        <ion-card>
+            <img class="image-on-top" src="{{profileImageUrl}}"/>
+            <ion-card-content>
+                <ion-card-title>
+                </ion-card-title>
+            </ion-card-content>
+        </ion-card>
+
         <ion-row>
             <ion-col width-25>{{"Name" | translate}}</ion-col>
             <ion-col>{{(teacher | async).name}}</ion-col>

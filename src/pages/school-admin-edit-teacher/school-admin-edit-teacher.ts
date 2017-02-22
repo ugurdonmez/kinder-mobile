@@ -46,6 +46,10 @@ export class SchoolAdminEditTeacherPage {
         console.log('Hello SchoolAdminAddUpdateTeacherPage Page');
     }
 
+    newPhoto(){
+        this.teachersProvider.newPhoto(this.teacherId);
+    }
+
     updateTeacher(){
         if (this.teacherDetailsForm.valid){
             this.teachersProvider.updateTeacher(this.teacherDetailsForm.value);

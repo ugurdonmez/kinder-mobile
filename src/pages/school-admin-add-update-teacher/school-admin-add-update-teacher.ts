@@ -19,9 +19,10 @@ import {TranslateService} from "ng2-translate";
 export class SchoolAdminAddUpdateTeacherPage {
     teacherDetailsForm: any;
     private translate: TranslateService;
+    teacherId: string;
 
   constructor(public navCtrl: NavController, public formBuilder: FormBuilder,
-              public teacherProvider: Teachers, public translator: Translator) {
+              public teachersProvider: Teachers, public translator: Translator) {
       this.translate = translator.translatePipe;
       this.teacherDetailsForm = formBuilder.group(
           {
@@ -38,8 +39,13 @@ export class SchoolAdminAddUpdateTeacherPage {
     console.log('Hello SchoolAdminAddUpdateTeacherPage Page');
   }
 
+    newPhoto(){
+        this.teachersProvider.newPhoto(this.teacherId);
+    }
+
     addNewTeacher(){
-        this.teacherProvider.addTeacher(this.teacherDetailsForm.value);
+        this.teacherId = this.teachersProvider.addTeacher(this.teacherDetailsForm.value);
+        this.newPhoto();
         this.navCtrl.pop();
     }
 
