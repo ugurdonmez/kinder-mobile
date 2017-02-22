@@ -3,5 +3,5 @@ export class TeacherModel {
     name: string;
     surname: string;
     notes: string;
-    photo_url: string;
+    profileImageUrl: string;
 }

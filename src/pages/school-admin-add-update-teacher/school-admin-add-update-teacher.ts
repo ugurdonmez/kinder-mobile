@@ -28,8 +28,7 @@ export class SchoolAdminAddUpdateTeacherPage {
           {
               'name': ['', Validators.minLength(1)],
               'surname': ['', Validators.minLength(1)],
-              'notes': [''],
-              'photoUrl': ['http://thegadgetfreaks.com/wp-content/uploads/2015/05/Anon-Woman.jpg']
+              'notes': ['']
           }
       );
 
