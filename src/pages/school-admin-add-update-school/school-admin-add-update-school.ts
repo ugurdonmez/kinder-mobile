@@ -37,7 +37,6 @@ export class SchoolAdminAddUpdateSchoolPage {
             {
                 'name': ['', Validators.required],
                 'buildingAddress': ['', Validators.required],
-                'logoURL': [''],
                 'managerName': ['', Validators.required],
                 'managerTel': ['', Validators.required],
                 'activationEmail': ['', Validators.compose([Validators.required, EmailValidator.isValid])],

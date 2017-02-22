@@ -40,7 +40,6 @@ export class SchoolAdminEditSchoolPage {
                     'id': [this.schoolId, Validators.required],
                     'branchId': [snapshot.branchId, Validators.required],
                     'isActivated': [snapshot.isActivated, Validators.required],
-                    'logoURL': [snapshot.logoURL],
                     'managerName': [snapshot.managerName, Validators.required],
                     'managerTel': [snapshot.managerTel, Validators.required],
                     'name': [snapshot.name, Validators.required],
