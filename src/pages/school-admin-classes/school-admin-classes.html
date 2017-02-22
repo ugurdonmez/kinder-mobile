@@ -12,6 +12,13 @@
 
 <ion-content class="page-school-admin-classes">
     <ion-grid>
+        <ion-card>
+            <img class="image-on-top" src="{{logoURL}}"/>
+            <ion-card-content>
+                <ion-card-title>
+                </ion-card-title>
+            </ion-card-content>
+        </ion-card>
         <ion-row>
             <ion-col width-25>{{"Building Address" | translate}}</ion-col>
             <ion-col>{{(school | async)?.buildingAddress}}</ion-col>

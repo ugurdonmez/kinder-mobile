@@ -57,6 +57,10 @@ export class SchoolAdminEditSchoolPage {
         console.log('Hello SchoolAdminEditSchoolPage Page');
     }
 
+    newPhoto(){
+        this.schoolsProvider.newPhoto(this.schoolId);
+    }
+
     updateSchool(){
         if (this.schoolDetailsForm.valid){
             this.schoolsProvider.updateSchool(this.schoolDetailsForm.value);

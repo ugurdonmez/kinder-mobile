@@ -4,13 +4,17 @@ import 'rxjs/add/operator/map';
 import { AngularFire } from 'angularfire2';
 import {SchoolModel} from '../models/school-model';
 import { AuthData } from './auth-data';
+import {Camera} from "ionic-native";
+import {AlertController} from "ionic-angular";
+
+import * as firebase from 'firebase';
 
 @Injectable()
 export class Schools {
 
     schools: any;
 
-    constructor(public af: AngularFire, public authData: AuthData){
+    constructor(public af: AngularFire, public authData: AuthData, private alertCtrl: AlertController){
         this.schools = af.database.list('/schools');
     }
 
@@ -59,4 +63,46 @@ export class Schools {
             }
         });
     }
+
+    public newPhoto(schoolId:string){
+        {
+            var imageSource;
+            let confirm = this.alertCtrl.create({
+                title: 'Image source?',
+                message: '',
+                buttons: [
+                    {
+                        text: 'SAVEDPHOTOALBUM',
+                        handler: () => {
+                            imageSource = Camera.PictureSourceType.SAVEDPHOTOALBUM;
+                            this.uploadImage(imageSource, schoolId);
+                        }
+                    },
+                    {
+                        text: 'PHOTOLIBRARY',
+                        handler: () => {
+                            imageSource = Camera.PictureSourceType.PHOTOLIBRARY;
+                            this.uploadImage(imageSource, schoolId);
+                        }
+                    }
+                ]
+            });
+            confirm.present();
+        }
+    }
+
+    private uploadImage(imageSource: any, schoolId:string): any{
+        Camera.getPicture({sourceType : imageSource}).then((image) => {
+            var imageData = image;
+            var profilePictureRef = firebase.storage().ref('/school-images/namedBySchoolId/').child(schoolId+"_"+new Date().getDate() + " @ " + new Date().getTime());
+            profilePictureRef.putString(imageData, 'base64', {contentType: 'image/png'})
+                .then((savedPicture) => {
+                    this.af.database.object('/schools/'+schoolId+"/logoURL")
+                        .set(savedPicture.downloadURL);
+                });
+        }, (err) => {
+            // Handle error
+        });
+    }
+
 }

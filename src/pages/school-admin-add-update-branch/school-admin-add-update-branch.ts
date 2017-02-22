@@ -21,6 +21,7 @@ export class SchoolAdminAddUpdateBranchPage {
     classes: Array<ClassModel> = [];
     translate: TranslateService;
     branchDetailsForm: any;
+    private branchId: string;
 
     constructor(public navCtrl: NavController, public branches: Branches, public formBuilder: FormBuilder,
                 public translator: Translator, public alertCtrl: AlertController, private authData: AuthData) {
@@ -46,7 +47,8 @@ export class SchoolAdminAddUpdateBranchPage {
         // this.branches.addBranch(this.mockBranch);
 
         if (this.branchDetailsForm.valid){
-            this.branches.addBranch(this.branchDetailsForm.value);
+            this.branchId = this.branches.addBranch(this.branchDetailsForm.value);
+            this.newPhoto();
             this.navCtrl.setRoot(HomePage);
         }
         else{
@@ -63,5 +65,9 @@ export class SchoolAdminAddUpdateBranchPage {
     logout() {
         console.log('logout clicked');
         this.authData.logoutUser();
+    }
+
+    newPhoto(){
+        this.branches.newPhoto(this.branchId);
     }
 }

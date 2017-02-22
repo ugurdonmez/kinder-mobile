@@ -5,12 +5,17 @@ import { AngularFire } from 'angularfire2';
 import {BranchModel} from '../models/branch-model';
 import { AuthData } from './auth-data';
 
+import {Camera} from "ionic-native";
+import {AlertController} from "ionic-angular";
+
+import * as firebase from 'firebase';
+
 @Injectable()
 export class Branches {
 
     branches: any;
 
-    constructor(public af: AngularFire, public authData: AuthData){
+    constructor(public af: AngularFire, public authData: AuthData, private alertCtrl: AlertController){
         this.branches = af.database.list('/branches');
     }
 
@@ -41,7 +46,7 @@ export class Branches {
 
     public addBranch(branch: BranchModel) {
         branch.adminUserId = this.authData.getUserId();
-        this.branches.push(branch);
+        return this.branches.push(branch).key;
         // var pushedBranch = this.branches.push(branch);
         // var branchId = pushedBranch.key;
         //console.log("branchId: " + branchId);
@@ -64,5 +69,46 @@ export class Branches {
 
     deleteBranch(branchId: string){
         this.af.database.object('/branches/' + branchId).remove();
+    }
+
+    public newPhoto(branchId:string){
+        {
+            var imageSource;
+            let confirm = this.alertCtrl.create({
+                title: 'Image source?',
+                message: '',
+                buttons: [
+                    {
+                        text: 'SAVEDPHOTOALBUM',
+                        handler: () => {
+                            imageSource = Camera.PictureSourceType.SAVEDPHOTOALBUM;
+                            this.uploadImage(imageSource, branchId);
+                        }
+                    },
+                    {
+                        text: 'PHOTOLIBRARY',
+                        handler: () => {
+                            imageSource = Camera.PictureSourceType.PHOTOLIBRARY;
+                            this.uploadImage(imageSource, branchId);
+                        }
+                    }
+                ]
+            });
+            confirm.present();
+        }
+    }
+
+    private uploadImage(imageSource: any, branchId:string): any{
+        Camera.getPicture({sourceType : imageSource}).then((image) => {
+            var imageData = image;
+            var profilePictureRef = firebase.storage().ref('/branch-images/namedById/').child(branchId+"_"+new Date().getDate() + " @ " + new Date().getTime());
+            profilePictureRef.putString(imageData, 'base64', {contentType: 'image/png'})
+                .then((savedPicture) => {
+                    this.af.database.object('/branches/'+branchId+"/logoURL")
+                        .set(savedPicture.downloadURL);
+                });
+        }, (err) => {
+            // Handle error
+        });
     }
 }

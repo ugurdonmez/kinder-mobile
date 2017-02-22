@@ -27,6 +27,7 @@ export class SchoolAdminAddUpdateSchoolPage {
     translate: TranslateService;
     schoolDetailsForm: any;
     private branchId: string;
+    private schoolId: string;
 
     constructor(public navCtrl: NavController, public schoolsProvider: Schools, public translator: Translator,
                 public formBuilder: FormBuilder, private navParams: NavParams, public alertCtrl: AlertController,
@@ -58,11 +59,12 @@ export class SchoolAdminAddUpdateSchoolPage {
         if (this.schoolDetailsForm.valid){
             this.schoolDetailsForm.value.isActivated = Boolean(this.schoolDetailsForm.value.isActivated);
             // this.schoolDetailsForm.value.maximum = Number(this.classDetailsForm.value.maximum);
-            let newSchoolId = this.schoolsProvider.addSchool(this.schoolDetailsForm.value);
+            this.schoolId = this.schoolsProvider.addSchool(this.schoolDetailsForm.value);
+            this.newPhoto();
             this.authData.getUser().subscribe( snapshot => {
                 if(snapshot.role === "school-admin"){//user is school admin
                     this.navCtrl.setRoot(HomePage);
-                    this.navCtrl.push(SchoolAdminClassesPage, {schoolId: newSchoolId});
+                    this.navCtrl.push(SchoolAdminClassesPage, {schoolId: this.schoolId});
                 }
                 else{
                     this.navCtrl.pop();
@@ -79,8 +81,67 @@ export class SchoolAdminAddUpdateSchoolPage {
         }
     }
 
+    // public presentActionSheet() {
+    //     let actionSheet = this.actionSheetCtrl.create({
+    //         title: 'Select Image Source',
+    //         buttons: [
+    //             {
+    //                 text: 'Load from Library',
+    //                 handler: () => {
+    //                     this.takePicture(Camera.PictureSourceType.PHOTOLIBRARY);
+    //                 }
+    //             },
+    //             {
+    //                 text: 'Use Camera',
+    //                 handler: () => {
+    //                     this.takePicture(Camera.PictureSourceType.CAMERA);
+    //                 }
+    //             },
+    //             {
+    //                 text: 'Cancel',
+    //                 role: 'cancel'
+    //             }
+    //         ]
+    //     });
+    //     actionSheet.present();
+    // }
+    //
+    // public takePicture(sourceType) {
+    //     // Create options for the Camera Dialog
+    //     var options = {
+    //         quality: 100,
+    //         sourceType: sourceType,
+    //         saveToPhotoAlbum: false,
+    //         correctOrientation: true
+    //     };
+    //
+    //     // Get the data of an image
+    //     Camera.getPicture(options).then((imagePath) => {
+    //         // Special handling for Android library
+    //         if (this.platform.is('android') && sourceType === Camera.PictureSourceType.PHOTOLIBRARY) {
+    //             FilePath.resolveNativePath(imagePath)
+    //                 .then(filePath => {
+    //                     let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
+    //                     let currentName = imagePath.substring(imagePath.lastIndexOf('/') + 1, imagePath.lastIndexOf('?'));
+    //                     this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
+    //                 });
+    //         } else {
+    //             var currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
+    //             var correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
+    //             this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
+    //         }
+    //     }, (err) => {
+    //         this.presentToast('Error while selecting image.');
+    //     });
+    // }
+
+
     logout() {
         console.log('logout clicked');
         this.authData.logoutUser();
+    }
+
+    newPhoto(){
+        this.schoolsProvider.newPhoto(this.schoolId);
     }
 }

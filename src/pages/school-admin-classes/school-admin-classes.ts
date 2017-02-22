@@ -24,12 +24,14 @@ export class SchoolAdminClassesPage {
     private allClassesOfSchool: any;
     private school: FirebaseObjectObservable<any>;
     private translate: TranslateService;
+    private logoURL: string;
 
     constructor(public navCtrl: NavController, public schoolsProvider: Schools, public classesProvider: Classes,
                 private navParams: NavParams, private teachersProvider: Teachers, public translator: Translator) {
         this.translate = translator.translatePipe;
         this.schoolId = navParams.get('schoolId');
         this.school = schoolsProvider.getSchool(this.schoolId);
+        this.loadImage();
         this.school.subscribe(snapshot => {
             if(snapshot === null){
                 console.log(snapshot === null);
@@ -62,5 +64,12 @@ export class SchoolAdminClassesPage {
 
     openSchoolAdminEditSchoolPage(schoolId: string){
         this.navCtrl.push( SchoolAdminEditSchoolPage , {'schoolId':this.schoolId});
+    }
+
+    loadImage(){
+        this.school.subscribe(snapshot => {
+            this.logoURL = snapshot.logoURL;
+            console.log(this.logoURL);
+        })
     }
 }

@@ -23,6 +23,7 @@ export class SchoolAdminSchoolsPage {
     private allSchoolsOfBranch: any;
     private branch: FirebaseObjectObservable<any>;
     private translate: TranslateService;
+    private logoURL: string;
 
     constructor(public navCtrl: NavController, public schoolsProvider: Schools, public branchesProvider: Branches,
                 private navParams: NavParams, public translator: Translator) {
@@ -37,6 +38,7 @@ export class SchoolAdminSchoolsPage {
             }
         });
         this.allSchoolsOfBranch = this.schoolsProvider.getSchoolsOfBranch(this.branchId);
+        this.loadImage();
     }
 
     ionViewDidLoad() {
@@ -55,5 +57,12 @@ export class SchoolAdminSchoolsPage {
 
     openSchoolAdminEditBranchPage(branchId: string){
         this.navCtrl.push( SchoolAdminEditBranchPage , {'branchId':this.branchId});
+    }
+
+    loadImage(){
+        this.branch.subscribe(snapshot => {
+            this.logoURL = snapshot.logoURL;
+            console.log(this.logoURL);
+        })
     }
 }

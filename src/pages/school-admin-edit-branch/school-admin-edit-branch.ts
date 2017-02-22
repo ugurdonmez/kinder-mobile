@@ -86,4 +86,8 @@ export class SchoolAdminEditBranchPage {
     confirm.present();
 
     }
+
+    newPhoto(){
+        this.branchesProvider.newPhoto(this.branchId);
+    }
 }
