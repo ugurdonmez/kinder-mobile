@@ -9,14 +9,19 @@ import {Camera} from "ionic-native";
 import {AlertController} from "ionic-angular";
 
 import * as firebase from 'firebase';
+import {Translator} from "../app/translator";
+import {TranslateService} from "ng2-translate";
 
 @Injectable()
 export class Branches {
 
     branches: any;
+    private translate: TranslateService;
 
-    constructor(public af: AngularFire, public authData: AuthData, private alertCtrl: AlertController){
+    constructor(public af: AngularFire, public authData: AuthData, private alertCtrl: AlertController,
+                public translator: Translator){
         this.branches = af.database.list('/branches');
+        this.translate = translator.translatePipe;
     }
 
     public getUserBranches() {
@@ -75,18 +80,18 @@ export class Branches {
         {
             var imageSource;
             let confirm = this.alertCtrl.create({
-                title: 'Image source?',
+                title: this.translate.instant('Image source?'),
                 message: '',
                 buttons: [
                     {
-                        text: 'SAVEDPHOTOALBUM',
+                        text: this.translate.instant('SAVEDPHOTOALBUM'),
                         handler: () => {
                             imageSource = Camera.PictureSourceType.SAVEDPHOTOALBUM;
                             this.uploadImage(imageSource, branchId);
                         }
                     },
                     {
-                        text: 'PHOTOLIBRARY',
+                        text: this.translate.instant('PHOTOLIBRARY'),
                         handler: () => {
                             imageSource = Camera.PictureSourceType.PHOTOLIBRARY;
                             this.uploadImage(imageSource, branchId);

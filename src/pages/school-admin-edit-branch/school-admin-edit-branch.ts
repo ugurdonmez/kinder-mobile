@@ -56,9 +56,9 @@ export class SchoolAdminEditBranchPage {
         }
         else{
             let alert = this.alertCtrl.create({
-                title: 'Cannot Submit!',
-                subTitle: 'At least one of the fields are not valid.',
-                buttons: ['OK']
+                title: this.translate.instant('Cannot Submit!'),
+                subTitle: this.translate.instant('At least one of the fields are not valid.'),
+                buttons: [this.translate.instant('OK')]
             });
             alert.present();
         }
@@ -66,16 +66,16 @@ export class SchoolAdminEditBranchPage {
 
     deleteBranch(){
     let confirm = this.alertCtrl.create({
-        title: 'Delete Branch?',
-        message: 'Sure you want to delete this branch? This will also remove the schools and classes in this branch. A delete operation is irreversible.',
+        title: this.translate.instant('Delete Branch?'),
+        message: this.translate.instant('Sure you want to delete this branch? This will also remove the schools and classes in this branch. A delete operation is irreversible.'),
         buttons: [
             {
-                text: 'Cancel',
+                text: this.translate.instant('Cancel'),
                 handler: () => {
                 }
             },
             {
-                text: 'Ok',
+                text: this.translate.instant('Ok'),
                 handler: () => {
                     this.branchesProvider.deleteBranch(this.branchId);
                     this.navCtrl.setRoot(HomePage);

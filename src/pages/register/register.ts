@@ -68,7 +68,8 @@ export class RegisterPage {
                         var errorMessage: string = error.message;
                         let alert = this.alertCtrl.create({
                             message: errorMessage,
-                            buttons: [{ text: "Ok", role: 'cancel' } ]
+                            buttons: [{ text: this.translate.instant("Ok"),
+                                role: this.translate.instant('Cancel') } ]
                         });
 
                         alert.present();

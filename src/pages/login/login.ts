@@ -71,8 +71,8 @@ export class LoginPage {
                             message: error.message,
                             buttons: [
                                 {
-                                    text: "Ok",
-                                    role: 'cancel'
+                                    text: this.translate.instant("Ok"),
+                                    role: this.translate.instant('Cancel')
                                 }
                             ]
                         });

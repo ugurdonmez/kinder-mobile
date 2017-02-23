@@ -8,14 +8,19 @@ import { AuthData } from './auth-data';
 import {Camera} from "ionic-native";
 import {AlertController} from "ionic-angular";
 import * as firebase from 'firebase';
+import {Translator} from "../app/translator";
+import {TranslateService} from "ng2-translate";
 
 @Injectable()
 export class Teachers {
 
     teachers: any;
+    private translate: TranslateService;
 
-    constructor(public af: AngularFire, public authData: AuthData, private alertCtrl: AlertController){
+    constructor(public af: AngularFire, public authData: AuthData, private alertCtrl: AlertController,
+                public translator: Translator){
         this.teachers = af.database.list('/teachers');
+        this.translate = translator.translatePipe;
     }
 
     // TODO ugur hoca'nin github'dan issue #6'ya verecegi yanita gore geri eklenebilir
@@ -71,25 +76,25 @@ export class Teachers {
         {
             var imageSource;
             let confirm = this.alertCtrl.create({
-                title: 'Image source?',
+                title: this.translate.instant('Image source?'),
                 message: '',
                 buttons: [
                     {
-                        text: 'CAMERA',
+                        text: this.translate.instant('CAMERA'),
                         handler: () => {
                             imageSource = Camera.PictureSourceType.CAMERA;
                             this.uploadImage(imageSource, teacherId);
                         }
                     },
                     {
-                        text: 'SAVEDPHOTOALBUM',
+                        text: this.translate.instant('SAVEDPHOTOALBUM'),
                         handler: () => {
                             imageSource = Camera.PictureSourceType.SAVEDPHOTOALBUM;
                             this.uploadImage(imageSource, teacherId);
                         }
                     },
                     {
-                        text: 'PHOTOLIBRARY',
+                        text: this.translate.instant('PHOTOLIBRARY'),
                         handler: () => {
                             imageSource = Camera.PictureSourceType.PHOTOLIBRARY;
                             this.uploadImage(imageSource, teacherId);

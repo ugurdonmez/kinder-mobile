@@ -67,9 +67,9 @@ export class SchoolAdminEditSchoolPage {
         }
         else{
             let alert = this.alertCtrl.create({
-                title: 'Cannot Submit!',
-                subTitle: 'At least one of the fields are not valid.',
-                buttons: ['OK']
+                title: this.translate.instant('Cannot Submit!'),
+                subTitle: this.translate.instant('At least one of the fields are not valid.'),
+                buttons: [this.translate.instant('OK')]
             });
             alert.present();
         }
@@ -77,16 +77,16 @@ export class SchoolAdminEditSchoolPage {
 
     deleteSchool(){
     let confirm = this.alertCtrl.create({
-        title: 'Delete School?',
-        message: 'Sure you want to delete this school? This will also remove the classes in this school. A delete operation is irreversible.',
+        title: this.translate.instant('Delete School?'),
+        message: this.translate.instant('Sure you want to delete this school? This will also remove the classes in this school. A delete operation is irreversible.'),
         buttons: [
             {
-                text: 'Cancel',
+                text: this.translate.instant('Cancel'),
                 handler: () => {
                 }
             },
             {
-                text: 'Ok',
+                text: this.translate.instant('Ok'),
                 handler: () => {
                     this.schoolsProvider.deleteSchool(this.schoolId);
                     this.authData.getUser().subscribe( snapshot => {

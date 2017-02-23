@@ -72,9 +72,9 @@ export class SchoolAdminAddUpdateSchoolPage {
         }
         else{
             let alert = this.alertCtrl.create({
-                title: 'Cannot Submit!',
-                subTitle: 'At least one of the fields are not valid.',
-                buttons: ['OK']
+                title: this.translate.instant('Cannot Submit!'),
+                subTitle: this.translate.instant('At least one of the fields are not valid.'),
+                buttons: [this.translate.instant('OK')]
             });
             alert.present();
         }

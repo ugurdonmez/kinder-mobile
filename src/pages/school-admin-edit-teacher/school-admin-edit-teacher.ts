@@ -56,8 +56,8 @@ export class SchoolAdminEditTeacherPage {
         }
         else{
             let alert = this.alertCtrl.create({
-                title: 'Cannot Submit!',
-                subTitle: 'At least one of the fields are not valid.',
+                title: this.translate.instant('Cannot Submit!'),
+                subTitle: this.translate.instant('At least one of the fields are not valid.'),
                 buttons: ['OK']
             });
             alert.present();
@@ -66,16 +66,16 @@ export class SchoolAdminEditTeacherPage {
 
     deleteTeacher(){
     let confirm = this.alertCtrl.create({
-        title: 'Delete Teacher?',
-        message: 'Sure you want to delete this teacher? A delete operation is irreversible.',
+        title: this.translate.instant('Delete Teacher?'),
+        message: this.translate.instant('Sure you want to delete this teacher? A delete operation is irreversible.'),
         buttons: [
             {
-                text: 'Cancel',
+                text: this.translate.instant('Cancel'),
                 handler: () => {
                 }
             },
             {
-                text: 'Ok',
+                text: this.translate.instant('Ok'),
                 handler: () => {
                     this.teachersProvider.deleteTeacher(this.teacherId);
                     this.navCtrl.pop();

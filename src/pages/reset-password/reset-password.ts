@@ -46,8 +46,8 @@ export class ResetPasswordPage {
             this.authData.resetPassword(this.resetPasswordForm.value.email)
             .then((user) => {
                 let alert = this.alertCtrl.create({
-                    message: "We just sent you a reset link to your email",
-                    buttons: [{ text: "Ok", role: 'cancel',
+                    message: this.translate.instant("We just sent you a reset link to your email"),
+                    buttons: [{ text: this.translate.instant("Ok"), role: this.translate.instant('Cancel'),
                         handler: () => {
                             this.nav.pop();
                         }
@@ -58,7 +58,7 @@ export class ResetPasswordPage {
                 var errorMessage: string = error.message;
                 let errorAlert = this.alertCtrl.create({
                     message: errorMessage,
-                    buttons: [{ text: "Ok", role: 'cancel' }]
+                    buttons: [{ text: this.translate.instant("Ok"), role: this.translate.instant('Cancel')}]
                 });
 
                 errorAlert.present();

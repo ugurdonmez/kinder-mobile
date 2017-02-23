@@ -8,14 +8,19 @@ import {Camera} from "ionic-native";
 import {AlertController} from "ionic-angular";
 
 import * as firebase from 'firebase';
+import {Translator} from "../app/translator";
+import {TranslateService} from "ng2-translate";
 
 @Injectable()
 export class Schools {
 
     schools: any;
+    private translate: TranslateService;
 
-    constructor(public af: AngularFire, public authData: AuthData, private alertCtrl: AlertController){
+    constructor(public af: AngularFire, public authData: AuthData, private alertCtrl: AlertController,
+                public translator: Translator){
         this.schools = af.database.list('/schools');
+        this.translate = translator.translatePipe;
     }
 
     public getSchool(schoolId: string) {
@@ -68,18 +73,18 @@ export class Schools {
         {
             var imageSource;
             let confirm = this.alertCtrl.create({
-                title: 'Image source?',
+                title: this.translate.instant('Image source?'),
                 message: '',
                 buttons: [
                     {
-                        text: 'SAVEDPHOTOALBUM',
+                        text: this.translate.instant('SAVEDPHOTOALBUM'),
                         handler: () => {
                             imageSource = Camera.PictureSourceType.SAVEDPHOTOALBUM;
                             this.uploadImage(imageSource, schoolId);
                         }
                     },
                     {
-                        text: 'PHOTOLIBRARY',
+                        text: this.translate.instant('PHOTOLIBRARY'),
                         handler: () => {
                             imageSource = Camera.PictureSourceType.PHOTOLIBRARY;
                             this.uploadImage(imageSource, schoolId);
