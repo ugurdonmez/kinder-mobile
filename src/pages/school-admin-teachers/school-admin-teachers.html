@@ -10,7 +10,7 @@
 <ion-content padding>
     <ion-list>
 
-        <button ion-item *ngFor="let teacher of allTeachers" (click)="openTeacherPage(teacher.$key)">
+        <button ion-item *ngFor="let teacher of allTeachers | async" (click)="openTeacherPage(teacher.$key)">
             <div item-left>
                 <img class="teacher-thumbnail" src="{{teacher.profileImageUrl}}"/>
             </div>
@@ -19,12 +19,8 @@
                 <p>{{teacher.surname}}</p>
             </div>
 
-            <!--<div>-->
-                <!--<p *ngFor="let branch of item.branches">{{branch}}</p>-->
-            <!--</div>-->
-
             <div item-right>
-                <p *ngFor="let _class of teacher.classes">{{(_class | async)?.name}}</p>
+                <p *ngFor="let _class of getClassesOfTeachers(teacher.$key)">{{_class?.name}}</p>
             </div>
         </button>
     </ion-list>

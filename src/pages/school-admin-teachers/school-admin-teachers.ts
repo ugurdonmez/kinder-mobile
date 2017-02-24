@@ -17,33 +17,19 @@ import {TranslateService} from "ng2-translate";
 })
 
 export class SchoolAdminTeachersPage {
-    randomMockTeacher: TeacherModel;
     allTeachers: any;
-    teacher: any;
     private translate: TranslateService;
+    private classProvider: Classes;
+    private classesOfTeachers: any;
 
     constructor(public navCtrl: NavController, public teachersProvider: Teachers,
     classProvider: Classes, public translator: Translator) {
         this.translate = translator.translatePipe;
-        let fetchedTeachers = teachersProvider.getAllTeachers();
-        // this.allTeachers = teachersProvider.getAllTeachers();
-        this.allTeachers = [];
-        fetchedTeachers
-            .subscribe(snapshots => {
-                snapshots.forEach(snapshot => {
-                    console.log(snapshot);
-                    let thisEntry = snapshot;
-                    var classes = [];
-                    for (var dictKey in thisEntry.classes){
-                        let classId = thisEntry.classes[dictKey];
-                        classes.push(classProvider.getClass(classId));
-                    }
-                    thisEntry.classes = classes;
-                    this.allTeachers.push(thisEntry);
-                    console.log(this.allTeachers);
-                });
-            })
+        this.allTeachers = teachersProvider.getAllTeachers();
 
+        this.classProvider = classProvider;
+        this.classesOfTeachers = {};
+        this.loadClassesOfTeachers();
     }
 
     ionViewDidLoad() {
@@ -57,5 +43,23 @@ export class SchoolAdminTeachersPage {
     openTeacherPage(teacherId){
         console.log(teacherId);
         this.navCtrl.push(SchoolAdminTeacherDetailsPage, {'teacherId':teacherId});
+    }
+
+    loadClassesOfTeachers(){
+        this.allTeachers.subscribe(snapshots =>{
+            snapshots.forEach(snapshot => {
+                this.loadClassesOfTeacherWithTeacherId(snapshot.$key);
+            })
+        })
+    }
+
+    loadClassesOfTeacherWithTeacherId(teacherId){
+        this.classProvider.getClassesOfTeacher(teacherId).subscribe(snapshot => {
+            this.classesOfTeachers[teacherId] = snapshot;
+        })
+    }
+
+    getClassesOfTeachers(teacherId){
+        return this.classesOfTeachers[teacherId];
     }
 }

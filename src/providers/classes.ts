@@ -68,4 +68,13 @@ export class Classes {
     deleteClass(classId: string){
         this.af.database.object('/classes/' + classId).remove();
     }
+
+    public getClassesOfTeacher(teacherId: string){
+        return this.af.database.list('/classes', {
+            query: {
+                orderByChild: 'teacher_id',
+                equalTo: teacherId
+            }
+        });
+    }
 }
