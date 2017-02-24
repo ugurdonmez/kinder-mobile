@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable, Component} from '@angular/core';
 import 'rxjs/add/operator/map';
 
 import { AngularFire } from 'angularfire2';
@@ -10,6 +10,8 @@ import {AlertController} from "ionic-angular";
 import * as firebase from 'firebase';
 import {Translator} from "../app/translator";
 import {TranslateService} from "ng2-translate";
+import {Classes} from "./classes";
+
 
 @Injectable()
 export class Schools {
@@ -18,7 +20,7 @@ export class Schools {
     private translate: TranslateService;
 
     constructor(public af: AngularFire, public authData: AuthData, private alertCtrl: AlertController,
-                public translator: Translator){
+                public translator: Translator, private classesProvider: Classes){
         this.schools = af.database.list('/schools');
         this.translate = translator.translatePipe;
     }
@@ -56,6 +58,18 @@ export class Schools {
 
     deleteSchool(schoolId: string){
         this.af.database.object('/schools/' + schoolId).remove();
+        var classesOfSchool = this.af.database.list('/classes', {
+            query: {
+                orderByChild: 'schoolId',
+                equalTo: schoolId
+            }
+        });
+        classesOfSchool.subscribe(snapshots => {
+            snapshots.forEach(classOfSchool => {
+                var classId = classOfSchool.$key;
+                this.classesProvider.deleteClass(classId);
+            })
+        })
     }
 
     public getUserSchools() {

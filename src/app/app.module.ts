@@ -36,6 +36,9 @@ import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import { TranslateModule, TranslateStaticLoader, TranslateLoader } from 'ng2-translate/ng2-translate';
 import { Http } from "@angular/http";
 import {TeacherHomePage} from "../pages/teacher-home/teacher-home";
+import {Classes} from "../providers/classes";
+import {Schools} from "../providers/schools";
+import {Translator} from "./translator";
 
 // AF2 Settings
 export const firebaseConfig = {
@@ -120,7 +123,10 @@ export function createTranslateLoader(http: Http) {
     providers: [
         {provide: ErrorHandler, useClass: IonicErrorHandler},
         AuthService,
-        AuthData
+        AuthData,
+        Classes,
+        Schools,
+        Translator
     ]
 })
 

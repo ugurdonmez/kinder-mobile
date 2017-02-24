@@ -11,6 +11,7 @@ import {AlertController} from "ionic-angular";
 import * as firebase from 'firebase';
 import {Translator} from "../app/translator";
 import {TranslateService} from "ng2-translate";
+import {Schools} from "./schools";
 
 @Injectable()
 export class Branches {
@@ -19,7 +20,7 @@ export class Branches {
     private translate: TranslateService;
 
     constructor(public af: AngularFire, public authData: AuthData, private alertCtrl: AlertController,
-                public translator: Translator){
+                public translator: Translator, private schoolsProvider: Schools){
         this.branches = af.database.list('/branches');
         this.translate = translator.translatePipe;
     }
@@ -74,6 +75,18 @@ export class Branches {
 
     deleteBranch(branchId: string){
         this.af.database.object('/branches/' + branchId).remove();
+        var schoolsOfBranch = this.af.database.list('/schools', {
+            query: {
+                orderByChild: 'branchId',
+                equalTo: branchId
+            }
+        });
+        schoolsOfBranch.subscribe(snapshots => {
+            snapshots.forEach(school => {
+                var schoolId = school.$key;
+                this.schoolsProvider.deleteSchool(schoolId);
+            })
+        })
     }
 
     public newPhoto(branchId:string){
