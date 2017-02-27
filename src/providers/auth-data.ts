@@ -32,84 +32,46 @@ export class AuthData {
     }
 
     signupUser(newEmail: string, newPassword: string): any {
-        let response = this.af.auth.createUser({ email: newEmail, password: newPassword });
-        this.printUID();
-        // this.checkInvitedUsersAndAddUserToUsersCollection(newEmail);
-        return response;
+        return this.af.auth.createUser({ email: newEmail, password: newPassword });
     }
 
-    getUID(): any{
+    getUserId(): any{
         return this.user.uid;
     }
 
-    printUID(): any{
-        this.af.auth.subscribe( user => {
-            console.log(user.uid);
-        })
-    }
-
-    getUserId(emailAddress?: string): any{
-        var userId;
-        var email;
-        if (emailAddress){
-            email = emailAddress;
-        }
-        else{
-            email = this.user.auth.email;
-        }
-        userId = email.split('.').join("").split("@")[0];
-
-        // console.log ("user id is: " + userId);
-        return userId
+    public getUserEmail(){
+        return this.user.auth.email;
     }
 
     // newInvitation(email: string, userRole: string, branchId?: string) {
-    newInvitation(invitationJson) {
+    public newInvitation(invitationJson) {
         let invitedUsersList = this.af.database.list('/invited-users/');
         invitedUsersList.push(invitationJson);
     }
 
-    private checkInvitedUsersAndAddUserToUsersCollection(userMail: string): any {
+    public updateUserRoleFromInvitedUsers(): any {
+        var userMail = this.getUserEmail();
 
-        //check if user exists in invited users
-        // let userId = this.getUserId(userMail);
-        // let userObject = this.af.database.object('/users/'+ userId);
+        this.af.database.object('/users/' + this.getUserId() + '/email').set(userMail);
 
-        this.af.database.object('/users/' + this.getUID()).set({
-            email: userMail,
-            role: "unknown"
-        });
-
-        let invitedUsersWithThatMail = this.af.database.list('/invited-users/', {
-            query: {
-                orderByChild: 'email',
-                equalTo: userMail
-            }
-        });
-
-        invitedUsersWithThatMail.subscribe(snapshots => {
-            snapshots.forEach(invitedObject => {
-                this.af.database.object('/users/' + this.getUID()).set(invitedObject);
-            })
-        });
-
-        //remove from invited-users
         this.af.database.list('/invited-users', {
             query: {
                 orderByChild: 'email',
                 equalTo: userMail
             }
         }).subscribe(snapshots => {
-            snapshots.forEach(snapshot => {
-                this.af.database.object('/invited-users/' + snapshot.$key).remove();
+            snapshots.forEach(userInvitation => {
+                this.af.database.object('/users/' + this.getUserId() + '/role').set(userInvitation.role);
+                if (userInvitation.role == 'school-admin' || userInvitation.role == 'teacher'){
+                    this.af.database.object('/users/' + this.getUserId() + '/branchId').set(userInvitation.branchId);
+                }
+                this.af.database.object('/invited-users/' + userInvitation.$key).remove(); // remove invitation
             })
         });
     }
 
     getUserRole(): any {
-        let userId = this.getUserId();
-        let userRole = this.af.database.object('/users/'+ userId + "/role");
-        return userRole
+        return this.af.database.object('/users/'+ this.getUserId() + "/role");
     }
 
     getUser(): any{

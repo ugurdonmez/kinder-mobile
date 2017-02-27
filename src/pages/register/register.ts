@@ -63,6 +63,7 @@ export class RegisterPage {
             this.authData.signupUser(this.signupForm.value.email,
                 this.signupForm.value.password).then(() => {
                     this.nav.setRoot(HomePage);
+                    this.authData.updateUserRoleFromInvitedUsers();
                 }, (error) => {
                     this.loading.dismiss().then( () => {
                         var errorMessage: string = error.message;

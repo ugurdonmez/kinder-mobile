@@ -30,7 +30,7 @@
                 </ion-select>
             </ion-item>
             <!---->
-            <ion-item *ngIf="inviteOthersForm.value.userRole=='school-admin' && myUserRole=='developer'">
+            <ion-item *ngIf="(inviteOthersForm.value.userRole=='school-admin' || inviteOthersForm.value.userRole=='teacher') && myUserRole=='developer'">
                 <ion-label>{{"Branch" | translate}}</ion-label>
                 <ion-select formControlName="branchId">
                     <ion-option *ngFor="let a_branch of allBranches | async" [value]="a_branch.$key">{{a_branch.name}}</ion-option>

@@ -48,7 +48,7 @@ export class InviteOthersPage {
     inviteUserFormSubmit(){
         if (this.inviteOthersForm.valid){
             //invite user code here
-            if(this.inviteOthersForm.value.userRole == "school-admin"){
+            if(this.inviteOthersForm.value.userRole == "school-admin" || this.inviteOthersForm.value.userRole == "teacher"){
                 if(this.inviteOthersForm.value.branchId===null){
                     let alert = this.alertCtrl.create({
                         title: this.translate.instant('Cannot Submit!'),
@@ -82,7 +82,6 @@ export class InviteOthersPage {
             });
             alert.present();
         }
-
     }
 
     private loadBranchIdOfUser() {

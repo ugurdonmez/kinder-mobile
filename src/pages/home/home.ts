@@ -47,6 +47,7 @@ export class HomePage {
         this.loadUserRole();
         this.loadDoesUserHasSchool();
         this.loadDoesUserHasBranch();
+        this.authData.updateUserRoleFromInvitedUsers();
         this.authData.getUserRole().subscribe(
             snapshot => {
                 if (snapshot.$value === "teacher"){
