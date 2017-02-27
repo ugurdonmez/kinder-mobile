@@ -38,6 +38,10 @@ export class AuthData {
         return response;
     }
 
+    getUID(): any{
+        return this.user.uid;
+    }
+
     printUID(): any{
         this.af.auth.subscribe( user => {
             console.log(user.uid);
