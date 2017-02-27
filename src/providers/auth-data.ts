@@ -7,12 +7,12 @@ import { AngularFire } from 'angularfire2';
 @Injectable()
 export class AuthData {
 
-    fireAuth: any;
+    private user: any;
 
     constructor(public af: AngularFire) {
         af.auth.subscribe( user => {
             if (user) {
-                this.fireAuth = user.auth;
+                this.user = user;
                 console.log("User:");
                 console.log(user);
             }
@@ -33,8 +33,15 @@ export class AuthData {
 
     signupUser(newEmail: string, newPassword: string): any {
         let response = this.af.auth.createUser({ email: newEmail, password: newPassword });
-        this.addUserToUsersCollectionIfNotExist(newEmail);
+        this.printUID();
+        // this.checkInvitedUsersAndAddUserToUsersCollection(newEmail);
         return response;
+    }
+
+    printUID(): any{
+        this.af.auth.subscribe( user => {
+            console.log(user.uid);
+        })
     }
 
     getUserId(emailAddress?: string): any{
@@ -44,7 +51,7 @@ export class AuthData {
             email = emailAddress;
         }
         else{
-            email = this.fireAuth.email;
+            email = this.user.auth.email;
         }
         userId = email.split('.').join("").split("@")[0];
 
@@ -54,24 +61,44 @@ export class AuthData {
 
     // newInvitation(email: string, userRole: string, branchId?: string) {
     newInvitation(invitationJson) {
-        let userId = this.getUserId(invitationJson.email);
-        console.log("userIdTry: " + userId);
-        let userObject = this.af.database.object('/users/'+ userId);
-        userObject.set(invitationJson);
+        let invitedUsersList = this.af.database.list('/invited-users/');
+        invitedUsersList.push(invitationJson);
     }
 
-    addUserToUsersCollectionIfNotExist(userMail: string): any {
-        let userId = this.getUserId(userMail);
-        let userObject = this.af.database.object('/users/'+ userId);
+    private checkInvitedUsersAndAddUserToUsersCollection(userMail: string): any {
 
-        userObject.subscribe( snapshot => {
-            console.log(snapshot.val);
-            if (snapshot.val === null){
-                userObject.set({
-                    email: userMail,
-                    role: "unknown"
-                });
+        //check if user exists in invited users
+        // let userId = this.getUserId(userMail);
+        // let userObject = this.af.database.object('/users/'+ userId);
+
+        this.af.database.object('/users/' + this.getUID()).set({
+            email: userMail,
+            role: "unknown"
+        });
+
+        let invitedUsersWithThatMail = this.af.database.list('/invited-users/', {
+            query: {
+                orderByChild: 'email',
+                equalTo: userMail
             }
+        });
+
+        invitedUsersWithThatMail.subscribe(snapshots => {
+            snapshots.forEach(invitedObject => {
+                this.af.database.object('/users/' + this.getUID()).set(invitedObject);
+            })
+        });
+
+        //remove from invited-users
+        this.af.database.list('/invited-users', {
+            query: {
+                orderByChild: 'email',
+                equalTo: userMail
+            }
+        }).subscribe(snapshots => {
+            snapshots.forEach(snapshot => {
+                this.af.database.object('/invited-users/' + snapshot.$key).remove();
+            })
         });
     }
 
