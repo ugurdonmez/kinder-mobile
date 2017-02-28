@@ -7,7 +7,6 @@ import { CalenderPage } from '../calender/calender';
 import { MenuController } from 'ionic-angular';
 
 import { AuthData } from '../../providers/auth-data';
-// import { LoginPage } from '../login/login';
 import { SchoolAdminBranchesPage } from '../school-admin-branches/school-admin-branches';
 import { SchoolAdminAddUpdateBranchPage } from '../school-admin-add-update-branch/school-admin-add-update-branch';
 import { SchoolAdminTeachersPage } from '../school-admin-teachers/school-admin-teachers';
@@ -15,7 +14,6 @@ import { SchoolAdminAddUpdateClassPage } from '../school-admin-add-update-class/
 import {InviteOthersPage} from "../invite-others/invite-others";
 import {TranslateService} from "ng2-translate";
 import {Translator} from "../../app/translator";
-import {TeacherHomePage} from "../teacher-home/teacher-home";
 import {SchoolAdminSchoolsPage} from "../school-admin-schools/school-admin-schools";
 import {Branches} from "../../providers/branches";
 import {Schools} from "../../providers/schools";
@@ -47,14 +45,7 @@ export class HomePage {
         this.loadUserRole();
         this.loadDoesUserHasSchool();
         this.loadDoesUserHasBranch();
-        this.authData.updateUserRoleFromInvitedUsers();
-        this.authData.getUserRole().subscribe(
-            snapshot => {
-                if (snapshot.$value === "teacher"){
-                    this.navCtrl.setRoot(TeacherHomePage);
-                }
-            }
-        )
+        this.authData.updateUserRoleFromInvitedUsers(); // remove after ugurdonmez87 logins
     }
 
     openCalender(page) {

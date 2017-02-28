@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 
 import {Schools} from '../../providers/schools'
-import {FirebaseObjectObservable} from "angularfire2";
+import {FirebaseObjectObservable, FirebaseListObservable} from "angularfire2";
 import {Classes} from "../../providers/classes";
 import { SchoolAdminAddUpdateClassPage } from '../school-admin-add-update-class/school-admin-add-update-class';
 import {Teachers} from "../../providers/teachers";
@@ -11,6 +11,7 @@ import {SchoolAdminClassDetailsPage} from "../school-admin-class-details/school-
 import {Translator} from "../../app/translator";
 import {TranslateService} from "ng2-translate";
 import {HomePage} from "../home/home";
+import {AuthData} from "../../providers/auth-data";
 
 @Component({
   selector: 'page-school-admin-classes',
@@ -21,25 +22,40 @@ import {HomePage} from "../home/home";
 
 export class SchoolAdminClassesPage {
     private schoolId: string;
-    private allClassesOfSchool: any;
     private school: FirebaseObjectObservable<any>;
     private translate: TranslateService;
     private logoURL: string;
+    private myUserRole: string;
+    private listedClasses: FirebaseListObservable<any[]>;
 
     constructor(public navCtrl: NavController, public schoolsProvider: Schools, public classesProvider: Classes,
-                private navParams: NavParams, private teachersProvider: Teachers, public translator: Translator) {
+                private navParams: NavParams, private teachersProvider: Teachers, public translator: Translator,
+                public authData: AuthData) {
         this.translate = translator.translatePipe;
         this.schoolId = navParams.get('schoolId');
         this.school = schoolsProvider.getSchool(this.schoolId);
         this.loadImage();
-        this.school.subscribe(snapshot => {
+        this.loadUserRoleAndUsersClasses();
+        this.school.subscribe(snapshot => { // return home if school doesn't exist.
             if(snapshot === null){
                 console.log(snapshot === null);
                 this.navCtrl.setRoot(HomePage);
             }
         });
+    }
 
-        this.allClassesOfSchool = this.classesProvider.getClassesOfSchool(this.schoolId);
+    private loadUserRoleAndUsersClasses() {
+        this.authData.getUser().subscribe(snapshot => {
+            this.myUserRole = snapshot.role;
+            if (this.myUserRole == 'developer'
+                || this.myUserRole == 'branch-admin'
+                || this.myUserRole == 'school-admin'){
+                this.listedClasses = this.classesProvider.getClassesOfSchool(this.schoolId);
+            }
+            else if(this.myUserRole == 'teacher'){
+                // TODO after teacher inv + profile creation works
+            }
+        });
     }
 
     ionViewDidLoad() {

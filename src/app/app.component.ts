@@ -18,18 +18,7 @@ export class MyApp {
     constructor(platform: Platform, af: AngularFire, private authData: AuthData) {
         af.auth.subscribe( user => {
             if (user) {
-                this.authData.getUserRole().subscribe(
-                    snapshot => {
-                        console.log("user role:");
-                        console.log(snapshot);
-                        if (snapshot.$value === "teacher"){
-                            this.rootPage = TeacherHomePage;
-                        }
-                        else{
-                            this.rootPage = HomePage;
-                        }
-                    }
-                )
+                this.rootPage = HomePage;
             } else {
                 this.rootPage = LoginPage;
             }

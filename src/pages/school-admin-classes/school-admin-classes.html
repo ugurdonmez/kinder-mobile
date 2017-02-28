@@ -2,7 +2,8 @@
 
   <ion-navbar>
     <ion-title>{{"School" | translate}}: {{(school | async)?.name}}</ion-title>
-      <ion-buttons end>
+      <ion-buttons *ngIf="myUserRole=='developer' || myUserRole=='branch-admin'
+        || myUserRole=='school-admin'" end>
           <button ion-button end (click)="openSchoolAdminEditSchoolPage(schoolId)">{{"Edit" | translate}}</button>
       </ion-buttons>
   </ion-navbar>
