@@ -86,7 +86,7 @@ export class HomePage {
     }
 
     openInvitePeople(page) {
-        this.navCtrl.push(InviteOthersPage);
+        this.navCtrl.push(InviteOthersPage, {'sourcePage': 'HomePage'});
     }
 
     private loadUserRole() {

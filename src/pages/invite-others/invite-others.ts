@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {NavController, AlertController} from 'ionic-angular';
+import {NavController, AlertController, NavParams} from 'ionic-angular';
 
 import {Translator} from "../../app/translator";
 import {TranslateService} from "ng2-translate";
@@ -22,23 +22,35 @@ export class InviteOthersPage {
     private myUserRole: any;
     private branchIdOfUser: string;
     private allBranches: FirebaseListObservable<any[]>;
+    private sourcePage: string;
 
     constructor(public navCtrl: NavController, public formBuilder: FormBuilder,
                 public translator: Translator, public alertCtrl: AlertController, public authData: AuthData,
-                private branchesProvider: Branches) {
+                private branchesProvider: Branches, private navParams: NavParams) {
         this.translate = translator.translatePipe;
+        this.sourcePage = navParams.get('sourcePage');
         this.loadBranchIdOfUser();
         this.allBranches = this.branchesProvider.getAllBranches();
         this.authData.getUserRole().subscribe(snapshot => {
             this.myUserRole = snapshot.$value;
         });
-        this.inviteOthersForm = formBuilder.group(
-            {
-                'email': ['', EmailValidator.isValid],
-                'userRole': ['', Validators.required],
-                'branchId': [this.branchIdOfUser]
-            }
-        );
+        if (this.sourcePage == 'HomePage'){
+            this.inviteOthersForm = formBuilder.group(
+                {
+                    'email': ['', EmailValidator.isValid],
+                    'userRole': ['', Validators.required],
+                }
+            );
+        }
+        else{
+            this.inviteOthersForm = formBuilder.group(
+                {
+                    'email': ['', EmailValidator.isValid],
+                    'userRole': ['', Validators.required],
+                    'branchId': [this.branchIdOfUser]
+                }
+            );
+        }
     }
 
     ionViewDidLoad() {
