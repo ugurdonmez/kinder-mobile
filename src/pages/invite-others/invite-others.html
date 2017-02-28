@@ -16,23 +16,23 @@
                 <ion-input type="text" formControlName="email"></ion-input>
             </ion-item>
 
-            <ion-item>
+            <ion-item *ngIf="sourcePage == 'HomePage'">
                 <ion-label>{{"User Role" | translate}}</ion-label>
                 <ion-select formControlName="userRole">
-                    <ion-option *ngIf="sourcePage == 'HomePage'" value="developer">Developer</ion-option>
-                    <ion-option *ngIf="sourcePage == 'HomePage'" value="branch-admin">{{"Branch Admin" | translate}}</ion-option>
-                    <ion-option *ngIf="sourcePage == 'BranchAdminSchoolsPage'" value="school-admin">{{"School Admin" | translate}}</ion-option>
-                    <ion-option *ngIf="sourcePage == 'BranchAdminSchoolsPage'" value="teacher">{{"TeacherStr" | translate}}</ion-option>
-                    <ion-option *ngIf="sourcePage == 'ClassAdminClassDetailsPage'" value="student">{{"Student" | translate}}</ion-option>
+                    <ion-option value="developer">Developer</ion-option>
+                    <ion-option value="branch-admin">{{"Branch Admin" | translate}}</ion-option>
+                    <!--<ion-option *ngIf="sourcePage == 'BranchPage'" value="school-admin">{{"School Admin" | translate}}</ion-option>-->
+                    <!--<ion-option *ngIf="sourcePage == 'BranchPage'" value="teacher">{{"TeacherStr" | translate}}</ion-option>-->
+                    <!--<ion-option *ngIf="sourcePage == 'ClassAdminClassDetailsPage'" value="student">{{"Student" | translate}}</ion-option>-->
                 </ion-select>
             </ion-item>
             <!---->
-            <ion-item *ngIf="(inviteOthersForm.value.userRole=='school-admin' || inviteOthersForm.value.userRole=='teacher') && myUserRole=='developer'">
-                <ion-label>{{"Branch" | translate}}</ion-label>
-                <ion-select formControlName="branchId">
-                    <ion-option *ngFor="let a_branch of allBranches | async" [value]="a_branch.$key">{{a_branch.name}}</ion-option>
-                </ion-select>
-            </ion-item>
+            <!--<ion-item *ngIf="(inviteOthersForm.value.userRole=='school-admin' || inviteOthersForm.value.userRole=='teacher') && myUserRole=='developer'">-->
+                <!--<ion-label>{{"Branch" | translate}}</ion-label>-->
+                <!--<ion-select formControlName="branchId">-->
+                    <!--<ion-option *ngFor="let a_branch of allBranches | async" [value]="a_branch.$key">{{a_branch.name}}</ion-option>-->
+                <!--</ion-select>-->
+            <!--</ion-item>-->
         </ion-list>
     </form>
 

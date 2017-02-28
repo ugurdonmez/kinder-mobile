@@ -10,6 +10,7 @@ import {SchoolAdminEditBranchPage} from "../school-admin-edit-branch/school-admi
 import {Translator} from "../../app/translator";
 import {TranslateService} from "ng2-translate";
 import {HomePage} from "../home/home";
+import {InviteOthersPage} from "../invite-others/invite-others";
 
 @Component({
   selector: 'page-school-admin-schools',
@@ -24,12 +25,14 @@ export class SchoolAdminSchoolsPage {
     private branch: FirebaseObjectObservable<any>;
     private translate: TranslateService;
     private logoURL: string;
+    allTeachersOfBranch: any;
 
     constructor(public navCtrl: NavController, public schoolsProvider: Schools, public branchesProvider: Branches,
                 private navParams: NavParams, public translator: Translator) {
         this.translate = translator.translatePipe;
         this.branchId = navParams.get('branchId');
         this.branch = branchesProvider.getBranch(this.branchId);
+        this.allTeachersOfBranch = [];
 
         this.branch.subscribe(snapshot => {
             if(snapshot === null){
@@ -52,7 +55,12 @@ export class SchoolAdminSchoolsPage {
 
     openSchoolAdminSchoolAdd() {
         console.log('adds new school to branch with branchId: ' + this.branchId);
-        this.navCtrl.push( SchoolAdminAddUpdateSchoolPage , {'branchId':this.branchId});
+        // this.navCtrl.push( SchoolAdminAddUpdateSchoolPage , {'branchId':this.branchId});
+        this.navCtrl.push( InviteOthersPage , {
+            'sourcePage': 'BranchPage',
+            'branchId':this.branchId,
+            'invitationRole':'school-admin'
+        });
     }
 
     openSchoolAdminEditBranchPage(branchId: string){
@@ -64,5 +72,13 @@ export class SchoolAdminSchoolsPage {
             this.logoURL = snapshot.logoURL;
             console.log(this.logoURL);
         })
+    }
+
+    private openAddTeacher(){
+        this.navCtrl.push( InviteOthersPage , {
+            'sourcePage': 'BranchPage',
+            'branchId':this.branchId,
+            'invitationRole':'teacher'
+        });
     }
 }

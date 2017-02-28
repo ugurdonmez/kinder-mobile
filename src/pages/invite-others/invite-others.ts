@@ -19,9 +19,6 @@ import {FirebaseListObservable} from "angularfire2";
 export class InviteOthersPage {
     translate: TranslateService;
     inviteOthersForm: any;
-    private myUserRole: any;
-    private branchIdOfUser: string;
-    private allBranches: FirebaseListObservable<any[]>;
     private sourcePage: string;
 
     constructor(public navCtrl: NavController, public formBuilder: FormBuilder,
@@ -29,11 +26,7 @@ export class InviteOthersPage {
                 private branchesProvider: Branches, private navParams: NavParams) {
         this.translate = translator.translatePipe;
         this.sourcePage = navParams.get('sourcePage');
-        this.loadBranchIdOfUser();
-        this.allBranches = this.branchesProvider.getAllBranches();
-        this.authData.getUserRole().subscribe(snapshot => {
-            this.myUserRole = snapshot.$value;
-        });
+
         if (this.sourcePage == 'HomePage'){
             this.inviteOthersForm = formBuilder.group(
                 {
@@ -42,12 +35,12 @@ export class InviteOthersPage {
                 }
             );
         }
-        else{
+        else if(this.sourcePage == 'BranchPage'){
             this.inviteOthersForm = formBuilder.group(
                 {
                     'email': ['', EmailValidator.isValid],
-                    'userRole': ['', Validators.required],
-                    'branchId': [this.branchIdOfUser]
+                    'userRole': [navParams.get('invitationRole')],
+                    'branchId': [navParams.get('branchId')]
                 }
             );
         }
@@ -96,16 +89,16 @@ export class InviteOthersPage {
         }
     }
 
-    private loadBranchIdOfUser() {
-        if(this.myUserRole==="branch-admin"){
-            this.branchesProvider.getUserBranches().subscribe(snapshot => {
-                if (snapshot.length > 0) {
-                    this.branchIdOfUser = snapshot[0].$key;
-                }
-                else{
-                    this.branchIdOfUser = "";
-                }
-            })
-        }
-    }
+    // private loadBranchIdOfUser() {
+    //     if(this.myUserRole==="branch-admin"){
+    //         this.branchesProvider.getUserBranches().subscribe(snapshot => {
+    //             if (snapshot.length > 0) {
+    //                 branchIdOfUser = snapshot[0].$key;
+    //             }
+    //             else{
+    //                 branchIdOfUser = "";
+    //             }
+    //         })
+    //     }
+    // }
 }
