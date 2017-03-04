@@ -5,3 +5,5 @@ After `npm install`, delete  `firebase.d.ts` in `/node_modules/firebase` folder.
 ## Use:
 - Run `npm run ionic:run` script to run on browsers because `npm run ionic:serve` is incompatible with Cordova's Camera plugin.  
 - If you are getting an error, try running `npm run ionic:build` before running `npm run ionic:run` and refresh your page with CTRL+F5 on Google Chrome.  
+## Documentation:
+- User Interactions (Use cases): https://drive.google.com/file/d/0B_YxK0Acwu_XX2l3T3dqUzdOYnc/view?usp=sharing
