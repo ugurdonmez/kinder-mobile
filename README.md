@@ -1,7 +1,7 @@
 # kinder-mobile
 
 ## Installation Reminder:
-After `npm install`, delete  `firebase.d.ts` in `/node_modules/firebase` folder. Because it is a duplicate of `app.d.ts` in that folder, which causes 'Duplicate Identifiers' error.  
+After `npm install`, delete  `firebase.d.ts` in `/node_modules/firebase` folder and `index.d.ts` in `/node_modules/@types/firebase` folder. Because they are duplicate of `/node_modules/firebase/app.d.ts`, which causes 'Duplicate Identifiers' error.  
 
 ## Use:
 - Run `npm run ionic:run` script to run on browsers because `npm run ionic:serve` is incompatible with Cordova's Camera plugin.  
