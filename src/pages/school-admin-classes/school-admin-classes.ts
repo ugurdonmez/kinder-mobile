@@ -62,6 +62,7 @@ export class SchoolAdminClassesPage {
             }
             else if(this.myUserRole == 'teacher'){
                 // TODO after teacher inv + profile creation works
+                this.listedClasses = this.classesProvider.getClassesOfTeacher(this.authData.getUserId());
             }
         });
     }

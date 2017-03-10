@@ -56,7 +56,8 @@
     </ion-grid>
 
 
-    <h1 class="classes-title">{{"Classes" | translate}}</h1>
+    <h1 *ngIf="myUserRole!=='teacher'" class="classes-title">{{"Classes" | translate}}</h1>
+    <h1 *ngIf="myUserRole==='teacher'" class="classes-title">{{"Your Classes" | translate}}</h1>
 
     <ion-list>
         <button ion-item *ngFor="let _class of listedClasses | async" (click)="openClassPage(_class.$key)">

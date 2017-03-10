@@ -104,5 +104,6 @@
   "Sure you want to delete this class? A delete operation is irreversible": "Sure you want to delete this class? A delete operation is irreversible",
   "Delete School?": "Delete School?",
   "Sure you want to delete this school? This will also remove the classes in this school. A delete operation is irreversible.": "Sure you want to delete this school? This will also remove the classes in this school. A delete operation is irreversible.",
-  "School Unknown": "School Unknown"
+  "School Unknown": "School Unknown",
+  "Your Classes": "Your Classes"
 }

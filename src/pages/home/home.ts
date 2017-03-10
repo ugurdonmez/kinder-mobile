@@ -33,7 +33,7 @@ export class HomePage {
     private myUserRole: string;
     private doesUserHasSchool: boolean;
     private doesUserHasBranch: boolean;
-    private userSchool: any;
+    private userSchoolId: any;
     private userBranch: any;
 
 
@@ -108,7 +108,7 @@ export class HomePage {
     }
 
     private openMySchool(): any{
-        this.navCtrl.push(SchoolAdminClassesPage, {'schoolId': this.userSchool.$key});
+        this.navCtrl.push(SchoolAdminClassesPage, {'schoolId': this.userSchoolId});
     }
 
     private createMySchool(){
@@ -122,7 +122,7 @@ export class HomePage {
             if (snapshot.length > 0){
                 this.doesUserHasSchool = (snapshot.length > 0);
                 console.log("user has school.");
-                this.userSchool = snapshot[0]
+                this.userSchoolId = snapshot[0].$key;
             }
             else{
                 this.doesUserHasSchool = (snapshot.length > 0);
@@ -157,6 +157,9 @@ export class HomePage {
                 if(teacherSnapshot.$value === null){
                     this.directTeacherToCreateTeacherPage();
                 }
+                else{
+                    this.directTeacherToSchoolPage();
+                }
             })
         }
     }
@@ -170,5 +173,13 @@ export class HomePage {
             })
         })
 
+    }
+
+    private directTeacherToSchoolPage() {
+        this.authData.getUser().subscribe(thisUser => {
+            // console.log("user snapshot:")
+            // console.log(thisUser)
+            this.userSchoolId = thisUser.schoolId;
+        })
     }
 }
