@@ -34,7 +34,8 @@ export class SchoolAdminEditTeacherPage {
                     'id': [this.teacherId, Validators.required],
                     'name': [snapshot.name, Validators.required],
                     'surname': [snapshot.surname, Validators.required],
-                    'notes': [snapshot.notes]
+                    'notes': [snapshot.notes],
+                    'schoolId': [snapshot.schoolId, Validators.required]
                 }
             );
         });
