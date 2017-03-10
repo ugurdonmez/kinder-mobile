@@ -64,6 +64,12 @@ export class Teachers {
         // user_teachers.push({'teacherId':teacherId});
     }
 
+    public registerThisUserAsTeacher(teacher: TeacherModel){
+        let userId = this.authData.getUserId();
+        this.af.database.object('/teachers/'+userId).set(teacher);
+        return userId;
+    }
+
     deleteTeacher(teacherId: string){
         this.af.database.object('/teachers/' + teacherId).remove();
     }

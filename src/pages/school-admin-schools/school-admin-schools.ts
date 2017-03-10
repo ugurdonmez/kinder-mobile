@@ -73,12 +73,4 @@ export class SchoolAdminSchoolsPage {
             console.log(this.logoURL);
         })
     }
-
-    private openAddTeacher(){
-        this.navCtrl.push( InviteOthersPage , {
-            'sourcePage': 'BranchPage',
-            'branchId':this.branchId,
-            'invitationRole':'teacher'
-        });
-    }
 }

@@ -76,4 +76,28 @@
 
     <ion-icon class="school-add-circle-icon" ios="ios-add-circle" md="md-add-circle" (click)="openSchoolAdminClassAdd(schoolId)"></ion-icon>
 
+    <h1 class="teachers-title">{{"Teachers" | translate}}</h1>
+
+    <ion-list>
+        <div>TODO</div>
+        <!--<button ion-item *ngFor="let teacher of allTeachersOfBranch | async" (click)="openTeacherPage(teacher.$key)">-->
+        <!--<div item-left>-->
+        <!--<img class="teacher-thumbnail" src="{{teacher?.profileImageUrl}}"/>-->
+        <!--</div>-->
+        <!--<div>-->
+        <!--&lt;!&ndash;ion-item&ndash;&gt;-->
+        <!--<h2>{{teacher?.name}}</h2>-->
+        <!--<p>{{teacher.managerName}}</p>-->
+        <!--<p>{{teacher.managerTel}}</p>-->
+        <!--</div>-->
+
+        <!--<div item-right>-->
+        <!--<p>{{teacher.buildingAddress}}</p>-->
+        <!--<p>{{teacher.teacherTelephone}}</p>-->
+        <!--</div>-->
+        <!--</button>-->
+    </ion-list>
+
+    <ion-icon class="teacher-add-circle-icon" ios="ios-add-circle" md="md-add-circle" (click)="openAddTeacher()"></ion-icon>
+
 </ion-content>

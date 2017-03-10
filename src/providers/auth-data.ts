@@ -62,8 +62,11 @@ export class AuthData {
         }).subscribe(snapshots => {
             snapshots.forEach(userInvitation => {
                 this.af.database.object('/users/' + this.getUserId() + '/role').set(userInvitation.role);
-                if (userInvitation.role == 'school-admin' || userInvitation.role == 'teacher'){
+                if (userInvitation.role == 'school-admin'){
                     this.af.database.object('/users/' + this.getUserId() + '/branchId').set(userInvitation.branchId);
+                }
+                else if (userInvitation.role == 'teacher'){
+                    this.af.database.object('/users/' + this.getUserId() + '/schoolId').set(userInvitation.schoolId);
                 }
                 this.af.database.object('/invited-users/' + userInvitation.$key).remove(); // remove invitation
             })

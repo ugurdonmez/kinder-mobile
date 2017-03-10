@@ -19,11 +19,13 @@ import {Branches} from "../../providers/branches";
 import {Schools} from "../../providers/schools";
 import {SchoolAdminAddUpdateSchoolPage} from "../school-admin-add-update-school/school-admin-add-update-school";
 import {SchoolAdminClassesPage} from "../school-admin-classes/school-admin-classes";
+import {Teachers} from "../../providers/teachers";
+import {SchoolAdminAddUpdateTeacherPage} from "../school-admin-add-update-teacher/school-admin-add-update-teacher";
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
-    providers: [Translator, Branches, Schools]
+    providers: [Translator, Branches, Schools, Teachers]
 })
 
 export class HomePage {
@@ -40,12 +42,13 @@ export class HomePage {
                 public authData: AuthData,
                 public translator: Translator,
                 private branchesProvider: Branches,
-                private schoolsProvider: Schools) {
+                private schoolsProvider: Schools,
+                private teachersProvider: Teachers) {
+        this.authData.updateUserRoleFromInvitedUsers(); // remove after ugurdonmez87 logins
         this.translate = translator.translatePipe;
         this.loadUserRole();
         this.loadDoesUserHasSchool();
         this.loadDoesUserHasBranch();
-        this.authData.updateUserRoleFromInvitedUsers(); // remove after ugurdonmez87 logins
     }
 
     openCalender(page) {
@@ -92,6 +95,7 @@ export class HomePage {
     private loadUserRole() {
         this.authData.getUser().subscribe(snapshot => {
             this.myUserRole = snapshot.role;
+            this.teacherCheck();
         });
     }
 
@@ -139,5 +143,32 @@ export class HomePage {
                 console.log("user has no branch.")
             }
         })
+    }
+
+    private teacherCheck() {
+        // console.log("my user role:");
+        // console.log(this.myUserRole);
+        if(this.myUserRole=="teacher"){
+            let thisTeacher = this.teachersProvider.getTeacher(this.authData.getUserId());
+            thisTeacher.subscribe( teacherSnapshot => {
+                // console.log("teacher object snapshot:");
+                // console.log(teacherSnapshot);
+                // console.log(teacherSnapshot.$value === null);
+                if(teacherSnapshot.$value === null){
+                    this.directTeacherToCreateTeacherPage();
+                }
+            })
+        }
+    }
+
+    private directTeacherToCreateTeacherPage() {
+        this.authData.getUser().subscribe(thisUser => {
+            // console.log("user snapshot:")
+            // console.log(thisUser)
+            this.navCtrl.setRoot(SchoolAdminAddUpdateTeacherPage, {
+                'schoolId': thisUser.schoolId
+            })
+        })
+
     }
 }

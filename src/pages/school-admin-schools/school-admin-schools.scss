@@ -9,24 +9,7 @@
         margin-bottom: 10px;
     }
 
-    .teacher-add-circle-icon {
-        color: green;
-        font-size: 300%;
-        display: block;
-        z-index: 2;
-        margin-left: auto;
-        text-align: center;
-        margin-bottom: 10px;
-    }
-
     .school-thumbnail{
-        max-width: 80px;
-        max-height: 80px;
-        display: block;
-        margin: 0 auto;
-    }
-
-    .teacher-thumbnail{
         max-width: 80px;
         max-height: 80px;
         display: block;
@@ -45,8 +28,4 @@
         display: block;
     }
 
-    .teachers-title {
-        text-align: center;
-        display: block;
-    }
 }

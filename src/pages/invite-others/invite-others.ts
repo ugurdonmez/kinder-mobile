@@ -44,6 +44,15 @@ export class InviteOthersPage {
                 }
             );
         }
+        else if(this.sourcePage == 'SchoolPage'){
+            this.inviteOthersForm = formBuilder.group(
+                {
+                    'email': ['', EmailValidator.isValid],
+                    'userRole': [navParams.get('invitationRole')],
+                    'schoolId': [navParams.get('schoolId')]
+                }
+            );
+        }
     }
 
     ionViewDidLoad() {
@@ -53,7 +62,7 @@ export class InviteOthersPage {
     inviteUserFormSubmit(){
         if (this.inviteOthersForm.valid){
             //invite user code here
-            if(this.inviteOthersForm.value.userRole == "school-admin" || this.inviteOthersForm.value.userRole == "teacher"){
+            if(this.inviteOthersForm.value.userRole == "school-admin"){
                 if(this.inviteOthersForm.value.branchId===null){
                     let alert = this.alertCtrl.create({
                         title: this.translate.instant('Cannot Submit!'),
@@ -67,6 +76,24 @@ export class InviteOthersPage {
                         email: this.inviteOthersForm.value.email,
                         role: this.inviteOthersForm.value.userRole,
                         branchId: this.inviteOthersForm.value.branchId
+                    });
+                    this.navCtrl.pop();
+                }
+            }
+            else if(this.inviteOthersForm.value.userRole == "teacher"){
+                if(this.inviteOthersForm.value.schoolId===null){
+                    let alert = this.alertCtrl.create({
+                        title: this.translate.instant('Cannot Submit!'),
+                        subTitle: this.translate.instant('School Unknown.'),
+                        buttons: [this.translate.instant('OK')]
+                    });
+                    alert.present();
+                }
+                else{
+                    this.authData.newInvitation({
+                        email: this.inviteOthersForm.value.email,
+                        role: this.inviteOthersForm.value.userRole,
+                        schoolId: this.inviteOthersForm.value.schoolId
                     });
                     this.navCtrl.pop();
                 }

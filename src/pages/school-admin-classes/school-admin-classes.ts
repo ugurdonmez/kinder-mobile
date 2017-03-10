@@ -12,6 +12,7 @@ import {Translator} from "../../app/translator";
 import {TranslateService} from "ng2-translate";
 import {HomePage} from "../home/home";
 import {AuthData} from "../../providers/auth-data";
+import {InviteOthersPage} from "../invite-others/invite-others";
 
 @Component({
   selector: 'page-school-admin-classes',
@@ -87,5 +88,13 @@ export class SchoolAdminClassesPage {
             this.logoURL = snapshot.logoURL;
             console.log(this.logoURL);
         })
+    }
+
+    openAddTeacher(){
+        this.navCtrl.push( InviteOthersPage , {
+            'sourcePage': 'SchoolPage',
+            'schoolId':this.schoolId,
+            'invitationRole':'teacher'
+        });
     }
 }
