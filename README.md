@@ -9,4 +9,7 @@ After `npm install`, delete  `firebase.d.ts` in `/node_modules/firebase` folder 
 - Always refresh your page with `CTRL+F5` on Google Chrome to force a cache refresh.  
 
 ## Documentation:
+### Diagrams:
 - User Interactions (Use cases) and Entity multiplicities (Class diagram): https://drive.google.com/file/d/0B_YxK0Acwu_XXzZraV9KQXR0aXM/view?usp=sharing  
+### Requirements:
+- User requrements: https://github.com/ugurdonmez/kinder-mobile/wiki/Design  
