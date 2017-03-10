@@ -26,7 +26,7 @@ export class SchoolAdminAddUpdateClassPage {
     private translate: TranslateService;
 
     constructor(public navCtrl: NavController, public classProvider: Classes, public formBuilder: FormBuilder,
-                public teacherProvider: Teachers, private navParams: NavParams, private schoolsProvider: Schools,
+                public teachersProvider: Teachers, private navParams: NavParams, private schoolsProvider: Schools,
                 public translator: Translator) {
         this.translate = translator.translatePipe;
         this.schoolId = navParams.get('schoolId');
@@ -40,7 +40,7 @@ export class SchoolAdminAddUpdateClassPage {
                 'schoolId': [this.schoolId]
             }
         );
-        this.allTeachers = this.teacherProvider.getAllTeachers();
+        this.allTeachers = this.teachersProvider.getTeachersOfSchool(this.schoolId);
         // console.log(this.teacher);
     }
 
