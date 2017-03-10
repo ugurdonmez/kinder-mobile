@@ -113,7 +113,7 @@ export class Schools {
     private uploadImage(imageSource: any, schoolId:string): any{
         Camera.getPicture({sourceType : imageSource}).then((image) => {
             var imageData = image;
-            var profilePictureRef = firebase.storage().ref('/school-images/namedBySchoolId/').child(schoolId+"_"+new Date().getDate() + " @ " + new Date().getTime());
+            var profilePictureRef = firebase.storage().ref('/school-images/namedBySchoolId/').child(schoolId+"_"+new Date().getDate() + " @ " + new Date().getTime() + ".png");
             profilePictureRef.putString(imageData, 'base64', {contentType: 'image/png'})
                 .then((savedPicture) => {
                     this.af.database.object('/schools/'+schoolId+"/logoURL")

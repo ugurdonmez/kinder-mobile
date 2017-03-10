@@ -119,7 +119,7 @@ export class Branches {
     private uploadImage(imageSource: any, branchId:string): any{
         Camera.getPicture({sourceType : imageSource}).then((image) => {
             var imageData = image;
-            var profilePictureRef = firebase.storage().ref('/branch-images/namedById/').child(branchId+"_"+new Date().getDate() + " @ " + new Date().getTime());
+            var profilePictureRef = firebase.storage().ref('/branch-images/namedById/').child(branchId+"_"+new Date().getDate() + " @ " + new Date().getTime() + ".png");
             profilePictureRef.putString(imageData, 'base64', {contentType: 'image/png'})
                 .then((savedPicture) => {
                     this.af.database.object('/branches/'+branchId+"/logoURL")

@@ -115,7 +115,7 @@ export class Teachers {
     private uploadImage(imageSource: any, teacherId:string): any{
         Camera.getPicture({sourceType : imageSource}).then((image) => {
             var imageData = image;
-            var profilePictureRef = firebase.storage().ref('/teacher-images/namedByTeacherId/').child(teacherId+"_"+new Date().getDate() + " @ " + new Date().getTime());
+            var profilePictureRef = firebase.storage().ref('/teacher-images/namedByTeacherId/').child(teacherId+"_"+new Date().getDate() + " @ " + new Date().getTime() + ".png");
             profilePictureRef.putString(imageData, 'base64', {contentType: 'image/png'})
                 .then((savedPicture) => {
                     this.af.database.object('/teachers/'+teacherId+"/profileImageUrl")
