@@ -59,7 +59,7 @@
     <h1 class="classes-title">{{"Classes" | translate}}</h1>
 
     <ion-list>
-        <button ion-item *ngFor="let _class of allClassesOfSchool | async" (click)="openClassPage(_class.$key)">
+        <button ion-item *ngFor="let _class of listedClasses | async" (click)="openClassPage(_class.$key)">
             <div>
                 <!--ion-item-->
                 <h2>{{_class.name}}</h2>
@@ -79,23 +79,19 @@
     <h1 class="teachers-title">{{"Teachers" | translate}}</h1>
 
     <ion-list>
-        <div>TODO</div>
-        <!--<button ion-item *ngFor="let teacher of allTeachersOfBranch | async" (click)="openTeacherPage(teacher.$key)">-->
-        <!--<div item-left>-->
-        <!--<img class="teacher-thumbnail" src="{{teacher?.profileImageUrl}}"/>-->
-        <!--</div>-->
-        <!--<div>-->
-        <!--&lt;!&ndash;ion-item&ndash;&gt;-->
-        <!--<h2>{{teacher?.name}}</h2>-->
-        <!--<p>{{teacher.managerName}}</p>-->
-        <!--<p>{{teacher.managerTel}}</p>-->
-        <!--</div>-->
+        <button ion-item *ngFor="let teacher of listedTeachers | async" (click)="openTeacherPage(teacher.$key)">
+            <div item-left>
+                <img class="teacher-thumbnail" src="{{teacher?.profileImageUrl}}"/>
+            </div>
+            <div>
+                <p>{{teacher.name}}</p>
+                <p>{{teacher.surname}}</p>
+            </div>
 
-        <!--<div item-right>-->
-        <!--<p>{{teacher.buildingAddress}}</p>-->
-        <!--<p>{{teacher.teacherTelephone}}</p>-->
-        <!--</div>-->
-        <!--</button>-->
+            <div item-right>
+                <p *ngFor="let _class of getClassesOfTeachers(teacher.$key)">{{_class?.name}}</p>
+            </div>
+        </button>
     </ion-list>
 
     <ion-icon class="teacher-add-circle-icon" ios="ios-add-circle" md="md-add-circle" (click)="openAddTeacher()"></ion-icon>

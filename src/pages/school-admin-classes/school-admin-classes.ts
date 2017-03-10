@@ -13,6 +13,7 @@ import {TranslateService} from "ng2-translate";
 import {HomePage} from "../home/home";
 import {AuthData} from "../../providers/auth-data";
 import {InviteOthersPage} from "../invite-others/invite-others";
+import {SchoolAdminTeacherDetailsPage} from "../school-admin-teacher-details/school-admin-teacher-details";
 
 @Component({
   selector: 'page-school-admin-classes',
@@ -28,6 +29,8 @@ export class SchoolAdminClassesPage {
     private logoURL: string;
     private myUserRole: string;
     private listedClasses: FirebaseListObservable<any[]>;
+    private listedTeachers: FirebaseListObservable<any[]>;
+    private classesOfTeachers: {};
 
     constructor(public navCtrl: NavController, public schoolsProvider: Schools, public classesProvider: Classes,
                 private navParams: NavParams, private teachersProvider: Teachers, public translator: Translator,
@@ -43,6 +46,10 @@ export class SchoolAdminClassesPage {
                 this.navCtrl.setRoot(HomePage);
             }
         });
+        this.listedTeachers = teachersProvider.getTeachersOfSchool(this.schoolId);
+
+        this.classesOfTeachers = {};
+        this.loadClassesOfTeachers();
     }
 
     private loadUserRoleAndUsersClasses() {
@@ -83,6 +90,11 @@ export class SchoolAdminClassesPage {
         this.navCtrl.push( SchoolAdminEditSchoolPage , {'schoolId':this.schoolId});
     }
 
+    openTeacherPage(teacherId){
+        console.log(teacherId);
+        this.navCtrl.push(SchoolAdminTeacherDetailsPage, {'teacherId':teacherId});
+    }
+
     loadImage(){
         this.school.subscribe(snapshot => {
             this.logoURL = snapshot.logoURL;
@@ -96,5 +108,23 @@ export class SchoolAdminClassesPage {
             'schoolId':this.schoolId,
             'invitationRole':'teacher'
         });
+    }
+
+    private loadClassesOfTeachers() {
+        this.listedTeachers.subscribe(snapshots =>{
+            snapshots.forEach(snapshot => {
+                this.loadClassesOfTeacherWithTeacherId(snapshot.$key);
+            })
+        })
+    }
+
+    private loadClassesOfTeacherWithTeacherId(teacherId: any) {
+        this.classesProvider.getClassesOfTeacher(teacherId).subscribe(snapshot => {
+            this.classesOfTeachers[teacherId] = snapshot;
+        })
+    }
+
+    getClassesOfTeachers(teacherId){
+        return this.classesOfTeachers[teacherId];
     }
 }

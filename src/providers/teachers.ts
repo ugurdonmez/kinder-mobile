@@ -130,4 +130,12 @@ export class Teachers {
     //     return firebase.storage().ref('/teacher-images/namedByTeacherId/').child(teacherId);
     //     }
 
+    getTeachersOfSchool(schoolId: string) {
+        return this.af.database.list('/teachers/', {
+            query: {
+                orderByChild: 'schoolId',
+                equalTo: schoolId
+            }
+        })
+    }
 }
