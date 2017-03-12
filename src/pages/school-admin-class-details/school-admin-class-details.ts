@@ -7,6 +7,8 @@ import {SchoolAdminEditClassPage} from "../school-admin-edit-class/school-admin-
 import {Teachers} from "../../providers/teachers";
 import {Translator} from "../../app/translator";
 import {TranslateService} from "ng2-translate";
+import {AuthData} from "../../providers/auth-data";
+import {InviteOthersPage} from "../invite-others/invite-others";
 
 @Component({
   selector: 'page-school-admin-class-details',
@@ -20,13 +22,20 @@ export class SchoolAdminClassDetailsPage {
     private _class: FirebaseObjectObservable<any>;
     private teacherName: string;
     private translate: TranslateService;
+    private parentsOfClass: any;
+    private userRole: any;
 
     constructor(public navCtrl: NavController, public classesProvider: Classes,
-                private navParams: NavParams, private teachersProvider: Teachers, public translator: Translator) {
+                private navParams: NavParams, private teachersProvider: Teachers, public translator: Translator,
+                private authData: AuthData) {
         this.translate = translator.translatePipe;
         this.classId = navParams.get('classId');
         this._class = classesProvider.getClass(this.classId);
         this.getTeacherOfClass();
+        let userRole = this.authData.getUserRole();
+        userRole.subscribe( snapshot => {
+            this.userRole = snapshot.$value;
+        })
     }
 
     openSchoolAdminEditClassPage(classId: string){
@@ -43,6 +52,13 @@ export class SchoolAdminClassDetailsPage {
                 this.teacherName = teachersnapshot.name;
             })
         })
+    }
 
+    openAddParent(){
+        this.navCtrl.push( InviteOthersPage , {
+            'sourcePage': 'ClassPage',
+            'classId':this.classId,
+            'invitationRole':'parent'
+        });
     }
 }

@@ -53,6 +53,15 @@ export class InviteOthersPage {
                 }
             );
         }
+        else if(this.sourcePage == 'ClassPage'){
+            this.inviteOthersForm = formBuilder.group(
+                {
+                    'email': ['', EmailValidator.isValid],
+                    'userRole': [navParams.get('invitationRole')],
+                    'classId': [navParams.get('classId')]
+                }
+            );
+        }
     }
 
     ionViewDidLoad() {
@@ -94,6 +103,24 @@ export class InviteOthersPage {
                         email: this.inviteOthersForm.value.email,
                         role: this.inviteOthersForm.value.userRole,
                         schoolId: this.inviteOthersForm.value.schoolId
+                    });
+                    this.navCtrl.pop();
+                }
+            }
+            else if(this.inviteOthersForm.value.userRole == "parent"){
+                if(this.inviteOthersForm.value.classId===null){
+                    let alert = this.alertCtrl.create({
+                        title: this.translate.instant('Cannot Submit!'),
+                        subTitle: this.translate.instant('Class Unknown.'),
+                        buttons: [this.translate.instant('OK')]
+                    });
+                    alert.present();
+                }
+                else{
+                    this.authData.newInvitation({
+                        email: this.inviteOthersForm.value.email,
+                        role: this.inviteOthersForm.value.userRole,
+                        classId: this.inviteOthersForm.value.classId
                     });
                     this.navCtrl.pop();
                 }
