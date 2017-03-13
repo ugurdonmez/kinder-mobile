@@ -38,15 +38,14 @@ export class AddParentPage {
   }
 
   ionViewDidLoad() {
-    console.log('Hello SchoolAdminAddUpdateTeacherPage Page');
+    console.log('Hello CreateParentPage Page');
   }
 
     newPhoto(){
         this.parentsProvider.newPhoto(this.parentId);
     }
 
-    addNewTeacher(){
-        // this.teacherId = this.teachersProvider.addTeacher(this.teacherDetailsForm.value);
+    addNewParent(){
         this.parentId = this.parentsProvider.addParent(this.parentDetailsForm.value);
         this.newPhoto();
         // this.navCtrl.pop();
