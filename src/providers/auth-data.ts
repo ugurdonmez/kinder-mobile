@@ -68,6 +68,9 @@ export class AuthData {
                 else if (userInvitation.role == 'teacher'){
                     this.af.database.object('/users/' + this.getUserId() + '/schoolId').set(userInvitation.schoolId);
                 }
+                else if (userInvitation.role == 'parent'){
+                    this.af.database.object('/users/' + this.getUserId() + '/classId').set(userInvitation.classId);
+                }
                 this.af.database.object('/invited-users/' + userInvitation.$key).remove(); // remove invitation
             })
         });

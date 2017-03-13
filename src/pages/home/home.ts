@@ -21,11 +21,14 @@ import {SchoolAdminAddUpdateSchoolPage} from "../school-admin-add-update-school/
 import {SchoolAdminClassesPage} from "../school-admin-classes/school-admin-classes";
 import {Teachers} from "../../providers/teachers";
 import {SchoolAdminAddUpdateTeacherPage} from "../school-admin-add-update-teacher/school-admin-add-update-teacher";
+import {Parents} from "../../providers/parents";
+import {SchoolAdminClassDetailsPage} from "../school-admin-class-details/school-admin-class-details";
+import {AddParentPage} from "../add-parent/add-parent";
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
-    providers: [Translator, Branches, Schools, Teachers]
+    providers: [Translator, Branches, Schools, Teachers, Parents]
 })
 
 export class HomePage {
@@ -43,7 +46,8 @@ export class HomePage {
                 public translator: Translator,
                 private branchesProvider: Branches,
                 private schoolsProvider: Schools,
-                private teachersProvider: Teachers) {
+                private teachersProvider: Teachers,
+                private parentsProvider: Parents) {
         this.authData.updateUserRoleFromInvitedUsers(); // remove after ugurdonmez87 logins
         this.translate = translator.translatePipe;
         this.loadUserRole();
@@ -96,6 +100,7 @@ export class HomePage {
         this.authData.getUser().subscribe(snapshot => {
             this.myUserRole = snapshot.role;
             this.teacherCheck();
+            this.parentCheck();
         });
     }
 
@@ -172,7 +177,6 @@ export class HomePage {
                 'schoolId': thisUser.schoolId
             })
         })
-
     }
 
     private directTeacherToSchoolPage() {
@@ -180,6 +184,43 @@ export class HomePage {
             // console.log("user snapshot:")
             // console.log(thisUser)
             this.userSchoolId = thisUser.schoolId;
+        })
+    }
+
+    private parentCheck() {
+        if(this.myUserRole=="parent"){
+            let thisParent = this.parentsProvider.getParent(this.authData.getUserId());
+            thisParent.subscribe( parentSnapshot => {
+                console.log("parent object snapshot:");
+                console.log(parentSnapshot);
+                console.log(parentSnapshot.$value === null);
+                if(parentSnapshot.$value === null){
+                    this.directToCreateParentPage();
+                }
+                else{
+                    this.directParentToClassPage();
+                }
+            })
+        }
+    }
+
+    private directToCreateParentPage() {
+        this.authData.getUser().subscribe(thisUser => {
+            // console.log("user snapshot:")
+            // console.log(thisUser)
+            this.navCtrl.setRoot(AddParentPage, {
+                'classId': thisUser.classId
+            })
+        })
+    }
+
+    private directParentToClassPage() {
+        this.authData.getUser().subscribe(thisUser => {
+            console.log("opening class details page for parent with object:");
+            console.log(thisUser);
+            this.navCtrl.setRoot(SchoolAdminClassDetailsPage, {
+                'classId': thisUser.classId
+            })
         })
     }
 }

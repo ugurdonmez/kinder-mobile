@@ -106,5 +106,8 @@
   "Sure you want to delete this school? This will also remove the classes in this school. A delete operation is irreversible.": "Okulu silmek istediğinize emin misiniz? Silme işlemi geri alınamaz. Bu işlem aynı zamanda okulun sınıflarını da silecektir.",
   "School Unknown": "Okul Bilinmiyor",
   "Your Classes": "Sizin Siniflariniz",
-  "Parents": "Ebeveynler"
+  "Parents": "Ebeveynler",
+  "Create Parent Account": "Ebeveyn Hesabı Yarat",
+  "Select profile picture for student.": "Öğrenci için profil resmi seçiniz.",
+  "Students": "Öğrenciler"
 }

@@ -26,6 +26,7 @@ import {SchoolAdminEditTeacherPage} from "../pages/school-admin-edit-teacher/sch
 import {SchoolAdminClassDetailsPage} from "../pages/school-admin-class-details/school-admin-class-details";
 import {SchoolAdminEditClassPage} from "../pages/school-admin-edit-class/school-admin-edit-class";
 import {InviteOthersPage} from "../pages/invite-others/invite-others";
+import {AddParentPage} from "../pages/add-parent/add-parent";
 
 // Importing provider
 import { AuthData } from '../providers/auth-data';
@@ -83,7 +84,8 @@ export function createTranslateLoader(http: Http) {
         SchoolAdminClassDetailsPage,
         SchoolAdminEditClassPage,
         InviteOthersPage,
-        TeacherHomePage
+        TeacherHomePage,
+        AddParentPage
     ],
     imports: [
         IonicModule.forRoot(MyApp),
@@ -118,7 +120,8 @@ export function createTranslateLoader(http: Http) {
         SchoolAdminClassDetailsPage,
         SchoolAdminEditClassPage,
         InviteOthersPage,
-        TeacherHomePage
+        TeacherHomePage,
+        AddParentPage
     ],
     providers: [
         {provide: ErrorHandler, useClass: IonicErrorHandler},
