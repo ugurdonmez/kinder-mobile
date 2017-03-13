@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-        {{"Class: " | translate}}{{(_class | async).name}}
+        {{"Class: " | translate}}{{(_class | async)?.name}}
     </ion-title>
       <ion-buttons *ngIf="userRole=='developer' || userRole=='branch-admin'
                    || userRole=='school-admin' || userRole=='teacher'" end>
@@ -15,11 +15,11 @@
     <ion-grid>
         <ion-row>
             <ion-col width-25>{{"Age" | translate}}</ion-col>
-            <ion-col>{{(_class | async).age}}</ion-col>
+            <ion-col>{{(_class | async)?.age}}</ion-col>
         </ion-row>
         <ion-row>
             <ion-col width-25>{{"Capacity" | translate}}</ion-col>
-            <ion-col>{{(_class | async).current}}/{{(_class | async).maximum}}</ion-col>
+            <ion-col>{{(_class | async)?.current}}/{{(_class | async)?.maximum}}</ion-col>
         </ion-row>
         <ion-row>
             <ion-col width-25>{{"TeacherStr" | translate}}</ion-col>
@@ -27,16 +27,19 @@
         </ion-row>
     </ion-grid>
 
-    <h1 class="parents-title">{{"Parents" | translate}}</h1>
+    <h1 *ngIf="userRole=='developer' || userRole=='branch-admin'
+                   || userRole=='school-admin' || userRole=='teacher'"
+        class="parents-title">{{"Students" | translate}}</h1>
 
-    <ion-list>
+    <ion-list *ngIf="userRole=='developer' || userRole=='branch-admin'
+                   || userRole=='school-admin' || userRole=='teacher'">
         <button ion-item *ngFor="let parent of parentsOfClass | async" (click)="openParentPage(parent.$key)">
             <div item-left>
                 <img class="parent-thumbnail" src="{{parent?.profileImageUrl}}"/>
             </div>
             <div>
-                <p>{{parent.name}}</p>
-                <p>{{parent.surname}}</p>
+                <p>{{parent?.studentName}}</p>
+                <p>{{parent?.studentSurname}}</p>
             </div>
         </button>
     </ion-list>

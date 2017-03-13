@@ -9,11 +9,12 @@ import {Translator} from "../../app/translator";
 import {TranslateService} from "ng2-translate";
 import {AuthData} from "../../providers/auth-data";
 import {InviteOthersPage} from "../invite-others/invite-others";
+import {Parents} from "../../providers/parents";
 
 @Component({
   selector: 'page-school-admin-class-details',
   templateUrl: 'school-admin-class-details.html',
-    providers: [Classes, Teachers, Translator]
+    providers: [Classes, Teachers, Translator, Parents]
 })
 
 
@@ -27,15 +28,17 @@ export class SchoolAdminClassDetailsPage {
 
     constructor(public navCtrl: NavController, public classesProvider: Classes,
                 private navParams: NavParams, private teachersProvider: Teachers, public translator: Translator,
-                private authData: AuthData) {
+                private authData: AuthData, private parentsProvider: Parents) {
         this.translate = translator.translatePipe;
         this.classId = navParams.get('classId');
+        console.log("opened class details page with classId:" + this.classId);
         this._class = classesProvider.getClass(this.classId);
         this.getTeacherOfClass();
         let userRole = this.authData.getUserRole();
         userRole.subscribe( snapshot => {
             this.userRole = snapshot.$value;
         })
+        this.parentsOfClass = this.parentsProvider.getParentsOfClass(this.classId);
     }
 
     openSchoolAdminEditClassPage(classId: string){
