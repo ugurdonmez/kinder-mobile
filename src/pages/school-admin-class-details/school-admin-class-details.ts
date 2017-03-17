@@ -10,11 +10,12 @@ import {TranslateService} from "ng2-translate";
 import {AuthData} from "../../providers/auth-data";
 import {InviteOthersPage} from "../invite-others/invite-others";
 import {Parents} from "../../providers/parents";
+import {Attendance} from "../../providers/attendance";
 
 @Component({
   selector: 'page-school-admin-class-details',
   templateUrl: 'school-admin-class-details.html',
-    providers: [Classes, Teachers, Translator, Parents]
+    providers: [Classes, Teachers, Translator, Parents, Attendance]
 })
 
 
@@ -28,7 +29,8 @@ export class SchoolAdminClassDetailsPage {
 
     constructor(public navCtrl: NavController, public classesProvider: Classes,
                 private navParams: NavParams, private teachersProvider: Teachers, public translator: Translator,
-                private authData: AuthData, private parentsProvider: Parents) {
+                private authData: AuthData, private parentsProvider: Parents,
+                private attendanceProvider: Attendance) {
         this.translate = translator.translatePipe;
         this.classId = navParams.get('classId');
         console.log("opened class details page with classId:" + this.classId);
@@ -37,8 +39,11 @@ export class SchoolAdminClassDetailsPage {
         let userRole = this.authData.getUserRole();
         userRole.subscribe( snapshot => {
             this.userRole = snapshot.$value;
-        })
+        });
         this.parentsOfClass = this.parentsProvider.getParentsOfClass(this.classId);
+
+        // attendance provider tests
+        this.runAttendanceProviderTests(); // TODO delete these tests after implementing the front end for this page.
     }
 
     openSchoolAdminEditClassPage(classId: string){
@@ -63,5 +68,26 @@ export class SchoolAdminClassDetailsPage {
             'classId':this.classId,
             'invitationRole':'parent'
         });
+    }
+
+    private runAttendanceProviderTests() {
+        // TODO
+        // delete these tests after implementing the front end for this page.
+        let todaysDate = new Date().toISOString().substring(0, 10);
+
+        this.attendanceProvider.markAllStudentsHere(this.classId, todaysDate);
+        this.attendanceProvider.markStudentHere("10qFn2d6daV17ZIt5QAIPpmv4G93", this.classId, todaysDate, false);
+
+        this.attendanceProvider.getAttendanceOf(this.classId, todaysDate).subscribe(
+            snapshot => {
+                console.log("test: this.attendanceProvider.getAttendanceOf");
+                console.log(snapshot);
+            });
+
+        this.attendanceProvider.getAttendanceOf(this.classId, todaysDate, "10qFn2d6daV17ZIt5QAIPpmv4G93").subscribe(
+            snapshot => {
+                console.log("test: this.attendanceProvider.getAttendanceOf with studentId: 10qFn2d6daV17ZIt5QAIPpmv4G93");
+                console.log(snapshot);
+            });
     }
 }
