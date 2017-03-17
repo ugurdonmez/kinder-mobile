@@ -75,7 +75,9 @@
         </button>
     </ion-list>
 
-    <ion-icon class="school-add-circle-icon" ios="ios-add-circle" md="md-add-circle" (click)="openSchoolAdminClassAdd(schoolId)"></ion-icon>
+    <ion-icon *ngIf="myUserRole=='developer' || myUserRole=='branch-admin'
+        || myUserRole=='school-admin'"
+              class="school-add-circle-icon" ios="ios-add-circle" md="md-add-circle" (click)="openSchoolAdminClassAdd(schoolId)"></ion-icon>
 
     <h1 class="teachers-title">{{"Teachers" | translate}}</h1>
 
@@ -95,6 +97,8 @@
         </button>
     </ion-list>
 
-    <ion-icon class="teacher-add-circle-icon" ios="ios-add-circle" md="md-add-circle" (click)="openAddTeacher()"></ion-icon>
+    <ion-icon *ngIf="myUserRole=='developer' || myUserRole=='branch-admin'
+        || myUserRole=='school-admin'"
+              class="teacher-add-circle-icon" ios="ios-add-circle" md="md-add-circle" (click)="openAddTeacher()"></ion-icon>
 
 </ion-content>

@@ -38,7 +38,8 @@ export class SchoolAdminEditBranchPage {
                     'manager': [snapshot.manager, Validators.required],
                     'manager_mail': [snapshot.manager_mail, Validators.required],
                     'manager_tel': [snapshot.manager_tel, Validators.required],
-                    'address': [snapshot.address, Validators.required]
+                    'address': [snapshot.address, Validators.required],
+                    'adminUserId': [snapshot.adminUserId]
                 }
             );
         });

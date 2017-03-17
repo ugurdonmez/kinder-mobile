@@ -45,7 +45,8 @@ export class SchoolAdminEditSchoolPage {
                     'name': [snapshot.name, Validators.required],
                     'schoolTelephone': [snapshot.schoolTelephone, Validators.required],
                     'secondContactPersonName': [snapshot.secondContactPersonName],
-                    'secondContactTelNo': [snapshot.secondContactTelNo]
+                    'secondContactTelNo': [snapshot.secondContactTelNo],
+                    'adminUserId': [snapshot.adminUserId]
                 }
             );
         });
