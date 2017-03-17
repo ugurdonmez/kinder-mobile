@@ -46,6 +46,8 @@ export class AddParentPage {
     }
 
     addNewParent(){
+        let dateString = new Date().toISOString(); // TODO remove after front end is implemented
+        this.parentDetailsForm.value.studentBirthDate = dateString.substring(0, 10);
         this.parentId = this.parentsProvider.addParent(this.parentDetailsForm.value);
         this.newPhoto();
         // this.navCtrl.pop();
