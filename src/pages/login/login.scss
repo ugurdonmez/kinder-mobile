@@ -2,5 +2,22 @@
 page-login {
   .login-content {
     background-image: url("../img/login.jpg");
+    background-size: cover;
+  }
+
+  .login-popup-div {
+
+    position: absolute;
+    bottom: 10%;
+    width: 100%;
+    margin-left: 10%;
+    margin-right: 10%;
+
+    button {
+      border-color: white;
+      color: white;
+      border-radius: 30px;
+      width: 100%;
+    }
   }
 }
