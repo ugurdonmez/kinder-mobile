@@ -20,7 +20,8 @@ export class CalenderPage {
 
     constructor(public navCtrl: NavController, public translator: Translator, private calendarProvider: Calendar) {
         this.translate = translator.translatePipe;
-        this.runCalendarProviderReminderTests(); // TODO delete these tests after implementing the front end for this page.
+        // this.runCalendarProviderReminderTests(); // TODO delete these tests after implementing the front end for this page.
+        this.runCalendarProviderInvitationTests(); // TODO delete these tests after implementing the front end for this page.
     }
 
     ionViewDidLoad() {
@@ -31,6 +32,19 @@ export class CalenderPage {
         console.log(this.calendarProvider.createReminderForThisUser("reminderText", "reminderDatetime"));
         console.log(this.calendarProvider.getThisUserReminders());
         console.log(this.calendarProvider.deleteReminderFromThisUser("-Kfu3ywdxWE0CCyUTXC7"));
+
+    }
+
+    private runCalendarProviderInvitationTests() {
+        console.log(this.calendarProvider.createInvitation("-Ketn4qOsNQOA0vSjZRC", "wXQd9quU4sT2zYg6bqvgr1mrvW42",
+            "dsfasdf", "asdjfhaskjfdatetime"));
+
+        console.log(this.calendarProvider.getInvitations("-Ketn4qOsNQOA0vSjZRC"));
+
+        console.log(this.calendarProvider.getInvitationsOfHost("-Ketn4qOsNQOA0vSjZRC", "wXQd9quU4sT2zYg6bqvgr1mrvW42"));
+
+        console.log(this.calendarProvider.deleteInvitation("-Ketn4qOsNQOA0vSjZRC", "-KfuHWBvqAO7SxeHjebZ"));
+
 
     }
 }

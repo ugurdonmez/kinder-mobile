@@ -31,12 +31,44 @@ export class Calendar {
         return this.af.database.list("/user-reminders/" + userId)
     }
 
+    // deletes a reminder of this user.
     public deleteReminderFromThisUser(reminderId){
         return this.deleteReminder(this.authDataProvider.getUserId(), reminderId);
     }
 
+    // deletes a reminder of a user, given userId.
     public deleteReminder(userId, reminderId){
         return this.af.database.object("/user-reminders/" + userId + "/" + reminderId).remove();
+    }
+
+
+    // adds invitation to class and returns invitationId
+    public createInvitation(classId, hostUserId, message, datetime){
+        return this.af.database.list("/classes/" + classId + "/invitations/").push({
+            hostUserId: hostUserId,
+            message: message,
+            datetime: datetime
+        }).key
+    }
+
+    // returns all invitations of class
+    public getInvitations(classId){
+        return this.af.database.list("/classes/" + classId + "/invitations/")
+    }
+
+    // returns all invitations filtered by hostId
+    getInvitationsOfHost(classId, hostUserId){
+        return this.af.database.list("/classes/" + classId + "/invitations/", {
+            query: {
+                orderByChild: 'hostUserId',
+                equalTo: hostUserId
+            }
+        })
+    }
+
+    // deletes an invitation, given classId and invitationId.
+    public deleteInvitation(classId, invitationId){
+        return this.af.database.object("/classes/" + classId + "/invitations/" + invitationId).remove();
     }
 
 
