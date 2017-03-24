@@ -90,6 +90,20 @@ export class Calendar {
         return this.af.database.object("/classes/" + classId + "/activities/" + activityId).remove();
     }
 
+    // TODO if we use subscribe, this function can't return. if not subscribe, we can't query the birthdays
+    // TODO after query. not using angularfire2 may be a solution. ".child('studentBirthDate')" might work in firebase library.
+    // TODO also, we can subscribe here and use callback, but it's redundant.
+    // TODO in this case, retrieving the birthdays should be handled on the front-end.
+    // returns students of class.
+    public getBirthdays(classId){
+        this.af.database.list("/parents/", {
+            query: {
+                orderByChild: 'classId',
+                equalTo: classId
+            }
+        })
+    }
+
 
 
     // public markAllStudentsHere(classId:string, date:string){
