@@ -72,6 +72,25 @@ export class Calendar {
     }
 
 
+    // adds activity to class and returns activityId
+    public createActivity(classId, message, datetime){
+        return this.af.database.list("/classes/" + classId + "/activities/").push({
+            message: message,
+            datetime: datetime
+        }).key
+    }
+
+    // returns all activities of class
+    public getActivities(classId){
+        return this.af.database.list("/classes/" + classId + "/activities/")
+    }
+
+    // deletes an activity, given classId and activityId.
+    public deleteActivity(classId, activityId){
+        return this.af.database.object("/classes/" + classId + "/activities/" + activityId).remove();
+    }
+
+
 
     // public markAllStudentsHere(classId:string, date:string){
     //     // this should be called by the teacher. marks all the students as here.
