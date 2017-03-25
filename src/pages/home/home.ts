@@ -24,6 +24,7 @@ import {SchoolAdminAddUpdateTeacherPage} from "../school-admin-add-update-teache
 import {Parents} from "../../providers/parents";
 import {SchoolAdminClassDetailsPage} from "../school-admin-class-details/school-admin-class-details";
 import {AddParentPage} from "../add-parent/add-parent";
+import {WeeklyMenuPage} from "../weekly-menu/weekly-menu";
 
 @Component({
   selector: 'page-home',
@@ -61,6 +62,10 @@ export class HomePage {
         console.log(page);
 
         this.navCtrl.push(CalenderPage);
+    }
+
+    openWeeklyMenu(){
+        this.navCtrl.push(WeeklyMenuPage);
     }
 
     logout() {

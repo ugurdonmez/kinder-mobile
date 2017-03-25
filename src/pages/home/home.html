@@ -28,10 +28,10 @@
             <ion-col *ngIf="false" width-33>{{"Attendance" | translate}}</ion-col>
             <ion-col *ngIf="false" width-33>{{"Message" | translate}}</ion-col>
         </ion-row>
-        <ion-row *ngIf="false" class="row-25">
-            <ion-col width-33>{{"Weekly Menu" | translate}}</ion-col>
-            <ion-col width-33>{{"Albulms" | translate}}</ion-col>
-            <ion-col width-33>{{"Homeworks" | translate}}</ion-col>
+        <ion-row class="row-25">
+            <ion-col (click)="openWeeklyMenu()"width-33>{{"Weekly Menu" | translate}}</ion-col>
+            <ion-col *ngIf="false" width-33>{{"Albulms" | translate}}</ion-col>
+            <ion-col *ngIf="false" width-33>{{"Homeworks" | translate}}</ion-col>
         </ion-row>
         <ion-row *ngIf="false" class="row-25">
             <ion-col width-33>{{"Activity Plan" | translate}}</ion-col>

@@ -27,18 +27,18 @@ import {SchoolAdminClassDetailsPage} from "../pages/school-admin-class-details/s
 import {SchoolAdminEditClassPage} from "../pages/school-admin-edit-class/school-admin-edit-class";
 import {InviteOthersPage} from "../pages/invite-others/invite-others";
 import {AddParentPage} from "../pages/add-parent/add-parent";
+import {WeeklyMenuPage} from "../pages/weekly-menu/weekly-menu";
+import {TeacherHomePage} from "../pages/teacher-home/teacher-home";
 
 // Importing provider
 import { AuthData } from '../providers/auth-data';
-
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
+import {Classes} from "../providers/classes";
+import {Schools} from "../providers/schools";
 
 // Localization
 import { TranslateModule, TranslateStaticLoader, TranslateLoader } from 'ng2-translate/ng2-translate';
 import { Http } from "@angular/http";
-import {TeacherHomePage} from "../pages/teacher-home/teacher-home";
-import {Classes} from "../providers/classes";
-import {Schools} from "../providers/schools";
 import {Translator} from "./translator";
 
 // AF2 Settings
@@ -85,7 +85,8 @@ export function createTranslateLoader(http: Http) {
         SchoolAdminEditClassPage,
         InviteOthersPage,
         TeacherHomePage,
-        AddParentPage
+        AddParentPage,
+        WeeklyMenuPage
     ],
     imports: [
         IonicModule.forRoot(MyApp),
@@ -121,7 +122,8 @@ export function createTranslateLoader(http: Http) {
         SchoolAdminEditClassPage,
         InviteOthersPage,
         TeacherHomePage,
-        AddParentPage
+        AddParentPage,
+        WeeklyMenuPage
     ],
     providers: [
         {provide: ErrorHandler, useClass: IonicErrorHandler},
