@@ -1,7 +1,7 @@
 
 page-login {
   .login-content {
-    background-image: url("../img/login.jpg");
+    background-image: url("../img/login1.jpg");
     background-size: cover;
   }
 
@@ -10,14 +10,19 @@ page-login {
     position: absolute;
     bottom: 10%;
     width: 100%;
-    margin-left: 10%;
-    margin-right: 10%;
+    padding-right: 10%;
 
     button {
       border-color: white;
       color: white;
       border-radius: 30px;
       width: 100%;
+      border-width: medium;
+    }
+
+    .button-inner {
+      font-weight: bold;
+      font-size: 130%;
     }
   }
 }
