@@ -25,6 +25,7 @@ import {Parents} from "../../providers/parents";
 import {SchoolAdminClassDetailsPage} from "../school-admin-class-details/school-admin-class-details";
 import {AddParentPage} from "../add-parent/add-parent";
 import {WeeklyMenuPage} from "../weekly-menu/weekly-menu";
+import {DailyTeacherFeedbackPage} from "../daily-teacher-feedback/daily-teacher-feedback";
 
 @Component({
   selector: 'page-home',
@@ -139,6 +140,9 @@ export class HomePage {
                 console.log("user has no school.")
             }
         })
+    }
+    private openFeedbackPage(){
+        this.navCtrl.push(DailyTeacherFeedbackPage);
     }
 
     private loadDoesUserHasBranch() {
