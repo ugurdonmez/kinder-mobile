@@ -1,4 +1,80 @@
 
 .login-dialog {
 
+  width: 86%;
+  margin-left: 7%;
+  height: 80%;
+  margin-top: 10%;
+  background: transparent;
+
+
+
+  .login-dialog-content {
+    background: white;
+    margin-top: 0;
+    height: 100%;
+    border-radius: 15px;
+    position: relative;
+
+    ion-item {
+      padding-right: 16px;
+    }
+
+    .login-submit-div {
+
+      margin-top: 15%;
+      bottom: 0%;
+      width: 90%;
+      padding-left: 9%;
+
+      button {
+        color: white;
+        background-color: green;
+        border-radius: 30px;
+        width: 100%;
+        border: 0;
+      }
+    }
+
+    .login-dialog-email-label {
+      padding-top: 30px;
+      color: rgba(0,0,0,.54);
+      font-size: 15px;
+    }
+
+    .login-dialog-password-label {
+      color: rgba(0,0,0,.54);
+      font-size: 15px;
+    }
+
+    .login-space {
+      height: 7%;
+    }
+
+    .login-space-bottom {
+      position: absolute;
+      bottom: 0;
+      height: 20%;
+    }
+  }
+
+  .login-close-button {
+
+    padding-left: 0;
+    margin-left: 2px;
+    margin-bottom: 0;
+
+    background: transparent;
+
+    .icon {
+      color: white;
+      font-size: 40px;
+      font-weight: bold;
+      padding-left: 0;
+      padding-top: 0;
+      margin-left: 0;
+      margin-bottom: 0;
+    }
+  }
+
 }

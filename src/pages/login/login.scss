@@ -8,16 +8,18 @@ page-login {
   .login-popup-div {
 
     position: absolute;
-    bottom: 10%;
-    width: 100%;
+    bottom: 20%;
+    width: 90%;
     padding-right: 10%;
+    padding-left: 15%;
 
     button {
-      border-color: white;
       color: white;
       border-radius: 30px;
       width: 100%;
-      border-width: medium;
+      background-color: black;
+      border: 0;
+      opacity: 0.8;
     }
 
     .button-inner {
