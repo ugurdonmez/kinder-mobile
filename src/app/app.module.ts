@@ -30,6 +30,7 @@ import {AddParentPage} from "../pages/add-parent/add-parent";
 import {WeeklyMenuPage} from "../pages/weekly-menu/weekly-menu";
 import {TeacherHomePage} from "../pages/teacher-home/teacher-home";
 import {DailyTeacherFeedbackPage} from "../pages/daily-teacher-feedback/daily-teacher-feedback";
+import {HomeworksPage} from "../pages/homeworks/homeworks";
 
 // Importing provider
 import { AuthData } from '../providers/auth-data';
@@ -88,7 +89,8 @@ export function createTranslateLoader(http: Http) {
         TeacherHomePage,
         AddParentPage,
         WeeklyMenuPage,
-        DailyTeacherFeedbackPage
+        DailyTeacherFeedbackPage,
+        HomeworksPage
     ],
     imports: [
         IonicModule.forRoot(MyApp),
@@ -126,7 +128,8 @@ export function createTranslateLoader(http: Http) {
         TeacherHomePage,
         AddParentPage,
         WeeklyMenuPage,
-        DailyTeacherFeedbackPage
+        DailyTeacherFeedbackPage,
+        HomeworksPage
     ],
     providers: [
         {provide: ErrorHandler, useClass: IonicErrorHandler},

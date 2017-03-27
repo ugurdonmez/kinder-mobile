@@ -26,6 +26,7 @@ import {SchoolAdminClassDetailsPage} from "../school-admin-class-details/school-
 import {AddParentPage} from "../add-parent/add-parent";
 import {WeeklyMenuPage} from "../weekly-menu/weekly-menu";
 import {DailyTeacherFeedbackPage} from "../daily-teacher-feedback/daily-teacher-feedback";
+import {HomeworksPage} from "../homeworks/homeworks";
 
 @Component({
   selector: 'page-home',
@@ -143,6 +144,10 @@ export class HomePage {
     }
     private openFeedbackPage(){
         this.navCtrl.push(DailyTeacherFeedbackPage);
+    }
+
+    private openHomeworkPage(){
+        this.navCtrl.push(HomeworksPage);
     }
 
     private loadDoesUserHasBranch() {
