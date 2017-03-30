@@ -1,0 +1,33 @@
+
+<ion-content class="login-dialog">
+  <button class="login-close-button" ion-button (click)="dismiss()">
+    <ion-icon name="close-circle-outline"></ion-icon>
+  </button>
+
+  <!--<button ion-button (click)="dismiss()">-->
+    <!--<ion-icon name="close-circle-outline"></ion-icon>-->
+  <!--</button>-->
+
+  <div class="login-dialog-content">
+
+    <div class="login-space"></div>
+
+    <ion-item>
+      <ion-label color="primary" class="login-dialog-email-label" stacked>Email</ion-label>
+      <ion-input type="email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="primary" class="login-dialog-password-label" stacked >Password</ion-label>
+      <ion-input type="password"></ion-input>
+    </ion-item>
+
+    <div class="login-submit-div">
+      <button ion-button outline login-popup-btn>LOGIN</button>
+    </div>
+
+    <!--<div class="login-space-bottom"></div>-->
+
+  </div>
+
+</ion-content>

@@ -1,89 +1,37 @@
+
 page-login {
-    form {
-        margin-bottom: 32px;
-        button {
-            margin-top: 20px;
-        }
-    }
-
-    p {
-        font-size: 0.8em;
-        color: #d2d2d2;
-    }
-
-    ion-label {
-        margin-left: 5px;
-    }
-
-    ion-input {
-        padding: 5px;
-    }
-
-    .invalid {
-        border-bottom: 1px solid #FF6153;
-    }
-
-    .error-message .item-inner {
-        border-bottom: 0 !important;
-    }
-
-}
-
-
-
-/*
-page-login {
-
   .login-content {
-    background: #56CA96;
-
-    .logo-row {
-      padding-top: 50px;
-      padding-bottom: 20px;
-    }
-
-    .login-box {
-      background: #399F8B;
-      padding: 20px 20px 0px 20px;
-      margin-top: 30px;
-    }
-
-    ion-row {
-       align-items: center;
-       text-align: center;
-     }
-
-     ion-item {
-         border-radius: 30px !important;
-         padding-left: 30px !important;
-         font-size: 0.9em;
-         margin-bottom: 10px;
-         border: 1px solid #ffffff;
-         border-bottom: 0px !important;
-         box-shadow: none !important;
-     }
-
-     .signup-col {
-       margin: 0px 16px 0px 16px;
-       padding-bottom: 20px;
-     }
-
-     .item-inner {
-       border-bottom-color: #ffffff !important;
-       box-shadow: none !important;
-     }
-
-     .submit-btn {
-       background: #51CFB1;
-       border-radius: 30px !important;
-       border: 1px solid #ffffff;
-     }
-
-     .register-btn {
-       color: #ffffff;
-       font-size: 0.8em;
-     }
+    background-image: url("../img/login1.jpg");
+    background-size: cover;
   }
 
+  .login-popup-div {
+
+    position: absolute;
+    bottom: 20%;
+    width: 90%;
+    padding-right: 10%;
+    padding-left: 15%;
+
+    button {
+      color: white;
+      border-radius: 30px;
+      width: 100%;
+      background-color: black;
+      border: 0;
+      opacity: 0.8;
+    }
+
+    .button-inner {
+      font-weight: bold;
+      font-size: 130%;
+    }
+  }
 }
-*/
+
+.login-alert{
+  color: red;
+  button{
+    color: red;
+  }
+}
