@@ -4,29 +4,36 @@
     <ion-icon name="close-circle-outline"></ion-icon>
   </button>
 
-  <!--<button ion-button (click)="dismiss()">-->
-    <!--<ion-icon name="close-circle-outline"></ion-icon>-->
-  <!--</button>-->
-
   <div class="login-dialog-content">
 
     <div class="login-space"></div>
 
-    <ion-item>
-      <ion-label color="primary" class="login-dialog-email-label" stacked>Email</ion-label>
-      <ion-input type="email"></ion-input>
-    </ion-item>
+    <form [formGroup]="loginForm" (submit)="loginUser()" novalidate>
+      <ion-item>
+        <ion-label color="primary" class="login-dialog-email-label" stacked>Email</ion-label>
 
-    <ion-item>
-      <ion-label color="primary" class="login-dialog-password-label" stacked >Password</ion-label>
-      <ion-input type="password"></ion-input>
-    </ion-item>
+        <ion-input #email
+                   formControlName="email"
+                   type="email"
+                   (change)="elementChanged(email)"
+                   [class.invalid]="!loginForm.controls.email.valid && (emailChanged || submitAttempt)">
+        </ion-input>
+      </ion-item>
 
-    <div class="login-submit-div">
-      <button ion-button outline login-popup-btn>LOGIN</button>
-    </div>
+      <ion-item>
+        <ion-label color="primary" class="login-dialog-password-label" stacked >Password</ion-label>
 
-    <!--<div class="login-space-bottom"></div>-->
+        <ion-input #password formControlName="password"
+                   type="password"
+                   (change)="elementChanged(password)"
+                   [class.invalid]="!loginForm.controls.password.valid && (passwordChanged || submitAttempt)">
+        </ion-input>
+      </ion-item>
+
+      <div class="login-submit-div">
+        <button ion-button outline login-popup-btn>{{"Login" | translate}}</button>
+      </div>
+    </form>
 
   </div>
 
