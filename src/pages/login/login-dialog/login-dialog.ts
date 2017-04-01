@@ -13,7 +13,11 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Translator } from "../../../app/translator";
 import { AuthData } from "../../../providers/auth-data";
 import { EmailValidator } from "../../../validators/email";
-import { HomePage } from "../../home/home";
+import { BranchAdminHomePage } from "../../homes/branch-admin-home/branch-admin-home";
+import { SchoolAdminHomePage } from "../pages/homes/school-admin-home/school-admin-home";
+import { TeacherHomePage } from "../../homes/teacher-home/teacher-home";
+import { ParentHomePage } from "../../homes/parent-home/parent-home";
+
 
 @Component({
    selector: 'login-dialog',
@@ -53,11 +57,11 @@ export class LoginDialog {
       this[field + "Changed"] = true;
    }
 
-   dismiss() {
+   dismiss(): void {
       this.viewCtrl.dismiss();
    }
 
-   loginUser() {
+   loginUser(): void {
       this.submitAttempt = true;
 
       if (!this.loginForm.valid) {
@@ -71,11 +75,8 @@ export class LoginDialog {
                console.log('user id');
                console.log(this.authData.getUserId());
 
-               // this.authData.getUserRole()
-               //    .then( (userRole) => {
-               //       console.log(userRole)
-               //    });
-               // this.nav.setRoot(HomePage);
+               this.redirectUser();
+
             }, error => {
                this.loading.dismiss().then(() => {
                   let alert = this.alertCtrl.create({
@@ -96,5 +97,30 @@ export class LoginDialog {
          });
          this.loading.present();
       }
+   }
+
+   private redirectUser(): void {
+      this.authData.getUserRole()
+         .subscribe(snapshot => {
+               console.log('user role snapshot');
+               console.log(snapshot);
+               console.log(snapshot.key);
+               console.log(snapshot.val);
+               console.log(snapshot.$key);
+               console.log(snapshot.$value);
+
+               const role = snapshot.$value;
+
+               if (role === 'branch-admin') {
+                  this.nav.setRoot(BranchAdminHomePage)
+               } else if (role === 'school-admin') {
+                  this.nav.setRoot(SchoolAdminHomePage)
+               } else if (role === 'teacher') {
+                  this.nav.setRoot(TeacherHomePage)
+               } else {
+                  this.nav.setRoot(ParentHomePage)
+               }
+            }
+         );
    }
 }

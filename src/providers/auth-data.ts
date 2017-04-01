@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 
-import { AngularFire } from 'angularfire2';
+import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 
 
 @Injectable()
@@ -76,7 +76,7 @@ export class AuthData {
         });
     }
 
-    public getUserRole(): any {
+    public getUserRole(): FirebaseObjectObservable<any> {
         return this.af.database.object('/users/'+ this.getUserId() + "/role");
     }
 
