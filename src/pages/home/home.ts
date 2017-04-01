@@ -27,6 +27,7 @@ import {AddParentPage} from "../add-parent/add-parent";
 import {WeeklyMenuPage} from "../weekly-menu/weekly-menu";
 import {DailyTeacherFeedbackPage} from "../daily-teacher-feedback/daily-teacher-feedback";
 import {HomeworksPage} from "../homeworks/homeworks";
+import {GalleryPage} from "../gallery/gallery";
 
 @Component({
   selector: 'page-home',
@@ -56,6 +57,10 @@ export class HomePage {
         this.loadUserRole();
         this.loadDoesUserHasSchool();
         this.loadDoesUserHasBranch();
+    }
+
+    openGallery(){
+        this.navCtrl.push(GalleryPage);
     }
 
     openCalender(page) {

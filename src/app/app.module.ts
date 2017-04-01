@@ -43,6 +43,7 @@ import { TranslateModule, TranslateStaticLoader, TranslateLoader } from 'ng2-tra
 import { Http } from "@angular/http";
 import {Translator} from "./translator";
 import { LoginDialog } from "../pages/login/login-dialog/login-dialog";
+import {GalleryPage} from "../pages/gallery/gallery";
 
 // AF2 Settings
 export const firebaseConfig = {
@@ -92,7 +93,8 @@ export function createTranslateLoader(http: Http) {
         WeeklyMenuPage,
         DailyTeacherFeedbackPage,
         HomeworksPage,
-        LoginDialog
+        LoginDialog,
+        GalleryPage
     ],
     imports: [
         IonicModule.forRoot(MyApp),
@@ -132,7 +134,8 @@ export function createTranslateLoader(http: Http) {
         WeeklyMenuPage,
         DailyTeacherFeedbackPage,
         HomeworksPage,
-        LoginDialog
+        LoginDialog,
+        GalleryPage
     ],
     providers: [
         {provide: ErrorHandler, useClass: IonicErrorHandler},
