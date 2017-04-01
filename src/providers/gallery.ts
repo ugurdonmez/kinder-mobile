@@ -10,23 +10,28 @@ export class Gallery {
     constructor(public af: AngularFire){
     }
 
+    // creates a new empty album and returns albumId.
     public addAlbum(classId: string, albumName: string){
         return this.af.database.list("/classes/" + classId + "/gallery/albums").push(albumName);
     }
 
+    // returns list of albums
     public getAllAlbums(classId: string){
         return this.af.database.list("/classes/" + classId + "/gallery/albums");
     }
 
+    // deletes an album and all images in it.
     public deleteAlbum(classId: string, albumId: string){
         this.getImagesInAlbum(classId, albumId).subscribe(snapshots => {
             snapshots.forEach(snapshot => {
-                this.af.database.object("/classes/" + classId + '/gallery/images/'+snapshot.$key).remove();
+                this.deleteImage(classId, snapshot.$key);
+                // this.af.database.object("/classes/" + classId + '/gallery/images/'+snapshot.$key).remove();
             });
             this.af.database.object("/classes/" + classId + '/gallery/albums/'+albumId).remove();
         })
     }
 
+    // just prints if album is empty or not. returns nothing. does nothing.
     public isAlbumEmpty(classId: string, albumId: string) {
         this.getImagesInAlbum(classId, albumId).subscribe(snapshots => {
             if(snapshots.length > 0){
@@ -38,7 +43,7 @@ export class Gallery {
         });
     }
 
-
+    // adds new image
     public addImage(classId: string, imageSource, albumId ?: string){
         Camera.getPicture({
             sourceType : imageSource,
@@ -61,10 +66,12 @@ export class Gallery {
         });
     }
 
+    // deletes an image
     public deleteImage(classId: string, imageId: string){
         this.af.database.object("/classes/" + classId + '/gallery/images/' + imageId).remove();
     }
 
+    // returns all images of album
     public getImagesInAlbum(classId: string, albumId: string) {
         return this.af.database.list("/classes/" + classId + '/gallery/images/', {
             query: {
@@ -74,16 +81,36 @@ export class Gallery {
         })
     }
 
+    // returns an image.
+    public getImage(classId: string, imageId: string){
+        return this.af.database.object("/classes/" + classId + "/gallery/images/" + imageId);
+    }
+
+    // returns all images in that class
     public getImagesOfClass(classId: string){
         return this.af.database.list("/classes/" + classId + "/gallery/images/");
     }
 
+    // tags student to image
     public tagStudentInImage(classId: string, imageId: string, studentId: string){
-        this.af.database.object("/classes/" + classId + "/gallery/images/" + imageId + "/taggedStudents/" + studentId).set(true);
+        this.af.database.object("/classes/" + classId + "/gallery/student-images/" + studentId + "/" + imageId).set(true);
     }
 
+    // untags student from image
     public untagStudentInImage(classId: string, imageId: string, studentId: string){
-        this.af.database.object("/classes/" + classId + "/gallery/images/" + imageId + "/taggedStudents/" + studentId).remove();
+        this.af.database.object("/classes/" + classId + "/gallery/student-images/" + studentId + "/" + imageId).remove();
+    }
+
+    // I couldn't find any better way using angularfire2. :(
+    // usage: Get imageIds from here, and retrieve those images separately.
+    public getImageIdsOfStudent(classId: string, studentId: string){
+        return this.af.database.list("/classes/" + classId + "/gallery/student-images/" + studentId);
+        // this.af.database.list("/classes/" + classId + "/gallery/images/", {
+        //     query: {
+        //         orderByChild: 'taggedStudents.'+studentId,
+        //         equalTo: true
+        //     }
+        // })
     }
 }
 
@@ -93,10 +120,9 @@ export class Gallery {
 //         {
 //             imgUrl: string
 //             album: albumId
-//             taggedStudents =
-//                 {
-//                     studentUserId1 = true,
-//                     studentUserId2 = true
-//                 }
 //         }
+// }
+// /gallery/student-images/[studentidhere] = {
+// imageId1 = true,
+// imageId2 = true
 // }

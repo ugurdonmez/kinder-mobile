@@ -64,4 +64,11 @@ export class GalleryPage {
     untagStudentTest(){
         this.galleryProvider.untagStudentInImage("-Ketn4qOsNQOA0vSjZRC", "-KgebxJc3o8QRNoBuP1-", "StudentId");
     }
+
+    //
+    getImagesOfStudentTest(){
+        this.galleryProvider.getImageIdsOfStudent("-Ketn4qOsNQOA0vSjZRC", "StudentId").subscribe(snapshot => {
+            console.log(snapshot)
+        })
+    }
 }

@@ -36,7 +36,7 @@ import {GalleryPage} from "../pages/gallery/gallery";
 import {LoginDialog} from "../pages/login/login-dialog/login-dialog";
 import {ParentHomePage} from "../pages/homes/parent-home/parent-home";
 import {SchoolAdminHomePage} from "../pages/homes/school-admin-home/school-admin-home";
-
+import {MessagePage} from "../pages/message/message";
 
 // Importing provider
 import {AuthData} from '../providers/auth-data';
@@ -101,7 +101,8 @@ export function createTranslateLoader(http: Http) {
       BranchAdminHomePage,
       ParentHomePage,
       SchoolAdminHomePage,
-      TeacherHomePage
+      TeacherHomePage,
+      MessagePage
    ],
    imports: [
       IonicModule.forRoot(MyApp),
@@ -145,7 +146,8 @@ export function createTranslateLoader(http: Http) {
       BranchAdminHomePage,
       ParentHomePage,
       SchoolAdminHomePage,
-      TeacherHomePage
+      TeacherHomePage,
+      MessagePage
    ],
    providers: [
       {provide: ErrorHandler, useClass: IonicErrorHandler},
