@@ -63,10 +63,19 @@ export class LoginDialog {
       if (!this.loginForm.valid) {
          console.log(this.loginForm.value);
       } else {
-         this.authData.loginUser(this.loginForm.value.email,
+         this.authData.loginUser(
+            this.loginForm.value.email,
             this.loginForm.value.password)
             .then(authData => {
-               this.nav.setRoot(HomePage);
+               // TODO: redirect to correct page
+               console.log('user id');
+               console.log(this.authData.getUserId());
+
+               // this.authData.getUserRole()
+               //    .then( (userRole) => {
+               //       console.log(userRole)
+               //    });
+               // this.nav.setRoot(HomePage);
             }, error => {
                this.loading.dismiss().then(() => {
                   let alert = this.alertCtrl.create({

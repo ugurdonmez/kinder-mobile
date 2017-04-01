@@ -28,7 +28,7 @@ import {SchoolAdminEditClassPage} from "../pages/school-admin-edit-class/school-
 import {InviteOthersPage} from "../pages/invite-others/invite-others";
 import {AddParentPage} from "../pages/add-parent/add-parent";
 import {WeeklyMenuPage} from "../pages/weekly-menu/weekly-menu";
-import {TeacherHomePage} from "../pages/teacher-home/teacher-home";
+import {TeacherHomePage} from "../pages/homes/teacher-home/teacher-home";
 import {DailyTeacherFeedbackPage} from "../pages/daily-teacher-feedback/daily-teacher-feedback";
 import {HomeworksPage} from "../pages/homeworks/homeworks";
 
