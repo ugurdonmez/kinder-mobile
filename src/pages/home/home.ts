@@ -28,6 +28,7 @@ import {WeeklyMenuPage} from "../weekly-menu/weekly-menu";
 import {DailyTeacherFeedbackPage} from "../daily-teacher-feedback/daily-teacher-feedback";
 import {HomeworksPage} from "../homeworks/homeworks";
 import {GalleryPage} from "../gallery/gallery";
+import {MessagePage} from "../message/message";
 
 @Component({
   selector: 'page-home',
@@ -153,6 +154,10 @@ export class HomePage {
 
     private openHomeworkPage(){
         this.navCtrl.push(HomeworksPage);
+    }
+
+    private openMessages(){
+        this.navCtrl.push(MessagePage)
     }
 
     private loadDoesUserHasBranch() {
