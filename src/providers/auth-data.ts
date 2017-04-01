@@ -35,7 +35,7 @@ export class AuthData {
         return this.af.auth.createUser({ email: newEmail, password: newPassword });
     }
 
-    getUserId(): any{
+    public getUserId(): any {
         return this.user.uid;
     }
 
@@ -76,7 +76,7 @@ export class AuthData {
         });
     }
 
-    getUserRole(): any {
+    public getUserRole(): any {
         return this.af.database.object('/users/'+ this.getUserId() + "/role");
     }
 

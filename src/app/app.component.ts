@@ -6,7 +6,7 @@ import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 
 import { AngularFire } from 'angularfire2';
-import {TeacherHomePage} from "../pages/teacher-home/teacher-home";
+import {TeacherHomePage} from "../pages/homes/teacher-home/teacher-home";
 import {AuthData} from "../providers/auth-data";
 
 @Component({
