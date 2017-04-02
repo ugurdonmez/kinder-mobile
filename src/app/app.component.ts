@@ -1,33 +1,60 @@
-import {Component} from '@angular/core';
-import {Platform} from 'ionic-angular';
-import {StatusBar, Splashscreen} from 'ionic-native';
 
-import {LoginPage} from '../pages/login/login';
+import { Component } from '@angular/core';
+import { Platform } from 'ionic-angular';
+import { StatusBar, Splashscreen } from 'ionic-native';
 
-import {AngularFire} from 'angularfire2';
-import {AuthData} from "../providers/auth-data";
+import { AngularFire } from 'angularfire2';
+import { AuthData } from "../providers/auth-data";
+import { BranchAdminHomePage } from "../pages/homes/branch-admin-home/branch-admin-home";
+import { SchoolAdminHomePage } from "../pages/homes/school-admin-home/school-admin-home";
+import { TeacherHomePage } from "../pages/homes/teacher-home/teacher-home";
+import { ParentHomePage } from "../pages/homes/parent-home/parent-home";
+import { LoginPage } from "../pages/login/login";
+
 
 @Component({
    template: `<ion-nav [root]="rootPage"></ion-nav>`
 })
+
 export class MyApp {
    rootPage: any;
 
-   constructor(platform: Platform, af: AngularFire, private authData: AuthData) {
+   constructor(platform: Platform,
+               af: AngularFire,
+               private authData: AuthData) {
+
       af.auth.subscribe(user => {
          if (user) {
-            // TODO: fix redirect
-            // this.rootPage = HomePage;
+
+            this.authData.getUserRole()
+               .subscribe(snapshot => {
+                     console.log('myapp navigate')
+
+                     const role = snapshot.$value;
+
+                     if (role === 'branch-admin') {
+                        this.rootPage = BranchAdminHomePage
+                     } else if (role === 'school-admin') {
+                        this.rootPage = SchoolAdminHomePage
+                     } else if (role === 'teacher') {
+                        this.rootPage = TeacherHomePage
+                     } else {
+                        this.rootPage = ParentHomePage
+                     }
+                  }
+               );
+            // console.log(user);
          } else {
             this.rootPage = LoginPage;
          }
       });
 
-      platform.ready().then(() => {
-         // Okay, so the platform is ready and our plugins are available.
-         // Here you can do any higher level native things you might need.
-         StatusBar.styleDefault();
-         Splashscreen.hide();
+      platform.ready()
+         .then(() => {
+            // Okay, so the platform is ready and our plugins are available.
+            // Here you can do any higher level native things you might need.
+            StatusBar.styleDefault();
+            Splashscreen.hide();
       });
    }
 }
