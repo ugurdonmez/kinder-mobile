@@ -6,9 +6,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthData } from '../../providers/auth-data';
 import { EmailValidator } from '../../validators/email';
-import { HomePage } from '../home/home';
-import {Translator} from "../../app/translator";
-import {TranslateService} from "ng2-translate";
+import { Translator } from "../../app/translator";
+import { TranslateService } from "ng2-translate";
 
 
 @Component({
@@ -51,6 +50,7 @@ export class RegisterPage {
     *
     * If the form is invalid it will just log the form value, feel free to handle that as you like.
     */
+    // TODO: check
     signupUser(){
         this.submitAttempt = true;
 
@@ -62,7 +62,7 @@ export class RegisterPage {
 
             this.authData.signupUser(this.signupForm.value.email,
                 this.signupForm.value.password).then(() => {
-                    this.nav.setRoot(HomePage);
+                    // this.nav.setRoot(HomePage);
                     this.authData.updateUserRoleFromInvitedUsers();
                 }, (error) => {
                     this.loading.dismiss().then( () => {
@@ -85,48 +85,4 @@ export class RegisterPage {
 
         }
     }
-
-
-    /*
-
-    createSuccess = false;
-    registerCredentials = {email: '', password: ''};
-
-    constructor(private nav: NavController, private auth: AuthService, private alertCtrl: AlertController) {}
-
-    public register() {
-        this.auth.register(this.registerCredentials).subscribe(success => {
-            if (success) {
-                this.createSuccess = true;
-                this.showPopup("Success", "Account created.");
-            } else {
-                this.showPopup("Error", "Problem creating account.");
-            }
-        },
-        error => {
-            this.showPopup("Error", error);
-        });
-    }
-
-    showPopup(title, text) {
-
-        let alert = this.alertCtrl.create({
-            title: title,
-            subTitle: text,
-            buttons: [
-                {
-                    text: 'OK',
-                    handler: data => {
-                        if (this.createSuccess) {
-                            this.nav.popToRoot();
-                        }
-                    }
-                }
-            ]
-        });
-
-        alert.present();
-    }
-
-    */
 }

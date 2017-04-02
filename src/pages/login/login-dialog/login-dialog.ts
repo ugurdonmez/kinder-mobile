@@ -1,22 +1,24 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
-import { Platform,
+import {
+   Platform,
    NavParams,
    ViewController,
    NavController,
    AlertController,
-   LoadingController } from 'ionic-angular';
+   LoadingController
+} from 'ionic-angular';
 
-import { TranslateService } from "ng2-translate";
-import { FormBuilder, Validators } from '@angular/forms';
+import {TranslateService} from "ng2-translate";
+import {FormBuilder, Validators} from '@angular/forms';
 
-import { Translator } from "../../../app/translator";
-import { AuthData } from "../../../providers/auth-data";
-import { EmailValidator } from "../../../validators/email";
-import { BranchAdminHomePage } from "../../homes/branch-admin-home/branch-admin-home";
-import { SchoolAdminHomePage } from "../pages/homes/school-admin-home/school-admin-home";
-import { TeacherHomePage } from "../../homes/teacher-home/teacher-home";
-import { ParentHomePage } from "../../homes/parent-home/parent-home";
+import {Translator} from "../../../app/translator";
+import {AuthData} from "../../../providers/auth-data";
+import {EmailValidator} from "../../../validators/email";
+import {BranchAdminHomePage} from "../../homes/branch-admin-home/branch-admin-home";
+import {TeacherHomePage} from "../../homes/teacher-home/teacher-home";
+import {ParentHomePage} from "../../homes/parent-home/parent-home";
+import {SchoolAdminHomePage} from "../../homes/school-admin-home/school-admin-home";
 
 
 @Component({
@@ -34,19 +36,19 @@ export class LoginDialog {
    loading: any;
    private translate: TranslateService;
 
-   constructor (public nav: NavController,
-                public platform: Platform,
-                public params: NavParams,
-                public authData: AuthData,
-                public translator: Translator,
-                public alertCtrl: AlertController,
-                public formBuilder: FormBuilder,
-                public loadingCtrl: LoadingController,
-                public viewCtrl: ViewController) {
+   constructor(public nav: NavController,
+               public platform: Platform,
+               public params: NavParams,
+               public authData: AuthData,
+               public translator: Translator,
+               public alertCtrl: AlertController,
+               public formBuilder: FormBuilder,
+               public loadingCtrl: LoadingController,
+               public viewCtrl: ViewController) {
 
       this.translate = translator.translatePipe;
       this.loginForm = formBuilder.group({
-         email:    ['', Validators.compose([Validators.required, EmailValidator.isValid])],
+         email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
          password: ['', Validators.compose([Validators.minLength(6), Validators.required])]
       });
 
@@ -103,13 +105,12 @@ export class LoginDialog {
       this.authData.getUserRole()
          .subscribe(snapshot => {
                console.log('user role snapshot');
-               console.log(snapshot);
-               console.log(snapshot.key);
-               console.log(snapshot.val);
                console.log(snapshot.$key);
                console.log(snapshot.$value);
 
                const role = snapshot.$value;
+
+               this.loading.dismiss()
 
                if (role === 'branch-admin') {
                   this.nav.setRoot(BranchAdminHomePage)
@@ -118,6 +119,7 @@ export class LoginDialog {
                } else if (role === 'teacher') {
                   this.nav.setRoot(TeacherHomePage)
                } else {
+
                   this.nav.setRoot(ParentHomePage)
                }
             }

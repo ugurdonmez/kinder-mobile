@@ -10,7 +10,7 @@ import {SchoolAdminEditSchoolPage} from "../school-admin-edit-school/school-admi
 import {SchoolAdminClassDetailsPage} from "../school-admin-class-details/school-admin-class-details";
 import {Translator} from "../../app/translator";
 import {TranslateService} from "ng2-translate";
-import {HomePage} from "../home/home";
+import {HomePage} from "../home-old/home";
 import {AuthData} from "../../providers/auth-data";
 import {InviteOthersPage} from "../invite-others/invite-others";
 import {SchoolAdminTeacherDetailsPage} from "../school-admin-teacher-details/school-admin-teacher-details";

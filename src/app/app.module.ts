@@ -7,7 +7,6 @@ import {RegisterPage} from '../pages/register/register';
 import {AuthService} from '../providers/auth-service';
 
 // Importing pages
-import {HomePage} from '../pages/home/home';
 import {LoginPage} from '../pages/login/login';
 import {ResetPasswordPage} from '../pages/reset-password/reset-password';
 import {CalenderPage} from '../pages/calender/calender';
@@ -35,8 +34,9 @@ import {BranchAdminHomePage} from "../pages/homes/branch-admin-home/branch-admin
 import {GalleryPage} from "../pages/gallery/gallery";
 import {LoginDialog} from "../pages/login/login-dialog/login-dialog";
 import {ParentHomePage} from "../pages/homes/parent-home/parent-home";
-import {SchoolAdminHomePage} from "../pages/homes/school-admin-home/school-admin-home";
 import {MessagePage} from "../pages/message/message";
+import {SchoolAdminHomePage} from "../pages/homes/school-admin-home/school-admin-home";
+
 
 // Importing provider
 import {AuthData} from '../providers/auth-data';
@@ -71,7 +71,6 @@ export function createTranslateLoader(http: Http) {
 @NgModule({
    declarations: [
       MyApp,
-      HomePage,
       CalenderPage,
       LoginPage,
       RegisterPage,
@@ -116,7 +115,6 @@ export function createTranslateLoader(http: Http) {
    bootstrap: [IonicApp],
    entryComponents: [
       MyApp,
-      HomePage,
       CalenderPage,
       LoginPage,
       RegisterPage,

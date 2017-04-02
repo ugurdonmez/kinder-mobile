@@ -1,22 +1,28 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { AuthData } from "../../../providers/auth-data";
+import { LoginPage } from "../../login/login";
 
-/*
-  Generated class for the ParentHome page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-parent-home',
   templateUrl: 'parent-home.html'
 })
 export class ParentHomePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public authData: AuthData) {
+
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ParentHomePage');
   }
+
+   logout() {
+      console.log('logout clicked');
+      this.authData.logoutUser();
+      this.navCtrl.setRoot(LoginPage);
+   }
 
 }

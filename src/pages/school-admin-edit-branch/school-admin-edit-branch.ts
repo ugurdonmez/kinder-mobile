@@ -6,7 +6,7 @@ import { ClassModel } from '../../models/class-model';
 import {Translator} from "../../app/translator";
 import {TranslateService} from "ng2-translate";
 import {FormBuilder, Validators} from "@angular/forms";
-import {HomePage} from "../home/home";
+import {HomePage} from "../home-old/home";
 
 
 @Component({

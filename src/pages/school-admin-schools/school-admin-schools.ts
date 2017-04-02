@@ -9,7 +9,7 @@ import {SchoolAdminAddUpdateSchoolPage} from "../school-admin-add-update-school/
 import {SchoolAdminEditBranchPage} from "../school-admin-edit-branch/school-admin-edit-branch";
 import {Translator} from "../../app/translator";
 import {TranslateService} from "ng2-translate";
-import {HomePage} from "../home/home";
+import {HomePage} from "../home-old/home";
 import {InviteOthersPage} from "../invite-others/invite-others";
 
 @Component({

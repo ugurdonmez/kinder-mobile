@@ -4,7 +4,7 @@ import {Validators, FormBuilder} from "@angular/forms";
 import { Teachers } from '../../providers/teachers';
 import {Translator} from "../../app/translator";
 import {TranslateService} from "ng2-translate";
-import {HomePage} from "../home/home";
+import {HomePage} from "../home-old/home";
 
 /*
   Generated class for the SchoolAdminAddUpdateTeacher page.

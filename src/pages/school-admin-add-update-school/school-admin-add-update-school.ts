@@ -9,7 +9,7 @@ import {TranslateService} from "ng2-translate";
 import {FormBuilder, Validators} from "@angular/forms";
 import {EmailValidator} from "../../validators/email";
 import {Branches} from "../../providers/branches";
-import {HomePage} from "../home/home";
+import {HomePage} from "../home-old/home";
 import {AuthData} from "../../providers/auth-data";
 import {SchoolAdminClassesPage} from "../school-admin-classes/school-admin-classes";
 
