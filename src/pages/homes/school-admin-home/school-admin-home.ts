@@ -1,13 +1,17 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+
 import { AuthData } from "../../../providers/auth-data";
 import { LoginPage } from "../../login/login";
-import {Branches} from "../../../providers/branches";
+import { Branches } from "../../../providers/branches";
+import { Translator } from "../../../app/translator";
+import {Schools} from "../../../providers/schools";
 
 
 @Component({
-  selector: 'page-school-admin-home',
-  templateUrl: 'school-admin-home.html'
+   selector: 'page-school-admin-home',
+   templateUrl: 'school-admin-home.html',
+   providers: [Translator, Branches, Schools]
 })
 
 export class SchoolAdminHomePage {
@@ -15,25 +19,14 @@ export class SchoolAdminHomePage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public authData: AuthData,
-              private branchesProvider: Branches) {
+              private branchesProvider: Branches,
+              private schoolProvider: Schools) {
 
-     this.branchesProvider.getUserBranches().subscribe(snapshot => {
-
-        console.log('school admin page branch')
-        console.log(snapshot)
-
-        if (snapshot.length > 0){
-           console.log("user has branch.");
-        }
-        else{
-           console.log("user has no branch.")
-        }
-     })
-
-     //let branches = branchProvider.getUserBranches()
-
-     console.log('list of school admin branches')
-     // console.log(branches)
+     this.schoolProvider.getUserSchools()
+        .subscribe(schools => {
+           console.log('user schools')
+           console.log(schools)
+        })
   }
 
   ionViewDidLoad() {

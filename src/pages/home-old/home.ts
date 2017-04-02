@@ -33,7 +33,7 @@ import {MessagePage} from "../message/message";
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
-    providers: [Translator, Branches, Schools, Teachers, Parents]
+   providers: [Translator, Branches, Schools, Teachers, Parents]
 })
 
 export class HomePage {
@@ -140,6 +140,8 @@ export class HomePage {
             if (snapshot.length > 0){
                 this.doesUserHasSchool = (snapshot.length > 0);
                 console.log("user has school.");
+                // TODO: bora
+                // TODO: why you take only first one?
                 this.userSchoolId = snapshot[0].$key;
             }
             else{
