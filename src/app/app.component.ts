@@ -23,9 +23,11 @@ export class MyApp {
                af: AngularFire,
                private authData: AuthData) {
 
+      console.log('my app constructor called')
+
+      // TODO: refactor this part
       af.auth.subscribe(user => {
          if (user) {
-
             this.authData.getUserRole()
                .subscribe(snapshot => {
                      console.log('myapp navigate')
@@ -42,8 +44,7 @@ export class MyApp {
                         this.rootPage = ParentHomePage
                      }
                   }
-               );
-            // console.log(user);
+               )
          } else {
             this.rootPage = LoginPage;
          }

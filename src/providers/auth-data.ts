@@ -7,16 +7,20 @@ import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 @Injectable()
 export class AuthData {
 
-    private user: any;
+    public user: any;
 
     constructor(public af: AngularFire) {
         af.auth.subscribe( user => {
             if (user) {
                 this.user = user;
-                console.log("User:");
+                console.log("AuthData => User:");
                 console.log(user);
             }
         });
+    }
+
+    getAuthDataUser(): any {
+       return this.user;
     }
 
     loginUser(newEmail: string, newPassword: string): any {
