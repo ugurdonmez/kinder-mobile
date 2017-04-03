@@ -48,6 +48,9 @@ import {Schools} from "../providers/schools";
 import {TranslateModule, TranslateStaticLoader, TranslateLoader} from 'ng2-translate/ng2-translate';
 import {Http} from "@angular/http";
 import {Translator} from "./translator";
+import {WeeklyActivityPlanPage} from "../pages/weekly-activity-plan/weekly-activity-plan";
+import {DailyParentFeedbackPage} from "../pages/daily-parent-feedback/daily-parent-feedback";
+import {AttendancePage} from "../pages/attendance/attendance";
 
 // AF2 Settings
 export const firebaseConfig = {
@@ -101,7 +104,10 @@ export function createTranslateLoader(http: Http) {
       ParentHomePage,
       SchoolAdminHomePage,
       TeacherHomePage,
-      MessagePage
+      MessagePage,
+      WeeklyActivityPlanPage,
+      DailyParentFeedbackPage,
+      AttendancePage
    ],
    imports: [
       IonicModule.forRoot(MyApp),
@@ -145,7 +151,10 @@ export function createTranslateLoader(http: Http) {
       ParentHomePage,
       SchoolAdminHomePage,
       TeacherHomePage,
-      MessagePage
+      MessagePage,
+      WeeklyActivityPlanPage,
+      DailyParentFeedbackPage,
+      AttendancePage
    ],
    providers: [
       {provide: ErrorHandler, useClass: IonicErrorHandler},

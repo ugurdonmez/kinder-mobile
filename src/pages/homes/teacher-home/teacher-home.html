@@ -2,8 +2,7 @@
 <ion-header>
 
   <ion-navbar>
-    <!--TODO: translate-->
-    <ion-title>Teacher Home Page</ion-title>
+    <ion-title>{{"Teacher Home Page" | translate}}</ion-title>
     <ion-buttons end>
       <button ion-button end (click)="logout()">{{"Logout" | translate}}</button>
     </ion-buttons>
@@ -13,5 +12,8 @@
 
 
 <ion-content padding>
-
+  <ion-row class="row-25">
+    <ion-col width-33 (click)="openMySchool()">{{"My School" | translate}}</ion-col>
+    <ion-col (click)="openMessages()" width-33>{{"Message" | translate}}</ion-col>
+  </ion-row>
 </ion-content>
