@@ -1,76 +1,77 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
-
 import {Schools} from '../../providers/schools'
 import {Branches} from "../../providers/branches";
 import {FirebaseObjectObservable} from "angularfire2";
 import {SchoolAdminClassesPage} from "../school-admin-classes/school-admin-classes";
-import {SchoolAdminAddUpdateSchoolPage} from "../school-admin-add-update-school/school-admin-add-update-school";
 import {SchoolAdminEditBranchPage} from "../school-admin-edit-branch/school-admin-edit-branch";
 import {Translator} from "../../app/translator";
 import {TranslateService} from "ng2-translate";
-import {HomePage} from "../home-old/home";
 import {InviteOthersPage} from "../invite-others/invite-others";
+import {SchoolAdminHomePage} from "../homes/school-admin-home/school-admin-home";
 
 @Component({
-  selector: 'page-school-admin-schools',
-  templateUrl: 'school-admin-schools.html',
-    providers: [Schools, Branches, Translator]
+   selector: 'page-school-admin-schools',
+   templateUrl: 'school-admin-schools.html',
+   providers: [Schools, Branches, Translator]
 })
 
-
 export class SchoolAdminSchoolsPage {
-    private branchId: string;
-    private allSchoolsOfBranch: any;
-    private branch: FirebaseObjectObservable<any>;
-    private translate: TranslateService;
-    private logoURL: string;
-    allTeachersOfBranch: any;
+   private branchId: string;
+   private allSchoolsOfBranch: any;
+   private branch: FirebaseObjectObservable<any>;
+   private translate: TranslateService;
+   private logoURL: string;
+   allTeachersOfBranch: any;
 
-    constructor(public navCtrl: NavController, public schoolsProvider: Schools, public branchesProvider: Branches,
-                private navParams: NavParams, public translator: Translator) {
-        this.translate = translator.translatePipe;
-        this.branchId = navParams.get('branchId');
-        this.branch = branchesProvider.getBranch(this.branchId);
-        this.allTeachersOfBranch = [];
+   constructor(public navCtrl: NavController,
+               public schoolsProvider: Schools,
+               public branchesProvider: Branches,
+               private navParams: NavParams,
+               public translator: Translator) {
 
-        this.branch.subscribe(snapshot => {
-            if(snapshot === null){
-                console.log(snapshot === null);
-                this.navCtrl.setRoot(HomePage);
-            }
-        });
-        this.allSchoolsOfBranch = this.schoolsProvider.getSchoolsOfBranch(this.branchId);
-        this.loadImage();
-    }
+      this.translate = translator.translatePipe;
+      this.branchId = navParams.get('branchId');
+      this.branch = branchesProvider.getBranch(this.branchId);
+      this.allTeachersOfBranch = [];
 
-    ionViewDidLoad() {
-        console.log('Hello SchoolAdminSchoolsPage Page');
-    }
+      this.branch.subscribe(snapshot => {
+         if (snapshot === null) {
+            console.log(snapshot === null);
+            this.navCtrl.setRoot(SchoolAdminHomePage);
+         }
+      });
+      this.allSchoolsOfBranch = this.schoolsProvider.getSchoolsOfBranch(this.branchId);
+      this.loadImage();
+   }
 
-    openSchoolPage(schoolId){
-        console.log('goes to class list of that school with schoolId:' + schoolId);
-        this.navCtrl.push(SchoolAdminClassesPage, {'schoolId':schoolId})
-    }
+   ionViewDidLoad() {
+      console.log('Hello SchoolAdminSchoolsPage Page');
+   }
 
-    openSchoolAdminSchoolAdd() {
-        console.log('adds new school to branch with branchId: ' + this.branchId);
-        // this.navCtrl.push( SchoolAdminAddUpdateSchoolPage , {'branchId':this.branchId});
-        this.navCtrl.push( InviteOthersPage , {
-            'sourcePage': 'BranchPage',
-            'branchId':this.branchId,
-            'invitationRole':'school-admin'
-        });
-    }
+   openSchoolPage(schoolId) {
+      console.log('goes to class list of that school with schoolId:' + schoolId);
+      this.navCtrl.push(SchoolAdminClassesPage, {'schoolId': schoolId})
+   }
 
-    openSchoolAdminEditBranchPage(branchId: string){
-        this.navCtrl.push( SchoolAdminEditBranchPage , {'branchId':this.branchId});
-    }
+   openSchoolAdminSchoolAdd() {
+      console.log('adds new school to branch with branchId: ' + this.branchId);
 
-    loadImage(){
-        this.branch.subscribe(snapshot => {
-            this.logoURL = snapshot.logoURL;
-            console.log(this.logoURL);
-        })
-    }
+      this.navCtrl.push(InviteOthersPage, {
+         'sourcePage': 'BranchPage',
+         'branchId': this.branchId,
+         'invitationRole': 'school-admin'
+      });
+   }
+
+   openSchoolAdminEditBranchPage(branchId: string) {
+      this.navCtrl.push(SchoolAdminEditBranchPage, {'branchId': this.branchId});
+   }
+
+   loadImage() {
+      this.branch.subscribe(snapshot => {
+         this.logoURL = snapshot.logoURL;
+         console.log(this.logoURL);
+      })
+   }
 }
