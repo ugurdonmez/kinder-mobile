@@ -38,15 +38,6 @@
             <ion-col *ngIf="false" width-33>{{"Activity Plan" | translate}}</ion-col>
             <ion-col *ngIf="false" width-33>{{"Parent Feedback" | translate}}</ion-col>
         </ion-row>
-        <!--<ion-row class="row-25">-->
-            <!--<ion-col width-33 (click)="logout()">{{"Logout" | translate}}</ion-col>-->
-        <!--</ion-row>-->
-        <ion-row *ngIf="myUserRole=='branch-admin' && doesUserHasBranch" class="row-25">
-            <ion-col width-33 (click)="openMyBranch()">{{"My Branch" | translate}}</ion-col>
-        </ion-row>
-        <ion-row *ngIf="myUserRole=='branch-admin' && (doesUserHasBranch==false)" class="row-25">
-            <ion-col width-33 (click)="createMyBranch()">{{"Create My Branch" | translate}}</ion-col>
-        </ion-row>
         <ion-row *ngIf="(myUserRole=='school-admin' && (doesUserHasSchool==true)) || myUserRole=='teacher'" class="row-25">
             <ion-col width-33 (click)="openMySchool()">{{"My School" | translate}}</ion-col>
         </ion-row>

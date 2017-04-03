@@ -1,21 +1,40 @@
 
 <ion-header>
 
-  <ion-header>
-
-    <ion-navbar>
-      <!--TODO: translate-->
-      <ion-title>Parent Home Page</ion-title>
-      <ion-buttons end>
-        <button ion-button end (click)="logout()">{{"Logout" | translate}}</button>
-      </ion-buttons>
-    </ion-navbar>
-
-  </ion-header>
+  <ion-navbar>
+    <ion-title>{{"Parent Home Page" | translate}}</ion-title>
+    <ion-buttons end>
+      <button ion-button end (click)="logout()">{{"Logout" | translate}}</button>
+    </ion-buttons>
+  </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+
+
+  <ion-row class="row-25">
+    <ion-col (click)="openMyClass()" width-33>{{"My Class" | translate}}</ion-col>
+    <ion-col (click)="openMessages()" width-33>{{"Message" | translate}}</ion-col>
+    <ion-col (click)="openActivityPlan()" width-33>{{"Activity Plan" | translate}}</ion-col>
+  </ion-row>
+
+  <ion-row class="row-25">
+    <ion-col (click)="openDailyParentFeedbackPage()" width-33>{{"Parent Feedback" | translate}}</ion-col>
+    <ion-col (click)="openDailyTeacherFeedbackPage()" width-33>{{"Teacher Feedback" | translate}}</ion-col>
+    <ion-col (click)="openHomeworkPage()" width-33>{{"Homeworks" | translate}}</ion-col>
+  </ion-row>
+
+  <ion-row class="row-25">
+    <ion-col (click)="openGallery()" width-33>{{"Albums" | translate}}</ion-col>
+    <ion-col (click)="openAttendancePage()" width-33>{{"Attendance" | translate}}</ion-col>
+    <ion-col (click)="openWeeklyMenu()" width-33>{{"Weekly Menu" | translate}}</ion-col>
+  </ion-row>
+
+  <ion-row class="row-25">
+    <ion-col (click)="openCalender()" width-33>{{"Calendar" | translate}}</ion-col>
+    <ion-col width-33>{{"Live Remote" | translate}}</ion-col>
+  </ion-row>
 
 </ion-content>

@@ -39,8 +39,6 @@ import {MessagePage} from "../message/message";
 export class HomePage {
     private translate: TranslateService;
     private myUserRole: string;
-    private doesUserHasSchool: boolean;
-    private doesUserHasBranch: boolean;
     private userSchoolId: any;
     private userBranch: any;
 
@@ -49,15 +47,12 @@ export class HomePage {
                 public menuCtrl: MenuController,
                 public authData: AuthData,
                 public translator: Translator,
-                private branchesProvider: Branches,
                 private schoolsProvider: Schools,
                 private teachersProvider: Teachers,
                 private parentsProvider: Parents) {
         this.authData.updateUserRoleFromInvitedUsers(); // remove after ugurdonmez87 logins
         this.translate = translator.translatePipe;
         this.loadUserRole();
-        this.loadDoesUserHasSchool();
-        this.loadDoesUserHasBranch();
     }
 
     openGallery(){
@@ -112,42 +107,9 @@ export class HomePage {
     private loadUserRole() {
         this.authData.getUser().subscribe(snapshot => {
             this.myUserRole = snapshot.role;
-            this.teacherCheck();
-            this.parentCheck();
         });
     }
 
-    private openMyBranch(): any{
-        this.navCtrl.push(SchoolAdminSchoolsPage, {'branchId': this.userBranch.$key});
-    }
-
-    private createMyBranch(){
-        this.navCtrl.push(SchoolAdminAddUpdateBranchPage);
-    }
-
-    private openMySchool(): any{
-        this.navCtrl.push(SchoolAdminClassesPage, {'schoolId': this.userSchoolId});
-    }
-
-    private createMySchool(){
-        this.authData.getUser().subscribe(snapshot => {
-            this.navCtrl.push(SchoolAdminAddUpdateSchoolPage, {'branchId': snapshot.branchId});
-        })
-    }
-
-    private loadDoesUserHasSchool() {
-        this.schoolsProvider.getUserSchools().subscribe(snapshot => {
-            if (snapshot.length > 0){
-                this.doesUserHasSchool = (snapshot.length > 0);
-                console.log("user has school.");
-                this.userSchoolId = snapshot[0].$key;
-            }
-            else{
-                this.doesUserHasSchool = (snapshot.length > 0);
-                console.log("user has no school.")
-            }
-        })
-    }
     private openFeedbackPage(){
         this.navCtrl.push(DailyTeacherFeedbackPage);
     }
@@ -158,93 +120,5 @@ export class HomePage {
 
     private openMessages(){
         this.navCtrl.push(MessagePage)
-    }
-
-    private loadDoesUserHasBranch() {
-        this.branchesProvider.getUserBranches().subscribe(snapshot => {
-            if (snapshot.length > 0){
-                this.doesUserHasBranch = (snapshot.length > 0);
-                console.log("user has branch.");
-                this.userBranch = snapshot[0]
-            }
-            else{
-                this.doesUserHasBranch = (snapshot.length > 0);
-                console.log("user has no branch.")
-            }
-        })
-    }
-
-    private teacherCheck() {
-        // console.log("my user role:");
-        // console.log(this.myUserRole);
-        if(this.myUserRole=="teacher"){
-            let thisTeacher = this.teachersProvider.getTeacher(this.authData.getUserId());
-            thisTeacher.subscribe( teacherSnapshot => {
-                // console.log("teacher object snapshot:");
-                // console.log(teacherSnapshot);
-                // console.log(teacherSnapshot.$value === null);
-                if(teacherSnapshot.$value === null){
-                    this.directTeacherToCreateTeacherPage();
-                }
-                else{
-                    this.directTeacherToSchoolPage();
-                }
-            })
-        }
-    }
-
-    private directTeacherToCreateTeacherPage() {
-        this.authData.getUser().subscribe(thisUser => {
-            // console.log("user snapshot:")
-            // console.log(thisUser)
-            this.navCtrl.setRoot(SchoolAdminAddUpdateTeacherPage, {
-                'schoolId': thisUser.schoolId
-            })
-        })
-    }
-
-    private directTeacherToSchoolPage() {
-        this.authData.getUser().subscribe(thisUser => {
-            // console.log("user snapshot:")
-            // console.log(thisUser)
-            this.userSchoolId = thisUser.schoolId;
-        })
-    }
-
-    private parentCheck() {
-        if(this.myUserRole=="parent"){
-            let thisParent = this.parentsProvider.getParent(this.authData.getUserId());
-            thisParent.subscribe( parentSnapshot => {
-                console.log("parent object snapshot:");
-                console.log(parentSnapshot);
-                console.log(parentSnapshot.$value === null);
-                if(parentSnapshot.$value === null){
-                    this.directToCreateParentPage();
-                }
-                else{
-                    this.directParentToClassPage();
-                }
-            })
-        }
-    }
-
-    private directToCreateParentPage() {
-        this.authData.getUser().subscribe(thisUser => {
-            // console.log("user snapshot:")
-            // console.log(thisUser)
-            this.navCtrl.setRoot(AddParentPage, {
-                'classId': thisUser.classId
-            })
-        })
-    }
-
-    private directParentToClassPage() {
-        this.authData.getUser().subscribe(thisUser => {
-            console.log("opening class details page for parent with object:");
-            console.log(thisUser);
-            this.navCtrl.setRoot(SchoolAdminClassDetailsPage, {
-                'classId': thisUser.classId
-            })
-        })
     }
 }
