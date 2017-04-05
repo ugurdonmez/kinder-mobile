@@ -27,6 +27,8 @@ export class MyApp {
 
       // TODO: refactor this part
       af.auth.subscribe(user => {
+         console.log('auth subscribe result')
+         console.log(user)
          if (user) {
             this.authData.getUserRole()
                .subscribe(snapshot => {

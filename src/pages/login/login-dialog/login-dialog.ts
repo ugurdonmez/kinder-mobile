@@ -72,10 +72,11 @@ export class LoginDialog {
          this.authData.loginUser(
             this.loginForm.value.email,
             this.loginForm.value.password)
-            .then(authData => {
-               // TODO: redirect to correct page
+            .then( x => {
                console.log('user id');
                console.log(this.authData.getUserId());
+               console.log('auth data')
+               console.log(x)
 
                this.redirectUser();
 

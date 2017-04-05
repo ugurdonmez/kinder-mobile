@@ -3,25 +3,24 @@ import 'rxjs/add/operator/map';
 
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 
-
 @Injectable()
 export class AuthData {
 
-    public user: any;
+    // public user: any;
 
     constructor(public af: AngularFire) {
-        af.auth.subscribe( user => {
-            if (user) {
-                this.user = user;
-                console.log("AuthData => User:");
-                console.log(user);
-            }
-        });
+        // af.auth.subscribe( user => {
+        //     if (user) {
+        //         this.user = user;
+        //         console.log("AuthData => User:");
+        //         console.log(user);
+        //     }
+        // });
     }
 
-    getAuthDataUser(): any {
-       return this.user;
-    }
+    // getAuthDataUser(): any {
+    //    return this.user;
+    // }
 
     loginUser(newEmail: string, newPassword: string): any {
         return this.af.auth.login({ email: newEmail, password: newPassword });
@@ -39,15 +38,14 @@ export class AuthData {
         return this.af.auth.createUser({ email: newEmail, password: newPassword });
     }
 
-    public getUserId(): any {
-        return this.user.uid;
-    }
+    // public getUserId(): any {
+    //     return this.user.uid;
+    // }
+    //
+    // public getUserEmail(){
+    //     return this.user.auth.email;
+    // }
 
-    public getUserEmail(){
-        return this.user.auth.email;
-    }
-
-    // newInvitation(email: string, userRole: string, branchId?: string) {
     public newInvitation(invitationJson) {
         let invitedUsersList = this.af.database.list('/invited-users/');
         invitedUsersList.push(invitationJson);
@@ -82,6 +80,10 @@ export class AuthData {
 
     public getUserRole(): FirebaseObjectObservable<any> {
         return this.af.database.object('/users/'+ this.getUserId() + "/role");
+    }
+
+    public getUserRole(userId: string) {
+       
     }
 
     getUser(): any{
