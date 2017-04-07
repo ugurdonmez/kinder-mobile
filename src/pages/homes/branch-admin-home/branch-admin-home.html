@@ -1,13 +1,9 @@
 
-<ion-header header-directive>
-
-  <!--<header-directive></header-directive>-->
+<ion-header>
 
   <ion-navbar>
     <ion-title>{{"Branch Admin Home Page" | translate}}</ion-title>
-    <ion-buttons end>
-      <button ion-button end (click)="logout()">{{"Logout" | translate}}</button>
-    </ion-buttons>
+    <ion-buttons logout-button-directive end></ion-buttons>
   </ion-navbar>
 
 </ion-header>

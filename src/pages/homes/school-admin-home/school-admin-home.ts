@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { AuthData } from "../../../providers/auth-data";
-import { LoginPage } from "../../login/login";
 import {Schools} from "../../../providers/schools";
 import {SchoolAdminAddUpdateSchoolPage} from "../../school-admin-add-update-school/school-admin-add-update-school";
 import {SchoolAdminClassesPage} from "../../school-admin-classes/school-admin-classes";
 import {Translator} from "../../../app/translator";
 import {MessagePage} from "../../message/message";
+import {LogoutButtonDirective} from "../../../components/logout-button-directive/logout-button-directive";
 
 
 @Component({
    selector: 'page-school-admin-home',
    templateUrl: 'school-admin-home.html',
-   providers: [Translator, Schools]
+   providers: [Translator, Schools, LogoutButtonDirective]
 })
 
 export class SchoolAdminHomePage {
@@ -32,12 +32,6 @@ export class SchoolAdminHomePage {
 
    ionViewDidLoad() {
       console.log('ionViewDidLoad SchoolAdminHomePage');
-   }
-
-   logout() {
-      console.log('logout clicked');
-      this.authData.logoutUser();
-      this.navCtrl.setRoot(LoginPage);
    }
 
    private loadDoesUserHasSchool() {
