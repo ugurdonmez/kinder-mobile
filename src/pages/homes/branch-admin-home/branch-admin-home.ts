@@ -1,17 +1,17 @@
 import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import {AuthData} from "../../../providers/auth-data";
-import {LoginPage} from "../../login/login";
 import {Branches} from "../../../providers/branches";
 import {SchoolAdminSchoolsPage} from "../../school-admin-schools/school-admin-schools";
 import {SchoolAdminAddUpdateBranchPage} from "../../school-admin-add-update-branch/school-admin-add-update-branch";
 import {Translator} from "../../../app/translator";
 import {MessagePage} from "../../message/message";
+import {LogoutButtonDirective} from "../../../components/logout-button-directive/logout-button-directive";
 
 @Component({
    selector: 'page-branch-admin-home',
    templateUrl: 'branch-admin-home.html',
-   providers: [Translator, Branches],
+   providers: [Translator, Branches, LogoutButtonDirective],
 })
 
 export class BranchAdminHomePage {
@@ -30,12 +30,6 @@ export class BranchAdminHomePage {
 
    ionViewDidLoad() {
       console.log('ionViewDidLoad BranchAdminHomePage');
-   }
-
-   logout() {
-      console.log('logout clicked');
-      this.authData.logoutUser();
-      this.navCtrl.setRoot(LoginPage);
    }
 
    private openMyBranch(): any {

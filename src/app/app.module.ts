@@ -51,7 +51,7 @@ import {Translator} from "./translator";
 import {WeeklyActivityPlanPage} from "../pages/weekly-activity-plan/weekly-activity-plan";
 import {DailyParentFeedbackPage} from "../pages/daily-parent-feedback/daily-parent-feedback";
 import {AttendancePage} from "../pages/attendance/attendance";
-import {HeaderDirective} from "../components/header-directive/header-directive";
+import {LogoutButtonDirective} from "../components/logout-button-directive/logout-button-directive";
 
 // AF2 Settings
 export const firebaseConfig = {
@@ -109,7 +109,7 @@ export function createTranslateLoader(http: Http) {
       WeeklyActivityPlanPage,
       DailyParentFeedbackPage,
       AttendancePage,
-      HeaderDirective
+      LogoutButtonDirective
    ],
    imports: [
       IonicModule.forRoot(MyApp),

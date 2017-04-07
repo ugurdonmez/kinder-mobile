@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { AuthData } from "../../../providers/auth-data";
-import { LoginPage } from "../../login/login";
 import {Translator} from "../../../app/translator";
 import {Parents} from "../../../providers/parents";
 import {AddParentPage} from "../../add-parent/add-parent";
@@ -15,6 +14,7 @@ import {DailyTeacherFeedbackPage} from "../../daily-teacher-feedback/daily-teach
 import {HomeworksPage} from "../../homeworks/homeworks";
 import {MessagePage} from "../../message/message";
 import {CalenderPage} from "../../calender/calender";
+import {LogoutButtonDirective} from "../../../components/logout-button-directive/logout-button-directive";
 
 @Component({
   selector: 'page-parent-home',
@@ -36,12 +36,6 @@ export class ParentHomePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ParentHomePage');
   }
-
-   logout() {
-      console.log('logout clicked');
-      this.authData.logoutUser();
-      this.navCtrl.setRoot(LoginPage);
-   }
 
     private parentCheck() {
         let thisParent = this.parentsProvider.getParent(this.authData.getUserId());

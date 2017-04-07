@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { LoginPage } from "../../login/login";
 import { AuthData } from "../../../providers/auth-data";
 import {MessagePage} from "../../message/message";
 import {SchoolAdminClassesPage} from "../../school-admin-classes/school-admin-classes";
@@ -8,6 +7,7 @@ import {Translator} from "../../../app/translator";
 import {Schools} from "../../../providers/schools";
 import {Teachers} from "../../../providers/teachers";
 import {SchoolAdminAddUpdateTeacherPage} from "../../school-admin-add-update-teacher/school-admin-add-update-teacher";
+import {LogoutButtonDirective} from "../../../components/logout-button-directive/logout-button-directive";
 
 
 @Component({
@@ -29,12 +29,6 @@ export class TeacherHomePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad TeacherHomePage');
   }
-
-   logout() {
-      console.log('logout clicked');
-      this.authData.logoutUser();
-      this.navCtrl.setRoot(LoginPage);
-   }
 
     private openMessages(){
         this.navCtrl.push(MessagePage)
