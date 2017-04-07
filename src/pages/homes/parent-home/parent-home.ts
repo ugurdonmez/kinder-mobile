@@ -14,7 +14,6 @@ import {DailyTeacherFeedbackPage} from "../../daily-teacher-feedback/daily-teach
 import {HomeworksPage} from "../../homeworks/homeworks";
 import {MessagePage} from "../../message/message";
 import {CalenderPage} from "../../calender/calender";
-import {LogoutButtonDirective} from "../../../components/logout-button-directive/logout-button-directive";
 
 @Component({
   selector: 'page-parent-home',
@@ -23,6 +22,7 @@ import {LogoutButtonDirective} from "../../../components/logout-button-directive
 })
 export class ParentHomePage {
     private userClassId: string;
+    private pageTitleTextEn: string = "Parent Home Page";
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,

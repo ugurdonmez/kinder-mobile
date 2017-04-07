@@ -6,16 +6,15 @@ import {SchoolAdminSchoolsPage} from "../../school-admin-schools/school-admin-sc
 import {SchoolAdminAddUpdateBranchPage} from "../../school-admin-add-update-branch/school-admin-add-update-branch";
 import {Translator} from "../../../app/translator";
 import {MessagePage} from "../../message/message";
-import {LogoutButtonDirective} from "../../../components/logout-button-directive/logout-button-directive";
 
 @Component({
    selector: 'page-branch-admin-home',
    templateUrl: 'branch-admin-home.html',
-   providers: [Translator, Branches, LogoutButtonDirective],
+   providers: [Translator, Branches]
 })
 
 export class BranchAdminHomePage {
-
+   private pageTitleTextEn: string = "Branch Admin Home Page";
    private userBranch: any;
    private doesUserHasBranch: boolean;
 

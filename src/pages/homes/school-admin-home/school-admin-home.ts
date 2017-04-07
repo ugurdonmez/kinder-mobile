@@ -6,18 +6,18 @@ import {SchoolAdminAddUpdateSchoolPage} from "../../school-admin-add-update-scho
 import {SchoolAdminClassesPage} from "../../school-admin-classes/school-admin-classes";
 import {Translator} from "../../../app/translator";
 import {MessagePage} from "../../message/message";
-import {LogoutButtonDirective} from "../../../components/logout-button-directive/logout-button-directive";
 
 
 @Component({
    selector: 'page-school-admin-home',
    templateUrl: 'school-admin-home.html',
-   providers: [Translator, Schools, LogoutButtonDirective]
+   providers: [Translator, Schools]
 })
 
 export class SchoolAdminHomePage {
    private doesUserHasSchool: boolean;
    private userSchoolId: string;
+   private pageTitleTextEn: string = "School Admin Home Page";
 
    constructor(public navCtrl: NavController,
                public navParams: NavParams,
