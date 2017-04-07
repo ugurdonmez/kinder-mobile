@@ -7,7 +7,6 @@ import {Translator} from "../../../app/translator";
 import {Schools} from "../../../providers/schools";
 import {Teachers} from "../../../providers/teachers";
 import {SchoolAdminAddUpdateTeacherPage} from "../../school-admin-add-update-teacher/school-admin-add-update-teacher";
-import {LogoutButtonDirective} from "../../../components/logout-button-directive/logout-button-directive";
 
 
 @Component({
@@ -17,6 +16,7 @@ import {LogoutButtonDirective} from "../../../components/logout-button-directive
 })
 export class TeacherHomePage {
     private userSchoolId: string;
+    private pageTitleTextEn: string = "Teacher Home Page";
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
