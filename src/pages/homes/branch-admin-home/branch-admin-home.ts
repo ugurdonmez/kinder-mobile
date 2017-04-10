@@ -23,8 +23,8 @@ export class BranchAdminHomePage {
                public navParams: NavParams,
                private branchesProvider: Branches,
                public authData: AuthData) {
-      this.loadDoesUserHasBranch();
 
+      this.loadDoesUserHasBranch();
    }
 
    ionViewDidLoad() {
