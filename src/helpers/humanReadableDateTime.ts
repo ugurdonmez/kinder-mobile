@@ -46,16 +46,11 @@ export class HumanReadableDateTime{
         }
         else if (delta < week-day){
             options['weekday']= "short";
-            console.log("week-day: ")
-            console.log(week-day)
-            console.log("delta: ")
-            console.log(delta)
         }
         else{
             options['month']= "short";
             options['day']= "numeric";
         }
-
 
         if (delta >= 360 * day){
             options['year']="numeric";
