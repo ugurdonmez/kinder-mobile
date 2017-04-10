@@ -1,8 +1,8 @@
 
 <ion-content class="login-content" padding>
 
-  <div class="login-button-div" (click)="openModal($event)">
-    <button ion-button outline login-popup-btn >{{"LOGIN" | translate}}</button>
+  <div class="login-button-div" (click)="openModal()" [ngClass]="{'disappear': dis}">
+    <button [ngClass]="{'disappear': dis}" ion-button outline login-popup-btn >{{"LOGIN" | translate}}</button>
   </div>
 
 </ion-content>

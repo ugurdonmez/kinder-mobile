@@ -14,6 +14,7 @@ import { LoginDialog } from "./login-dialog/login-dialog";
 
 export class LoginPage {
    private translate: TranslateService;
+   public dis:boolean = false;
 
    constructor(public translator: Translator,
                public modalCtrl: ModalController) {
@@ -21,10 +22,19 @@ export class LoginPage {
       this.translate = translator.translatePipe;
    }
 
-   openModal(event) {
+   ionViewDidLoad() {
+      console.log('ionViewDidLoad Login');
+   }
+
+   showLoginButton() {
+      this.dis = false
+   }
+
+
+   openModal() {
       let modal = this.modalCtrl.create(LoginDialog);
       modal.present().then(() => {
-         return event.target.classList.add('disappear');
+         this.dis = true
       });
    }
 }
