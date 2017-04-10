@@ -21,9 +21,10 @@ export class LoginPage {
       this.translate = translator.translatePipe;
    }
 
-   openModal() {
+   openModal(event) {
       let modal = this.modalCtrl.create(LoginDialog);
-      modal.present();
+      modal.present().then(() => {
+         return event.target.classList.add('disappear');
+      });
    }
-
 }
