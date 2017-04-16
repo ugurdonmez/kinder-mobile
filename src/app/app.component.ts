@@ -30,26 +30,24 @@ export class MyApp {
          if (user) {
             this.authData.getUserRole()
                .subscribe(snapshot => {
-                     console.log('myapp navigate')
+                  console.log('myapp navigate')
 
-                     const role = snapshot.$value;
+                  const role = snapshot.$value;
 
-                     if (role === 'branch-admin') {
-                        this.rootPage = BranchAdminHomePage
-                     } else if (role === 'school-admin') {
-                        this.rootPage = SchoolAdminHomePage
-                     } else if (role === 'teacher') {
-                        this.rootPage = TeacherHomePage
-                     } else {
-                        this.rootPage = ParentHomePage
-                     }
-                  }
+                  if (role === 'branch-admin') {
+                     this.rootPage = BranchAdminHomePage
+                  } else if (role === 'school-admin') {
+                     this.rootPage = SchoolAdminHomePage
+                  } else if (role === 'teacher') {
+                     this.rootPage = TeacherHomePage
+                  } else {
+                     this.rootPage = ParentHomePage
+                  }}
                )
          } else {
             this.rootPage = LoginPage;
          }
       });
-
       platform.ready()
          .then(() => {
             // Okay, so the platform is ready and our plugins are available.
