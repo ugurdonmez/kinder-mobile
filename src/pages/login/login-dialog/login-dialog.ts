@@ -14,11 +14,7 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {Translator} from "../../../app/translator";
 import {AuthData} from "../../../providers/auth-data";
 import {EmailValidator} from "../../../validators/email";
-import {BranchAdminHomePage} from "../../homes/branch-admin-home/branch-admin-home";
-import {TeacherHomePage} from "../../homes/teacher-home/teacher-home";
-import {ParentHomePage} from "../../homes/parent-home/parent-home";
-import {SchoolAdminHomePage} from "../../homes/school-admin-home/school-admin-home";
-// import {LoginPage} from "../login";
+import {SchoolAdminHomePage} from "../../school-admin/home/home";
 
 
 @Component({
@@ -105,23 +101,33 @@ export class LoginDialog {
    private redirectUser(): void {
       this.authData.getUserRole()
          .subscribe(snapshot => {
-               console.log('user role snapshot');
-               console.log(snapshot.$key);
-               console.log(snapshot.$value);
 
-               const role = snapshot.$value;
+            const role = snapshot.$value;
 
-               this.loading.dismiss()
+            this.loading.dismiss()
 
-               if (role === 'branch-admin') {
-                  this.nav.setRoot(BranchAdminHomePage)
-               } else if (role === 'school-admin') {
-                  this.nav.setRoot(SchoolAdminHomePage)
-               } else if (role === 'teacher') {
-                  this.nav.setRoot(TeacherHomePage)
-               } else {
-                  this.nav.setRoot(ParentHomePage)
-               }
+            if (role == 'branch-admin') {
+               this.nav.setRoot(SchoolAdminHomePage)
+                  .then(() => {
+                     this.loading.dismiss()
+                  })
+            } else {
+               this.nav.setRoot(SchoolAdminHomePage)
+                  .then(() => {
+                     this.loading.dismiss()
+                  })
+            }
+
+
+               // if (role === 'branch-admin') {
+               //    this.nav.setRoot(BranchAdminHomePage)
+               // } else if (role === 'school-admin') {
+               //    this.nav.setRoot(SchoolAdminHomePage)
+               // } else if (role === 'teacher') {
+               //    this.nav.setRoot(TeacherHomePage)
+               // } else {
+               //    this.nav.setRoot(ParentHomePage)
+               // }
             }
          );
    }

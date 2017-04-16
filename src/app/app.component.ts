@@ -1,15 +1,12 @@
 
-import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
-import { StatusBar, Splashscreen } from 'ionic-native';
+import {Component} from '@angular/core';
+import {Platform} from 'ionic-angular';
+import {StatusBar, Splashscreen} from 'ionic-native';
 
-import { AngularFire } from 'angularfire2';
-import { AuthData } from "../providers/auth-data";
-import { BranchAdminHomePage } from "../pages/homes/branch-admin-home/branch-admin-home";
-import { SchoolAdminHomePage } from "../pages/homes/school-admin-home/school-admin-home";
-import { TeacherHomePage } from "../pages/homes/teacher-home/teacher-home";
-import { ParentHomePage } from "../pages/homes/parent-home/parent-home";
-import { LoginPage } from "../pages/login/login";
+import {AngularFire} from 'angularfire2';
+import {LoginPage} from '../pages/login/login';
+import {SchoolAdminHomePage} from '../pages/school-admin/home/home';
+import {AuthData} from '../providers/auth-data';
 
 
 @Component({
@@ -34,16 +31,22 @@ export class MyApp {
 
                   const role = snapshot.$value;
 
-                  if (role === 'branch-admin') {
-                     this.rootPage = BranchAdminHomePage
-                  } else if (role === 'school-admin') {
+                  if (role == 'branch-admin') {
                      this.rootPage = SchoolAdminHomePage
-                  } else if (role === 'teacher') {
-                     this.rootPage = TeacherHomePage
                   } else {
-                     this.rootPage = ParentHomePage
-                  }}
-               )
+                     this.rootPage = SchoolAdminHomePage
+                  }
+
+                  // if (role === 'branch-admin') {
+                  //    this.rootPage = BranchAdminHomePage
+                  // } else if (role === 'school-admin') {
+                  //    this.rootPage = SchoolAdminHomePage
+                  // } else if (role === 'teacher') {
+                  //    this.rootPage = TeacherHomePage
+                  // } else {
+                  //    this.rootPage = ParentHomePage
+                  // }
+               })
          } else {
             this.rootPage = LoginPage;
          }
@@ -54,6 +57,6 @@ export class MyApp {
             // Here you can do any higher level native things you might need.
             StatusBar.styleDefault();
             Splashscreen.hide();
-      });
+         });
    }
 }

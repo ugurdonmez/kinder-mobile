@@ -1,29 +1,26 @@
 import {NgModule, ErrorHandler} from '@angular/core';
 import {IonicApp, IonicModule, IonicErrorHandler} from 'ionic-angular';
-import {MyApp} from 'app/app.component';
+import {MyApp} from './app.component';
 
-import {AuthService} from 'providers/auth-service';
-
+import {AuthService} from '../providers/auth-service';
+import {AuthData} from '../providers/auth-data';
 
 // Importing provider
-import {AuthData} from 'providers/auth-data';
 import {AngularFireModule, AuthProviders, AuthMethods} from 'angularfire2';
-import {Classes} from 'providers/classes';
-import {Schools} from 'providers/schools';
 
 // Localization
 import {TranslateModule, TranslateStaticLoader, TranslateLoader} from 'ng2-translate/ng2-translate';
 import {Http} from '@angular/http';
-import {Translator} from 'translator';
+import {Translator} from './translator';
 
 // Importing pages
-import {LoginPage} from '/pages/login/login';
-import {LoginDialog} from '/pages/login/login-dialog/login-dialog';
-import {SchoolAdminBranchPage} from '/pages/school-admin/branch/';
-import {SchoolAdminHome} from '/pages/school-admin/home/home';
-import {SchoolAdminMePage} from '/pages/school-admin/me/me';
-import {SchoolAdminStudentsPage} from '/pages/school-admin-students/school-admin-students';
-import {SchoolAdminTeacherPage} from '/pages/school-admin/teacher/teacher';
+import {LoginPage} from '../pages/login/login';
+import {LoginDialog} from '../pages/login/login-dialog/login-dialog';
+import {SchoolAdminHomePage} from '../pages/school-admin/home/home';
+import {SchoolAdminMePage} from '../pages/school-admin/me/me';
+import {SchoolAdminTeacherPage} from '../pages/school-admin/teacher/teacher';
+import {SchoolAdminStudentPage} from '../pages/school-admin/student/student';
+import {SchoolAdminBranchPage} from '../pages/school-admin/branch/branch';
 
 // AF2 Settings
 export const firebaseConfig = {
@@ -49,10 +46,10 @@ export function createTranslateLoader(http: Http) {
       MyApp,
       LoginPage,
       LoginDialog,
+      SchoolAdminHomePage,
       SchoolAdminBranchPage,
-      SchoolAdminHome,
       SchoolAdminMePage,
-      SchoolAdminStudentsPage,
+      SchoolAdminStudentPage,
       SchoolAdminTeacherPage,
    ],
    imports: [
@@ -69,19 +66,17 @@ export function createTranslateLoader(http: Http) {
       MyApp,
       LoginPage,
       LoginDialog,
+      SchoolAdminHomePage,
       SchoolAdminBranchPage,
-      SchoolAdminHome,
       SchoolAdminMePage,
-      SchoolAdminStudentsPage,
+      SchoolAdminStudentPage,
       SchoolAdminTeacherPage,
    ],
    providers: [
       {provide: ErrorHandler, useClass: IonicErrorHandler},
       AuthService,
       AuthData,
-      Classes,
-      Schools,
-      Translator
+      Translator,
    ]
 })
 
