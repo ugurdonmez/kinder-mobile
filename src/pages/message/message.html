@@ -16,7 +16,7 @@
             </div>
             <div>
                 <p>User Id: {{person?.$key}}</p>
-                <p>Name: {{(getParent(person?.$key) | async)?.parentName}}</p>
+                <p>Name: {{(getParent(person?.$key) | async)?.parentName}} {{(getParent(person?.$key) | async)?.parentSurname}}</p>
             </div>
             <div item-right>
                 <!--{{person?.timestamp}}-->
