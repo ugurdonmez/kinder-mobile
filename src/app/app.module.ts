@@ -21,6 +21,8 @@ import {SchoolAdminMePage} from '../pages/school-admin/me/me';
 import {SchoolAdminTeacherPage} from '../pages/school-admin/teacher/teacher';
 import {SchoolAdminStudentPage} from '../pages/school-admin/student/student';
 import {SchoolAdminBranchPage} from '../pages/school-admin/branch/branch';
+import {HomeHeaderDirective} from "../components/home-header/home-header";
+import {LogoutButtonDirective} from "../components/logout-button-directive/logout-button-directive";
 
 // AF2 Settings
 export const firebaseConfig = {
@@ -51,6 +53,8 @@ export function createTranslateLoader(http: Http) {
       SchoolAdminMePage,
       SchoolAdminStudentPage,
       SchoolAdminTeacherPage,
+      HomeHeaderDirective,
+      LogoutButtonDirective,
    ],
    imports: [
       IonicModule.forRoot(MyApp),
