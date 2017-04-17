@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 
 import {
-   Platform,
    NavParams,
    ViewController,
    NavController,
@@ -19,6 +18,7 @@ import {BranchAdminHomePage} from "../../homes/branch-admin-home/branch-admin-ho
 import {TeacherHomePage} from "../../homes/teacher-home/teacher-home";
 import {ParentHomePage} from "../../homes/parent-home/parent-home";
 import {SchoolAdminHomePage} from "../../homes/school-admin-home/school-admin-home";
+// import {LoginPage} from "../login";
 
 
 @Component({
@@ -34,10 +34,10 @@ export class LoginDialog {
    passwordChanged: boolean = false;
    submitAttempt: boolean = false;
    loading: any;
+   // private login: LoginPage;
    private translate: TranslateService;
 
    constructor(public nav: NavController,
-               public platform: Platform,
                public params: NavParams,
                public authData: AuthData,
                public translator: Translator,
@@ -60,7 +60,10 @@ export class LoginDialog {
    }
 
    dismiss(): void {
-      this.viewCtrl.dismiss();
+      this.viewCtrl.dismiss()
+         .then(() => {
+            // this.login.showLoginButton()
+         });
    }
 
    loginUser(): void {
@@ -72,13 +75,11 @@ export class LoginDialog {
          this.authData.loginUser(
             this.loginForm.value.email,
             this.loginForm.value.password)
-            .then(authData => {
-               // TODO: redirect to correct page
+            .then(() => {
                console.log('user id');
                console.log(this.authData.getUserId());
 
                this.redirectUser();
-
             }, error => {
                this.loading.dismiss().then(() => {
                   let alert = this.alertCtrl.create({
@@ -119,7 +120,6 @@ export class LoginDialog {
                } else if (role === 'teacher') {
                   this.nav.setRoot(TeacherHomePage)
                } else {
-
                   this.nav.setRoot(ParentHomePage)
                }
             }
