@@ -48,6 +48,10 @@ export class Teachers {
         return this.af.database.object('/teachers/' + teacherId);
     }
 
+    public getImage(teacherId: string){
+        return this.af.database.object('/teachers/' + teacherId + "/profileImageUrl");
+    }
+
     public getAllTeachers() {
         return this.af.database.list('/teachers/');
     }
