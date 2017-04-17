@@ -4,7 +4,7 @@ import {Translator} from "../../app/translator";
 import {TranslateService} from "ng2-translate";
 import {AuthData} from "../../providers/auth-data";
 import {Classes} from "../../providers/classes";
-import {FirebaseListObservable} from "angularfire2";
+import {FirebaseListObservable, FirebaseObjectObservable} from "angularfire2";
 import {Message} from "../../providers/message";
 import {HumanReadableDateTime} from "../../helpers/humanReadableDateTime";
 import {Parents} from "../../providers/parents";
@@ -29,6 +29,8 @@ export class MessageParentPage {
     private teacherId: string;
     private teacherName: string;
     private teacherImage: string;
+    private isTeacherConversationUnread: FirebaseObjectObservable<any>;
+
 
     constructor(public navCtrl: NavController, public translator: Translator,
                 private authData: AuthData, private classProvider: Classes, private messageProvider: Message,
@@ -36,6 +38,10 @@ export class MessageParentPage {
                 private teacherProvider: Teachers) {
         this.translate = translator.translatePipe;
         this.loadUser();
+    }
+
+    private markTeacherConversationRead(){
+        this.messageProvider.setDialogRead(this.teacherId);
     }
 
     private loadUser() {
@@ -53,6 +59,9 @@ export class MessageParentPage {
     private loadClass() {
         this.classProvider.getClass(this.classId).subscribe(classSnapshot => {
             this.teacherId = classSnapshot.teacher_id;
+            this.messageProvider.isDialogUnread(this.teacherId).subscribe( unreadStatusSnapshot => {
+                this.isTeacherConversationUnread = unreadStatusSnapshot.$value;
+            });
             this.loadTeacher();
             this.loadConversation();
             console.log("class id, teacher id:");

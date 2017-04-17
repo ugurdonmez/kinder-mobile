@@ -15,8 +15,8 @@
                 </ion-avatar>
             </div>
             <div>
-                <p>User Id: {{person?.$key}}</p>
-                <p>Name: {{(getParent(person?.$key) | async)?.parentName}} {{(getParent(person?.$key) | async)?.parentSurname}}</p>
+                <!--<p>User Id: {{person?.$key}}</p>-->
+                <h2><ion-icon name="alert" color="danger" [hidden]="!(person.isUnread)"></ion-icon> Name: {{(getParent(person?.$key) | async)?.parentName}} {{(getParent(person?.$key) | async)?.parentSurname}}</h2>
             </div>
             <div item-right>
                 <!--{{person?.timestamp}}-->

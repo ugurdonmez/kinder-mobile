@@ -40,5 +40,6 @@ export class MessagePage {
 
     private openDialog(dialogPartnerId){
         this.navCtrl.push(DialogPage, {dialogPartnerId: dialogPartnerId});
+        this.messageProvider.setDialogRead(dialogPartnerId);
     }
 }

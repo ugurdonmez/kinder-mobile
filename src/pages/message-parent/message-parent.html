@@ -12,7 +12,8 @@
     <!-- upper bar -->
     <div ion-card>
         <ion-segment [(ngModel)]="messageChannel">
-            <ion-segment-button value="teacher">
+            <ion-segment-button value="teacher" (click)="markTeacherConversationRead()">
+                <ion-icon name="alert" color="danger" [hidden]="!(isTeacherConversationUnread)"></ion-icon>
                 Teacher
             </ion-segment-button>
             <ion-segment-button value="classGroup">
