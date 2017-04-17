@@ -1,0 +1,33 @@
+<ion-content padding>
+    <ion-card *ngFor="let message of messagesOfConversation | async">
+        <ion-item>
+            <div item-left>
+                <div>imagelink: {{getImageLink(message.sender) | async}}</div>
+                <ion-avatar item-left>
+                    <!--<img src=""/>-->
+                </ion-avatar>
+            </div>
+            <div>
+                <p>{{getViewName(message?.sender)}}</p>
+                <p>{{message?.message}}</p>
+
+            </div>
+            <div item-right>
+                <p end>{{getDateTimeHumanReadable(message?.timestamp)}}</p>
+            </div>
+        </ion-item>
+    </ion-card>
+</ion-content>
+
+
+<ion-footer>
+    <ion-toolbar>
+        <ion-input type="text" [(ngModel)]="newMessageText" placeholder="Click To Send Message..."></ion-input>
+        <ion-buttons end>
+            <button (click)="sendMessage()" ion-button icon-left>
+                <ion-icon name="send"></ion-icon>
+                Send
+            </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-footer>
