@@ -5,6 +5,7 @@ import {NavController, NavParams} from 'ionic-angular';
    selector: 'page-school-admin-branch',
    templateUrl: 'branch.html'
 })
+
 export class SchoolAdminBranchPage {
 
    private pageTitleTextEn: string = "Branch Admin Home Page";
