@@ -14,6 +14,7 @@ import {DailyTeacherFeedbackPage} from "../../daily-teacher-feedback/daily-teach
 import {HomeworksPage} from "../../homeworks/homeworks";
 import {MessagePage} from "../../message/message";
 import {CalenderPage} from "../../calender/calender";
+import {MessageParentPage} from "../../message-parent/message-parent";
 
 @Component({
    selector: 'page-parent-home',
@@ -46,6 +47,9 @@ export class ParentHomePage {
             this.directToCreateParentPage();
          }
          else {
+            if(parentSnapshot.profileImageUrl == null){
+               this.parentsProvider.newPhoto(this.authData.getUserId());
+            }
             this.directParentToClassPage();
          }
       })
@@ -81,8 +85,8 @@ export class ParentHomePage {
       this.navCtrl.push(HomeworksPage);
    }
 
-   private openMessages() {
-      this.navCtrl.push(MessagePage)
+   private openParentMessages() {
+      this.navCtrl.push(MessageParentPage)
    }
 
    openCalender() {
