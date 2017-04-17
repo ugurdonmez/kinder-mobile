@@ -2,11 +2,12 @@ import {NgModule, ErrorHandler} from '@angular/core';
 import {IonicApp, IonicModule, IonicErrorHandler} from 'ionic-angular';
 import {MyApp} from './app.component';
 
-import {AuthService} from '../providers/auth-service';
-import {AuthData} from '../providers/auth-data';
-
 // Importing provider
 import {AngularFireModule, AuthProviders, AuthMethods} from 'angularfire2';
+
+import {AuthService} from '../providers/auth-service';
+import {AuthData} from '../providers/auth-data';
+import {Branches} from "../providers/branches";
 
 // Localization
 import {TranslateModule, TranslateStaticLoader, TranslateLoader} from 'ng2-translate/ng2-translate';
@@ -23,6 +24,8 @@ import {SchoolAdminStudentPage} from '../pages/school-admin/student/student';
 import {SchoolAdminBranchPage} from '../pages/school-admin/branch/branch';
 import {HomeHeaderDirective} from '../components/home-header/home-header';
 import {LogoutButtonDirective} from '../components/logout-button-directive/logout-button-directive';
+import {Schools} from "../providers/schools";
+import {Classes} from "../providers/classes";
 
 // AF2 Settings
 export const firebaseConfig = {
@@ -81,6 +84,9 @@ export function createTranslateLoader(http: Http) {
       AuthService,
       AuthData,
       Translator,
+      Branches,
+      Schools,
+      Classes,
    ]
 })
 
