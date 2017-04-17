@@ -36,6 +36,8 @@ import {LoginDialog} from "../pages/login/login-dialog/login-dialog";
 import {ParentHomePage} from "../pages/homes/parent-home/parent-home";
 import {MessagePage} from "../pages/message/message";
 import {SchoolAdminHomePage} from "../pages/homes/school-admin-home/school-admin-home";
+import {MessageDialogComponent} from "../components/message-dialog/message-dialog";
+import {MessageParentPage} from "../pages/message-parent/message-parent";
 
 
 // Importing provider
@@ -53,6 +55,7 @@ import {DailyParentFeedbackPage} from "../pages/daily-parent-feedback/daily-pare
 import {AttendancePage} from "../pages/attendance/attendance";
 import {LogoutButtonDirective} from "../components/logout-button-directive/logout-button-directive";
 import {HomeHeaderDirective} from "../components/home-header/home-header";
+import {DialogPage} from "../pages/message/dialog/dialog";
 
 // AF2 Settings
 export const firebaseConfig = {
@@ -111,7 +114,10 @@ export function createTranslateLoader(http: Http) {
       DailyParentFeedbackPage,
       AttendancePage,
       LogoutButtonDirective,
-      HomeHeaderDirective
+      HomeHeaderDirective,
+      MessageDialogComponent,
+      MessageParentPage,
+      DialogPage
    ],
    imports: [
       IonicModule.forRoot(MyApp),
@@ -158,7 +164,9 @@ export function createTranslateLoader(http: Http) {
       MessagePage,
       WeeklyActivityPlanPage,
       DailyParentFeedbackPage,
-      AttendancePage
+      AttendancePage,
+      MessageParentPage,
+      DialogPage
    ],
    providers: [
       {provide: ErrorHandler, useClass: IonicErrorHandler},

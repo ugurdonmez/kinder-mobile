@@ -1,0 +1,74 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>{{"Message" | translate}}</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <!-- upper bar -->
+    <div ion-card>
+        <ion-segment [(ngModel)]="messageChannel">
+            <ion-segment-button value="teacher" (click)="markTeacherConversationRead()">
+                <ion-icon name="alert" color="danger" [hidden]="!(isTeacherConversationUnread)"></ion-icon>
+                Teacher
+            </ion-segment-button>
+            <ion-segment-button value="classGroup">
+                Class
+            </ion-segment-button>
+        </ion-segment>
+    </div>
+
+    <!-- page content -->
+    <div [ngSwitch]="messageChannel">
+
+        <!--if teacher chat-->
+        <ion-list *ngSwitchCase="'teacher'">
+            <ion-item *ngFor="let message of messagesOfConversation | async">
+                <ion-row>
+                    <ion-col width-10>
+                        <ion-avatar>
+                            <img [src]="getImageLink(message.sender)"/>
+                        </ion-avatar>
+                    </ion-col>
+                    <ion-col width-90>
+                        <ion-row>
+                            <ion-col width-80>
+                                <p>{{getName(message?.sender)}}</p>
+                                <p>Message:</p>
+                                <div style="white-space: normal;">{{message?.message}}</div>
+                            </ion-col>
+                            <ion-col width-20>
+                                <p>Time:</p>
+                                <p>{{getDateTimeHumanReadable(message?.timestamp)}}</p>
+                            </ion-col>
+                        </ion-row>
+                    </ion-col>
+                </ion-row>
+            </ion-item>
+        </ion-list>
+
+        <!--if class chat-->
+        <ion-list *ngSwitchCase="'classGroup'">
+
+        </ion-list>
+
+    </div>
+
+</ion-content>
+
+<!--footer to send message. now, only shown if teacher chat mode active.-->
+<ion-footer [hidden]="messageChannel!='teacher'">
+    <ion-toolbar>
+        <ion-input type="text" [(ngModel)]="newMessageText" placeholder="Click To Send Message..."></ion-input>
+        <ion-buttons end>
+            <button (click)="sendMessage()" ion-button icon-left>
+                <ion-icon name="send"></ion-icon>
+                Send
+            </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-footer>

@@ -1,51 +1,45 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import {Component} from '@angular/core';
+import {NavController} from 'ionic-angular';
 import {Translator} from "../../app/translator";
 import {TranslateService} from "ng2-translate";
 import {Message} from "../../providers/message";
+import {AuthData} from "../../providers/auth-data";
+import {Classes} from "../../providers/classes";
+import {Parents} from "../../providers/parents";
+import {DialogPage} from "./dialog/dialog";
 
-/*
-  Generated class for the Message page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
-  selector: 'page-message',
-  templateUrl: 'message.html',
-  providers: [Translator, Message]
+    selector: 'page-message',
+    templateUrl: 'message.html',
+    providers: [Translator, Message, Parents]
 })
+
 export class MessagePage {
-  private translate: TranslateService;
+    private translate: TranslateService;
+    private conversations: any;
+    // private parentProvider: Parents;
 
-  constructor(public navCtrl: NavController, public translator: Translator, private messageProvider: Message) {
-    this.translate = translator.translatePipe;}
+    constructor(public navCtrl: NavController, public translator: Translator, private messageProvider: Message,
+                private parentProvider: Parents) {
+        this.translate = translator.translatePipe;
+        this.conversations = this.messageProvider.getAllConversations();
+    }
 
-  ionViewDidLoad() {
-    console.log('Hello MessagePage Page');
-  }
+    ionViewDidLoad() {
+        console.log('Hello MessagePage Page');
+    }
 
-  private sendMessageTest(){
-    this.messageProvider.sendMessage("b66mMRb4hyfDNRGNcSnOLl6AxdT2", "test message")
-  }
+    private getParent(parentId: string){
+        let reply = this.parentProvider.getParent(parentId);
+        // reply.subscribe( snapshot => {
+        //     console.log(snapshot)
+        // })
+        return reply;
+    }
 
-  private getinboxtest(){
-    this.messageProvider.getInbox().subscribe(snapshot => {
-      console.log(snapshot)
-    })
-  }
-
-  private getoutboxtest(){
-    this.messageProvider.getOutbox().subscribe(snapshot => {
-      console.log(snapshot)
-    })
-  }
-
-  private deleteFromOutboxTest(){
-    this.messageProvider.deleteOutboxMessage("-Kgf-zjABwhKi-cVsnkD")
-  }
-
-  private deleteFromInboxTest(){
-    this.messageProvider.deleteInboxMessage("messageid")
-  }
+    private openDialog(dialogPartnerId){
+        this.navCtrl.push(DialogPage, {dialogPartnerId: dialogPartnerId});
+        this.messageProvider.setDialogRead(dialogPartnerId);
+    }
 }
