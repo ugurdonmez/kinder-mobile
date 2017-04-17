@@ -55,14 +55,14 @@ export class Message {
         console.log(receiverUserId);
         console.log(message);
         let time = new Date().getTime();
-        this.af.database.list("user-messages/" + this.userId + "/" + receiverUserId).push(
+        this.af.database.list("user-messages/" + this.userId + "/" + receiverUserId + "/conversation").push(
             {
                 message: message,
                 timestamp: time,
                 sender: this.userId
             }
         );
-        this.af.database.list("user-messages/" + receiverUserId + "/" + this.userId).push(
+        this.af.database.list("user-messages/" + receiverUserId + "/" + this.userId + "/conversation").push(
             {
                 message: message,
                 timestamp: time,
@@ -84,12 +84,12 @@ export class Message {
     // returns whole conversation with a user.
     // TODO we can add pagination
     getConversation(interactionUserId){
-        return this.af.database.list("user-messages/" + this.userId + "/" + interactionUserId)
+        return this.af.database.list("user-messages/" + this.userId + "/" + interactionUserId + "/conversation")
     }
 
     // deletes one message from the conversation.
     deleteMessage(interactionUserId, messageId){
-        this.af.database.object("user-messages/" + this.userId + "/" + interactionUserId + "/" + messageId).remove();
+        this.af.database.object("user-messages/" + this.userId + "/" + interactionUserId + "/conversation"+ messageId).remove();
     }
 
     // call this when user marks a dialog as unread, or, when user sends a message.
