@@ -8,6 +8,8 @@ import {NavController, NavParams} from 'ionic-angular';
 
 export class SchoolAdminTeacherPage {
 
+   private pageTitleTextEn: string = "Branch Admin Home Page";
+
    constructor(public navCtrl: NavController,
                public navParams: NavParams) {
 

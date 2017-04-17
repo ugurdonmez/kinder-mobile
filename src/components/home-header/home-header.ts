@@ -1,3 +1,4 @@
+
 import {Component, Input} from '@angular/core';
 
 @Component({
@@ -8,8 +9,7 @@ import {Component, Input} from '@angular/core';
 export class HomeHeaderDirective {
     @Input() titleTextEn: string;
 
-    constructor(
-    ) {
+    constructor() {
         console.log('Hello HomeHeader');
     }
 }
