@@ -70,7 +70,7 @@ export class MessageParentPage {
     }
 
     private getDateTimeHumanReadable(messageTimestamp): string {
-        return this.humanReadableDateTime.get(messageTimestamp);
+        return this.humanReadableDateTime.getDifference(messageTimestamp);
     }
 
     private sendMessage(): void {
