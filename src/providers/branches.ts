@@ -1,5 +1,7 @@
 import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/first';
 
 import {AngularFire} from 'angularfire2';
 import {BranchModel} from '../models/branch-model';
@@ -32,12 +34,37 @@ export class Branches {
    public getUserBranches() {
       var userId = this.authData.getUserId();
 
+      console.log('get user branch : id')
+      console.log(userId)
+
       return this.af.database.list('/branches', {
          query: {
             orderByChild: 'adminUserId',
             equalTo: userId
          }
-      });
+      })
+   }
+
+   public getSchoolAdminBranches(): Promise<BranchModel> {
+
+      var userId = this.authData.getUserId()
+
+      return this.af.database
+         .list('/branches', {
+            query: {
+               orderByChild: 'adminUserId',
+               equalTo: userId
+            }
+         })
+         .map(obj => {
+            var branch = new BranchModel()
+            // TODO: cast
+            branch.name = 'aaa'
+
+            return branch
+         })
+         .first()
+         .toPromise()
    }
 
    public getBranch(branchId: string) {

@@ -16,7 +16,7 @@ export class SchoolAdminBranchPage {
 
    constructor(public navCtrl: NavController,
                public navParams: NavParams,
-               public branchesProvider: Branches,
+               public branchProvider: Branches,
                public translator: Translator
    ) {
 
@@ -26,10 +26,18 @@ export class SchoolAdminBranchPage {
 
       console.log('branch tab inside')
 
-      // this.branchProvider.getUserBranches()
-      //    .subscribe((val) => {
-      //       console.log(val)
-      //    })
+      this.branchProvider.getUserBranches()
+         .subscribe((val) => {
+            console.log('old method')
+            console.log(val)
+         })
+
+      this.branchProvider.getSchoolAdminBranches()
+         .then(res => {
+            console.log('new method')
+            console.log(res)
+         })
    }
+
 
 }
