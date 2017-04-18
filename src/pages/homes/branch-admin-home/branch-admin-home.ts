@@ -14,7 +14,6 @@ import {MessagePage} from "../../message/message";
 })
 
 export class BranchAdminHomePage {
-   private pageTitleTextEn: string = "Branch Admin Home Page";
    private userBranch: any;
    private doesUserHasBranch: boolean;
 

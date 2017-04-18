@@ -17,7 +17,6 @@ import {MessagePage} from "../../message/message";
 export class SchoolAdminHomePage {
    private doesUserHasSchool: boolean;
    private userSchoolId: string;
-   private pageTitleTextEn: string = "School Admin Home Page";
 
    constructor(public navCtrl: NavController,
                public navParams: NavParams,
