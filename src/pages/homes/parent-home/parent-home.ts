@@ -23,7 +23,6 @@ import {MessageParentPage} from "../../message-parent/message-parent";
 })
 export class ParentHomePage {
    private userClassId: string;
-   private pageTitleTextEn: string = "Parent Home Page";
 
    constructor(public navCtrl: NavController,
                public navParams: NavParams,

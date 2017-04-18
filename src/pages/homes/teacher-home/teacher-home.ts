@@ -16,7 +16,6 @@ import {SchoolAdminAddUpdateTeacherPage} from "../../school-admin-add-update-tea
 })
 export class TeacherHomePage {
     private userSchoolId: string;
-    private pageTitleTextEn: string = "Teacher Home Page";
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
