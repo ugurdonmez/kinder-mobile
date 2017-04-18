@@ -45,7 +45,7 @@ export class Branches {
       })
    }
 
-   public getSchoolAdminBranches(): Promise<BranchModel> {
+   public getSchoolAdminBranches(): Promise<BranchModel[]> {
 
       var userId = this.authData.getUserId()
 
