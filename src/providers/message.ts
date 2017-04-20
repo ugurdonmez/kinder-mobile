@@ -47,6 +47,10 @@ export class Message {
         return this.af.database.object("classes/" + classId + "/wallRead/" + this.userId)
     }
 
+    public deletePostFromClassWall(classId: string, postId: string){
+        return this.af.database.object("classes/" + classId + "/" + "wall" + "/" + postId).remove();
+    }
+
 
     ////////////// PRIVATE MESSAGING
     // call this when user sends a message to another user.
