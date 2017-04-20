@@ -52,14 +52,14 @@ export class Branches {
       return this.af.database
          .list('/branches', {
             query: {
-               orderByChild: 'adminUserId',
+               orderByChild: 'schoolAdminId',
                equalTo: userId
             }
          })
          .map(obj => {
-            var branch = new BranchModel()
-            // TODO: cast
-            branch.name = 'aaa'
+            // console.log('object')
+            // console.log(obj)
+            var branch = this.castToBranchModel(obj)
 
             return branch
          })
@@ -153,5 +153,29 @@ export class Branches {
       }, (err) => {
          // Handle error
       });
+   }
+
+   private castToBranchModel(objs: any[]): BranchModel[] {
+
+      let branchArray: Array<BranchModel> = []
+
+      for (let obj of objs) {
+         var branch = new BranchModel()
+
+         branch.id = obj.id
+         branch.name = obj.name
+         branch.tel = obj.tel
+         branch.logoURL = obj.logoURL
+         branch.manager = obj.manager
+         branch.manager_tel = obj.manager_tel
+         branch.manager_mail = obj.manager_mail
+         branch.address = obj.address
+         branch.adminUserId = obj.adminUserId
+         branch.schoolAdminId = obj.schoolAdminId
+
+         branchArray.push(branch)
+      }
+
+      return branchArray
    }
 }

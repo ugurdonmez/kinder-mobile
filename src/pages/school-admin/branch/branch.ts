@@ -3,6 +3,7 @@ import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import {Branches} from "../../../providers/branches";
 import {Translator} from "../../../app/translator";
+import {BranchModel} from "../../../models/branch-model";
 
 @Component({
    selector: 'page-school-admin-branch',
@@ -23,21 +24,11 @@ export class SchoolAdminBranchPage {
    }
 
    ionViewDidLoad() {
-
-      console.log('branch tab inside')
-
-      this.branchProvider.getUserBranches()
-         .subscribe((val) => {
-            console.log('old method')
-            console.log(val)
-         })
-
       this.branchProvider.getSchoolAdminBranches()
          .then(res => {
-            console.log('new method')
+            console.log('branch model ')
             console.log(res)
          })
    }
-
 
 }

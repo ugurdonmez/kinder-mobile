@@ -8,4 +8,5 @@ export class BranchModel {
     manager_mail: string;
     address: string;
     adminUserId: string;
+    schoolAdminId: string;
 }
