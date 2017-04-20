@@ -84,8 +84,11 @@ export class AuthData {
         return this.af.database.object('/users/'+ this.getUserId() + "/role");
     }
 
-    getUser(): any{
-        let userId = this.getUserId();
-        return this.af.database.object('/users/'+userId);
+    getUser(userId?: string): FirebaseObjectObservable<any>{
+        if (!userId){
+            var userId:string = this.getUserId();
+        }
+        let result:FirebaseObjectObservable<any> = this.af.database.object('/users/'+userId);
+        return result
     }
 }
