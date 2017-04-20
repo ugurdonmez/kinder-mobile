@@ -57,13 +57,13 @@
                 <ion-row>
                     <ion-col width-10>
                         <ion-avatar>
-                            <img [src]="getImageLink(post?.sender)"/>
+                            <img [src]="getUserDetails(post?.sender)?.imageUrl"/>
                         </ion-avatar>
                     </ion-col>
                     <ion-col width-90>
                         <ion-row>
                             <ion-col width-80>
-                                <p>{{getName(post?.sender)}}</p>
+                                <p>{{getUserDetails(post?.sender)?.name}}</p>
                                 <p>Message:</p>
                                 <div style="white-space: normal;">{{post?.message}}</div>
                             </ion-col>
