@@ -22,6 +22,8 @@ export class Message {
                 sender: this.userId
             }
         );
+        this.setClassWallUnreadForAll(classId);
+        this.setClassWallReadForThisUser(classId);
     }
 
     // gets class wall
@@ -33,8 +35,6 @@ export class Message {
     //sets class wall unread for all users
     private setClassWallUnreadForAll(classId: string){
         this.af.database.object("classes/" + classId + "/wallRead").remove(); // sets class wall unread at all users
-        this.setClassWallReadForThisUser(classId)
-
     }
 
     //sets class wall as read
