@@ -11,6 +11,7 @@ import {AuthData} from "../../providers/auth-data";
 import {InviteOthersPage} from "../invite-others/invite-others";
 import {Parents} from "../../providers/parents";
 import {Attendance} from "../../providers/attendance";
+import {SchoolAdminWallPage} from "../school-admin-class-wall/school-admin-class-wall";
 
 @Component({
   selector: 'page-school-admin-class-details',
@@ -44,6 +45,11 @@ export class SchoolAdminClassDetailsPage {
 
         // attendance provider tests
         this.runAttendanceProviderTests(); // TODO delete these tests after implementing the front end for this page.
+    }
+
+    // opens the class wall. only for teacher and administrative users.
+    openSchoolAdminClassWall(){
+        this.navCtrl.push( SchoolAdminWallPage , {'classId':this.classId});
     }
 
     openSchoolAdminEditClassPage(classId: string){

@@ -38,6 +38,7 @@ import {MessagePage} from "../pages/message/message";
 import {SchoolAdminHomePage} from "../pages/homes/school-admin-home/school-admin-home";
 import {MessageDialogComponent} from "../components/message-dialog/message-dialog";
 import {MessageParentPage} from "../pages/message-parent/message-parent";
+import {SchoolAdminWallPage} from "../pages/school-admin-class-wall/school-admin-class-wall";
 
 
 // Importing provider
@@ -117,7 +118,8 @@ export function createTranslateLoader(http: Http) {
       HomeHeaderDirective,
       MessageDialogComponent,
       MessageParentPage,
-      DialogPage
+      DialogPage,
+      SchoolAdminWallPage
    ],
    imports: [
       IonicModule.forRoot(MyApp),
@@ -166,7 +168,8 @@ export function createTranslateLoader(http: Http) {
       DailyParentFeedbackPage,
       AttendancePage,
       MessageParentPage,
-      DialogPage
+      DialogPage,
+      SchoolAdminWallPage
    ],
    providers: [
       {provide: ErrorHandler, useClass: IonicErrorHandler},

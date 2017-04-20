@@ -1,73 +1,119 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-        {{"Class: " | translate}}{{(_class | async)?.name}}
-    </ion-title>
-      <ion-buttons *ngIf="userRole=='developer' || userRole=='branch-admin'
-                   || userRole=='school-admin' || userRole=='teacher'" end>
-          <button ion-button end (click)="openSchoolAdminEditClassPage(classId)">{{"Edit" | translate}}</button>
-      </ion-buttons>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>
+            {{"Class Wall: " | translate}}{{(_class | async)?.name}}
+        </ion-title>
+    </ion-navbar>
 </ion-header>
 
-
-<ion-content class="page-school-admin-class-details">
-    <ion-grid>
-        <ion-row>
-            <ion-col width-25>{{"Age" | translate}}</ion-col>
-            <ion-col>{{(_class | async)?.age}}</ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col width-25>{{"Capacity" | translate}}</ion-col>
-            <ion-col>{{(_class | async)?.current}}/{{(_class | async)?.maximum}}</ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col width-25>{{"TeacherStr" | translate}}</ion-col>
-            <ion-col>{{teacherName}}</ion-col>
-        </ion-row>
-        <ion-row *ngIf="userRole=='developer' || userRole=='branch-admin'
-                   || userRole=='school-admin' || userRole=='teacher'">
-            <ion-buttons>
-                <button ion-button end (click)="openSchoolAdminClassWall(classId)">{{"Class Wall" | translate}}</button>
-            </ion-buttons>
-        </ion-row>
-
-    </ion-grid>
-
-    <h1 *ngIf="userRole=='developer' || userRole=='branch-admin'
-                   || userRole=='school-admin' || userRole=='teacher'"
-        class="parents-title">{{"Students" | translate}}</h1>
-
-    <ion-list *ngIf="userRole=='developer' || userRole=='branch-admin'
-                   || userRole=='school-admin' || userRole=='teacher'">
-        <button ion-item *ngFor="let parent of parentsOfClass | async" (click)="openParentPage(parent.$key)">
-            <div item-left>
-                <img class="parent-thumbnail" src="{{parent?.profileImageUrl}}"/>
-            </div>
-            <div>
-                <p>{{parent?.studentName}}</p>
-                <p>{{parent?.studentSurname}}</p>
-            </div>
-        </button>
+<!-- page content -->
+<ion-content padding class="page-school-admin-class-wall">
+    <ion-list>
+        <ion-item *ngFor="let post of classWallPosts | async">
+            <ion-row>
+                <ion-col width-10>
+                    <ion-avatar>
+                        <img [src]="getUserDetails(post?.sender)?.imageUrl"/>
+                    </ion-avatar>
+                </ion-col>
+                <ion-col width-90>
+                    <ion-row>
+                        <ion-col width-80>
+                            <p>{{getUserDetails(post?.sender)?.name}}</p>
+                            <p>Message:</p>
+                            <div style="white-space: normal;">{{post?.message}}</div>
+                        </ion-col>
+                        <ion-col width-20>
+                            <p>
+                                <ion-buttons>
+                                    <!-- leaving this button without popup prompt,
+                                    because this front-end is just for testing -->
+                                    <button ion-button end color="danger" (click)="deleteWallPost(post.$key)">{{"Delete" |
+                                        translate}}
+                                    </button>
+                                </ion-buttons>
+                            </p>
+                            <p>Time:</p>
+                            <p>{{getDateTimeHumanReadable(post?.timestamp)}}</p>
+                        </ion-col>
+                    </ion-row>
+                </ion-col>
+            </ion-row>
+        </ion-item>
     </ion-list>
-
-    <ion-icon *ngIf="userRole=='developer' || userRole=='branch-admin'
-                   || userRole=='school-admin' || userRole=='teacher'"
-              class="parent-add-circle-icon" ios="ios-add-circle" md="md-add-circle" (click)="openAddParent()"></ion-icon>
-    <!--<ion-list>-->
-        <!--<button ion-item *ngFor="let school of allSchoolsOfTeacher | async" (click)="openSchoolPage(school.$key)">-->
-            <!--<div>-->
-                <!--&lt;!&ndash;ion-item&ndash;&gt;-->
-                <!--<h2>{{school.name}}</h2>-->
-                <!--<p>{{school.managerName}}</p>-->
-                <!--<p>{{school.managerTel}}</p>-->
-            <!--</div>-->
-
-            <!--<div item-right>-->
-                <!--<p>{{school.buildingAddress}}</p>-->
-                <!--<p>{{school.schoolTelephone}}</p>-->
-            <!--</div>-->
-        <!--</button>-->
-    <!--</ion-list>-->
-
 </ion-content>
+
+<!--footer to post to class wall. now, only shown if class wall mode active.-->
+<ion-footer>
+    <ion-toolbar>
+        <ion-input type="text" [(ngModel)]="newClassPost" placeholder="Click To Send Message..."></ion-input>
+        <ion-buttons end>
+            <button (click)="postToClassWall()" ion-button icon-left>
+                <ion-icon name="send"></ion-icon>
+                Send
+            </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-footer>
+
+
+<!--<ion-content class="page-school-admin-class-details">-->
+<!--<ion-grid>-->
+<!--<ion-row>-->
+<!--<ion-col width-25>{{"Age" | translate}}</ion-col>-->
+<!--<ion-col>{{(_class | async)?.age}}</ion-col>-->
+<!--</ion-row>-->
+<!--<ion-row>-->
+<!--<ion-col width-25>{{"Capacity" | translate}}</ion-col>-->
+<!--<ion-col>{{(_class | async)?.current}}/{{(_class | async)?.maximum}}</ion-col>-->
+<!--</ion-row>-->
+<!--<ion-row>-->
+<!--<ion-col width-25>{{"TeacherStr" | translate}}</ion-col>-->
+<!--<ion-col>{{teacherName}}</ion-col>-->
+<!--</ion-row>-->
+<!--<ion-row *ngIf="userRole=='developer' || userRole=='branch-admin'-->
+<!--|| userRole=='school-admin' || userRole=='teacher'">-->
+<!--<ion-buttons>-->
+<!--<button ion-button end (click)="openSchoolAdminClassWall(classId)">{{"Class Wall" | translate}}</button>-->
+<!--</ion-buttons>-->
+<!--</ion-row>-->
+
+<!--</ion-grid>-->
+
+<!--<h1 *ngIf="userRole=='developer' || userRole=='branch-admin'-->
+<!--|| userRole=='school-admin' || userRole=='teacher'"-->
+<!--class="parents-title">{{"Students" | translate}}</h1>-->
+
+<!--<ion-list *ngIf="userRole=='developer' || userRole=='branch-admin'-->
+<!--|| userRole=='school-admin' || userRole=='teacher'">-->
+<!--<button ion-item *ngFor="let parent of parentsOfClass | async" (click)="openParentPage(parent.$key)">-->
+<!--<div item-left>-->
+<!--<img class="parent-thumbnail" src="{{parent?.profileImageUrl}}"/>-->
+<!--</div>-->
+<!--<div>-->
+<!--<p>{{parent?.studentName}}</p>-->
+<!--<p>{{parent?.studentSurname}}</p>-->
+<!--</div>-->
+<!--</button>-->
+<!--</ion-list>-->
+
+<!--<ion-icon *ngIf="userRole=='developer' || userRole=='branch-admin'-->
+<!--|| userRole=='school-admin' || userRole=='teacher'"-->
+<!--class="parent-add-circle-icon" ios="ios-add-circle" md="md-add-circle" (click)="openAddParent()"></ion-icon>-->
+<!--&lt;!&ndash;<ion-list>&ndash;&gt;-->
+<!--&lt;!&ndash;<button ion-item *ngFor="let school of allSchoolsOfTeacher | async" (click)="openSchoolPage(school.$key)">&ndash;&gt;-->
+<!--&lt;!&ndash;<div>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;ion-item&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;<h2>{{school.name}}</h2>&ndash;&gt;-->
+<!--&lt;!&ndash;<p>{{school.managerName}}</p>&ndash;&gt;-->
+<!--&lt;!&ndash;<p>{{school.managerTel}}</p>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;<div item-right>&ndash;&gt;-->
+<!--&lt;!&ndash;<p>{{school.buildingAddress}}</p>&ndash;&gt;-->
+<!--&lt;!&ndash;<p>{{school.schoolTelephone}}</p>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--&lt;!&ndash;</button>&ndash;&gt;-->
+<!--&lt;!&ndash;</ion-list>&ndash;&gt;-->
+
+<!--</ion-content>-->
