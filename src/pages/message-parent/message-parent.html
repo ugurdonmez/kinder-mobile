@@ -53,7 +53,28 @@
 
         <!--if class chat-->
         <ion-list *ngSwitchCase="'classGroup'">
-
+            <ion-item *ngFor="let post of classWallPosts | async">
+                <ion-row>
+                    <ion-col width-10>
+                        <ion-avatar>
+                            <img [src]="getUserDetails(post?.sender)?.imageUrl"/>
+                        </ion-avatar>
+                    </ion-col>
+                    <ion-col width-90>
+                        <ion-row>
+                            <ion-col width-80>
+                                <p>{{getUserDetails(post?.sender)?.name}}</p>
+                                <p>Message:</p>
+                                <div style="white-space: normal;">{{post?.message}}</div>
+                            </ion-col>
+                            <ion-col width-20>
+                                <p>Time:</p>
+                                <p>{{getDateTimeHumanReadable(post?.timestamp)}}</p>
+                            </ion-col>
+                        </ion-row>
+                    </ion-col>
+                </ion-row>
+            </ion-item>
         </ion-list>
 
     </div>
@@ -66,6 +87,19 @@
         <ion-input type="text" [(ngModel)]="newMessageText" placeholder="Click To Send Message..."></ion-input>
         <ion-buttons end>
             <button (click)="sendMessage()" ion-button icon-left>
+                <ion-icon name="send"></ion-icon>
+                Send
+            </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-footer>
+
+<!--footer to post to class wall. now, only shown if class wall mode active.-->
+<ion-footer [hidden]="messageChannel!='classGroup'">
+    <ion-toolbar>
+        <ion-input type="text" [(ngModel)]="newClassPost" placeholder="Click To Send Message..."></ion-input>
+        <ion-buttons end>
+            <button (click)="postToClassWall()" ion-button icon-left>
                 <ion-icon name="send"></ion-icon>
                 Send
             </button>

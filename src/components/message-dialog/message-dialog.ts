@@ -12,7 +12,7 @@ import {Teachers} from "../../providers/teachers";
 })
 // TODO
 // WARNING
-// THIS CLASS WILL BE DELETED because it includes ion-footer, but it is impossible to include ion-footer into other views properly.
+// THIS CLASS WILL BE DELETED because it includes ion-footer, and it is impossible to include ion-footer into other views properly.
 // so, we will delete this. message-parent and message/dialog pages replaced this.
 export class MessageDialogComponent {
     @Input() partnerUserId: string;

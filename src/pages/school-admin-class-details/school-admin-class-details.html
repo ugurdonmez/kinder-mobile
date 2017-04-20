@@ -25,6 +25,13 @@
             <ion-col width-25>{{"TeacherStr" | translate}}</ion-col>
             <ion-col>{{teacherName}}</ion-col>
         </ion-row>
+        <ion-row *ngIf="userRole=='developer' || userRole=='branch-admin'
+                   || userRole=='school-admin' || userRole=='teacher'">
+            <ion-buttons>
+                <button ion-button end (click)="openSchoolAdminClassWall(classId)">{{"Class Wall" | translate}}</button>
+            </ion-buttons>
+        </ion-row>
+
     </ion-grid>
 
     <h1 *ngIf="userRole=='developer' || userRole=='branch-admin'

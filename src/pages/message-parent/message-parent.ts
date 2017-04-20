@@ -21,6 +21,7 @@ export class MessageParentPage {
     private classId: string;
     private messagesOfConversation: FirebaseListObservable<any[]>;
     private newMessageText: string;
+    private newClassPost: string;
 
     private userId: string;
     private userName: string;
@@ -30,26 +31,29 @@ export class MessageParentPage {
     private teacherName: string;
     private teacherImage: string;
     private isTeacherConversationUnread: FirebaseObjectObservable<any>;
+    private classWallPosts: FirebaseListObservable<any[]>;
+    private userDetails: {};
 
 
     constructor(public navCtrl: NavController, public translator: Translator,
                 private authData: AuthData, private classProvider: Classes, private messageProvider: Message,
-                private humanReadableDateTime: HumanReadableDateTime, private parentProvider: Parents,
-                private teacherProvider: Teachers) {
+                private humanReadableDateTime: HumanReadableDateTime, private parentsProvider: Parents,
+                private teachersProvider: Teachers) {
         this.translate = translator.translatePipe;
-        this.loadUser();
+        this.userDetails = {};
+        this.loadThisUser();
     }
 
     private markTeacherConversationRead(){
         this.messageProvider.setDialogRead(this.teacherId);
     }
 
-    private loadUser() {
+    private loadThisUser() {
         this.authData.getUser().subscribe(snapshot => {
             this.classId = snapshot.classId; // loads class id
             this.userId = snapshot.$key;
             this.loadClass();
-            this.parentProvider.getParent(this.userId).subscribe( parentSnapshot => {
+            this.parentsProvider.getParent(this.userId).subscribe( parentSnapshot => {
                 this.userImage = parentSnapshot.profileImageUrl;
                 this.userName = parentSnapshot.parentName + " " + parentSnapshot.parentSurname;
             })
@@ -67,7 +71,9 @@ export class MessageParentPage {
             console.log("class id, teacher id:");
             console.log(this.classId);
             console.log(this.teacherId);
-        })
+        });
+        this.classWallPosts = this.messageProvider.getClassWall(this.classId)
+        this.loadAllUsersPostedOnWall();
     }
 
     private loadConversation() {
@@ -85,6 +91,11 @@ export class MessageParentPage {
     private sendMessage(): void {
         this.messageProvider.sendMessage(this.teacherId, this.newMessageText);
         this.newMessageText = "";
+    }
+
+    private postToClassWall(): void {
+        this.messageProvider.postToClassWall(this.classId, this.newClassPost);
+        this.newClassPost = "";
     }
 
     private getImageLink(userId) {
@@ -112,9 +123,56 @@ export class MessageParentPage {
     }
 
     private loadTeacher() {
-        this.teacherProvider.getTeacher(this.teacherId).subscribe( teacherSnapshot => {
+        this.teachersProvider.getTeacher(this.teacherId).subscribe( teacherSnapshot => {
             this.teacherName = teacherSnapshot.name + " " + teacherSnapshot.surname;
             this.teacherImage = teacherSnapshot.profileImageUrl;
         })
+    }
+
+    private loadAllUsersPostedOnWall():void {
+        this.classWallPosts.subscribe( posts => {
+            posts.forEach( post => {
+                let senderUserId:string = post.sender;
+                if (senderUserId in this.userDetails){
+                    return;
+                }
+                else{
+                    this.loadUser(senderUserId);
+                }
+            })
+        })
+    }
+
+    private loadUser(userId: string) {
+        this.authData.getUser(userId).subscribe( userSnapshot => {
+            if (userSnapshot.role == 'teacher'){
+                this.teachersProvider.getTeacher(userId).subscribe( teacherSnapshot => {
+                    this.userDetails[userId] = {};
+                    this.userDetails[userId]['name'] = teacherSnapshot.name + " " + teacherSnapshot.surname;
+                    this.userDetails[userId]['imageUrl'] = teacherSnapshot.profileImageUrl;
+                })
+            }
+            else if(userSnapshot.role == 'parent'){
+                this.parentsProvider.getParent(userId).subscribe( parentSnapshot => {
+                    this.userDetails[userId] = {};
+                    this.userDetails[userId]['name'] = parentSnapshot.parentName + " " + parentSnapshot.parentSurname;
+                    this.userDetails[userId]['imageUrl'] = parentSnapshot.profileImageUrl;
+                })
+            }
+            else{
+                this.userDetails[userId] = {};
+                this.userDetails[userId]['name'] = 'Admin';
+                this.userDetails[userId]['imageUrl'] = '';
+            }
+        })
+    }
+
+    public getUserDetails(userId: string){
+        if(!(userId in this.userDetails)){
+            this.loadUser(userId);
+        }
+        else{
+            return this.userDetails[userId];
+        }
     }
 }
