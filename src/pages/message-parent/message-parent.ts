@@ -21,6 +21,7 @@ export class MessageParentPage {
     private classId: string;
     private messagesOfConversation: FirebaseListObservable<any[]>;
     private newMessageText: string;
+    private newClassPost: string;
 
     private userId: string;
     private userName: string;
@@ -30,6 +31,7 @@ export class MessageParentPage {
     private teacherName: string;
     private teacherImage: string;
     private isTeacherConversationUnread: FirebaseObjectObservable<any>;
+    private classWallPosts: FirebaseListObservable<any[]>;
 
 
     constructor(public navCtrl: NavController, public translator: Translator,
@@ -67,7 +69,8 @@ export class MessageParentPage {
             console.log("class id, teacher id:");
             console.log(this.classId);
             console.log(this.teacherId);
-        })
+        });
+        this.classWallPosts = this.messageProvider.getClassWall(this.classId)
     }
 
     private loadConversation() {
@@ -85,6 +88,11 @@ export class MessageParentPage {
     private sendMessage(): void {
         this.messageProvider.sendMessage(this.teacherId, this.newMessageText);
         this.newMessageText = "";
+    }
+
+    private postToClassWall(): void {
+        this.messageProvider.postToClassWall(this.classId, this.newClassPost);
+        this.newClassPost = "";
     }
 
     private getImageLink(userId) {
