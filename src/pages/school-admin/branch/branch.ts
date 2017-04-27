@@ -24,11 +24,31 @@ export class SchoolAdminBranchPage {
    }
 
    ionViewDidLoad() {
-      this.branchProvider.getSchoolAdminBranches()
-         .then(res => {
-            console.log('branch model ')
-            console.log(res)
-         })
+      // this.runTests();
    }
 
+   private runTests() {
+      // branchProvider.getSchoolAdminBranches() Test
+      console.log('branchProvider.getSchoolAdminBranches() Test')
+      this.branchProvider.getSchoolAdminBranches()
+          .then(res => {
+             console.log(res)
+          })
+
+      // branchProvider.getAllBranches() Test
+      this.branchProvider.getAllBranches()
+          .then(response => {
+             console.log('branchProvider.getAllBranches() Test with subscribe:')
+             console.log(response)
+          })
+
+      // branchProvider.getBranch() Test
+      console.log('branchProvider.getBranch() Test raw:')
+      console.log(this.branchProvider.getBranch('-KaEb4P-cddA6VHNoMOW'))
+      this.branchProvider.getBranch('-KaEb4P-cddA6VHNoMOW')
+          .then(response => {
+             console.log('branchProvider.getBranch() Test with subscribe:')
+             console.log(response)
+          })
+   }
 }

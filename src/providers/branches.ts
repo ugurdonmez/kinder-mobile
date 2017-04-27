@@ -67,35 +67,32 @@ export class Branches {
          .toPromise()
    }
 
-   public getBranch(branchId: string) {
-      return this.af.database.object('/branches/' + branchId);
+   public getBranch(branchId: string): Promise<BranchModel> {
+      return this.af.database.object('/branches/' + branchId).map(obj => {
+         var branch = this.castObjectToBranchModel(obj)
+         return branch
+      })
+          .first()
+          .toPromise()
    }
 
-   public getAllBranches() {
-      return this.af.database.list('/branches/');
+   public getAllBranches(): Promise<BranchModel[]> {
+      return this.af.database.list('/branches/')
+          .map(obj => {
+             var branch = this.castToBranchModel(obj)
+             return branch
+          })
+          .first()
+          .toPromise()
    }
 
    public addBranch(branch: BranchModel) {
       branch.adminUserId = this.authData.getUserId();
       return this.branches.push(branch).key;
-      // var pushedBranch = this.branches.push(branch);
-      // var branchId = pushedBranch.key;
-      //console.log("branchId: " + branchId);
-
-      // var userId = this.authData.getUserId();
-      // var user_branches = this.af.database.list('/user-branches/'+userId);
-      // user_branches.push({'branchId':branchId});
    }
 
    public updateBranch(branch: BranchModel) {
       this.af.database.object('/branches/' + branch.id).set(branch);
-   }
-
-   addSchoolToBranch(branchId: string, schoolId: string) {
-      // schoollar zaten branch'larini tutuyor, buna gerek yok o yuzden.
-      // duplicate data olunca duzenlemeler, silmeler eklemeler biraz zor oluyor.
-      // let branchSchoolsList = this.af.database.list('/branches/' + branchId + '/schools');
-      // branchSchoolsList.push(schoolId);
    }
 
    deleteBranch(branchId: string) {
@@ -155,6 +152,7 @@ export class Branches {
       });
    }
 
+   // Conversion: FirebaseListObservable -> Model
    private castToBranchModel(objs: any[]): BranchModel[] {
 
       let branchArray: Array<BranchModel> = []
@@ -177,5 +175,24 @@ export class Branches {
       }
 
       return branchArray
+   }
+
+   // Conversion: FirebaseObjectObservable -> Model
+   private castObjectToBranchModel(obj: any): BranchModel {
+
+      let branch = new BranchModel()
+
+      branch.id = obj.id
+      branch.name = obj.name
+      branch.tel = obj.tel
+      branch.logoURL = obj.logoURL
+      branch.manager = obj.manager
+      branch.manager_tel = obj.manager_tel
+      branch.manager_mail = obj.manager_mail
+      branch.address = obj.address
+      branch.adminUserId = obj.adminUserId
+      branch.schoolAdminId = obj.schoolAdminId
+
+      return branch
    }
 }
