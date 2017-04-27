@@ -29,21 +29,38 @@ export class Schools {
       this.translate = translator.translatePipe;
    }
 
-   public getSchool(schoolId: string) {
-      return this.af.database.object('/schools/' + schoolId);
+   public getSchool(schoolId: string): Promise<SchoolModel> {
+      return this.af.database.object('/schools/' + schoolId).map(obj => {
+         var branch = this.castObjectToSchoolModel(obj)
+         return branch
+      })
+          .first()
+          .toPromise()
    }
 
-   public getAllSchools() {
-      return this.af.database.list('/schools/');
+   public getAllSchools(): Promise<SchoolModel[]>  {
+      return this.af.database.list('/schools/')
+          .map(obj => {
+             var school = this.castToSchoolModel(obj)
+             return school
+          })
+          .first()
+          .toPromise()
    }
 
-   getSchoolsOfBranch(branchId: string) {
+   getSchoolsOfBranch(branchId: string): Promise<SchoolModel[]> {
       return this.af.database.list('/schools', {
          query: {
             orderByChild: 'branchId',
             equalTo: branchId
          }
-      });
+      })
+          .map(obj => {
+             var school = this.castToSchoolModel(obj)
+             return school
+          })
+          .first()
+          .toPromise()
    }
 
    public addSchool(school: SchoolModel) {
@@ -76,7 +93,7 @@ export class Schools {
       })
    }
 
-   public getUserSchools() {
+   public getUserSchools(): Promise<SchoolModel[]> {
       var userId = this.authData.getUserId();
 
       return this.af.database.list('/schools', {
@@ -84,7 +101,13 @@ export class Schools {
             orderByChild: 'adminUserId',
             equalTo: userId
          }
-      });
+      })
+          .map(obj => {
+             var school = this.castToSchoolModel(obj)
+             return school
+          })
+          .first()
+          .toPromise()
    }
 
    public newPhoto(schoolId: string) {
@@ -128,4 +151,57 @@ export class Schools {
       });
    }
 
+   // Conversion: FirebaseListObservable -> Model
+   private castToSchoolModel(objs: any[]): SchoolModel[] {
+
+      let schoolArray: Array<SchoolModel> = []
+
+      for (let obj of objs) {
+         var school = new SchoolModel()
+
+         school.id = obj.id;
+         school.name = obj.name;
+         school.membershipEnd = obj.membershipEnd;
+         school.membershipStart = obj.membershipStart;
+         school.buildingAddress = obj.buildingAddress;
+         school.branchId = obj.branchId;
+         school.isActivated = obj.isActivated;
+         school.logoURL = obj.logoURL;
+         school.managerName = obj.managerName;
+         school.managerTel = obj.managerTel;
+         school.activationEmail = obj.activationEmail;
+         school.schoolTelephone = obj.schoolTelephone;
+         school.secondContactPersonName = obj.secondContactPersonName;
+         school.secondContactTelNo = obj.secondContactTelNo;
+         school.adminUserId = obj.adminUserId;
+
+         schoolArray.push(school)
+      }
+
+      return schoolArray
+   }
+
+   // Conversion: FirebaseObjectObservable -> Model
+   private castObjectToSchoolModel(obj: any): SchoolModel {
+
+      let school = new SchoolModel()
+
+      school.id = obj.id;
+      school.name = obj.name;
+      school.membershipEnd = obj.membershipEnd;
+      school.membershipStart = obj.membershipStart;
+      school.buildingAddress = obj.buildingAddress;
+      school.branchId = obj.branchId;
+      school.isActivated = obj.isActivated;
+      school.logoURL = obj.logoURL;
+      school.managerName = obj.managerName;
+      school.managerTel = obj.managerTel;
+      school.activationEmail = obj.activationEmail;
+      school.schoolTelephone = obj.schoolTelephone;
+      school.secondContactPersonName = obj.secondContactPersonName;
+      school.secondContactTelNo = obj.secondContactTelNo;
+      school.adminUserId = obj.adminUserId;
+
+      return school
+   }
 }
