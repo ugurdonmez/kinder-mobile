@@ -14,28 +14,13 @@ export class Classes {
         this.classes = af.database.list('/classes');
     }
 
-    public getUserClasses(callback) {
-        let classCursors : any[] = [];
-        var userId = this.authData.getUserId();
-
-        var user_class_ids = this.af.database.list('/user-classes/'+userId, {preserveSnapshot: true});
-        // console.log("user_class_ids:");
-        // console.log(user_class_ids);
-
-        user_class_ids.subscribe(snapshots=>{
-                snapshots.forEach(
-                    snapshot=>{
-                        // console.log(snapshot.val().classId);
-                        classCursors.push(snapshot.val().classId);
-                    });
-                // console.log(classCursors)
-                callback(classCursors)
-            }
-        )
-    }
-
-    public getClass(classId: string) {
-        return this.af.database.object('/classes/' + classId);
+    public getClass(classId: string): Promise<ClassModel> {
+        return this.af.database.object('/classes/' + classId)
+            .map(obj => {
+                return this.castObjectToClassModel(obj)
+            })
+            .first()
+            .toPromise()
     }
 
     public addClass(_class: ClassModel) {
@@ -56,25 +41,50 @@ export class Classes {
         this.af.database.object('/classes/'+_class.id).set(_class);
     }
 
-    getClassesOfSchool(schoolId: string) {
+    getClassesOfSchool(schoolId: string): Promise<ClassModel[]> {
         return this.af.database.list('/classes', {
             query: {
                 orderByChild: 'schoolId',
                 equalTo: schoolId
             }
-        });
+        })
+            .map(obj => {
+                return this.castListToClassModel(obj)
+            })
+            .first()
+            .toPromise()
     }
 
     deleteClass(classId: string){
         this.af.database.object('/classes/' + classId).remove();
     }
 
-    public getClassesOfTeacher(teacherId: string){
+    public getClassesOfTeacher(teacherId: string): Promise<ClassModel[]>{
         return this.af.database.list('/classes', {
             query: {
                 orderByChild: 'teacher_id',
                 equalTo: teacherId
             }
-        });
+        })
+            .map(obj => {
+                return this.castListToClassModel(obj)
+            })
+            .first()
+            .toPromise()
+    }
+
+    // Conversion: FirebaseListObservable -> Model
+    private castListToClassModel(objs: any[]): ClassModel[] {
+        let classArray: Array<ClassModel> = [];
+        for (let obj of objs) {
+            var _class = new ClassModel().fromObject(obj);
+            classArray.push(_class);
+        }
+        return classArray;
+    }
+
+    // Conversion: FirebaseObjectObservable -> Model
+    private castObjectToClassModel(obj: any): ClassModel {
+        return new ClassModel().fromObject(obj);
     }
 }
