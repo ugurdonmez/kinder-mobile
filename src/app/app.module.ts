@@ -27,6 +27,7 @@ import {LogoutButtonDirective} from '../components/logout-button-directive/logou
 import {Schools} from "../providers/schools";
 import {Classes} from "../providers/classes";
 import {BranchListDirective} from "../components/branch-list/branch-list";
+import {Parents} from "../providers/parents";
 
 // AF2 Settings
 export const firebaseConfig = {
@@ -89,6 +90,7 @@ export function createTranslateLoader(http: Http) {
       Branches,
       Schools,
       Classes,
+      Parents
    ]
 })
 
