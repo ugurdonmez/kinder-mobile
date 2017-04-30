@@ -16,6 +16,11 @@ export class BranchListDirective {
 
       console.log('BranchListDirective: constructor()')
 
+      this.branchProvider.getSchoolAdminBranches()
+         .then(res => {
+            console.log('BranchListDirective: constructor branches of school admin ')
+            console.log(res)
+         })
    }
 
    ionViewDidLoad() {
