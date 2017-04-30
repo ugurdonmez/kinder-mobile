@@ -23,12 +23,12 @@ export class SchoolAdminHomePage {
    tab4Root = SchoolAdminMePage
 
    constructor(private schoolProvider: Schools) {
-      this.runTests();
+      // this.runSchoolProviderTests();
 
    }
 
-   private runTests() {
-      // branchProvider.getUserSchools() Test
+   private runSchoolProviderTests() {
+      // schoolProvider.getUserSchools() Test
       console.log('schoolProvider.getUserSchools() Test raw:')
       console.log(this.schoolProvider.getUserSchools())
       this.schoolProvider.getUserSchools()

@@ -24,10 +24,10 @@ export class SchoolAdminBranchPage {
    }
 
    ionViewDidLoad() {
-      // this.runTests();
+      // this.runBranchProviderTests();
    }
 
-   private runTests() {
+   private runBranchProviderTests() {
       // branchProvider.getSchoolAdminBranches() Test
       console.log('branchProvider.getSchoolAdminBranches() Test')
       this.branchProvider.getSchoolAdminBranches()
