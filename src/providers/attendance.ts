@@ -14,10 +14,10 @@ export class Attendance {
     public markAllStudentsHere(classId:string, date:string){
         // this should be called by the teacher. marks all the students as here.
         // also it overwrites "absent" students as all "here".
-        this.parentsProvider.getParentsOfClass(classId).subscribe(studentsOfClass => {
+        this.parentsProvider.getParentsOfClass(classId).then(studentsOfClass => {
             // console.log(studentsOfClass);
             studentsOfClass.forEach( student => {
-                this.markStudentHere(student.$key, classId, date, true);
+                this.markStudentHere(student.id, classId, date, true);
             })
         })
     }

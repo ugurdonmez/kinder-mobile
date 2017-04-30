@@ -22,8 +22,13 @@ export class Parents {
         this.translate = translator.translatePipe;
     }
 
-    public getParent(parentId: string) {
-        return this.af.database.object('/parents/' + parentId);
+    public getParent(parentId: string): Promise<ParentModel> {
+        return this.af.database.object('/parents/' + parentId)
+            .map(obj => {
+                return this.castObjectToModel(obj)
+            })
+            .first()
+            .toPromise()
     }
 
     public addParent(parent: ParentModel) {
@@ -82,12 +87,32 @@ export class Parents {
         });
     }
 
-    getParentsOfClass(classId: string) {
+    getParentsOfClass(classId: string): Promise<ParentModel[]> {
         return this.af.database.list('/parents', {
             query: {
                 orderByChild: 'classId',
                 equalTo: classId
             }
         })
+            .map(obj => {
+                return this.castListToModel(obj)
+            })
+            .first()
+            .toPromise()
+    }
+
+    // Conversion: FirebaseListObservable -> Model
+    private castListToModel(objs: any[]): ParentModel[] {
+        let parentArray: Array<ParentModel> = [];
+        for (let obj of objs) {
+            var parent = new ParentModel().fromObject(obj);
+            parentArray.push(parent);
+        }
+        return parentArray;
+    }
+
+    // Conversion: FirebaseObjectObservable -> Model
+    private castObjectToModel(obj: any): ParentModel {
+        return new ParentModel().fromObject(obj);
     }
 }

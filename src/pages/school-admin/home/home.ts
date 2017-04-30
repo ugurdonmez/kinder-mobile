@@ -10,6 +10,7 @@ import {Branches} from "../../../providers/branches";
 import {Translator} from "../../../app/translator";
 import {Schools} from "../../../providers/schools";
 import {Classes} from "../../../providers/classes";
+import {Parents} from "../../../providers/parents";
 
 @Component({
    selector: 'page-school-admin-home',
@@ -23,9 +24,10 @@ export class SchoolAdminHomePage {
    tab3Root = SchoolAdminStudentPage
    tab4Root = SchoolAdminMePage
 
-   constructor(private schoolProvider: Schools, private classProvider: Classes) {
+   constructor(private schoolProvider: Schools, private classProvider: Classes, private parentProvider: Parents) {
        // this.runSchoolProviderTests();
        // this.runClassProviderTests();
+       this.runParentProviderTests();
    }
 
    private runSchoolProviderTests() {
@@ -93,5 +95,26 @@ export class SchoolAdminHomePage {
                 console.log('classProvider.getClassesOfTeacher() Test with subscribe:')
                 console.log(response)
             })
+    }
+
+    private runParentProviderTests() {
+        // parentProvider.getParent() Test
+        console.log('parentProvider.getParent() Test raw:')
+        console.log(this.parentProvider.getParent("10qFn2d6daV17ZIt5QAIPpmv4G93"))
+        this.parentProvider.getParent("10qFn2d6daV17ZIt5QAIPpmv4G93")
+            .then(response => {
+                console.log('parentProvider.getParent() Test with subscribe:')
+                console.log(response)
+            })
+
+        // parentProvider.getParentsOfClass() Test
+        console.log('parentProvider.getParentsOfClass() Test raw:')
+        console.log(this.parentProvider.getParentsOfClass("-Ketn4qOsNQOA0vSjZRC"))
+        this.parentProvider.getParentsOfClass("-Ketn4qOsNQOA0vSjZRC")
+            .then(response => {
+                console.log('parentProvider.getParentsOfClass() Test with subscribe:')
+                console.log(response)
+            })
+
     }
 }
