@@ -23,45 +23,26 @@ export class Teachers {
         this.translate = translator.translatePipe;
     }
 
-    // TODO ugur hoca'nin github'dan issue #6'ya verecegi yanita gore geri eklenebilir
-    // public getUserTeachers(callback) {
-    //     let teacherCursors : any[] = [];
-    //     var userId = this.authData.getUserId();
-    //
-    //     var user_teacher_ids = this.af.database.list('/user-teachers/'+userId, {preserveSnapshot: true});
-    //     // console.log("user_teacher_ids:");
-    //     // console.log(user_teacher_ids);
-    //
-    //     user_teacher_ids.subscribe(snapshots=>{
-    //             snapshots.forEach(
-    //                 snapshot=>{
-    //                     // console.log(snapshot.val().teacherId);
-    //                     teacherCursors.push(snapshot.val().teacherId);
-    //                 });
-    //             // console.log(teacherCursors)
-    //             callback(teacherCursors)
-    //         }
-    //     )
-    // }
-
-    public getTeacher(teacherId: string) {
-        return this.af.database.object('/teachers/' + teacherId);
+    public getTeacher(teacherId: string):Promise<TeacherModel> {
+        return this.af.database.object('/teachers/' + teacherId)
+            .map(obj => {
+                return this.castObjectToModel(obj)
+            })
+            .first()
+            .toPromise()
     }
 
-    public getAllTeachers() {
-        return this.af.database.list('/teachers/');
+    public getAllTeachers():Promise<TeacherModel[]> {
+        return this.af.database.list('/teachers/')
+            .map(obj => {
+                return this.castListToModel(obj)
+            })
+            .first()
+            .toPromise()
     }
 
     public addTeacher(teacher: TeacherModel) {
         return this.teachers.push(teacher).key;
-
-
-        // TODO ugur hoca'nin github'dan issue #6'ya verecegi yanita gore asagidaki kisim geri eklenebilir
-        // var teacherId = pushedTeacher.key;
-        //console.log("teacherId: " + teacherId);
-        // var userId = this.authData.getUserId();
-        // var user_teachers = this.af.database.list('/user-teachers/'+userId);
-        // user_teachers.push({'teacherId':teacherId});
     }
 
     public registerThisUserAsTeacher(teacher: TeacherModel){
@@ -130,12 +111,32 @@ export class Teachers {
     //     return firebase.storage().ref('/teacher-images/namedByTeacherId/').child(teacherId);
     //     }
 
-    getTeachersOfSchool(schoolId: string) {
+    getTeachersOfSchool(schoolId: string):Promise<TeacherModel[]> {
         return this.af.database.list('/teachers/', {
             query: {
                 orderByChild: 'schoolId',
                 equalTo: schoolId
             }
         })
+            .map(obj => {
+                return this.castListToModel(obj)
+            })
+            .first()
+            .toPromise()
+    }
+
+    // Conversion: FirebaseListObservable -> Model
+    private castListToModel(objs: any[]): TeacherModel[] {
+        let teacherArray: Array<TeacherModel> = [];
+        for (let obj of objs) {
+            var teacher = new TeacherModel().fromObject(obj);
+            teacherArray.push(teacher);
+        }
+        return teacherArray;
+    }
+
+    // Conversion: FirebaseObjectObservable -> Model
+    private castObjectToModel(obj: any): TeacherModel {
+        return new TeacherModel().fromObject(obj);
     }
 }

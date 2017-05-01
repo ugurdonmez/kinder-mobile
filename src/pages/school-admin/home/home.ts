@@ -11,6 +11,7 @@ import {Translator} from "../../../app/translator";
 import {Schools} from "../../../providers/schools";
 import {Classes} from "../../../providers/classes";
 import {Parents} from "../../../providers/parents";
+import {Teachers} from "../../../providers/teachers";
 
 @Component({
    selector: 'page-school-admin-home',
@@ -24,10 +25,12 @@ export class SchoolAdminHomePage {
    tab3Root = SchoolAdminStudentPage
    tab4Root = SchoolAdminMePage
 
-   constructor(private schoolProvider: Schools, private classProvider: Classes, private parentProvider: Parents) {
+   constructor(private schoolProvider: Schools, private classProvider: Classes, private parentProvider: Parents,
+   private teacherProvider: Teachers) {
        // this.runSchoolProviderTests();
        // this.runClassProviderTests();
-       this.runParentProviderTests();
+       // this.runParentProviderTests();
+       this.runTeacherProviderTests();
    }
 
    private runSchoolProviderTests() {
@@ -113,6 +116,33 @@ export class SchoolAdminHomePage {
         this.parentProvider.getParentsOfClass("-Ketn4qOsNQOA0vSjZRC")
             .then(response => {
                 console.log('parentProvider.getParentsOfClass() Test with subscribe:')
+                console.log(response)
+            })
+
+    }
+
+    private runTeacherProviderTests() {
+        console.log('teacherProvider.getTeacher() Test raw:')
+        console.log(this.teacherProvider.getTeacher("0eUDFB4h8WdpQwWmxPzcngGDR7a2"))
+        this.teacherProvider.getTeacher("0eUDFB4h8WdpQwWmxPzcngGDR7a2")
+            .then(response => {
+                console.log('teacherProvider.getTeacher() Test with subscribe:')
+                console.log(response)
+            })
+
+        console.log('teacherProvider.getAllTeachers() Test raw:')
+        console.log(this.teacherProvider.getAllTeachers())
+        this.teacherProvider.getAllTeachers()
+            .then(response => {
+                console.log('teacherProvider.getAllTeachers() Test with subscribe:')
+                console.log(response)
+            })
+
+        console.log('teacherProvider.getTeachersOfSchool() Test raw:')
+        console.log(this.teacherProvider.getTeachersOfSchool("-KcBQ6jMFDopvvJ0muK9"))
+        this.teacherProvider.getTeachersOfSchool("-KcBQ6jMFDopvvJ0muK9")
+            .then(response => {
+                console.log('teacherProvider.getTeachersOfSchool() Test with subscribe:')
                 console.log(response)
             })
 
