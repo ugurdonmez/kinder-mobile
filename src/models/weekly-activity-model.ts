@@ -4,7 +4,6 @@ export class WeeklyActivityModel {
     imgUrl: string;
 
     public fromObject(obj: any):WeeklyActivityModel {
-        console.log(obj)
         this.id = obj.$key
         this.date = obj.$key
         this.imgUrl = obj.$value
