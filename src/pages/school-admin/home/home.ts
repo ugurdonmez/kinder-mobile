@@ -14,6 +14,7 @@ import {Parents} from "../../../providers/parents";
 import {Teachers} from "../../../providers/teachers";
 import {Activity} from "../../../providers/activity";
 import {WeeklyActivity} from "../../../providers/weeklyactivity";
+import {Invitation} from "../../../providers/invitation";
 
 @Component({
    selector: 'page-school-admin-home',
@@ -28,13 +29,15 @@ export class SchoolAdminHomePage {
    tab4Root = SchoolAdminMePage
 
    constructor(private schoolProvider: Schools, private classProvider: Classes, private parentProvider: Parents,
-   private teacherProvider: Teachers, private weeklyActivityProvider: WeeklyActivity, private activityProvider: Activity) {
+   private teacherProvider: Teachers, private weeklyActivityProvider: WeeklyActivity, private activityProvider: Activity,
+   private invitationProvider: Invitation) {
        // this.runSchoolProviderTests();
        // this.runClassProviderTests();
        // this.runParentProviderTests();
        // this.runTeacherProviderTests();
-       this.runWeeklyActivityProviderTests();
-       this.runActivityProviderTests();
+       // this.runWeeklyActivityProviderTests();
+       // this.runActivityProviderTests();
+       // this.runInvitationProviderTests();
    }
 
    private runSchoolProviderTests() {
@@ -168,6 +171,24 @@ export class SchoolAdminHomePage {
         this.activityProvider.getActivities("-Ketn4qOsNQOA0vSjZRC")
             .then(response => {
                 console.log('activityProvider.getActivities() Test with subscribe:')
+                console.log(response)
+            })
+    }
+
+    private runInvitationProviderTests() {
+        console.log('invitationProvider.getInvitations() Test raw:')
+        console.log(this.invitationProvider.getInvitations("-Ketn4qOsNQOA0vSjZRC"))
+        this.invitationProvider.getInvitations("-Ketn4qOsNQOA0vSjZRC")
+            .then(response => {
+                console.log('invitationProvider.getInvitations() Test with subscribe:')
+                console.log(response)
+            })
+
+        console.log('invitationProvider.getInvitationsOfHost() Test raw:')
+        console.log(this.invitationProvider.getInvitationsOfHost("-Ketn4qOsNQOA0vSjZRC", "wXQd9quU4sT2zYg6bqvgr1mrvW42"))
+        this.invitationProvider.getInvitationsOfHost("-Ketn4qOsNQOA0vSjZRC", "wXQd9quU4sT2zYg6bqvgr1mrvW42")
+            .then(response => {
+                console.log('invitationProvider.getInvitationsOfHost() Test with subscribe:')
                 console.log(response)
             })
     }
