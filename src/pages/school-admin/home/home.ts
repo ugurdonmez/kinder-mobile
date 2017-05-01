@@ -12,6 +12,8 @@ import {Schools} from "../../../providers/schools";
 import {Classes} from "../../../providers/classes";
 import {Parents} from "../../../providers/parents";
 import {Teachers} from "../../../providers/teachers";
+import {Activity} from "../../../providers/activity";
+import {WeeklyActivity} from "../../../providers/weeklyactivity";
 
 @Component({
    selector: 'page-school-admin-home',
@@ -26,11 +28,13 @@ export class SchoolAdminHomePage {
    tab4Root = SchoolAdminMePage
 
    constructor(private schoolProvider: Schools, private classProvider: Classes, private parentProvider: Parents,
-   private teacherProvider: Teachers) {
+   private teacherProvider: Teachers, private weeklyActivityProvider: WeeklyActivity, private activityProvider: Activity) {
        // this.runSchoolProviderTests();
        // this.runClassProviderTests();
        // this.runParentProviderTests();
-       this.runTeacherProviderTests();
+       // this.runTeacherProviderTests();
+       this.runWeeklyActivityProviderTests();
+       this.runActivityProviderTests();
    }
 
    private runSchoolProviderTests() {
@@ -147,4 +151,26 @@ export class SchoolAdminHomePage {
             })
 
     }
+
+    private runWeeklyActivityProviderTests() {
+        console.log('weeklyActivityProvider.getActivityImage() Test raw:')
+        console.log(this.weeklyActivityProvider.getActivityImage("-Ketn4qOsNQOA0vSjZRC", "1234"))
+        this.weeklyActivityProvider.getActivityImage("-Ketn4qOsNQOA0vSjZRC", "1234")
+            .then(response => {
+                console.log('weeklyActivityProvider.getActivityImage() Test with subscribe:')
+                console.log(response)
+            })
+    }
+
+    private runActivityProviderTests() {
+        console.log('activityProvider.getActivities() Test raw:')
+        console.log(this.activityProvider.getActivities("-Ketn4qOsNQOA0vSjZRC"))
+        this.activityProvider.getActivities("-Ketn4qOsNQOA0vSjZRC")
+            .then(response => {
+                console.log('activityProvider.getActivities() Test with subscribe:')
+                console.log(response)
+            })
+    }
+
+
 }
