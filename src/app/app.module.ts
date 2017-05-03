@@ -34,6 +34,7 @@ import {WeeklyActivity} from "../providers/weeklyactivity";
 import {Invitation} from "../providers/invitation";
 import {Birthday} from "../providers/birthday";
 import {Reminder} from "../providers/reminder";
+import {WeeklyMealMenu} from "../providers/weeklymealmenu";
 
 // AF2 Settings
 export const firebaseConfig = {
@@ -103,6 +104,7 @@ export function createTranslateLoader(http: Http) {
       Invitation,
       Birthday,
       Reminder,
+      WeeklyMealMenu,
    ]
 })
 

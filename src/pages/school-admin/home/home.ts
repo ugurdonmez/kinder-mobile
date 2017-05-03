@@ -15,6 +15,8 @@ import {Teachers} from "../../../providers/teachers";
 import {Activity} from "../../../providers/activity";
 import {WeeklyActivity} from "../../../providers/weeklyactivity";
 import {Invitation} from "../../../providers/invitation";
+import {Reminder} from "../../../providers/reminder";
+import {WeeklyMealMenu} from "../../../providers/weeklymealmenu";
 
 @Component({
    selector: 'page-school-admin-home',
@@ -30,7 +32,7 @@ export class SchoolAdminHomePage {
 
    constructor(private schoolProvider: Schools, private classProvider: Classes, private parentProvider: Parents,
    private teacherProvider: Teachers, private weeklyActivityProvider: WeeklyActivity, private activityProvider: Activity,
-   private invitationProvider: Invitation) {
+   private invitationProvider: Invitation, private reminderProvider: Reminder, private weeklyMealMenuProvider: WeeklyMealMenu) {
        // this.runSchoolProviderTests();
        // this.runClassProviderTests();
        // this.runParentProviderTests();
@@ -38,6 +40,8 @@ export class SchoolAdminHomePage {
        // this.runWeeklyActivityProviderTests();
        // this.runActivityProviderTests();
        // this.runInvitationProviderTests();
+       // this.runReminderProviderTests();
+       // this.runWeeklyMealMenuProviderTests();
    }
 
    private runSchoolProviderTests() {
@@ -189,6 +193,26 @@ export class SchoolAdminHomePage {
         this.invitationProvider.getInvitationsOfHost("-Ketn4qOsNQOA0vSjZRC", "wXQd9quU4sT2zYg6bqvgr1mrvW42")
             .then(response => {
                 console.log('invitationProvider.getInvitationsOfHost() Test with subscribe:')
+                console.log(response)
+            })
+    }
+
+    private runReminderProviderTests() {
+        console.log('reminderProvider.getReminders() Test raw:')
+        console.log(this.reminderProvider.getReminders("wXQd9quU4sT2zYg6bqvgr1mrvW42"))
+        this.reminderProvider.getReminders("wXQd9quU4sT2zYg6bqvgr1mrvW42")
+            .then(response => {
+                console.log('reminderProvider.getReminders() Test with subscribe:')
+                console.log(response)
+            })
+    }
+
+    private runWeeklyMealMenuProviderTests() {
+        console.log('weeklyMealMenuProvider.getMenuImage() Test raw:')
+        console.log(this.weeklyMealMenuProvider.getMenuImage("-Ketn4qOsNQOA0vSjZRC", "datehere"))
+        this.weeklyMealMenuProvider.getMenuImage("-Ketn4qOsNQOA0vSjZRC", "datehere")
+            .then(response => {
+                console.log('weeklyMealMenuProvider.getMenuImage() Test with subscribe:')
                 console.log(response)
             })
     }
