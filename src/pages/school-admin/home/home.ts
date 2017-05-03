@@ -20,6 +20,7 @@ import {WeeklyMealMenu} from "../../../providers/weeklymealmenu";
 import {Homework} from "../../../providers/homework";
 import {Gallery} from "../../../providers/gallery";
 import {Feedback} from "../../../providers/feedback";
+import {Attendance} from "../../../providers/attendance";
 
 @Component({
    selector: 'page-school-admin-home',
@@ -36,7 +37,8 @@ export class SchoolAdminHomePage {
    constructor(private schoolProvider: Schools, private classProvider: Classes, private parentProvider: Parents,
    private teacherProvider: Teachers, private weeklyActivityProvider: WeeklyActivity, private activityProvider: Activity,
    private invitationProvider: Invitation, private reminderProvider: Reminder, private weeklyMealMenuProvider: WeeklyMealMenu,
-   private homeworkProvider: Homework, private galleryProvider: Gallery, private feedbackProvider: Feedback) {
+   private homeworkProvider: Homework, private galleryProvider: Gallery, private feedbackProvider: Feedback,
+   private attendanceProvider: Attendance) {
        // this.runSchoolProviderTests();
        // this.runClassProviderTests();
        // this.runParentProviderTests();
@@ -50,6 +52,7 @@ export class SchoolAdminHomePage {
        // this.runGalleryProviderTests();
        // this.runGalleryProviderTests();
        // this.runFeedbackProviderTests();
+       this.runAttendanceProviderTests();
    }
 
    private runSchoolProviderTests() {
@@ -285,6 +288,20 @@ export class SchoolAdminHomePage {
         this.feedbackProvider.getFeedbackForStudent("-Ketn4qOsNQOA0vSjZRC", "parentUserId", "datehere")
             .then(response => {
                 console.log('feedbackProvider.getFeedbackForStudent() Test with subscribe:')
+                console.log(response)
+            })
+    }
+
+    private runAttendanceProviderTests() {
+        this.attendanceProvider.getAttendanceOf("-Ketn4qOsNQOA0vSjZRC", "datehere")
+            .then(response => {
+                console.log('attendanceProvider.getAttendanceOf() Test:')
+                console.log(response)
+            })
+
+        this.attendanceProvider.getAttendanceOf("-Ketn4qOsNQOA0vSjZRC", "datehere", "studentid1")
+            .then(response => {
+                console.log('attendanceProvider.getAttendanceOf() Test with student id:')
                 console.log(response)
             })
     }

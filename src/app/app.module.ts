@@ -38,6 +38,7 @@ import {WeeklyMealMenu} from "../providers/weeklymealmenu";
 import {Homework} from "../providers/homework";
 import {Gallery} from "../providers/gallery";
 import {Feedback} from "../providers/feedback";
+import {Attendance} from "../providers/attendance";
 
 // AF2 Settings
 export const firebaseConfig = {
@@ -111,6 +112,7 @@ export function createTranslateLoader(http: Http) {
       Homework,
       Gallery,
       Feedback,
+      Attendance,
    ]
 })
 
