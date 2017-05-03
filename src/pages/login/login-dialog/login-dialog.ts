@@ -99,10 +99,10 @@ export class LoginDialog {
    }
 
    private redirectUser(): void {
-      this.authData.getUserRole()
-         .subscribe(snapshot => {
+      this.authData.getUser()
+         .then(snapshot => {
 
-            const role = snapshot.$value;
+            const role = snapshot.role;
 
             this.loading.dismiss()
 

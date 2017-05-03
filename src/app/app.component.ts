@@ -25,11 +25,11 @@ export class MyApp {
       // TODO: refactor this part
       af.auth.subscribe(user => {
          if (user) {
-            this.authData.getUserRole()
-               .subscribe(snapshot => {
+            this.authData.getUser()
+               .then(snapshot => {
                   console.log('myapp navigate')
 
-                  const role = snapshot.$value;
+                  const role = snapshot.role;
 
                   if (role == 'branch-admin') {
                      this.rootPage = SchoolAdminHomePage

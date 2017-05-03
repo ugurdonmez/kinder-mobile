@@ -78,11 +78,6 @@ export class AuthData {
         });
     }
 
-    // TODO delete this after refactoring its usages.
-    public getUserRole(): FirebaseObjectObservable<any> {
-        return this.af.database.object('/users/'+ this.getUserId() + "/role");
-    }
-
     public getUser(): Promise<UserModel>{
         let userId = this.getUserId();
         return this.af.database.object('/users/'+userId)
