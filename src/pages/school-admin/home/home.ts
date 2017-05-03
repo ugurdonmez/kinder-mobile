@@ -21,6 +21,7 @@ import {Homework} from "../../../providers/homework";
 import {Gallery} from "../../../providers/gallery";
 import {Feedback} from "../../../providers/feedback";
 import {Attendance} from "../../../providers/attendance";
+import {AuthData} from "../../../providers/auth-data";
 
 @Component({
    selector: 'page-school-admin-home',
@@ -38,7 +39,7 @@ export class SchoolAdminHomePage {
    private teacherProvider: Teachers, private weeklyActivityProvider: WeeklyActivity, private activityProvider: Activity,
    private invitationProvider: Invitation, private reminderProvider: Reminder, private weeklyMealMenuProvider: WeeklyMealMenu,
    private homeworkProvider: Homework, private galleryProvider: Gallery, private feedbackProvider: Feedback,
-   private attendanceProvider: Attendance) {
+   private attendanceProvider: Attendance, private userProvider: AuthData) {
        // this.runSchoolProviderTests();
        // this.runClassProviderTests();
        // this.runParentProviderTests();
@@ -52,7 +53,8 @@ export class SchoolAdminHomePage {
        // this.runGalleryProviderTests();
        // this.runGalleryProviderTests();
        // this.runFeedbackProviderTests();
-       this.runAttendanceProviderTests();
+       // this.runAttendanceProviderTests();
+       // this.runUserProviderTests();
    }
 
    private runSchoolProviderTests() {
@@ -302,6 +304,14 @@ export class SchoolAdminHomePage {
         this.attendanceProvider.getAttendanceOf("-Ketn4qOsNQOA0vSjZRC", "datehere", "studentid1")
             .then(response => {
                 console.log('attendanceProvider.getAttendanceOf() Test with student id:')
+                console.log(response)
+            })
+    }
+
+    private runUserProviderTests() {
+        this.userProvider.getUser()
+            .then(response => {
+                console.log('userProvider.getUser() Test:')
                 console.log(response)
             })
     }

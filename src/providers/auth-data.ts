@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
+import {UserModel} from "../models/user-model";
 
 
 @Injectable()
@@ -39,25 +40,22 @@ export class AuthData {
         return this.af.auth.createUser({ email: newEmail, password: newPassword });
     }
 
-    public getUserId(): any {
+    public getUserId(): string {
         return this.user.uid;
     }
 
-    public getUserEmail(){
+    public getUserEmail(): string{
         return this.user.auth.email;
     }
 
-    // newInvitation(email: string, userRole: string, branchId?: string) {
-    public newInvitation(invitationJson) {
+    public newInvitation(invitationJson): void {
         let invitedUsersList = this.af.database.list('/invited-users/');
         invitedUsersList.push(invitationJson);
     }
 
-    public updateUserRoleFromInvitedUsers(): any {
+    public updateUserRoleFromInvitedUsers(): void {
         var userMail = this.getUserEmail();
-
-        this.af.database.object('/users/' + this.getUserId() + '/email').set(userMail);
-
+        // this.af.database.list('/all-registered-emails/' + userMail).set(true); // TODO to prevent invitation of already registered users
         this.af.database.list('/invited-users', {
             query: {
                 orderByChild: 'email',
@@ -80,12 +78,33 @@ export class AuthData {
         });
     }
 
+    // TODO delete this after refactoring its usages.
     public getUserRole(): FirebaseObjectObservable<any> {
         return this.af.database.object('/users/'+ this.getUserId() + "/role");
     }
 
-    getUser(): any{
+    public getUser(): Promise<UserModel>{
         let userId = this.getUserId();
-        return this.af.database.object('/users/'+userId);
+        return this.af.database.object('/users/'+userId)
+            .map(obj => {
+                return this.castObjectToModel(obj, this.getUserEmail())
+            })
+            .first()
+            .toPromise()
+    }
+
+    // // Conversion: FirebaseListObservable -> Model
+    // private castListToModel(objs: any[]): UserModel[] {
+    //     let modelArray: Array<UserModel> = [];
+    //     for (let obj of objs) {
+    //         var model = new UserModel().fromObject(obj);
+    //         modelArray.push(model);
+    //     }
+    //     return modelArray;
+    // }
+
+    // Conversion: FirebaseObjectObservable -> Model
+    private castObjectToModel(obj: any, email:string): UserModel {
+        return new UserModel().fromObject(obj, email);
     }
 }
