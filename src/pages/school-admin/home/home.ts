@@ -17,6 +17,7 @@ import {WeeklyActivity} from "../../../providers/weeklyactivity";
 import {Invitation} from "../../../providers/invitation";
 import {Reminder} from "../../../providers/reminder";
 import {WeeklyMealMenu} from "../../../providers/weeklymealmenu";
+import {Homework} from "../../../providers/homework";
 
 @Component({
    selector: 'page-school-admin-home',
@@ -32,7 +33,8 @@ export class SchoolAdminHomePage {
 
    constructor(private schoolProvider: Schools, private classProvider: Classes, private parentProvider: Parents,
    private teacherProvider: Teachers, private weeklyActivityProvider: WeeklyActivity, private activityProvider: Activity,
-   private invitationProvider: Invitation, private reminderProvider: Reminder, private weeklyMealMenuProvider: WeeklyMealMenu) {
+   private invitationProvider: Invitation, private reminderProvider: Reminder, private weeklyMealMenuProvider: WeeklyMealMenu,
+   private homeworkProvider: Homework) {
        // this.runSchoolProviderTests();
        // this.runClassProviderTests();
        // this.runParentProviderTests();
@@ -42,6 +44,7 @@ export class SchoolAdminHomePage {
        // this.runInvitationProviderTests();
        // this.runReminderProviderTests();
        // this.runWeeklyMealMenuProviderTests();
+       this.runhomeworkProviderTests();
    }
 
    private runSchoolProviderTests() {
@@ -213,6 +216,16 @@ export class SchoolAdminHomePage {
         this.weeklyMealMenuProvider.getMenuImage("-Ketn4qOsNQOA0vSjZRC", "datehere")
             .then(response => {
                 console.log('weeklyMealMenuProvider.getMenuImage() Test with subscribe:')
+                console.log(response)
+            })
+    }
+
+    private runhomeworkProviderTests() {
+        console.log('homeworkProvider.getHomeworks() Test raw:')
+        console.log(this.homeworkProvider.getHomeworks("-Ketn4qOsNQOA0vSjZRC"))
+        this.homeworkProvider.getHomeworks("-Ketn4qOsNQOA0vSjZRC")
+            .then(response => {
+                console.log('homeworkProvider.getHomeworks() Test with subscribe:')
                 console.log(response)
             })
     }
