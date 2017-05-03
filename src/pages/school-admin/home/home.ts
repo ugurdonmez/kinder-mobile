@@ -18,6 +18,7 @@ import {Invitation} from "../../../providers/invitation";
 import {Reminder} from "../../../providers/reminder";
 import {WeeklyMealMenu} from "../../../providers/weeklymealmenu";
 import {Homework} from "../../../providers/homework";
+import {Gallery} from "../../../providers/gallery";
 
 @Component({
    selector: 'page-school-admin-home',
@@ -34,7 +35,7 @@ export class SchoolAdminHomePage {
    constructor(private schoolProvider: Schools, private classProvider: Classes, private parentProvider: Parents,
    private teacherProvider: Teachers, private weeklyActivityProvider: WeeklyActivity, private activityProvider: Activity,
    private invitationProvider: Invitation, private reminderProvider: Reminder, private weeklyMealMenuProvider: WeeklyMealMenu,
-   private homeworkProvider: Homework) {
+   private homeworkProvider: Homework, private galleryProvider: Gallery) {
        // this.runSchoolProviderTests();
        // this.runClassProviderTests();
        // this.runParentProviderTests();
@@ -44,7 +45,8 @@ export class SchoolAdminHomePage {
        // this.runInvitationProviderTests();
        // this.runReminderProviderTests();
        // this.runWeeklyMealMenuProviderTests();
-       this.runhomeworkProviderTests();
+       // this.runHomeworkProviderTests();
+       this.runGalleryProviderTests();
    }
 
    private runSchoolProviderTests() {
@@ -220,7 +222,7 @@ export class SchoolAdminHomePage {
             })
     }
 
-    private runhomeworkProviderTests() {
+    private runHomeworkProviderTests() {
         console.log('homeworkProvider.getHomeworks() Test raw:')
         console.log(this.homeworkProvider.getHomeworks("-Ketn4qOsNQOA0vSjZRC"))
         this.homeworkProvider.getHomeworks("-Ketn4qOsNQOA0vSjZRC")
@@ -228,6 +230,50 @@ export class SchoolAdminHomePage {
                 console.log('homeworkProvider.getHomeworks() Test with subscribe:')
                 console.log(response)
             })
+    }
+
+    private runGalleryProviderTests() {
+        console.log('galleryProvider.getAllAlbums() Test raw:')
+        console.log(this.galleryProvider.getAllAlbums("-Ketn4qOsNQOA0vSjZRC"))
+        this.galleryProvider.getAllAlbums("-Ketn4qOsNQOA0vSjZRC")
+            .then(response => {
+                console.log('galleryProvider.getAllAlbums() Test with subscribe:')
+                console.log(response)
+            })
+
+        console.log('galleryProvider.getImagesInAlbum() Test raw:')
+        console.log(this.galleryProvider.getImagesInAlbum("-Ketn4qOsNQOA0vSjZRC", "-KgebT_yvgW6BqZE5dLx"))
+        this.galleryProvider.getImagesInAlbum("-Ketn4qOsNQOA0vSjZRC", "-KgebT_yvgW6BqZE5dLx")
+            .then(response => {
+                console.log('galleryProvider.getImagesInAlbum() Test with subscribe:')
+                console.log(response)
+            })
+
+        console.log('galleryProvider.getImage() Test raw:')
+        console.log(this.galleryProvider.getImage("-Ketn4qOsNQOA0vSjZRC", "-KgebxJc3o8QRNoBuP1-"))
+        this.galleryProvider.getImage("-Ketn4qOsNQOA0vSjZRC", "-KgebxJc3o8QRNoBuP1-")
+            .then(response => {
+                console.log('galleryProvider.getImage() Test with subscribe:')
+                console.log(response)
+            })
+
+        console.log('galleryProvider.getImagesOfClass() Test raw:')
+        console.log(this.galleryProvider.getImagesOfClass("-Ketn4qOsNQOA0vSjZRC"))
+        this.galleryProvider.getImagesOfClass("-Ketn4qOsNQOA0vSjZRC")
+            .then(response => {
+                console.log('galleryProvider.getImagesOfClass() Test with subscribe:')
+                console.log(response)
+            })
+
+        console.log('galleryProvider.getImageIdsOfStudent() Test raw:')
+        console.log(this.galleryProvider.getImageIdsOfStudent("-Ketn4qOsNQOA0vSjZRC", 'StudentId'))
+        this.galleryProvider.getImageIdsOfStudent("-Ketn4qOsNQOA0vSjZRC", 'StudentId')
+            .then(response => {
+                console.log('galleryProvider.getImageIdsOfStudent() Test with subscribe:')
+                console.log(response)
+            })
+
+
     }
 
 
