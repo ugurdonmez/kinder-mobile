@@ -19,6 +19,7 @@ import {Reminder} from "../../../providers/reminder";
 import {WeeklyMealMenu} from "../../../providers/weeklymealmenu";
 import {Homework} from "../../../providers/homework";
 import {Gallery} from "../../../providers/gallery";
+import {Feedback} from "../../../providers/feedback";
 
 @Component({
    selector: 'page-school-admin-home',
@@ -35,7 +36,7 @@ export class SchoolAdminHomePage {
    constructor(private schoolProvider: Schools, private classProvider: Classes, private parentProvider: Parents,
    private teacherProvider: Teachers, private weeklyActivityProvider: WeeklyActivity, private activityProvider: Activity,
    private invitationProvider: Invitation, private reminderProvider: Reminder, private weeklyMealMenuProvider: WeeklyMealMenu,
-   private homeworkProvider: Homework, private galleryProvider: Gallery) {
+   private homeworkProvider: Homework, private galleryProvider: Gallery, private feedbackProvider: Feedback) {
        // this.runSchoolProviderTests();
        // this.runClassProviderTests();
        // this.runParentProviderTests();
@@ -46,7 +47,9 @@ export class SchoolAdminHomePage {
        // this.runReminderProviderTests();
        // this.runWeeklyMealMenuProviderTests();
        // this.runHomeworkProviderTests();
-       this.runGalleryProviderTests();
+       // this.runGalleryProviderTests();
+       // this.runGalleryProviderTests();
+       // this.runFeedbackProviderTests();
    }
 
    private runSchoolProviderTests() {
@@ -276,5 +279,14 @@ export class SchoolAdminHomePage {
 
     }
 
+    private runFeedbackProviderTests() {
+        console.log('feedbackProvider.getFeedbackForStudent() Test raw:')
+        console.log(this.feedbackProvider.getFeedbackForStudent("-Ketn4qOsNQOA0vSjZRC", "parentUserId", "datehere"))
+        this.feedbackProvider.getFeedbackForStudent("-Ketn4qOsNQOA0vSjZRC", "parentUserId", "datehere")
+            .then(response => {
+                console.log('feedbackProvider.getFeedbackForStudent() Test with subscribe:')
+                console.log(response)
+            })
+    }
 
 }
