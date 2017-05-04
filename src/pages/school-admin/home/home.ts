@@ -22,6 +22,7 @@ import {Gallery} from "../../../providers/gallery";
 import {Feedback} from "../../../providers/feedback";
 import {Attendance} from "../../../providers/attendance";
 import {AuthData} from "../../../providers/auth-data";
+import {UserModel} from "../../../models/user-model";
 
 @Component({
    selector: 'page-school-admin-home',
@@ -55,6 +56,7 @@ export class SchoolAdminHomePage {
        // this.runFeedbackProviderTests();
        // this.runAttendanceProviderTests();
        // this.runUserProviderTests();
+       // this.runUserInvitationProviderTests();
    }
 
    private runSchoolProviderTests() {
@@ -314,6 +316,13 @@ export class SchoolAdminHomePage {
                 console.log('userProvider.getUser() Test:')
                 console.log(response)
             })
+    }
+
+    private runUserInvitationProviderTests() {
+       let invitation = new UserModel();
+       invitation.email = "mockEmail@abc.com"
+       invitation.role = "mock User Role"
+        this.userProvider.newInvitation(invitation)
     }
 
 }

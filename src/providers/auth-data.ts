@@ -37,6 +37,7 @@ export class AuthData {
     }
 
     signupUser(newEmail: string, newPassword: string): any {
+        this.af.database.list('/all-registered-emails/').push({email: newEmail}); // adds mail to registered/invited mails
         return this.af.auth.createUser({ email: newEmail, password: newPassword });
     }
 
@@ -48,14 +49,25 @@ export class AuthData {
         return this.user.auth.email;
     }
 
-    public newInvitation(invitationJson): void {
-        let invitedUsersList = this.af.database.list('/invited-users/');
-        invitedUsersList.push(invitationJson);
+    public newInvitation(invitationJson: UserModel): void {
+        this.af.database.list('/all-registered-emails/', {
+            query: {
+                orderByChild: 'email',
+                equalTo: invitationJson.email
+        }}).subscribe( snapshots => {
+            if (snapshots.length > 0){ // ignore if mail is already registered or invited
+                console.log("mail already invited.")
+            }
+            else{ // // proceed if mail is not registered or invited yet
+                console.log('invitation successful')
+                this.af.database.list('/invited-users/').push(invitationJson);
+                this.af.database.list('/all-registered-emails/').push({email: invitationJson.email});
+            }
+        })
     }
 
     public updateUserRoleFromInvitedUsers(): void {
         var userMail = this.getUserEmail();
-        // this.af.database.list('/all-registered-emails/' + userMail).set(true); // TODO to prevent invitation of already registered users
         this.af.database.list('/invited-users', {
             query: {
                 orderByChild: 'email',
