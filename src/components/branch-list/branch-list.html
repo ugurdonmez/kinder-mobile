@@ -1,3 +1,12 @@
 
-<p>School Admin Branch Directive</p>
+<ion-list>
+  <ion-card *ngFor="let item of branches">
+    <ion-avatar item-left>
+      <img src="{{item.logoURL}}">
+    </ion-avatar>
+    <h2>{{item.name}}</h2>
+    <p>{{item.manager}}</p>
+    <p>{{item.manager_tel}}</p>
+  </ion-card>
+</ion-list>
 
