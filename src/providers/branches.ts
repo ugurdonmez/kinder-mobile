@@ -39,7 +39,7 @@ export class Branches {
 
       return this.af.database.list('/branches', {
          query: {
-            orderByChild: 'adminUserId',
+            orderByChild: 'branchAdminId',
             equalTo: userId
          }
       })
@@ -84,7 +84,7 @@ export class Branches {
    }
 
    public addBranch(branch: BranchModel) {
-      branch.adminUserId = this.authData.getUserId();
+      branch.branchAdminId = this.authData.getUserId();
       return this.branches.push(branch).key;
    }
 
@@ -165,7 +165,6 @@ export class Branches {
          branch.manager_tel = obj.manager_tel
          branch.manager_mail = obj.manager_mail
          branch.address = obj.address
-         branch.adminUserId = obj.adminUserId
          branch.branchAdminId = obj.branchAdminId
 
          branchArray.push(branch)
@@ -187,8 +186,7 @@ export class Branches {
       branch.manager_tel = obj.manager_tel
       branch.manager_mail = obj.manager_mail
       branch.address = obj.address
-      branch.adminUserId = obj.adminUserId
-      branch.schoolAdminId = obj.schoolAdminId
+      branch.branchAdminId = obj.branchAdminId
 
       return branch
    }

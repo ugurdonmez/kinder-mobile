@@ -7,6 +7,5 @@ export class BranchModel {
     manager_tel: string;
     manager_mail: string;
     address: string;
-    adminUserId: string;
     branchAdminId: string;
 }

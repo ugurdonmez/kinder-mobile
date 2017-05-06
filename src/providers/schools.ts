@@ -64,7 +64,7 @@ export class Schools {
    }
 
    public addSchool(school: SchoolModel) {
-      school.adminUserId = this.authData.getUserId();
+      school.schoolAdminId = this.authData.getUserId();
       return this.schools.push(school).key;
    }
 
@@ -98,7 +98,7 @@ export class Schools {
 
       return this.af.database.list('/schools', {
          query: {
-            orderByChild: 'adminUserId',
+            orderByChild: 'schoolAdminId',
             equalTo: userId
          }
       })
@@ -173,7 +173,8 @@ export class Schools {
          school.schoolTelephone = obj.schoolTelephone;
          school.secondContactPersonName = obj.secondContactPersonName;
          school.secondContactTelNo = obj.secondContactTelNo;
-         school.adminUserId = obj.adminUserId;
+         school.branchAdminId = obj.branchAdminId;
+         school.schoolAdminId = obj.schoolAdminId;
 
          schoolArray.push(school)
       }
@@ -200,7 +201,8 @@ export class Schools {
       school.schoolTelephone = obj.schoolTelephone;
       school.secondContactPersonName = obj.secondContactPersonName;
       school.secondContactTelNo = obj.secondContactTelNo;
-      school.adminUserId = obj.adminUserId;
+      school.branchAdminId = obj.branchAdminId;
+      school.schoolAdminId = obj.schoolAdminId;
 
       return school
    }

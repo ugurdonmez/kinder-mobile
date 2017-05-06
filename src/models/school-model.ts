@@ -13,5 +13,6 @@ export class SchoolModel {
     schoolTelephone: string;
     secondContactPersonName: string;
     secondContactTelNo: string;
-    adminUserId: string;
+    branchAdminId: string;
+    schoolAdminId: string;
 }
