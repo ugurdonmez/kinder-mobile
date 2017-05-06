@@ -39,6 +39,7 @@ import {Homework} from "../providers/homework";
 import {Gallery} from "../providers/gallery";
 import {Feedback} from "../providers/feedback";
 import {Attendance} from "../providers/attendance";
+import {Message} from "../providers/message";
 
 // AF2 Settings
 export const firebaseConfig = {
@@ -113,6 +114,7 @@ export function createTranslateLoader(http: Http) {
       Gallery,
       Feedback,
       Attendance,
+      Message,
    ]
 })
 

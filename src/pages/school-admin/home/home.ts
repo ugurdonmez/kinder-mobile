@@ -23,6 +23,7 @@ import {Feedback} from "../../../providers/feedback";
 import {Attendance} from "../../../providers/attendance";
 import {AuthData} from "../../../providers/auth-data";
 import {UserModel} from "../../../models/user-model";
+import {Message} from "../../../providers/message";
 
 @Component({
    selector: 'page-school-admin-home',
@@ -40,7 +41,7 @@ export class SchoolAdminHomePage {
    private teacherProvider: Teachers, private weeklyActivityProvider: WeeklyActivity, private activityProvider: Activity,
    private invitationProvider: Invitation, private reminderProvider: Reminder, private weeklyMealMenuProvider: WeeklyMealMenu,
    private homeworkProvider: Homework, private galleryProvider: Gallery, private feedbackProvider: Feedback,
-   private attendanceProvider: Attendance, private userProvider: AuthData) {
+   private attendanceProvider: Attendance, private userProvider: AuthData, private messageProvider: Message) {
        // this.runSchoolProviderTests();
        // this.runClassProviderTests();
        // this.runParentProviderTests();
@@ -57,6 +58,7 @@ export class SchoolAdminHomePage {
        // this.runAttendanceProviderTests();
        // this.runUserProviderTests();
        // this.runUserInvitationProviderTests();
+       // this.runMessageProviderTests();
    }
 
    private runSchoolProviderTests() {
@@ -323,6 +325,33 @@ export class SchoolAdminHomePage {
        invitation.email = "mockEmail@abc.com"
        invitation.role = "mock User Role"
         this.userProvider.newInvitation(invitation)
+    }
+
+    private runMessageProviderTests() {
+        this.messageProvider.getAllConversations()
+            .then(response => {
+                console.log('messageProvider.getAllConversations() Test:')
+                console.log(response)
+            })
+
+        this.messageProvider.getConversation("10qFn2d6daV17ZIt5QAIPpmv4G93")
+            .then(response => {
+                console.log('messageProvider.getConversation() Test:')
+                console.log(response)
+            })
+
+        this.messageProvider.getClassWall("-Ketn4qOsNQOA0vSjZRC")
+            .then(response => {
+                console.log('messageProvider.getClassWall() Test:')
+                console.log(response)
+            })
+
+        this.messageProvider.isClassWallReadForThisUser("-Ketn4qOsNQOA0vSjZRC")
+            .then(response => {
+                console.log('messageProvider.isClassWallReadForThisUser() Test:')
+                console.log(response)
+            })
+
     }
 
 }
