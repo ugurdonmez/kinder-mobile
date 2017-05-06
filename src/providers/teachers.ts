@@ -11,6 +11,7 @@ import * as firebase from 'firebase';
 import {Translator} from "../app/translator";
 import {TranslateService} from "ng2-translate";
 import {Schools} from "./schools";
+import {SchoolModel} from "../models/school-model";
 
 @Injectable()
 export class Teachers {
@@ -126,32 +127,12 @@ export class Teachers {
             .toPromise()
     }
 
-    public getSchoolAdminTeachers(schoolAdminId: string) {// : Promise<TeacherModel[]> {
-        this.schoolProvider.getSchoolAdminSchools().then(school => {
-            // console.log('teacher provider getSchoolAdminTeachers test:')
-            // console.log(school)
-            let schoolId = school[0].id
-            this.getTeachersOfSchool(schoolId).then( teachers => {
-                // console.log('teacher provider getTeachersOfSchool test:')
-                // console.log(teachers)
-                return teachers // we should return this value somehow. callback maybe?
-            })
-
-        })
+    public getSchoolAdminTeachers() {
+        return this.getTeachersOfSchools(this.schoolProvider.getSchoolAdminSchools())
     }
 
-    public getBranchAdminTeachers(branchAdminId: string) {// : Promise<TeacherModel[]> {
-        this.schoolProvider.getBranchAdminSchools().then( school => {
-            // console.log('teacher provider getSchoolAdminTeachers test:')
-            // console.log(school)
-            let schoolId = school[0].id
-            this.getTeachersOfSchool(schoolId).then( teachers => {
-                // console.log('teacher provider getTeachersOfSchool test:')
-                // console.log(teachers)
-                return teachers // we should return this value somehow. callback maybe?
-            })
-
-        })
+    public getBranchAdminTeachers() : Promise<TeacherModel[]> {
+        return this.getTeachersOfSchools(this.schoolProvider.getBranchAdminSchools())
     }
 
     // Conversion: FirebaseListObservable -> Model
@@ -167,5 +148,17 @@ export class Teachers {
     // Conversion: FirebaseObjectObservable -> Model
     private castObjectToModel(obj: any): TeacherModel {
         return new TeacherModel().fromObject(obj);
+    }
+
+    private getTeachersOfSchools(schools: Promise<SchoolModel[]>) {
+        return schools.then(schools => {
+            let teachers;
+            schools.forEach( school => {
+                teachers = this.getTeachersOfSchool(school.id)
+                // console.log("teachers is:")
+                // console.log(teachers)
+            })
+            return teachers
+        })
     }
 }

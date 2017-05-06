@@ -10,12 +10,9 @@ import {AuthData} from "../../../providers/auth-data";
 export class SchoolAdminTeacherPage {
 
    private pageTitleTextEn: string = "School Admin Home Page";
-   private userId: string;
 
    constructor(public navCtrl: NavController,
-               public navParams: NavParams,
-               private userProvider: AuthData) {
-      this.userId = userProvider.getUserId();
+               public navParams: NavParams) {
 
    }
 

@@ -1,23 +1,23 @@
 
 <p>teacher list directive start</p>
 
-<!--<ion-list>-->
-  <!--<ion-card *ngFor="let item of schools">-->
-    <!--<ion-grid>-->
-      <!--<ion-row>-->
-        <!--<div class="my-col-3">-->
-          <!--<div class="avatar-class">-->
-            <!--<img src="{{item.logoURL}}">-->
-          <!--</div>-->
-        <!--</div>-->
-        <!--<div class="my-col-9">-->
-          <!--<h2>{{item.name}}</h2>-->
-          <!--<h3>{{item.manager}}</h3>-->
-          <!--<p>{{item.manager_tel}}</p>-->
-        <!--</div>-->
-      <!--</ion-row>-->
-    <!--</ion-grid>-->
-  <!--</ion-card>-->
-<!--</ion-list>-->
+<ion-list>
+  <ion-card *ngFor="let item of teachers">
+    <ion-grid>
+      <ion-row>
+        <ion-col width-10>
+          <ion-avatar item-left>
+            <img src="{{item.profileImageUrl}}"/>
+          </ion-avatar>
+        </ion-col>
+        <div class="my-col-9">
+          <h2>{{item.name}}</h2>
+          <h3>{{item.surname}}</h3>
+          <p>{{item.notes}}</p>
+        </div>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+</ion-list>
 
 <p>teacher list directive end</p>
