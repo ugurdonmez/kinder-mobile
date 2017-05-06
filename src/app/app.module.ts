@@ -45,6 +45,7 @@ import {Gallery} from "../providers/gallery";
 import {Feedback} from "../providers/feedback";
 import {Attendance} from "../providers/attendance";
 import {Message} from "../providers/message";
+import {TeacherListDirective} from "../components/teacher-list/teacher-list";
 
 // AF2 Settings
 export const firebaseConfig = {
@@ -82,6 +83,7 @@ export function createTranslateLoader(http: Http) {
       HomeHeaderDirective,
       LogoutButtonDirective,
       SchoolListDirective,
+      TeacherListDirective,
    ],
    imports: [
       IonicModule.forRoot(MyApp),

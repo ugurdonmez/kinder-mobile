@@ -10,6 +10,7 @@ import {AlertController} from "ionic-angular";
 import * as firebase from 'firebase';
 import {Translator} from "../app/translator";
 import {TranslateService} from "ng2-translate";
+import {Schools} from "./schools";
 
 @Injectable()
 export class Teachers {
@@ -18,7 +19,7 @@ export class Teachers {
     private translate: TranslateService;
 
     constructor(public af: AngularFire, public authData: AuthData, private alertCtrl: AlertController,
-                public translator: Translator){
+                public translator: Translator, private schoolProvider: Schools){
         this.teachers = af.database.list('/teachers');
         this.translate = translator.translatePipe;
     }
@@ -123,6 +124,34 @@ export class Teachers {
             })
             .first()
             .toPromise()
+    }
+
+    public getSchoolAdminTeachers(schoolAdminId: string) {// : Promise<TeacherModel[]> {
+        this.schoolProvider.getSchoolAdminSchools().then(school => {
+            // console.log('teacher provider getSchoolAdminTeachers test:')
+            // console.log(school)
+            let schoolId = school[0].id
+            this.getTeachersOfSchool(schoolId).then( teachers => {
+                // console.log('teacher provider getTeachersOfSchool test:')
+                // console.log(teachers)
+                return teachers // we should return this value somehow. callback maybe?
+            })
+
+        })
+    }
+
+    public getBranchAdminTeachers(branchAdminId: string) {// : Promise<TeacherModel[]> {
+        this.schoolProvider.getBranchAdminSchools().then( school => {
+            // console.log('teacher provider getSchoolAdminTeachers test:')
+            // console.log(school)
+            let schoolId = school[0].id
+            this.getTeachersOfSchool(schoolId).then( teachers => {
+                // console.log('teacher provider getTeachersOfSchool test:')
+                // console.log(teachers)
+                return teachers // we should return this value somehow. callback maybe?
+            })
+
+        })
     }
 
     // Conversion: FirebaseListObservable -> Model

@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
+import {AuthData} from "../../../providers/auth-data";
 
 @Component({
    selector: 'page-school-admin-teacher',
@@ -9,9 +10,12 @@ import {NavController, NavParams} from 'ionic-angular';
 export class SchoolAdminTeacherPage {
 
    private pageTitleTextEn: string = "School Admin Home Page";
+   private userId: string;
 
    constructor(public navCtrl: NavController,
-               public navParams: NavParams) {
+               public navParams: NavParams,
+               private userProvider: AuthData) {
+      this.userId = userProvider.getUserId();
 
    }
 
