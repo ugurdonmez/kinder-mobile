@@ -5,8 +5,9 @@ import {StatusBar, Splashscreen} from 'ionic-native';
 
 import {AngularFire} from 'angularfire2';
 import {LoginPage} from '../pages/login/login';
-import {SchoolAdminHomePage} from '../pages/branch-admin/home/home';
 import {AuthData} from '../providers/auth-data';
+import {BranchAdminHomePage} from "../pages/branch-admin/home/home";
+import {SchoolAdminHomePage} from "../pages/school-admin/home/home";
 
 
 @Component({
@@ -32,9 +33,11 @@ export class MyApp {
                   const role = snapshot.$value;
 
                   if (role == 'branch-admin') {
+                     this.rootPage = BranchAdminHomePage
+                  } else if (role == 'school-admin') {
                      this.rootPage = SchoolAdminHomePage
                   } else {
-                     this.rootPage = SchoolAdminHomePage
+                     this.rootPage = LoginPage
                   }
 
                   // if (role === 'branch-admin') {

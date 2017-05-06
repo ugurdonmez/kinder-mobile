@@ -1,25 +1,22 @@
 
 import {Component} from '@angular/core';
 
-import {SchoolAdminTeacherPage} from '../teacher/teacher';
-import {SchoolAdminMePage} from '../me/me';
-import {SchoolAdminBranchPage} from '../branch/branch';
-import {SchoolAdminStudentPage} from '../student/student';
-
-import {Branches} from "../../../providers/branches";
-import {Translator} from "../../../app/translator";
+import {BranchAdminBranchPage} from "../branch/branch";
+import {BranchAdminTeacherPage} from "../teacher/teacher";
+import {BranchAdminStudentPage} from "../student/student";
+import {BranchAdminMePage} from "../me/me";
 
 @Component({
    selector: 'page-school-admin-home',
    templateUrl: 'home.html',
 })
 
-export class SchoolAdminHomePage {
+export class BranchAdminHomePage {
 
-   tab1Root = SchoolAdminBranchPage
-   tab2Root = SchoolAdminTeacherPage
-   tab3Root = SchoolAdminStudentPage
-   tab4Root = SchoolAdminMePage
+   tab1Root = BranchAdminBranchPage
+   tab2Root = BranchAdminTeacherPage
+   tab3Root = BranchAdminStudentPage
+   tab4Root = BranchAdminMePage
 
    constructor() {
 

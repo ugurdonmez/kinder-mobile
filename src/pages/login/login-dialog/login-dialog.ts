@@ -14,7 +14,8 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {Translator} from "../../../app/translator";
 import {AuthData} from "../../../providers/auth-data";
 import {EmailValidator} from "../../../validators/email";
-import {SchoolAdminHomePage} from "../../branch-admin/home/home";
+import {BranchAdminHomePage} from "../../branch-admin/home/home";
+import {SchoolAdminHomePage} from "../../school-admin/home/home";
 
 
 @Component({
@@ -107,11 +108,11 @@ export class LoginDialog {
             this.loading.dismiss()
 
             if (role == 'branch-admin') {
-               this.nav.setRoot(SchoolAdminHomePage)
+               this.nav.setRoot(BranchAdminHomePage)
                   .then(() => {
                      this.loading.dismiss()
                   })
-            } else {
+            } else if (role == 'school-admin') {
                this.nav.setRoot(SchoolAdminHomePage)
                   .then(() => {
                      this.loading.dismiss()
