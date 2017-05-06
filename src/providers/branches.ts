@@ -168,7 +168,7 @@ export class Branches {
          branch.manager_mail = obj.manager_mail
          branch.address = obj.address
          branch.adminUserId = obj.adminUserId
-         branch.schoolAdminId = obj.schoolAdminId
+         branch.branchAdminId = obj.branchAdminId
 
          branchArray.push(branch)
       }

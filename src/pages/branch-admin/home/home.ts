@@ -1,10 +1,10 @@
 
 import {Component} from '@angular/core';
 
-import {BranchAdminBranchPage} from "../branch/branch";
 import {BranchAdminTeacherPage} from "../teacher/teacher";
 import {BranchAdminStudentPage} from "../student/student";
 import {BranchAdminMePage} from "../me/me";
+import {BranchAdminSchoolPage} from "../school/school";
 
 @Component({
    selector: 'page-school-admin-home',
@@ -13,7 +13,7 @@ import {BranchAdminMePage} from "../me/me";
 
 export class BranchAdminHomePage {
 
-   tab1Root = BranchAdminBranchPage
+   tab1Root = BranchAdminSchoolPage
    tab2Root = BranchAdminTeacherPage
    tab3Root = BranchAdminStudentPage
    tab4Root = BranchAdminMePage

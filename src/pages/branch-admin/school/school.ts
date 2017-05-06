@@ -1,22 +1,17 @@
 import {Component} from '@angular/core';
-import {Branches} from "../../../providers/branches";
 import {Translator} from "../../../app/translator";
 
 @Component({
-   selector: 'page-branch-admin-branch',
-   templateUrl: 'branch.html',
+   selector: 'page-branch-admin-school',
+   templateUrl: 'school.html',
    providers: [Translator]
 })
 
-export class BranchAdminBranchPage {
+export class BranchAdminSchoolPage {
 
    private pageTitleTextEn: string = "Branch Admin Home Page";
 
    constructor(public translator: Translator) {
-
-   }
-
-   ionViewDidLoad() {
 
    }
 
