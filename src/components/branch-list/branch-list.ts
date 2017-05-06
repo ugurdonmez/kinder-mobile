@@ -19,7 +19,7 @@ export class BranchListDirective {
 
       console.log('BranchListDirective: constructor()')
 
-      this.branchProvider.getSchoolAdminBranches()
+      this.branchProvider.getBranchAdminBranches()
          .then(res => {
             console.log('BranchListDirective: constructor branches of school admin ')
             console.log(res)

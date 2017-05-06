@@ -5,7 +5,7 @@ import {StatusBar, Splashscreen} from 'ionic-native';
 
 import {AngularFire} from 'angularfire2';
 import {LoginPage} from '../pages/login/login';
-import {SchoolAdminHomePage} from '../pages/school-admin/home/home';
+import {SchoolAdminHomePage} from '../pages/branch-admin/home/home';
 import {AuthData} from '../providers/auth-data';
 
 

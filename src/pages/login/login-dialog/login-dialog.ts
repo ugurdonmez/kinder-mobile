@@ -14,7 +14,7 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {Translator} from "../../../app/translator";
 import {AuthData} from "../../../providers/auth-data";
 import {EmailValidator} from "../../../validators/email";
-import {SchoolAdminHomePage} from "../../school-admin/home/home";
+import {SchoolAdminHomePage} from "../../branch-admin/home/home";
 
 
 @Component({

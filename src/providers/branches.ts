@@ -67,6 +67,25 @@ export class Branches {
          .toPromise()
    }
 
+   public getBranchAdminBranches(): Promise<BranchModel[]> {
+      var userId = this.authData.getUserId();
+
+      return this.af.database
+         .list('/branches', {
+            query: {
+               orderByChild: 'branchAdminId',
+               equalTo: userId
+            }
+         })
+         .map(obj => {
+            var branch = this.castToBranchModel(obj)
+
+            return branch
+         })
+         .first()
+         .toPromise()
+   }
+
    public getBranch(branchId: string) {
       return this.af.database.object('/branches/' + branchId);
    }

@@ -9,4 +9,5 @@ export class BranchModel {
     address: string;
     adminUserId: string;
     schoolAdminId: string;
+    branchAdminId: string;
 }
