@@ -45,28 +45,6 @@ export class Branches {
       })
    }
 
-   public getSchoolAdminBranches(): Promise<BranchModel[]> {
-
-      var userId = this.authData.getUserId()
-
-      return this.af.database
-         .list('/branches', {
-            query: {
-               orderByChild: 'schoolAdminId',
-               equalTo: userId
-            }
-         })
-         .map(obj => {
-            // console.log('object')
-            // console.log(obj)
-            var branch = this.castToBranchModel(obj)
-
-            return branch
-         })
-         .first()
-         .toPromise()
-   }
-
    public getBranchAdminBranches(): Promise<BranchModel[]> {
       var userId = this.authData.getUserId();
 
