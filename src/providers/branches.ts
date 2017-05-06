@@ -151,43 +151,15 @@ export class Branches {
 
    // Conversion: FirebaseListObservable -> Model
    private castToBranchModel(objs: any[]): BranchModel[] {
-
-      let branchArray: Array<BranchModel> = []
-
+      let modelArray: Array<BranchModel> = []
       for (let obj of objs) {
-         var branch = new BranchModel()
-
-         branch.id = obj.$key
-         branch.name = obj.name
-         branch.tel = obj.tel
-         branch.logoURL = obj.logoURL
-         branch.manager = obj.manager
-         branch.manager_tel = obj.manager_tel
-         branch.manager_mail = obj.manager_mail
-         branch.address = obj.address
-         branch.branchAdminId = obj.branchAdminId
-
-         branchArray.push(branch)
+         modelArray.push(new BranchModel().fromObject(obj))
       }
-
-      return branchArray
+      return modelArray
    }
 
    // Conversion: FirebaseObjectObservable -> Model
    private castObjectToBranchModel(obj: any): BranchModel {
-
-      let branch = new BranchModel()
-
-      branch.id = obj.$key
-      branch.name = obj.name
-      branch.tel = obj.tel
-      branch.logoURL = obj.logoURL
-      branch.manager = obj.manager
-      branch.manager_tel = obj.manager_tel
-      branch.manager_mail = obj.manager_mail
-      branch.address = obj.address
-      branch.branchAdminId = obj.branchAdminId
-
-      return branch
+      return new BranchModel().fromObject(obj);
    }
 }

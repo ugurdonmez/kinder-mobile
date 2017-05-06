@@ -170,57 +170,15 @@ export class Schools {
 
    // Conversion: FirebaseListObservable -> Model
    private castToSchoolModel(objs: any[]): SchoolModel[] {
-
-      let schoolArray: Array<SchoolModel> = []
-
+      let modelArray: Array<SchoolModel> = []
       for (let obj of objs) {
-         var school = new SchoolModel()
-
-         school.id = obj.$key;
-         school.name = obj.name;
-         school.membershipEnd = obj.membershipEnd;
-         school.membershipStart = obj.membershipStart;
-         school.buildingAddress = obj.buildingAddress;
-         school.branchId = obj.branchId;
-         school.isActivated = obj.isActivated;
-         school.logoURL = obj.logoURL;
-         school.managerName = obj.managerName;
-         school.managerTel = obj.managerTel;
-         school.activationEmail = obj.activationEmail;
-         school.schoolTelephone = obj.schoolTelephone;
-         school.secondContactPersonName = obj.secondContactPersonName;
-         school.secondContactTelNo = obj.secondContactTelNo;
-         school.branchAdminId = obj.branchAdminId;
-         school.schoolAdminId = obj.schoolAdminId;
-
-         schoolArray.push(school)
+         modelArray.push(new SchoolModel().fromObject(obj))
       }
-
-      return schoolArray
+      return modelArray
    }
 
    // Conversion: FirebaseObjectObservable -> Model
    private castObjectToSchoolModel(obj: any): SchoolModel {
-
-      let school = new SchoolModel()
-
-      school.id = obj.$key;
-      school.name = obj.name;
-      school.membershipEnd = obj.membershipEnd;
-      school.membershipStart = obj.membershipStart;
-      school.buildingAddress = obj.buildingAddress;
-      school.branchId = obj.branchId;
-      school.isActivated = obj.isActivated;
-      school.logoURL = obj.logoURL;
-      school.managerName = obj.managerName;
-      school.managerTel = obj.managerTel;
-      school.activationEmail = obj.activationEmail;
-      school.schoolTelephone = obj.schoolTelephone;
-      school.secondContactPersonName = obj.secondContactPersonName;
-      school.secondContactTelNo = obj.secondContactTelNo;
-      school.branchAdminId = obj.branchAdminId;
-      school.schoolAdminId = obj.schoolAdminId;
-
-      return school
+      return new SchoolModel().fromObject(obj);
    }
 }
