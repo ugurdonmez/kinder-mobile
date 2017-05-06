@@ -157,7 +157,7 @@ export class Branches {
       for (let obj of objs) {
          var branch = new BranchModel()
 
-         branch.id = obj.id
+         branch.id = obj.$key
          branch.name = obj.name
          branch.tel = obj.tel
          branch.logoURL = obj.logoURL
@@ -178,7 +178,7 @@ export class Branches {
 
       let branch = new BranchModel()
 
-      branch.id = obj.id
+      branch.id = obj.$key
       branch.name = obj.name
       branch.tel = obj.tel
       branch.logoURL = obj.logoURL

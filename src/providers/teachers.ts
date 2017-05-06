@@ -131,7 +131,7 @@ export class Teachers {
         return this.getTeachersOfSchools(this.schoolProvider.getSchoolAdminSchools())
     }
 
-    public getBranchAdminTeachers() : Promise<TeacherModel[]> {
+    public getBranchAdminTeachers() {
         return this.getTeachersOfSchools(this.schoolProvider.getBranchAdminSchools())
     }
 
@@ -152,11 +152,10 @@ export class Teachers {
 
     private getTeachersOfSchools(schools: Promise<SchoolModel[]>) {
         return schools.then(schools => {
-            let teachers;
+            let teachers = []
             schools.forEach( school => {
-                teachers = this.getTeachersOfSchool(school.id)
-                // console.log("teachers is:")
-                // console.log(teachers)
+                let teachersOfThisSchool = this.getTeachersOfSchool(school.id)
+                teachers.push(teachersOfThisSchool)
             })
             return teachers
         })

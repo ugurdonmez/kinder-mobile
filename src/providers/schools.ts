@@ -176,7 +176,7 @@ export class Schools {
       for (let obj of objs) {
          var school = new SchoolModel()
 
-         school.id = obj.id;
+         school.id = obj.$key;
          school.name = obj.name;
          school.membershipEnd = obj.membershipEnd;
          school.membershipStart = obj.membershipStart;
@@ -204,7 +204,7 @@ export class Schools {
 
       let school = new SchoolModel()
 
-      school.id = obj.id;
+      school.id = obj.$key;
       school.name = obj.name;
       school.membershipEnd = obj.membershipEnd;
       school.membershipStart = obj.membershipStart;

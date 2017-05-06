@@ -23,6 +23,7 @@ export class TeacherListDirective {
                 private userProvider: AuthData) {
         console.log('TeacherListDirective: constructor()')
         this.userId = userProvider.getUserId();
+        this.teachers = [];
         userProvider.getUser().then(user => {
             this.userRole = user.role
             this.loadTeachers()
@@ -31,13 +32,21 @@ export class TeacherListDirective {
 
     private loadTeachers() {
         if (this.userRole == "branch-admin") {
-            this.teacherProvider.getBranchAdminTeachers().then(res => {
-                this.teachers = res
+            this.teacherProvider.getBranchAdminTeachers().then(schools => {
+                schools.forEach(school => {
+                    school.then(teachers => {
+                        this.teachers = this.teachers.concat(teachers)
+                    })
+                })
             })
         }
         else if (this.userRole == "school-admin") {
-            this.teacherProvider.getSchoolAdminTeachers().then(res => {
-                this.teachers = res
+            this.teacherProvider.getSchoolAdminTeachers().then(schools => {
+                schools.forEach(school => {
+                    school.then(teachers => {
+                        this.teachers = this.teachers.concat(teachers)
+                    })
+                })
             })
         }
     }
