@@ -1,10 +1,9 @@
 
 import {Component} from '@angular/core';
 
-import {SchoolAdminTeacherPage} from '../teacher/teacher';
-import {SchoolAdminMePage} from '../me/me';
-import {SchoolAdminBranchPage} from '../branch/branch';
-import {SchoolAdminStudentPage} from '../student/student';
+import {SchoolAdminTeacherPage} from "../teacher/teacher";
+import {SchoolAdminStudentPage} from "../student/student";
+import {SchoolAdminMePage} from "../me/me";
 
 import {Branches} from "../../../providers/branches";
 import {Translator} from "../../../app/translator";
@@ -32,10 +31,9 @@ import {Message} from "../../../providers/message";
 
 export class SchoolAdminHomePage {
 
-   tab1Root = SchoolAdminBranchPage
-   tab2Root = SchoolAdminTeacherPage
-   tab3Root = SchoolAdminStudentPage
-   tab4Root = SchoolAdminMePage
+   tab1Root = SchoolAdminTeacherPage
+   tab2Root = SchoolAdminStudentPage
+   tab3Root = SchoolAdminMePage
 
    constructor(private schoolProvider: Schools, private classProvider: Classes, private parentProvider: Parents,
    private teacherProvider: Teachers, private weeklyActivityProvider: WeeklyActivity, private activityProvider: Activity,

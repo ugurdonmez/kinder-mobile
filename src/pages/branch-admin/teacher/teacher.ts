@@ -2,13 +2,13 @@ import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 
 @Component({
-   selector: 'page-school-admin-student',
-   templateUrl: 'student.html'
+   selector: 'page-branch-admin-teacher',
+   templateUrl: 'teacher.html'
 })
 
-export class SchoolAdminStudentPage {
+export class BranchAdminTeacherPage {
 
-   private pageTitleTextEn: string = "School Admin Home Page";
+   private pageTitleTextEn: string = "Branch Admin Home Page";
 
    constructor(public navCtrl: NavController,
                public navParams: NavParams) {

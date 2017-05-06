@@ -45,20 +45,17 @@ export class Branches {
       })
    }
 
-   public getSchoolAdminBranches(): Promise<BranchModel[]> {
-
-      var userId = this.authData.getUserId()
+   public getBranchAdminBranches(): Promise<BranchModel[]> {
+      var userId = this.authData.getUserId();
 
       return this.af.database
          .list('/branches', {
             query: {
-               orderByChild: 'schoolAdminId',
+               orderByChild: 'branchAdminId',
                equalTo: userId
             }
          })
          .map(obj => {
-            // console.log('object')
-            // console.log(obj)
             var branch = this.castToBranchModel(obj)
 
             return branch
@@ -169,7 +166,7 @@ export class Branches {
          branch.manager_mail = obj.manager_mail
          branch.address = obj.address
          branch.adminUserId = obj.adminUserId
-         branch.schoolAdminId = obj.schoolAdminId
+         branch.branchAdminId = obj.branchAdminId
 
          branchArray.push(branch)
       }
