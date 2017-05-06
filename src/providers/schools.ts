@@ -93,7 +93,7 @@ export class Schools {
       })
    }
 
-   public getUserSchools(): Promise<SchoolModel[]> {
+   public getSchoolAdminSchools(): Promise<SchoolModel[]> {
       var userId = this.authData.getUserId();
 
       return this.af.database.list('/schools', {
@@ -105,6 +105,23 @@ export class Schools {
           .map(obj => {
              var school = this.castToSchoolModel(obj)
              return school
+          })
+          .first()
+          .toPromise()
+   }
+
+   public getBranchAdminSchools(): Promise<SchoolModel[]> {
+      var userId = this.authData.getUserId();
+
+      return this.af.database.list('/schools', {
+         query: {
+            orderByChild: 'branchAdminId',
+            equalTo: userId
+         }
+      })
+          .map(obj => {
+             return this.castToSchoolModel(obj)
+
           })
           .first()
           .toPromise()

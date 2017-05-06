@@ -60,12 +60,12 @@ export class SchoolAdminHomePage {
    }
 
    private runSchoolProviderTests() {
-      // schoolProvider.getUserSchools() Test
-      console.log('schoolProvider.getUserSchools() Test raw:')
-      console.log(this.schoolProvider.getUserSchools())
-      this.schoolProvider.getUserSchools()
+      // schoolProvider.getSchoolAdminSchools() Test
+      console.log('schoolProvider.getSchoolAdminSchools() Test raw:')
+      console.log(this.schoolProvider.getSchoolAdminSchools())
+      this.schoolProvider.getSchoolAdminSchools()
           .then(response => {
-             console.log('schoolProvider.getUserSchools() Test with subscribe:')
+             console.log('schoolProvider.getSchoolAdminSchools() Test with subscribe:')
              console.log(response)
           })
 
