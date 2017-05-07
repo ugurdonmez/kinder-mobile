@@ -1,23 +1,19 @@
 
-<p>teacher list directive start</p>
-
 <ion-list>
-  <ion-card *ngFor="let item of teachers">
+  <ion-card *ngFor="let teacher of teachers">
     <ion-grid>
       <ion-row>
         <ion-col width-10>
           <ion-avatar item-left>
-            <img src="{{item.profileImageUrl}}"/>
+            <img src="{{teacher.profileImageUrl}}"/>
           </ion-avatar>
         </ion-col>
         <div class="my-col-9">
-          <h2>{{item.name}}</h2>
-          <h3>{{item.surname}}</h3>
-          <p>{{item.notes}}</p>
+          <h2>{{teacher.name}}</h2>
+          <h3>{{teacher.surname}}</h3>
+          <p>{{teacher.notes}}</p>
         </div>
       </ion-row>
     </ion-grid>
   </ion-card>
 </ion-list>
-
-<p>teacher list directive end</p>

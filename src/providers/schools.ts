@@ -33,6 +33,9 @@ export class Schools {
 
       var userId = this.authData.getUserId();
 
+      console.log('Schools: getSchoolByBranchAdminId')
+      console.log('userId ' + userId)
+
       return this.af.database
          .list('/schools', {
             query: {
@@ -40,11 +43,7 @@ export class Schools {
                equalTo: userId
             }
          })
-         .map(obj => {
-            var school = this.castObjectToSchoolModel(obj)
-
-            return school
-         })
+         .map(this.castToSchoolModel)
          .first()
          .toPromise()
    }
