@@ -165,6 +165,7 @@ export class Teachers {
         return this.getTeachersOfSchools(this.schoolProvider.getBranchAdminSchools())
     }
 
+    // TODO: refactor use stream instead of foreach
     // Conversion: FirebaseListObservable -> Model
     private castListToModel(objs: any[]): TeacherModel[] {
         let teacherArray: Array<TeacherModel> = [];
