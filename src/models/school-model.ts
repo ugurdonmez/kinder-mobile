@@ -17,6 +17,7 @@ export class SchoolModel {
     schoolAdminId: string;
 
     public fromObject(obj: any):SchoolModel {
+
         this.id = obj.$key
         this.name = obj.name
         this.membershipEnd = obj.membershipEnd

@@ -10,6 +10,7 @@ export class BranchModel {
     branchAdminId: string;
 
     public fromObject(obj: any):BranchModel {
+
         this.id = obj.$key
         this.name = obj.name
         this.tel = obj.tel
