@@ -46,6 +46,8 @@ import {Feedback} from "../providers/feedback";
 import {Attendance} from "../providers/attendance";
 import {Message} from "../providers/message";
 import {TeacherListDirective} from "../components/teacher-list/teacher-list";
+import {BranchAdminClassPage} from "../pages/branch-admin/class/class";
+import {SchoolAdminClassPage} from "../pages/school-admin/class/class";
 
 // AF2 Settings
 export const firebaseConfig = {
@@ -74,12 +76,14 @@ export function createTranslateLoader(http: Http) {
       BranchAdminHomePage,
       BranchAdminStudentPage,
       BranchAdminTeacherPage,
+      BranchAdminClassPage,
       BranchAdminMePage,
       BranchAdminSchoolPage,
       SchoolAdminHomePage,
       SchoolAdminMePage,
       SchoolAdminStudentPage,
       SchoolAdminTeacherPage,
+      SchoolAdminClassPage,
       HomeHeaderDirective,
       LogoutButtonDirective,
       SchoolListDirective,
@@ -104,10 +108,12 @@ export function createTranslateLoader(http: Http) {
       BranchAdminTeacherPage,
       BranchAdminMePage,
       BranchAdminSchoolPage,
+      BranchAdminClassPage,
       SchoolAdminHomePage,
       SchoolAdminMePage,
       SchoolAdminStudentPage,
       SchoolAdminTeacherPage,
+      SchoolAdminClassPage,
    ],
    providers: [
       {provide: ErrorHandler, useClass: IonicErrorHandler},

@@ -31,20 +31,6 @@ export class Branches {
       this.translate = translator.translatePipe;
    }
 
-   public getUserBranches() {
-      var userId = this.authData.getUserId();
-
-      console.log('get user branch : id')
-      console.log(userId)
-
-      return this.af.database.list('/branches', {
-         query: {
-            orderByChild: 'branchAdminId',
-            equalTo: userId
-         }
-      })
-   }
-
    public getBranchAdminBranches(): Promise<BranchModel[]> {
       var userId = this.authData.getUserId();
 
