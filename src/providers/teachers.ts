@@ -35,11 +35,7 @@ export class Teachers {
                 equalTo: userId
              }
           })
-          .map(obj => {
-             var teacher = new TeacherModel().fromObject(obj);
-
-             return teacher
-          })
+          .map(this.castListToModel)
           .first()
           .toPromise()
     }
@@ -54,11 +50,7 @@ export class Teachers {
                 equalTo: userId
              }
           })
-          .map(obj => {
-             var teacher = new TeacherModel().fromObject(obj);
-
-             return teacher
-          })
+          .map(this.castListToModel)
           .first()
           .toPromise()
     }
