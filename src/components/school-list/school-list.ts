@@ -1,4 +1,3 @@
-
 import {Component} from '@angular/core';
 import {Translator} from "../../app/translator";
 import {SchoolModel} from "../../models/school-model";
@@ -19,21 +18,12 @@ export class SchoolListDirective {
 
       console.log('SchoolListDirective: constructor()')
 
-      // this.branchProvider.getBranchAdminBranches()
-      //    .then(res => {
-      //       console.log('SchoolListDirective: constructor branches of school admin ')
-      //       console.log(res)
-      //       this.branches = res
-      //    })
+      this.schoolProvider.getSchoolByBranchAdminId()
+         .then(res => {
+            console.log('SchoolListDirective: constructor schools of branch admin ')
+            console.log(res)
+            this.schools = res
+         })
    }
-
-   // ionViewDidLoad() {
-   //    console.log('SchoolListDirective: ionViewDidLoad()')
-   //    this.branchProvider.getSchoolAdminBranches()
-   //       .then(res => {
-   //          console.log('SchoolListDirective: branches of school admin ')
-   //          console.log(res)
-   //       })
-   // }
 
 }
