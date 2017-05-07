@@ -25,6 +25,44 @@ export class Teachers {
         this.translate = translator.translatePipe;
     }
 
+    public getTeacherByBranchAdminId() : Promise<TeacherModel[]> {
+       var userId = this.authData.getUserId();
+
+       return this.af.database
+          .list('/teachers', {
+             query: {
+                orderByChild: 'branchAdminId',
+                equalTo: userId
+             }
+          })
+          .map(obj => {
+             var teacher = new TeacherModel().fromObject(obj);
+
+             return teacher
+          })
+          .first()
+          .toPromise()
+    }
+
+    public getTeacherBySchoolAdminId() : Promise<TeacherModel[]> {
+       var userId = this.authData.getUserId();
+
+       return this.af.database
+          .list('/teachers', {
+             query: {
+                orderByChild: 'schoolAdminId',
+                equalTo: userId
+             }
+          })
+          .map(obj => {
+             var teacher = new TeacherModel().fromObject(obj);
+
+             return teacher
+          })
+          .first()
+          .toPromise()
+    }
+
     public getTeacher(teacherId: string):Promise<TeacherModel> {
         return this.af.database.object('/teachers/' + teacherId)
             .map(obj => {
