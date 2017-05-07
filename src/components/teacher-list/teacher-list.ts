@@ -1,16 +1,16 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Translator} from "../../app/translator";
 import {Schools} from "../../providers/schools";
 import {Teachers} from "../../providers/teachers";
 import {TeacherModel} from "../../models/teacher-model";
 
 @Component({
-   selector: '[teacher-list]',
+   selector: 'teacher-list',
    templateUrl: 'teacher-list.html',
    providers: [Schools, Translator]
 })
 
-export class TeacherListDirective {
+export class TeacherListDirective implements OnInit {
 
    @Input() role: string;
 
@@ -18,9 +18,23 @@ export class TeacherListDirective {
 
    constructor(public teacherProvider: Teachers,
                public translator: Translator) {
-      console.log('TeacherListDirective: constructor()')
-      console.log(this.role)
    }
 
+   ngOnInit(): void {
+      console.log('TeacherListDirective: onInit()')
+      console.log(this.role)
+
+      if (this.role == 'branch-admin') {
+         this.teacherProvider.getTeacherByBranchAdminId()
+            .then(res => {
+               this.teachers = res
+            })
+      } else if (this.role == 'school-admin') {
+         this.teacherProvider.getTeacherBySchoolAdminId()
+            .then(res => {
+               this.teachers = res
+         })
+      }
+   }
 
 }
