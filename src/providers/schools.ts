@@ -29,6 +29,26 @@ export class Schools {
       this.translate = translator.translatePipe;
    }
 
+   public getSchoolByBranchAdminId() : Promise<SchoolModel[]> {
+
+      var userId = this.authData.getUserId();
+
+      return this.af.database
+         .list('/schools', {
+            query: {
+               orderByChild: 'branchAdminId',
+               equalTo: userId
+            }
+         })
+         .map(obj => {
+            var school = this.castObjectToSchoolModel(obj)
+
+            return school
+         })
+         .first()
+         .toPromise()
+   }
+
    public getSchool(schoolId: string): Promise<SchoolModel> {
       return this.af.database.object('/schools/' + schoolId).map(obj => {
          var branch = this.castObjectToSchoolModel(obj)
