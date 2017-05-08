@@ -3,16 +3,16 @@
   <ion-card *ngFor="let school of schools">
     <ion-grid>
       <ion-row>
-        <div class="my-col-3">
+        <ion-col width-20>
           <div class="avatar-class">
             <img src="{{school.logoURL}}">
           </div>
-        </div>
-        <div class="my-col-9">
+        </ion-col>
+        <ion-col width-80>
           <h2>{{school.name}}</h2>
           <h3>{{school.manager}}</h3>
           <p>{{school.manager_tel}}</p>
-        </div>
+        </ion-col>
       </ion-row>
     </ion-grid>
   </ion-card>

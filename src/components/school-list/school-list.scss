@@ -7,24 +7,12 @@ school-list {
     overflow: hidden;
     border-radius:50%;
     position: relative;
-  }
 
-  ion-avatar img {
-    position: absolute;
-    top:50%;
-    left:50%;
-    transform: translate(-50%,-50%)
-  }
-
-  .branch-txt {
-    float: right;
-  }
-
-  .my-col-3 {
-    width: 25%;
-  }
-
-  .my-col-9 {
-    width: 75%;
+    img {
+      position: absolute;
+      top:50%;
+      left:50%;
+      transform: translate(-50%,-50%)
+    }
   }
 }
