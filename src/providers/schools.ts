@@ -29,7 +29,7 @@ export class Schools {
       this.translate = translator.translatePipe;
    }
 
-   public getSchoolByBranchAdminId() : Promise<SchoolModel[]> {
+   public getSchoolByBranchAdminId(): Promise<SchoolModel[]> {
 
       var userId = this.authData.getUserId();
 
@@ -48,40 +48,6 @@ export class Schools {
          .toPromise()
    }
 
-   public getSchool(schoolId: string): Promise<SchoolModel> {
-      return this.af.database.object('/schools/' + schoolId).map(obj => {
-         var branch = this.castObjectToSchoolModel(obj)
-         return branch
-      })
-          .first()
-          .toPromise()
-   }
-
-   public getAllSchools(): Promise<SchoolModel[]>  {
-      return this.af.database.list('/schools/')
-          .map(obj => {
-             var school = this.castToSchoolModel(obj)
-             return school
-          })
-          .first()
-          .toPromise()
-   }
-
-   getSchoolsOfBranch(branchId: string): Promise<SchoolModel[]> {
-      return this.af.database.list('/schools', {
-         query: {
-            orderByChild: 'branchId',
-            equalTo: branchId
-         }
-      })
-          .map(obj => {
-             var school = this.castToSchoolModel(obj)
-             return school
-          })
-          .first()
-          .toPromise()
-   }
-
    public addSchool(school: SchoolModel) {
       school.schoolAdminId = this.authData.getUserId();
       return this.schools.push(school).key;
@@ -91,10 +57,6 @@ export class Schools {
       this.af.database.object('/schools/' + school.id).set(school);
    }
 
-   addClassToSchool(schoolId: string, classId: string) {
-      // let schoolClasssList = this.af.database.list('/schools/' + schoolId + '/classes');
-      // schoolClasssList.push(classId);
-   }
 
    deleteSchool(schoolId: string) {
       this.af.database.object('/schools/' + schoolId).remove();
@@ -112,39 +74,6 @@ export class Schools {
       })
    }
 
-   public getSchoolAdminSchools(): Promise<SchoolModel[]> {
-      var userId = this.authData.getUserId();
-
-      return this.af.database.list('/schools', {
-         query: {
-            orderByChild: 'schoolAdminId',
-            equalTo: userId
-         }
-      })
-          .map(obj => {
-             var school = this.castToSchoolModel(obj)
-             return school
-          })
-          .first()
-          .toPromise()
-   }
-
-   public getBranchAdminSchools(): Promise<SchoolModel[]> {
-      var userId = this.authData.getUserId();
-
-      return this.af.database.list('/schools', {
-         query: {
-            orderByChild: 'branchAdminId',
-            equalTo: userId
-         }
-      })
-          .map(obj => {
-             return this.castToSchoolModel(obj)
-
-          })
-          .first()
-          .toPromise()
-   }
 
    public newPhoto(schoolId: string) {
       {
@@ -189,15 +118,8 @@ export class Schools {
 
    // Conversion: FirebaseListObservable -> Model
    private castToSchoolModel(objs: any[]): SchoolModel[] {
-      let modelArray: Array<SchoolModel> = []
-      for (let obj of objs) {
-         modelArray.push(new SchoolModel().fromObject(obj))
-      }
-      return modelArray
-   }
-
-   // Conversion: FirebaseObjectObservable -> Model
-   private castObjectToSchoolModel(obj: any): SchoolModel {
-      return new SchoolModel().fromObject(obj);
+      return objs.map(o => {
+         return new SchoolModel().fromObject(o);
+      })
    }
 }
