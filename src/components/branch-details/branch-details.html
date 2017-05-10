@@ -1,0 +1,30 @@
+<ion-card>
+    <ion-card-header>
+        {{(branch)?.name}}
+        <ion-buttons class="edit-branch-button">
+            <button ion-button icon-left clear class="button-text-70-percent" (click)="editBranchButtonClicked()">
+                <ion-icon name="md-brush" color="primary" ></ion-icon>
+                {{'Edit' | translate}}
+            </button>
+        </ion-buttons>
+    </ion-card-header>
+
+    <ion-card-content>
+        <img class="avatar-class" src="{{branch?.logoURL}}">
+
+        <ion-label stacked>{{"Telephone" | translate}}</ion-label>
+        <ion-row>{{(branch)?.tel}}</ion-row>
+
+        <ion-label stacked>{{"Manager" | translate}}</ion-label>
+        <ion-row>{{(branch)?.manager}}</ion-row>
+
+        <ion-label stacked>{{"Manager Telephone" | translate}}</ion-label>
+        <ion-row>{{(branch)?.manager_tel}}</ion-row>
+
+        <ion-label stacked>{{"Manager Email" | translate}}</ion-label>
+        <ion-row>{{(branch)?.manager_mail}}</ion-row>
+
+        <ion-label stacked>{{"Address" | translate}}</ion-label>
+        <ion-row>{{(branch)?.address}}</ion-row>
+    </ion-card-content>
+</ion-card>
