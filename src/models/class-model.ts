@@ -13,6 +13,8 @@ export class ClassModel {
     invitations: any;
     wall: any;
     wallRead: any;
+    branchAdminId: string;
+    schoolAdminId: string;
 
     public fromObject(obj: any):ClassModel {
         this.id = obj.id;
@@ -29,6 +31,8 @@ export class ClassModel {
         this.invitations = obj.invitations;
         this.wall = obj.wall;
         this.wallRead = obj.wallRead;
+        this.branchAdminId = obj.branchAdminId
+        this.schoolAdminId = obj.schoolAdminId
         return this;
     }
 }

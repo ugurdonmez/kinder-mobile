@@ -17,7 +17,7 @@ export class Classes {
     public getClass(classId: string): Promise<ClassModel> {
         return this.af.database.object('/classes/' + classId)
             .map(obj => {
-                return this.castObjectToClassModel(obj)
+                return this.castObjectToModel(obj)
             })
             .first()
             .toPromise()
@@ -49,7 +49,7 @@ export class Classes {
             }
         })
             .map(obj => {
-                return this.castListToClassModel(obj)
+                return this.castListToModel(obj)
             })
             .first()
             .toPromise()
@@ -67,14 +67,45 @@ export class Classes {
             }
         })
             .map(obj => {
-                return this.castListToClassModel(obj)
+                return this.castListToModel(obj)
             })
             .first()
             .toPromise()
     }
 
+
+    public getClassByBranchAdminId(): Promise<ClassModel[]> {
+        var userId = this.authData.getUserId();
+
+        return this.af.database
+           .list('/classes', {
+               query: {
+                   orderByChild: 'branchAdminId',
+                   equalTo: userId
+               }
+           })
+           .map(this.castListToModel)
+           .first()
+           .toPromise()
+    }
+
+    public getClassBySchoolAdminId(): Promise<ClassModel[]> {
+        var userId = this.authData.getUserId();
+
+        return this.af.database
+           .list('/classes', {
+               query: {
+                   orderByChild: 'schoolAdminId',
+                   equalTo: userId
+               }
+           })
+           .map(this.castListToModel)
+           .first()
+           .toPromise()
+    }
+
     // Conversion: FirebaseListObservable -> Model
-    private castListToClassModel(objs: any[]): ClassModel[] {
+    private castListToModel(objs: any[]): ClassModel[] {
         let classArray: Array<ClassModel> = [];
         for (let obj of objs) {
             var _class = new ClassModel().fromObject(obj);
@@ -84,7 +115,7 @@ export class Classes {
     }
 
     // Conversion: FirebaseObjectObservable -> Model
-    private castObjectToClassModel(obj: any): ClassModel {
+    private castObjectToModel(obj: any): ClassModel {
         return new ClassModel().fromObject(obj);
     }
 }
