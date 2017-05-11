@@ -15,6 +15,8 @@ export class TeacherModel {
       this.notes = obj.notes
       this.profileImageUrl = obj.profileImageUrl
       this.schoolId = obj.schoolId
+      this.branchAdminId = obj.branchAdminId
+      this.schoolAdminId = obj.schoolAdminId
 
       return this;
    }
