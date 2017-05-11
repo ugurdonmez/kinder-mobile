@@ -9,6 +9,8 @@ export class ParentModel {
     studentBirthDate: string
     studentName: string
     studentSurname: string
+    branchAdminId: string;
+    schoolAdminId: string;
 
     public fromObject(obj: any):ParentModel {
         this.id = obj.id;
@@ -21,6 +23,8 @@ export class ParentModel {
         this.studentBirthDate = obj.studentBirthDate
         this.studentName = obj.studentName
         this.studentSurname = obj.studentSurname
+        this.branchAdminId = obj.branchAdminId
+        this.schoolAdminId = obj.schoolAdminId
 
         return this;
     }
