@@ -28,7 +28,7 @@ export class Reminder {
     }
 
     // returns all reminders of user
-    public getReminders(userId): Promise<ReminderModel>{
+    public getReminders(userId): Promise<ReminderModel[]>{
         return this.af.database.list("/user-reminders/" + userId)
             .map(obj => {
                 return this.castListToModel(obj)
