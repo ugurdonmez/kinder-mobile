@@ -50,6 +50,7 @@ import {BranchAdminClassPage} from "../pages/branch-admin/class/class";
 import {SchoolAdminClassPage} from "../pages/school-admin/class/class";
 import {BranchDetailsDirective} from "../components/branch-details/branch-details";
 import {ClassListDirective} from "../components/class-list/class-list";
+import {ParentListDirective} from "../components/parent-list/parent-list";
 
 // AF2 Settings
 export const firebaseConfig = {
@@ -92,6 +93,7 @@ export function createTranslateLoader(http: Http) {
       TeacherListDirective,
       BranchDetailsDirective,
       ClassListDirective,
+      ParentListDirective,
    ],
    imports: [
       IonicModule.forRoot(MyApp),

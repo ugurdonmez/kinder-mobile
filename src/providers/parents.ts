@@ -101,6 +101,37 @@ export class Parents {
             .toPromise()
     }
 
+
+    public getParentsByBranchAdminId(): Promise<ParentModel[]> {
+        var userId = this.authData.getUserId();
+
+        return this.af.database
+           .list('/parents', {
+               query: {
+                   orderByChild: 'branchAdminId',
+                   equalTo: userId
+               }
+           })
+           .map(this.castListToModel)
+           .first()
+           .toPromise()
+    }
+
+    public getParentsBySchoolAdminId(): Promise<ParentModel[]> {
+        var userId = this.authData.getUserId();
+
+        return this.af.database
+           .list('/parents', {
+               query: {
+                   orderByChild: 'schoolAdminId',
+                   equalTo: userId
+               }
+           })
+           .map(this.castListToModel)
+           .first()
+           .toPromise()
+    }
+
     // Conversion: FirebaseListObservable -> Model
     private castListToModel(objs: any[]): ParentModel[] {
         let parentArray: Array<ParentModel> = [];
