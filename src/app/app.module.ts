@@ -51,6 +51,7 @@ import {SchoolAdminClassPage} from "../pages/school-admin/class/class";
 import {BranchDetailsDirective} from "../components/branch-details/branch-details";
 import {ClassListDirective} from "../components/class-list/class-list";
 import {ParentListDirective} from "../components/parent-list/parent-list";
+import {BranchAdminSchoolDetailsPage} from "../pages/branch-admin/school-details/school-details";
 
 // AF2 Settings
 export const firebaseConfig = {
@@ -94,6 +95,7 @@ export function createTranslateLoader(http: Http) {
       BranchDetailsDirective,
       ClassListDirective,
       ParentListDirective,
+      BranchAdminSchoolDetailsPage,
    ],
    imports: [
       IonicModule.forRoot(MyApp),
@@ -120,6 +122,7 @@ export function createTranslateLoader(http: Http) {
       SchoolAdminStudentPage,
       SchoolAdminTeacherPage,
       SchoolAdminClassPage,
+      BranchAdminSchoolDetailsPage,
    ],
    providers: [
       {provide: ErrorHandler, useClass: IonicErrorHandler},

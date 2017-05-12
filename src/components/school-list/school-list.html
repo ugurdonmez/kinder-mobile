@@ -2,7 +2,7 @@
 <ion-list>
   <ion-card *ngFor="let school of schools">
     <ion-grid>
-      <ion-row>
+      <ion-row (click)="schoolClicked(school)">
         <ion-col width-20>
           <div class="avatar-class">
             <img src="{{school.logoURL}}">

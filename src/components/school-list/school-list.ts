@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Translator} from "../../app/translator";
 import {SchoolModel} from "../../models/school-model";
 import {Schools} from "../../providers/schools";
+import {NavController} from "ionic-angular";
+import {BranchAdminSchoolDetailsPage} from "../../pages/branch-admin/school-details/school-details";
 
 @Component({
    selector: 'school-list',
@@ -14,7 +16,8 @@ export class SchoolListDirective implements OnInit {
    private schools: Array<SchoolModel>
 
    constructor(public schoolProvider: Schools,
-               public translator: Translator) {
+               public translator: Translator,
+               public navCtrl: NavController) {
    }
 
    ngOnInit(): void {
@@ -24,6 +27,12 @@ export class SchoolListDirective implements OnInit {
             console.log(res)
             this.schools = res
          })
+   }
+
+   private schoolClicked(school): void {
+      console.log('goes to class list of that school with school:');
+      console.log(school);
+      this.navCtrl.push(BranchAdminSchoolDetailsPage, {'school': school})
    }
 
 }
