@@ -108,6 +108,20 @@ export class Teachers {
       }
    }
 
+   getTeachersOfSchool(schoolId: string):Promise<TeacherModel[]> {
+      return this.af.database.list('/teachers/', {
+         query: {
+            orderByChild: 'schoolId',
+            equalTo: schoolId
+         }
+      })
+         .map(obj => {
+            return this.castListToModel(obj)
+         })
+         .first()
+         .toPromise()
+   }
+
    private uploadImage(imageSource: any, teacherId: string): any {
       Camera.getPicture({sourceType: imageSource}).then((image) => {
          var imageData = image;
