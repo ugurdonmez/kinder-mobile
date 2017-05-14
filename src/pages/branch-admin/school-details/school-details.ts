@@ -9,6 +9,8 @@ import {Schools} from "../../../providers/schools";
 import {FormBuilder, Validators, FormGroup} from "@angular/forms";
 import {Translator} from "../../../app/translator";
 import {TranslateService} from "ng2-translate";
+import {UserModel} from "../../../models/user-model";
+import {AuthData} from "../../../providers/auth-data";
 
 @Component({
    selector: 'page-branch-admin-school-details',
@@ -30,8 +32,8 @@ export class BranchAdminSchoolDetailsPage {
                public formBuilder: FormBuilder,
                public schoolProvider: Schools,
                public translator: Translator,
-               public alertCtrl: AlertController
-   ) {
+               public alertCtrl: AlertController,
+               private authData: AuthData) {
       this.translate = translator.translatePipe;
       this.school = this.navParams.get('school');
       this.schoolDetailsForm = this.formBuilder.group({
@@ -92,4 +94,37 @@ export class BranchAdminSchoolDetailsPage {
          alert.present();
       }
    }
+
+   private inviteTeacherButtonClicked(): void {
+      let prompt = this.alertCtrl.create({
+         title: 'Invite Teacher',
+         message: "Enter e-mail address of teacher.",
+         inputs: [
+            {
+               name: 'email',
+               placeholder: 'Email'
+            },
+         ],
+         buttons: [
+            {
+               text: 'Cancel',
+               handler: data => {
+               }
+            },
+            {
+               text: 'Invite',
+               handler: data => {
+                  let invitedUser = new UserModel()
+                  invitedUser.email = data.email
+                  invitedUser.role = 'teacher'
+                  invitedUser.schoolId = this.school.id
+
+                  this.authData.newInvitation(invitedUser);
+               }
+            }
+         ]
+      });
+      prompt.present();
+   }
+
 }

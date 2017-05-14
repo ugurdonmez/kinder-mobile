@@ -50,13 +50,17 @@ export class AuthData {
     }
 
     public newInvitation(invitationJson: UserModel): void {
+        let email: string = invitationJson.email;
+        // console.log("newInvitation test. email:")
+        // console.log(email)
         this.af.database.list('/all-registered-emails/', {
             query: {
                 orderByChild: 'email',
-                equalTo: invitationJson.email
-        }}).subscribe( snapshots => {
+                equalTo: email
+        }})
+           .subscribe( snapshots => {
             if (snapshots.length > 0){ // ignore if mail is already registered or invited
-                console.log("mail already invited.")
+                console.log("mail already invited.") // TODO: show error popup
             }
             else{ // // proceed if mail is not registered or invited yet
                 console.log('invitation successful')
