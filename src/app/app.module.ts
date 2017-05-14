@@ -2,12 +2,7 @@ import {NgModule, ErrorHandler} from '@angular/core';
 import {IonicApp, IonicModule, IonicErrorHandler} from 'ionic-angular';
 import {MyApp} from './app.component';
 
-// Importing provider
 import {AngularFireModule, AuthProviders, AuthMethods} from 'angularfire2';
-
-import {AuthService} from '../providers/auth-service';
-import {AuthData} from '../providers/auth-data';
-import {Branches} from "../providers/branches";
 
 // Localization
 import {TranslateModule, TranslateStaticLoader, TranslateLoader} from 'ng2-translate/ng2-translate';
@@ -15,45 +10,13 @@ import {Http} from '@angular/http';
 import {Translator} from './translator';
 
 // Importing pages
-import {LoginPage} from '../pages/login/login';
-import {LoginDialog} from '../pages/login/login-dialog/login-dialog';
-import {HomeHeaderDirective} from '../components/home-header/home-header';
-import {LogoutButtonDirective} from '../components/logout-button-directive/logout-button-directive';
-import {Schools} from "../providers/schools";
-import {Classes} from "../providers/classes";
-import {BranchAdminHomePage} from "../pages/branch-admin/home/home";
-import {BranchAdminStudentPage} from "../pages/branch-admin/student/student";
-import {BranchAdminTeacherPage} from "../pages/branch-admin/teacher/teacher";
-import {BranchAdminMePage} from "../pages/branch-admin/me/me";
-import {SchoolAdminHomePage} from "../pages/school-admin/home/home";
-import {SchoolAdminMePage} from "../pages/school-admin/me/me";
-import {SchoolAdminStudentPage} from "../pages/school-admin/student/student";
-import {SchoolAdminTeacherPage} from "../pages/school-admin/teacher/teacher";
-import {SchoolListDirective} from "../components/school-list/school-list";
-import {BranchAdminSchoolPage} from "../pages/branch-admin/school/school";
-import {BranchListDirective} from "../components/branch-list/branch-list";
-import {Parents} from "../providers/parents";
-import {Teachers} from "../providers/teachers";
-import {Activity} from "../providers/activity";
-import {WeeklyActivity} from "../providers/weeklyactivity";
-import {Invitation} from "../providers/invitation";
-import {Birthday} from "../providers/birthday";
-import {Reminder} from "../providers/reminder";
-import {WeeklyMealMenu} from "../providers/weeklymealmenu";
-import {Homework} from "../providers/homework";
-import {Gallery} from "../providers/gallery";
-import {Feedback} from "../providers/feedback";
-import {Attendance} from "../providers/attendance";
-import {Message} from "../providers/message";
-import {TeacherListDirective} from "../components/teacher-list/teacher-list";
-import {BranchAdminClassPage} from "../pages/branch-admin/class/class";
-import {SchoolAdminClassPage} from "../pages/school-admin/class/class";
-import {BranchDetailsDirective} from "../components/branch-details/branch-details";
-import {ClassListDirective} from "../components/class-list/class-list";
-import {ParentListDirective} from "../components/parent-list/parent-list";
-import {BranchAdminSchoolDetailsPage} from "../pages/branch-admin/school-details/school-details";
-import {BranchAdminCreateClassPage} from "../pages/branch-admin/create-class/create-class";
-import {BranchAdminClassDetailsPage} from "../pages/branch-admin/class-details/class-details";
+import * as page from '../pages';
+
+// Importing providers
+import * as provider from '../providers';
+
+// Importing components
+import * as cmp from '../components';
 
 // AF2 Settings
 export const firebaseConfig = {
@@ -77,29 +40,33 @@ export function createTranslateLoader(http: Http) {
 @NgModule({
    declarations: [
       MyApp,
-      LoginPage,
-      LoginDialog,
-      BranchAdminHomePage,
-      BranchAdminStudentPage,
-      BranchAdminTeacherPage,
-      BranchAdminClassPage,
-      BranchAdminMePage,
-      BranchAdminSchoolPage,
-      SchoolAdminHomePage,
-      SchoolAdminMePage,
-      SchoolAdminStudentPage,
-      SchoolAdminTeacherPage,
-      SchoolAdminClassPage,
-      HomeHeaderDirective,
-      LogoutButtonDirective,
-      SchoolListDirective,
-      TeacherListDirective,
-      BranchDetailsDirective,
-      ClassListDirective,
-      ParentListDirective,
-      BranchAdminSchoolDetailsPage,
-      BranchAdminCreateClassPage,
-      BranchAdminClassDetailsPage,
+
+      // pages
+      page.LoginPage,
+      page.LoginDialog,
+      page.BranchAdminHomePage,
+      page.BranchAdminStudentPage,
+      page.BranchAdminTeacherPage,
+      page.BranchAdminClassPage,
+      page.BranchAdminMePage,
+      page.BranchAdminSchoolPage,
+      page.SchoolAdminHomePage,
+      page.SchoolAdminMePage,
+      page.SchoolAdminStudentPage,
+      page.SchoolAdminTeacherPage,
+      page.SchoolAdminClassPage,
+      page.BranchAdminSchoolDetailsPage,
+      page.BranchAdminCreateClassPage,
+      page.BranchAdminClassDetailsPage,
+
+      // components
+      cmp.HomeHeaderDirective,
+      cmp.LogoutButtonDirective,
+      cmp.SchoolListDirective,
+      cmp.TeacherListDirective,
+      cmp.BranchDetailsDirective,
+      cmp.ClassListDirective,
+      cmp.ParentListDirective,
    ],
    imports: [
       IonicModule.forRoot(MyApp),
@@ -113,44 +80,44 @@ export function createTranslateLoader(http: Http) {
    bootstrap: [IonicApp],
    entryComponents: [
       MyApp,
-      LoginPage,
-      LoginDialog,
-      BranchAdminHomePage,
-      BranchAdminStudentPage,
-      BranchAdminTeacherPage,
-      BranchAdminMePage,
-      BranchAdminSchoolPage,
-      BranchAdminClassPage,
-      SchoolAdminHomePage,
-      SchoolAdminMePage,
-      SchoolAdminStudentPage,
-      SchoolAdminTeacherPage,
-      SchoolAdminClassPage,
-      BranchAdminSchoolDetailsPage,
-      BranchAdminCreateClassPage,
-      BranchAdminClassDetailsPage,
+      page.LoginPage,
+      page.LoginDialog,
+      page.BranchAdminHomePage,
+      page.BranchAdminStudentPage,
+      page.BranchAdminTeacherPage,
+      page.BranchAdminMePage,
+      page.BranchAdminSchoolPage,
+      page.BranchAdminClassPage,
+      page.SchoolAdminHomePage,
+      page.SchoolAdminMePage,
+      page.SchoolAdminStudentPage,
+      page.SchoolAdminTeacherPage,
+      page.SchoolAdminClassPage,
+      page.BranchAdminSchoolDetailsPage,
+      page.BranchAdminCreateClassPage,
+      page.BranchAdminClassDetailsPage,
    ],
    providers: [
       {provide: ErrorHandler, useClass: IonicErrorHandler},
-      AuthService,
-      AuthData,
       Translator,
-      Branches,
-      Schools,
-      Classes,
-      Parents,
-      Teachers,
-      Activity,
-      WeeklyActivity,
-      Invitation,
-      Birthday,
-      Reminder,
-      WeeklyMealMenu,
-      Homework,
-      Gallery,
-      Feedback,
-      Attendance,
-      Message,
+      provider.AuthService,
+      provider.AuthData,
+      provider.Branches,
+      provider.Schools,
+      provider.Classes,
+      provider.Parents,
+      provider.Teachers,
+      provider.Activity,
+      provider.WeeklyActivity,
+      provider.Invitation,
+      provider.Birthday,
+      provider.Reminder,
+      provider.WeeklyMealMenu,
+      provider.Homework,
+      provider.Gallery,
+      provider.Feedback,
+      provider.Attendance,
+      provider.Message,
    ]
 })
 
