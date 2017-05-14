@@ -124,6 +124,12 @@ export class BranchAdminSchoolDetailsPage {
                   invitedUser.email = data.email
                   invitedUser.role = 'teacher'
                   invitedUser.schoolId = this.school.id
+                  invitedUser.branchAdminId = this.school.branchAdminId
+                  // checking if schoolAdminId exists. because there are some cases where schoolAdminId doesn't
+                  // exist. but we can't push to firebase if a property of invitedUser is undefined.
+                  if(!!this.school.schoolAdminId){
+                     invitedUser.schoolAdminId = this.school.schoolAdminId
+                  }
 
                   this.authData.newInvitation(invitedUser);
                }
