@@ -82,12 +82,17 @@ export class AuthData {
                 this.af.database.object('/users/' + this.getUserId() + '/role').set(userInvitation.role);
                 if (userInvitation.role == 'school-admin'){
                     this.af.database.object('/users/' + this.getUserId() + '/branchId').set(userInvitation.branchId);
+                    this.af.database.object('/users/' + this.getUserId() + '/branchAdminId').set(userInvitation.branchAdminId);
                 }
                 else if (userInvitation.role == 'teacher'){
                     this.af.database.object('/users/' + this.getUserId() + '/schoolId').set(userInvitation.schoolId);
+                    this.af.database.object('/users/' + this.getUserId() + '/branchAdminId').set(userInvitation.branchAdminId);
+                    this.af.database.object('/users/' + this.getUserId() + '/schoolAdminId').set(userInvitation.schoolAdminId);
                 }
                 else if (userInvitation.role == 'parent'){
                     this.af.database.object('/users/' + this.getUserId() + '/classId').set(userInvitation.classId);
+                    this.af.database.object('/users/' + this.getUserId() + '/branchAdminId').set(userInvitation.branchAdminId);
+                    this.af.database.object('/users/' + this.getUserId() + '/schoolAdminId').set(userInvitation.schoolAdminId);
                 }
                 this.af.database.object('/invited-users/' + userInvitation.$key).remove(); // remove invitation
             })

@@ -12,6 +12,7 @@ import {TranslateService} from "ng2-translate";
 import {AuthData} from "../../../providers/auth-data";
 import {Parents} from "../../../providers/parents";
 import {ParentModel} from "../../../models/parent-model";
+import {UserModel} from "../../../models/user-model";
 
 @Component({
    selector: 'page-branch-admin-class-details',
@@ -33,7 +34,8 @@ export class BranchAdminClassDetailsPage {
                public formBuilder: FormBuilder,
                public translator: Translator,
                public alertCtrl: AlertController,
-               private parentProvider: Parents) {
+               private parentProvider: Parents,
+               private authData: AuthData) {
       this.translate = translator.translatePipe;
       this._class = this.navParams.get('class');
       console.log('class details page called with:')
@@ -94,5 +96,43 @@ export class BranchAdminClassDetailsPage {
          });
          alert.present();
       }
+   }
+
+   private inviteParentButtonClicked(){
+      let prompt = this.alertCtrl.create({
+         title: 'Invite Parent',
+         message: "Enter e-mail address of parent.",
+         inputs: [
+            {
+               name: 'email',
+               placeholder: 'Email'
+            },
+         ],
+         buttons: [
+            {
+               text: 'Cancel',
+               handler: data => {
+               }
+            },
+            {
+               text: 'Invite',
+               handler: data => {
+                  let invitedUser = new UserModel()
+                  invitedUser.email = data.email
+                  invitedUser.role = 'parent'
+                  invitedUser.classId = this._class.id
+                  invitedUser.branchAdminId = this._class.branchAdminId
+                  // checking if schoolAdminId exists. because there are some cases where schoolAdminId doesn't
+                  // exist. but we can't push to firebase if a property of invitedUser is undefined.
+                  if(!!this._class.schoolAdminId){
+                     invitedUser.schoolAdminId = this._class.schoolAdminId
+                  }
+
+                  this.authData.newInvitation(invitedUser);
+               }
+            }
+         ]
+      });
+      prompt.present();
    }
 }
