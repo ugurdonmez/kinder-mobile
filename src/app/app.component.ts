@@ -8,6 +8,8 @@ import {LoginPage} from '../pages/login/login';
 import {AuthData} from '../providers/auth-data';
 import {BranchAdminHomePage} from "../pages/branch-admin/home/home";
 import {SchoolAdminHomePage} from "../pages/school-admin/home/home";
+import {ParentHomePage} from "../pages/parent/home/home";
+import {TeacherHomePage} from "../pages/teacher/home/home";
 
 
 @Component({
@@ -36,19 +38,13 @@ export class MyApp {
                      this.rootPage = BranchAdminHomePage
                   } else if (role == 'school-admin') {
                      this.rootPage = SchoolAdminHomePage
+                  } else if (role == 'parent') {
+                     this.rootPage = ParentHomePage
+                  } else if (role == 'teacher') {
+                     this.rootPage = TeacherHomePage
                   } else {
                      this.rootPage = LoginPage
                   }
-
-                  // if (role === 'branch-admin') {
-                  //    this.rootPage = BranchAdminHomePage
-                  // } else if (role === 'school-admin') {
-                  //    this.rootPage = SchoolAdminHomePage
-                  // } else if (role === 'teacher') {
-                  //    this.rootPage = TeacherHomePage
-                  // } else {
-                  //    this.rootPage = ParentHomePage
-                  // }
                })
          } else {
             this.rootPage = LoginPage;

@@ -16,6 +16,8 @@ import {AuthData} from "../../../providers/auth-data";
 import {EmailValidator} from "../../../validators/email";
 import {BranchAdminHomePage} from "../../branch-admin/home/home";
 import {SchoolAdminHomePage} from "../../school-admin/home/home";
+import {ParentHomePage} from "../../parent/home/home";
+import {TeacherHomePage} from "../../teacher/home/home";
 
 
 @Component({
@@ -117,19 +119,17 @@ export class LoginDialog {
                   .then(() => {
                      this.loading.dismiss()
                   })
+            } else if (role == 'parent') {
+               this.nav.setRoot(ParentHomePage)
+                  .then(() => {
+                     this.loading.dismiss()
+                  })
+            } else if (role == 'teacher') {
+               this.nav.setRoot(TeacherHomePage)
+                  .then(() => {
+                     this.loading.dismiss()
+                  })
             }
-
-
-               // if (role === 'branch-admin') {
-               //    this.nav.setRoot(BranchAdminHomePage)
-               // } else if (role === 'school-admin') {
-               //    this.nav.setRoot(SchoolAdminHomePage)
-               // } else if (role === 'teacher') {
-               //    this.nav.setRoot(TeacherHomePage)
-               // } else {
-               //    this.nav.setRoot(ParentHomePage)
-               // }
-            }
-         );
+         });
    }
 }
