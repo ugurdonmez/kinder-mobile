@@ -80,7 +80,7 @@
       <h1 class="classes-title section-title">{{"Classes" | translate}}</h1>
 
       <ion-list>
-         <button ion-item *ngFor="let _class of listedClasses" (click)="openClassPage(_class.$key)">
+         <button ion-item *ngFor="let _class of listedClasses" (click)="openClassPage(_class)">
             <div>
                <!--ion-item-->
                <h2>{{_class.name}}</h2>

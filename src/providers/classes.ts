@@ -23,7 +23,7 @@ export class Classes {
             .toPromise()
     }
 
-    public addClass(_class: ClassModel) {
+    public addClass(_class) {
         // this.classes.push(classProvider);
         var pushedClass = this.classes.push(_class);
         var classId = pushedClass.key;
@@ -37,7 +37,7 @@ export class Classes {
         user_classes.push({'classId':classId});
     }
 
-    public updateClass(_class: ClassModel) {
+    public updateClass(_class) {
         this.af.database.object('/classes/'+_class.id).set(_class);
     }
 

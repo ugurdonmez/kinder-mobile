@@ -12,6 +12,7 @@ import {TranslateService} from "ng2-translate";
 import {UserModel} from "../../../models/user-model";
 import {AuthData} from "../../../providers/auth-data";
 import {BranchAdminCreateClassPage} from "../create-class/create-class";
+import {BranchAdminClassDetailsPage} from "../class-details/class-details";
 
 @Component({
    selector: 'page-branch-admin-school-details',
@@ -71,6 +72,10 @@ export class BranchAdminSchoolDetailsPage {
 
    private addClassButtonClicked():void{
          this.navCtrl.push(BranchAdminCreateClassPage, {'school': this.school})
+   }
+
+   private openClassPage(_class): void{
+      this.navCtrl.push(BranchAdminClassDetailsPage, {'class': _class})
    }
 
    private getClassesOfTeachers(teacherId){
