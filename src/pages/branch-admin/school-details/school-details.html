@@ -106,7 +106,7 @@
       <h1 class="teachers-title section-title">{{"Teachers" | translate}}</h1>
 
       <ion-list>
-         <button ion-item *ngFor="let teacher of listedTeachers" (click)="openTeacherPage(teacher.$key)">
+         <button ion-item *ngFor="let teacher of listedTeachers | async" (click)="openTeacherPage(teacher.$key)">
             <div item-left>
                <img class="teacher-thumbnail" src="{{teacher?.profileImageUrl}}"/>
             </div>

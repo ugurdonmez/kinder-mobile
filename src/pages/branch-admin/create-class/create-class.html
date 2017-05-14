@@ -1,0 +1,43 @@
+<ion-header>
+   <ion-navbar>
+      <ion-title>{{"School" | translate}}: {{(school)?.name}}</ion-title>
+   </ion-navbar>
+</ion-header>
+
+<ion-content class="page-branch-admin-create-class">
+   <ion-card class="section">
+      <form *ngIf='!!createClassForm' [formGroup]="createClassForm">
+         <ion-list>
+            <ion-item>
+               <ion-label stacked>{{"Class Name" | translate}}</ion-label>
+               <ion-input type="text" formControlName="name"></ion-input>
+            </ion-item>
+
+            <ion-item>
+               <ion-label>{{"TeacherStr" | translate}}</ion-label>
+               <ion-select formControlName="teacher_id">
+                  <ion-option *ngFor="let a_teacher of teachersOfSchool" [value]="a_teacher.id">{{a_teacher
+                     .name}} {{a_teacher.surname}}
+                  </ion-option>
+               </ion-select>
+            </ion-item>
+
+            <ion-item>
+               <ion-label stacked>{{"Age" | translate}}</ion-label>
+               <ion-input type="text" formControlName="age"></ion-input>
+            </ion-item>
+
+            <ion-item>
+               <ion-label stacked>{{"Total Size" | translate}}</ion-label>
+               <ion-input type="text" formControlName="maximum"></ion-input>
+            </ion-item>
+         </ion-list>
+
+         <ion-buttons class="add-class-button">
+            <button ion-button block (click)="createClassButtonClicked()">
+               {{'Add Class' | translate}}
+            </button>
+         </ion-buttons>
+      </form>
+   </ion-card>
+</ion-content>

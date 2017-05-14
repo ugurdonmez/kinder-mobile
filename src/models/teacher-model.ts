@@ -9,7 +9,7 @@ export class TeacherModel {
    schoolAdminId: string;
 
    public fromObject(obj: any): TeacherModel {
-      this.id = obj.id
+      this.id = obj.$key
       this.name = obj.name
       this.surname = obj.surname
       this.notes = obj.notes

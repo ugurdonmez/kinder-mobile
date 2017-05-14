@@ -17,7 +17,7 @@ export class ClassModel {
     schoolAdminId: string;
 
     public fromObject(obj: any):ClassModel {
-        this.id = obj.id;
+        this.id = obj.$key;
         this.name = obj.name;
         this.teacher_id = obj.teacher_id;
         this.teacher_name = obj.teacher_name;

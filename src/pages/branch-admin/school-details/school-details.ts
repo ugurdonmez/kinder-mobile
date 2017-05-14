@@ -11,6 +11,7 @@ import {Translator} from "../../../app/translator";
 import {TranslateService} from "ng2-translate";
 import {UserModel} from "../../../models/user-model";
 import {AuthData} from "../../../providers/auth-data";
+import {BranchAdminCreateClassPage} from "../create-class/create-class";
 
 @Component({
    selector: 'page-branch-admin-school-details',
@@ -20,10 +21,10 @@ import {AuthData} from "../../../providers/auth-data";
 export class BranchAdminSchoolDetailsPage {
 
    private listedClasses: ClassModel[];
-   private listedTeachers: TeacherModel[];
    private school: SchoolModel;
    private schoolDetailsForm: FormGroup;
    private translate: TranslateService;
+   private listedTeachers: Promise<TeacherModel[]>;
 
    constructor(public navCtrl: NavController,
                public navParams: NavParams,
@@ -61,18 +62,18 @@ export class BranchAdminSchoolDetailsPage {
          this.listedClasses = res
       })
 
-      teacherProvider.getTeachersOfSchool(this.school.id).then(res => {
-         console.log("school-details page listedTeachers:")
-         console.log(res)
-         this.listedTeachers = res
-      })
+      this.listedTeachers = teacherProvider.getTeachersOfSchool(this.school.id)
    }
 
    ionViewDidLoad() {
 
    }
 
-   getClassesOfTeachers(teacherId) {
+   private addClassButtonClicked():void{
+         this.navCtrl.push(BranchAdminCreateClassPage, {'school': this.school})
+   }
+
+   private getClassesOfTeachers(teacherId){
       return []
    }
 
