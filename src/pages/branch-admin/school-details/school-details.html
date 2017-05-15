@@ -9,6 +9,9 @@
       <ion-avatar>
          <img class="avatar-class" src="{{(school).logoURL}}"/>
       </ion-avatar>
+      <ion-item>
+         <button ion-button color="light" (click)="newPhoto()">{{"New Photo" | translate}}</button>
+      </ion-item>
 
       <form *ngIf='!!schoolDetailsForm' [formGroup]="schoolDetailsForm">
          <ion-list>

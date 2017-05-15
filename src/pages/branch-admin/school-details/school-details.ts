@@ -139,4 +139,8 @@ export class BranchAdminSchoolDetailsPage {
       prompt.present();
    }
 
+   private newPhoto(){
+      this.schoolProvider.newPhoto(this.school.id)
+   }
+
 }
