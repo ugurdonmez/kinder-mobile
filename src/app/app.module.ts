@@ -58,6 +58,7 @@ export function createTranslateLoader(http: Http) {
       page.BranchAdminSchoolDetailsPage,
       page.BranchAdminCreateClassPage,
       page.BranchAdminClassDetailsPage,
+      page.BranchAdminCreateSchoolPage,
 
       // components
       cmp.HomeHeaderDirective,
@@ -96,6 +97,7 @@ export function createTranslateLoader(http: Http) {
       page.BranchAdminSchoolDetailsPage,
       page.BranchAdminCreateClassPage,
       page.BranchAdminClassDetailsPage,
+      page.BranchAdminCreateSchoolPage,
    ],
    providers: [
       {provide: ErrorHandler, useClass: IonicErrorHandler},

@@ -4,6 +4,7 @@ import {SchoolModel} from "../../models/school-model";
 import {Schools} from "../../providers/schools";
 import {NavController} from "ionic-angular";
 import {BranchAdminSchoolDetailsPage} from "../../pages/branch-admin/school-details/school-details";
+import {BranchAdminCreateSchoolPage} from "../../pages/branch-admin/create-school/create-school";
 
 @Component({
    selector: 'school-list',
@@ -33,6 +34,10 @@ export class SchoolListDirective implements OnInit {
       console.log('goes to class list of that school with school:');
       console.log(school);
       this.navCtrl.push(BranchAdminSchoolDetailsPage, {'school': school})
+   }
+
+   private createSchoolButtonClicked(): void{
+      this.navCtrl.push(BranchAdminCreateSchoolPage)
    }
 
 }

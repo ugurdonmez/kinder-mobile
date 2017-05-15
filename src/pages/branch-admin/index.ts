@@ -2,6 +2,7 @@
 export * from './class/class'
 export * from './class-details/class-details'
 export * from './create-class/create-class'
+export * from './create-school/create-school'
 export * from './home/home'
 export * from './me/me'
 export * from './school/school'
