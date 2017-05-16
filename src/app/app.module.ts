@@ -68,6 +68,7 @@ export function createTranslateLoader(http: Http) {
       cmp.BranchDetailsDirective,
       cmp.ClassListDirective,
       cmp.ParentListDirective,
+      cmp.SchoolDetailsDirective,
    ],
    imports: [
       IonicModule.forRoot(MyApp),

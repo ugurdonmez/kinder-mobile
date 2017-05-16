@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 import {Translator} from "../../app/translator";
 import {SchoolModel} from "../../models/school-model";
 import {Schools} from "../../providers/schools";
@@ -15,29 +15,43 @@ import {BranchAdminCreateSchoolPage} from "../../pages/branch-admin/create-schoo
 export class SchoolListDirective implements OnInit {
 
    private schools: Array<SchoolModel>
+   @Input() role: string;
 
    constructor(public schoolProvider: Schools,
                public translator: Translator,
-               public navCtrl: NavController) {
+               public navCtrl: NavController,
+   ) {
    }
 
    ngOnInit(): void {
       this.schoolProvider.getSchoolByBranchAdminId()
          .then(res => {
-            console.log('SchoolListDirective: constructor schools of branch admin ')
+            console.log('SchoolListDirective: constructor schools')
             console.log(res)
             this.schools = res
          })
+      console.log('SchoolListDirective called with role:')
+      console.log(this.role)
    }
 
    private schoolClicked(school): void {
       console.log('goes to class list of that school with school:');
       console.log(school);
-      this.navCtrl.push(BranchAdminSchoolDetailsPage, {'school': school})
+
+      if (this.role == 'branch-admin') {
+         this.navCtrl.push(BranchAdminSchoolDetailsPage, {'school': school})
+      } else if (this.role == 'school-admin') {
+         // this.navCtrl.push(SchoolAdminSchoolDetailsPage, {'school': school})
+      }
    }
 
    private createSchoolButtonClicked(): void{
-      this.navCtrl.push(BranchAdminCreateSchoolPage)
+
+      if (this.role == 'branch-admin') {
+         this.navCtrl.push(BranchAdminCreateSchoolPage)
+      } else if (this.role == 'school-admin') {
+         // this.navCtrl.push(SchoolAdminCreateSchoolPage)
+      }
    }
 
 }

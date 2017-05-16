@@ -1,0 +1,38 @@
+
+branch-details {
+  .avatar-class {
+    width: auto;
+    max-height: 150px;
+    margin: 0 auto;
+    margin-top: 20px;
+    overflow: hidden;
+    border-radius: 50%;
+    position: relative;
+    border: 2px solid #d9d9d9;
+
+    img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%)
+    }
+  }
+
+  .edit-branch-button {
+    display: inline-block;
+    float: right;
+    position: relative;
+    top: -10px;
+    //text-align: right;
+  }
+
+  .button-text-70-percent {
+    font-size: 70%;
+    margin: 0;
+  }
+
+  .details-header {
+    background-color: #fbfbfb;
+    overflow: visible;
+  }
+}
