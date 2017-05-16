@@ -2,8 +2,8 @@ import {Component} from '@angular/core';
 import {Translator} from "../../../app/translator";
 
 @Component({
-   selector: 'page-branch-admin-school',
-   templateUrl: 'school.html',
+   selector: 'page-branch-admin-school-tab',
+   templateUrl: 'school-tab.html',
    providers: [Translator]
 })
 

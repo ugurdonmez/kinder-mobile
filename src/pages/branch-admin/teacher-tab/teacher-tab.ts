@@ -2,16 +2,20 @@ import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 
 @Component({
-   selector: 'page-branch-admin-class',
-   templateUrl: 'class.html'
+   selector: 'page-branch-admin-teacher-tab',
+   templateUrl: 'teacher-tab.html'
 })
 
-export class BranchAdminClassPage {
+export class BranchAdminTeacherPage {
 
-   private pageTitleTextEn: string = "Branch Admin Class Page";
+   private pageTitleTextEn: string = "Branch Admin Home Page";
 
    constructor(public navCtrl: NavController,
                public navParams: NavParams) {
+
+   }
+
+   ionViewDidLoad() {
 
    }
 
