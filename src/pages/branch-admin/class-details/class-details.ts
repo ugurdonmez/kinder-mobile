@@ -38,8 +38,8 @@ export class BranchAdminClassDetailsPage {
                private authData: AuthData) {
       this.translate = translator.translatePipe;
       this._class = this.navParams.get('class');
-      console.log('class details page called with:')
-      console.log(this._class)
+      // console.log('class details page called with:')
+      // console.log(this._class)
       this.editClassForm = this.formBuilder.group({
          name: [this._class.name, Validators.required],
          teacher_id: [this._class.teacher_id, Validators.required],
@@ -79,8 +79,8 @@ export class BranchAdminClassDetailsPage {
    private editClassButtonClicked(): void {
       if (this.editClassForm.valid) {
          let updatedClass = new ClassModel().fromObject(this.editClassForm.value)
-         console.log('edit class button clicked with:')
-         console.log(updatedClass)
+         // console.log('edit class button clicked with:')
+         // console.log(updatedClass)
          this.classProvider.updateClass(updatedClass);
          let alert = this.alertCtrl.create({
             title: this.translate.instant('Successful'),

@@ -11,11 +11,11 @@ import {NavController} from "ionic-angular";
 export class LogoutButtonDirective {
     constructor( private authData: AuthData,
                  private navCtrl: NavController) {
-        console.log('Hello LogoutButtonDirective Directive')
+        // console.log('Hello LogoutButtonDirective Directive')
     }
 
     private logout(){
-        console.log('logout clicked');
+        // console.log('logout clicked');
         this.authData.logoutUser();
         this.navCtrl.setRoot(LoginPage);
     }

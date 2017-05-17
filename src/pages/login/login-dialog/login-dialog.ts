@@ -67,14 +67,14 @@ export class LoginDialog {
       this.submitAttempt = true;
 
       if (!this.loginForm.valid) {
-         console.log(this.loginForm.value);
+         // console.log(this.loginForm.value);
       } else {
          this.authData.loginUser(
             this.loginForm.value.email,
             this.loginForm.value.password)
             .then(() => {
-               console.log('user id');
-               console.log(this.authData.getUserId());
+               // console.log('user id:');
+               // console.log(this.authData.getUserId());
 
                this.redirectUser();
             }, error => {

@@ -21,15 +21,15 @@ export class ClassListDirective implements OnInit {
    }
 
    ngOnInit(): void {
-      console.log('TeacherListDirective: onInit()')
-      console.log(this.role)
+      // console.log('TeacherListDirective: onInit()')
+      // console.log(this.role)
 
       if (this.role == 'branch-admin') {
          this.classProvider.getClassByBranchAdminId()
             .then(res => {
                this.classes = res
-               console.log("classes of branch admin:")
-               console.log(this.classes)
+               // console.log("classes of branch admin:")
+               // console.log(this.classes)
             })
       } else if (this.role == 'school-admin') {
          this.classProvider.getClassBySchoolAdminId()

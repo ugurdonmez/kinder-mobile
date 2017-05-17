@@ -69,9 +69,9 @@ export class Message {
     ////////////// PRIVATE MESSAGING
     // call this when user sends a message to another user.
     public sendMessage(receiverUserId: string, message: string): void{
-        console.log("Hello message provider sendMessage function");
-        console.log(receiverUserId);
-        console.log(message);
+        // console.log("Hello message provider sendMessage function");
+        // console.log(receiverUserId);
+        // console.log(message);
         let time = new Date().getTime();
         this.af.database.list("user-messages/" + this.userId + "/" + receiverUserId + "/conversation").push(
             {

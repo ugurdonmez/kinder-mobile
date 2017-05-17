@@ -40,7 +40,7 @@ export class SchoolDetailsDirective implements OnInit {
                public alertCtrl: AlertController,
                private authData: AuthData) {
 
-      console.log("school-details directive constructor:")
+      // console.log("school-details directive constructor:")
 
    }
 

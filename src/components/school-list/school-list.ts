@@ -26,17 +26,17 @@ export class SchoolListDirective implements OnInit {
    ngOnInit(): void {
       this.schoolProvider.getSchoolByBranchAdminId()
          .then(res => {
-            console.log('SchoolListDirective: constructor schools')
-            console.log(res)
+            // console.log('SchoolListDirective: constructor schools')
+            // console.log(res)
             this.schools = res
          })
-      console.log('SchoolListDirective called with role:')
-      console.log(this.role)
+      // console.log('SchoolListDirective called with role:')
+      // console.log(this.role)
    }
 
    private schoolClicked(school): void {
-      console.log('goes to class list of that school with school:');
-      console.log(school);
+      // console.log('goes to class list of that school with school:');
+      // console.log(school);
 
       if (this.role == 'branch-admin') {
          this.navCtrl.push(BranchAdminSchoolDetailsPage, {'school': school})

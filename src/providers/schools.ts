@@ -34,8 +34,8 @@ export class Schools {
 
       var userId = this.authData.getUserId();
 
-      console.log('Schools: getSchoolByBranchAdminId')
-      console.log('userId ' + userId)
+      // console.log('Schools: getSchoolByBranchAdminId')
+      // console.log('userId ' + userId)
 
       return this.af.database
          .list('/schools', {
