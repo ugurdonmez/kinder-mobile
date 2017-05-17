@@ -2,20 +2,17 @@ import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 
 @Component({
-   selector: 'page-school-admin-me',
-   templateUrl: 'me.html'
+   selector: 'page-school-admin-class-tab',
+   templateUrl: 'class-tab.html'
 })
 
-export class SchoolAdminMePage {
+export class SchoolAdminClassPage {
 
-   private pageTitleTextEn: string = "School Admin Home Page";
+   private pageTitleTextEn: string = "School Admin Class Page";
 
    constructor(public navCtrl: NavController,
                public navParams: NavParams) {
 
    }
 
-   ionViewDidLoad() {
-
-   }
 }
