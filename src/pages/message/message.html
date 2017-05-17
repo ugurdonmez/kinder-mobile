@@ -1,0 +1,27 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>{{"Message" | translate}}</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+    <ion-list>
+        <button ion-item *ngFor="let person of conversations | async" (click)="openDialog(person.$key)">
+            <div item-left>
+                <ion-avatar item-left>
+                    <img src="{{(getParent(person?.$key) | async)?.profileImageUrl}}"/>
+                </ion-avatar>
+            </div>
+            <div>
+                <!--<p>User Id: {{person?.$key}}</p>-->
+                <h2><ion-icon name="alert" color="danger" [hidden]="!(person.isUnread)"></ion-icon> Name: {{(getParent(person?.$key) | async)?.parentName}} {{(getParent(person?.$key) | async)?.parentSurname}}</h2>
+            </div>
+            <div item-right>
+                <!--{{person?.timestamp}}-->
+            </div>
+        </button>
+    </ion-list>
+
+</ion-content>

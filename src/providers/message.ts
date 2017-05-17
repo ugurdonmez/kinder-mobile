@@ -60,6 +60,10 @@ export class Message {
             .toPromise()
     }
 
+   public deletePostFromClassWall(classId: string, postId: string){
+      return this.af.database.object("classes/" + classId + "/" + "wall" + "/conversation/" + postId).remove();
+   }
+
     // Conversion: FirebaseObjectObservable -> Model
     private castClassWallObjectToModel(obj: any): ClassWallModel {
         return new ClassWallModel().fromObject(obj);
