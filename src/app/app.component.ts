@@ -1,15 +1,13 @@
 
-import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
-import { StatusBar, Splashscreen } from 'ionic-native';
+import {Component} from '@angular/core';
+import {Platform} from 'ionic-angular';
+import {StatusBar, Splashscreen} from 'ionic-native';
 
-import { AngularFire } from 'angularfire2';
-import { AuthData } from "../providers/auth-data";
-import { BranchAdminHomePage } from "../pages/homes/branch-admin-home/branch-admin-home";
-import { SchoolAdminHomePage } from "../pages/homes/school-admin-home/school-admin-home";
-import { TeacherHomePage } from "../pages/homes/teacher-home/teacher-home";
-import { ParentHomePage } from "../pages/homes/parent-home/parent-home";
-import { LoginPage } from "../pages/login/login";
+import {AngularFire} from 'angularfire2';
+import {LoginPage} from '../pages/login/login';
+import {AuthData} from '../providers/auth-data';
+import {BranchAdminHomePage} from "../pages/branch-admin/home/home";
+import {SchoolAdminHomePage} from "../pages/school-admin/home/home";
 
 
 @Component({
@@ -28,34 +26,40 @@ export class MyApp {
       // TODO: refactor this part
       af.auth.subscribe(user => {
          if (user) {
-            this.authData.getUserRole()
-               .subscribe(snapshot => {
-                     console.log('myapp navigate')
+            this.authData.getUser()
+               .then(snapshot => {
+                  console.log('myapp navigate')
 
-                     const role = snapshot.$value;
+                  const role = snapshot.role;
 
-                     if (role === 'branch-admin') {
-                        this.rootPage = BranchAdminHomePage
-                     } else if (role === 'school-admin') {
-                        this.rootPage = SchoolAdminHomePage
-                     } else if (role === 'teacher') {
-                        this.rootPage = TeacherHomePage
-                     } else {
-                        this.rootPage = ParentHomePage
-                     }
+                  if (role == 'branch-admin') {
+                     this.rootPage = BranchAdminHomePage
+                  } else if (role == 'school-admin') {
+                     this.rootPage = SchoolAdminHomePage
+                  } else {
+                     this.rootPage = LoginPage
                   }
-               )
+
+                  // if (role === 'branch-admin') {
+                  //    this.rootPage = BranchAdminHomePage
+                  // } else if (role === 'school-admin') {
+                  //    this.rootPage = SchoolAdminHomePage
+                  // } else if (role === 'teacher') {
+                  //    this.rootPage = TeacherHomePage
+                  // } else {
+                  //    this.rootPage = ParentHomePage
+                  // }
+               })
          } else {
             this.rootPage = LoginPage;
          }
       });
-
       platform.ready()
          .then(() => {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
             StatusBar.styleDefault();
             Splashscreen.hide();
-      });
+         });
    }
 }

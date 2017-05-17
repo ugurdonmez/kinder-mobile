@@ -1,0 +1,18 @@
+
+school-list {
+  .avatar-class {
+    width:70px;
+    height:70px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius:50%;
+    position: relative;
+
+    img {
+      position: absolute;
+      top:50%;
+      left:50%;
+      transform: translate(-50%,-50%)
+    }
+  }
+}

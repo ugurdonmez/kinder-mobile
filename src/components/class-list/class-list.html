@@ -1,0 +1,10 @@
+
+<ion-list>
+  <ion-card *ngFor="let _class of classes">
+        <ion-col width-80>
+          <h2>{{"Class Name" | translate}}: {{_class.name}}</h2>
+          <h3>{{"Age" | translate}}: {{_class.age}}</h3>
+          <p>{{"Capacity" | translate}}: {{_class.current}}/{{_class.maximum}}</p>
+        </ion-col>
+  </ion-card>
+</ion-list>

@@ -4,6 +4,7 @@ import { AngularFire } from 'angularfire2';
 import {AuthData} from "./auth-data";
 import {Camera} from "ionic-native";
 import * as firebase from 'firebase';
+import {ActivityModel} from "../models/activity-model";
 
 @Injectable()
 export class Activity {
@@ -11,34 +12,42 @@ export class Activity {
     constructor(public af: AngularFire, private authDataProvider: AuthData){
     }
 
-    // uploads the image. upload method is chosen by imageSource parameter.
-    public addActivityImage(imageSource, classId:string, date:string){
-        Camera.getPicture({
-            sourceType : imageSource,
-            saveToPhotoAlbum: false
-        }).then((image) => {
-            var imageData = image;
-            var profilePictureRef = firebase.storage().ref('/activity-images/' + classId).child(new Date().getDate() + " @ " + new Date().getTime() + ".png");
-            profilePictureRef.putString(imageData, 'base64', {contentType: 'image/png'})
-                .then((savedPicture) => {
-                    this.af.database.object('/classes/'+classId+"/activities/"+date)
-                        .set(
-                            savedPicture.downloadURL
-                        );
-                });
-        }, (err) => {
-            // Handle error
-        });
+    // adds activity to class and returns activityId
+    public createActivity(classId, message, datetime){
+        return this.af.database.list("/classes/" + classId + "/activities/").push({
+            message: message,
+            datetime: datetime
+        }).key
     }
 
-    // returns url of requested activity image
-    public getActivityImage(classId:string, date:string){
-        return this.af.database.object('/classes/'+classId+"/activities/"+date)
+    // returns all activities of class
+    public getActivities(classId): Promise<ActivityModel[]>{
+        return this.af.database.list("/classes/" + classId + "/activities/")
+            .map(obj => {
+                return this.castListToModel(obj)
+            })
+            .first()
+            .toPromise()
     }
 
-    // removes activity image link from db. note: .png image file is not deleted from firebase storage. only the link is removed.
-    public deleteActivityImage(classId:string, date:string){
-        this.af.database.list("/classes/" + classId + "/activities/"+date).remove();
+    // deletes an activity, given classId and activityId.
+    public deleteActivity(classId, activityId){
+        return this.af.database.object("/classes/" + classId + "/activities/" + activityId).remove();
+    }
+
+    // Conversion: FirebaseListObservable -> Model
+    private castListToModel(objs: any[]): ActivityModel[] {
+        let modelArray: Array<ActivityModel> = [];
+        for (let obj of objs) {
+            var model = new ActivityModel().fromObject(obj);
+            modelArray.push(model);
+        }
+        return modelArray;
+    }
+
+    // Conversion: FirebaseObjectObservable -> Model
+    private castObjectToModel(obj: any): ActivityModel {
+        return new ActivityModel().fromObject(obj);
     }
 
 }

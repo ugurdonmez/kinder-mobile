@@ -4,6 +4,8 @@ import { AngularFire } from 'angularfire2';
 import {AuthData} from "./auth-data";
 import {Camera} from "ionic-native";
 import * as firebase from 'firebase';
+import {WeeklyMealMenuModel} from "../models/weekly-meal-menu-model";
+import {PromiseObservable} from "rxjs/observable/PromiseObservable";
 
 @Injectable()
 export class WeeklyMealMenu {
@@ -33,13 +35,33 @@ export class WeeklyMealMenu {
     }
 
     // returns url of requested menu image
-    public getMenuImage(classId:string, date:string){
+    public getMenuImage(classId:string, date:string): Promise<WeeklyMealMenuModel>{
         return this.af.database.object('/classes/'+classId+"/weeklyMenu/"+date)
+            .map(obj => {
+                return this.castObjectToModel(obj)
+            })
+            .first()
+            .toPromise()
     }
 
     // removes menu image link from db. note: .png image file is not deleted from firebase storage. only the link is removed.
     public deleteMenuImage(classId:string, date:string){
         this.af.database.list("/classes/" + classId + "/weeklyMenu/"+date).remove();
+    }
+
+    // Conversion: FirebaseListObservable -> Model
+    private castListToModel(objs: any[]): WeeklyMealMenuModel[] {
+        let modelArray: Array<WeeklyMealMenuModel> = [];
+        for (let obj of objs) {
+            var model = new WeeklyMealMenuModel().fromObject(obj);
+            modelArray.push(model);
+        }
+        return modelArray;
+    }
+
+    // Conversion: FirebaseObjectObservable -> Model
+    private castObjectToModel(obj: any): WeeklyMealMenuModel {
+        return new WeeklyMealMenuModel().fromObject(obj);
     }
 
 }

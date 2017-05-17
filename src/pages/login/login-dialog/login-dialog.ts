@@ -14,11 +14,8 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {Translator} from "../../../app/translator";
 import {AuthData} from "../../../providers/auth-data";
 import {EmailValidator} from "../../../validators/email";
-import {BranchAdminHomePage} from "../../homes/branch-admin-home/branch-admin-home";
-import {TeacherHomePage} from "../../homes/teacher-home/teacher-home";
-import {ParentHomePage} from "../../homes/parent-home/parent-home";
-import {SchoolAdminHomePage} from "../../homes/school-admin-home/school-admin-home";
-// import {LoginPage} from "../login";
+import {BranchAdminHomePage} from "../../branch-admin/home/home";
+import {SchoolAdminHomePage} from "../../school-admin/home/home";
 
 
 @Component({
@@ -70,14 +67,14 @@ export class LoginDialog {
       this.submitAttempt = true;
 
       if (!this.loginForm.valid) {
-         console.log(this.loginForm.value);
+         // console.log(this.loginForm.value);
       } else {
          this.authData.loginUser(
             this.loginForm.value.email,
             this.loginForm.value.password)
             .then(() => {
-               console.log('user id');
-               console.log(this.authData.getUserId());
+               // console.log('user id:');
+               // console.log(this.authData.getUserId());
 
                this.redirectUser();
             }, error => {
@@ -103,25 +100,35 @@ export class LoginDialog {
    }
 
    private redirectUser(): void {
-      this.authData.getUserRole()
-         .subscribe(snapshot => {
-               console.log('user role snapshot');
-               console.log(snapshot.$key);
-               console.log(snapshot.$value);
+      this.authData.getUser()
+         .then(snapshot => {
 
-               const role = snapshot.$value;
+            const role = snapshot.role;
 
-               this.loading.dismiss()
+            this.loading.dismiss()
 
-               if (role === 'branch-admin') {
-                  this.nav.setRoot(BranchAdminHomePage)
-               } else if (role === 'school-admin') {
-                  this.nav.setRoot(SchoolAdminHomePage)
-               } else if (role === 'teacher') {
-                  this.nav.setRoot(TeacherHomePage)
-               } else {
-                  this.nav.setRoot(ParentHomePage)
-               }
+            if (role == 'branch-admin') {
+               this.nav.setRoot(BranchAdminHomePage)
+                  .then(() => {
+                     this.loading.dismiss()
+                  })
+            } else if (role == 'school-admin') {
+               this.nav.setRoot(SchoolAdminHomePage)
+                  .then(() => {
+                     this.loading.dismiss()
+                  })
+            }
+
+
+               // if (role === 'branch-admin') {
+               //    this.nav.setRoot(BranchAdminHomePage)
+               // } else if (role === 'school-admin') {
+               //    this.nav.setRoot(SchoolAdminHomePage)
+               // } else if (role === 'teacher') {
+               //    this.nav.setRoot(TeacherHomePage)
+               // } else {
+               //    this.nav.setRoot(ParentHomePage)
+               // }
             }
          );
    }

@@ -1,0 +1,49 @@
+<ion-card>
+   <ion-card-header class="details-header">
+      {{(branch)?.name}}
+   </ion-card-header>
+
+   <ion-card-content>
+      <img class="avatar-class" src="{{branch?.logoURL}}" (click)="updatePhotoClicked()">
+      <form *ngIf='!!branchDetailsForm' [formGroup]="branchDetailsForm">
+         <ion-list>
+            <ion-item>
+               <ion-label stacked>{{"Name" | translate}}</ion-label>
+               <ion-input type="text" formControlName="name"></ion-input>
+            </ion-item>
+
+            <ion-item>
+               <ion-label stacked>{{"Telephone" | translate}}</ion-label>
+               <ion-input type="text" formControlName="tel"></ion-input>
+            </ion-item>
+
+            <ion-item>
+               <ion-label stacked>{{"Manager" | translate}}</ion-label>
+               <ion-input type="text" formControlName="manager"></ion-input>
+            </ion-item>
+
+            <ion-item>
+               <ion-label stacked>{{"Manager Telephone" | translate}}</ion-label>
+               <ion-input type="text" formControlName="manager_tel"></ion-input>
+            </ion-item>
+
+            <ion-item>
+               <ion-label stacked>{{"Manager Email" | translate}}</ion-label>
+               <ion-input type="text" formControlName="manager_mail"></ion-input>
+            </ion-item>
+            <ion-item>
+               <ion-label stacked>{{"Address" | translate}}</ion-label>
+               <ion-input type="text" formControlName="address"></ion-input>
+            </ion-item>
+         </ion-list>
+
+         <ion-buttons class="update-branch-button">
+            <button ion-button block (click)="updateBranchButtonClicked()">
+               {{'Update' | translate}}
+            </button>
+         </ion-buttons>
+
+
+      </form>
+   </ion-card-content>
+</ion-card>

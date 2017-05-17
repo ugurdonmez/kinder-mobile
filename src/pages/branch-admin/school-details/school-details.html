@@ -1,0 +1,11 @@
+<ion-header>
+   <ion-navbar>
+      <ion-title>{{"School" | translate}}: {{(school)?.name}}</ion-title>
+   </ion-navbar>
+</ion-header>
+
+<ion-content class="page-branch-admin-school-details">
+
+   <school-details [school]="school" [role]="'branch-admin'"></school-details>
+
+</ion-content>

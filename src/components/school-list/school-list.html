@@ -1,0 +1,25 @@
+
+<ion-list>
+  <ion-card *ngFor="let school of schools | async">
+    <ion-grid>
+      <ion-row (click)="schoolClicked(school)">
+        <ion-col width-20>
+          <div class="avatar-class">
+            <img src="{{school.logoURL}}">
+          </div>
+        </ion-col>
+        <ion-col width-80>
+          <h2>{{school.name}}</h2>
+          <h3>{{school.manager}}</h3>
+          <p>{{school.manager_tel}}</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+</ion-list>
+
+<ion-buttons class="create-school-button">
+  <button ion-button block (click)="createSchoolButtonClicked()">
+    {{'Create School' | translate}}
+  </button>
+</ion-buttons>

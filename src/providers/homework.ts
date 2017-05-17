@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { AngularFire } from 'angularfire2';
 import {Camera} from "ionic-native";
 import * as firebase from 'firebase';
+import {HomeworkModel} from "../models/homework-model";
 
 @Injectable()
 export class Homework {
@@ -10,23 +11,28 @@ export class Homework {
     constructor(public af: AngularFire){
     }
 
-    // adds a homework to a class.
-    public addHomework(classId: string, homework){
-        return this.af.database.list("/classes/" + classId + "/homeworks/").push(homework)
+    // adds a homework to a class, returns key of added element.
+    public addHomework(classId: string, homework: HomeworkModel): string{
+        return this.af.database.list("/classes/" + classId + "/homeworks/").push(homework).key
     }
 
     // gets a homework from a class. also, links to attachments and list of students that completed that homework are included.
-    public getHomeworks(classId: string){
+    public getHomeworks(classId: string): Promise<HomeworkModel[]>{
         return this.af.database.list("/classes/" + classId + "/homeworks/")
+            .map(obj => {
+                return this.castListToModel(obj)
+            })
+            .first()
+            .toPromise()
     }
 
     // deletes a homework from a class.
-    public deleteHomework(classId: string, homeworkId: string){
+    public deleteHomework(classId: string, homeworkId: string): void{
         this.af.database.object("/classes/" + classId + "/homeworks/" + homeworkId).remove();
     }
 
     // adds an attachment to homework. image only for now.
-    public addAttachmentToHomework(classId: string, homeworkId: string, imageSource){
+    public addAttachmentToHomework(classId: string, homeworkId: string, imageSource): void{
         Camera.getPicture({
             sourceType : imageSource,
             saveToPhotoAlbum: false
@@ -46,19 +52,34 @@ export class Homework {
     }
 
     // removes an attachment from homework. note: media file is not deleted from firebase storage. only the link is removed.
-    public removeAttachmentFromHomework(classId: string, homeworkId: string, attachmentId: String){
+    public removeAttachmentFromHomework(classId: string, homeworkId: string, attachmentId: String): void{
         this.af.database.object('/classes/'+classId+"/homeworks/" + homeworkId + "/attachments/" + attachmentId).remove();
     }
 
     // when a student completed a homework, call this function to mark student as completed
-    public markStudentCompleted(classId: string, homeworkId: string, studentUserId: string){
+    public markStudentCompleted(classId: string, homeworkId: string, studentUserId: string): void{
         this.af.database.object('/classes/'+classId+"/homeworks/"+homeworkId+"/completedStudents/" + studentUserId)
             .set(true);
     }
 
     // to undo a student completed homework status
-    public markStudentNotCompleted(classId: string, homeworkId: string, studentUserId: string){
+    public markStudentNotCompleted(classId: string, homeworkId: string, studentUserId: string): void{
         this.af.database.object('/classes/'+classId+"/homeworks/"+homeworkId+"/completedStudents/" + studentUserId)
             .remove()
+    }
+
+    // Conversion: FirebaseListObservable -> Model
+    private castListToModel(objs: any[]): HomeworkModel[] {
+        let modelArray: Array<HomeworkModel> = [];
+        for (let obj of objs) {
+            var model = new HomeworkModel().fromObject(obj);
+            modelArray.push(model);
+        }
+        return modelArray;
+    }
+
+    // Conversion: FirebaseObjectObservable -> Model
+    private castObjectToModel(obj: any): HomeworkModel {
+        return new HomeworkModel().fromObject(obj);
     }
 }

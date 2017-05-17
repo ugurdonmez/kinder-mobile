@@ -11,6 +11,7 @@ import * as firebase from 'firebase';
 import {Translator} from "../app/translator";
 import {TranslateService} from "ng2-translate";
 import {Classes} from "./classes";
+import {UserModel} from "../models/user-model";
 
 
 @Injectable()
@@ -29,25 +30,51 @@ export class Schools {
       this.translate = translator.translatePipe;
    }
 
-   public getSchool(schoolId: string) {
-      return this.af.database.object('/schools/' + schoolId);
+   public getSchoolByBranchAdminId(): Promise<SchoolModel[]> {
+
+      var userId = this.authData.getUserId();
+
+      // console.log('Schools: getSchoolByBranchAdminId')
+      // console.log('userId ' + userId)
+
+      return this.af.database
+         .list('/schools', {
+            query: {
+               orderByChild: 'branchAdminId',
+               equalTo: userId
+            }
+         })
+         .map(this.castToSchoolModel)
+         .first()
+         .toPromise()
    }
 
-   public getAllSchools() {
-      return this.af.database.list('/schools/');
+   public getSchoolBySchoolAdminId(): Promise<SchoolModel[]> {
+
+      var userId = this.authData.getUserId();
+
+      return this.af.database
+         .list('/schools', {
+            query: {
+               orderByChild: 'schoolAdminId',
+               equalTo: userId
+            }
+         })
+         .map(this.castToSchoolModel)
+         .first()
+         .toPromise()
    }
 
-   getSchoolsOfBranch(branchId: string) {
-      return this.af.database.list('/schools', {
-         query: {
-            orderByChild: 'branchId',
-            equalTo: branchId
-         }
-      });
-   }
-
-   public addSchool(school: SchoolModel) {
-      school.adminUserId = this.authData.getUserId();
+   public addSchool(school) {
+      if (!!school.schoolAdminEmail){
+         let schoolAdmin = new UserModel()
+         schoolAdmin.branchId = school.branchId
+         schoolAdmin.branchAdminId = school.branchAdminId
+         schoolAdmin.role = 'school-admin'
+         schoolAdmin.email = school.schoolAdminEmail
+         this.authData.newInvitation(schoolAdmin)
+         delete school.schoolAdminEmail
+      }
       return this.schools.push(school).key;
    }
 
@@ -55,10 +82,6 @@ export class Schools {
       this.af.database.object('/schools/' + school.id).set(school);
    }
 
-   addClassToSchool(schoolId: string, classId: string) {
-      // let schoolClasssList = this.af.database.list('/schools/' + schoolId + '/classes');
-      // schoolClasssList.push(classId);
-   }
 
    deleteSchool(schoolId: string) {
       this.af.database.object('/schools/' + schoolId).remove();
@@ -76,16 +99,6 @@ export class Schools {
       })
    }
 
-   public getUserSchools() {
-      var userId = this.authData.getUserId();
-
-      return this.af.database.list('/schools', {
-         query: {
-            orderByChild: 'adminUserId',
-            equalTo: userId
-         }
-      });
-   }
 
    public newPhoto(schoolId: string) {
       {
@@ -128,4 +141,10 @@ export class Schools {
       });
    }
 
+   // Conversion: FirebaseListObservable -> Model
+   private castToSchoolModel(objs: any[]): SchoolModel[] {
+      return objs.map(o => {
+         return new SchoolModel().fromObject(o);
+      })
+   }
 }

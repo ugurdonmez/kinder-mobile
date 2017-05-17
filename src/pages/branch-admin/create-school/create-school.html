@@ -1,0 +1,82 @@
+<ion-header>
+   <ion-navbar>
+      <ion-title>{{"Create School" | translate}}</ion-title>
+   </ion-navbar>
+</ion-header>
+
+<ion-content class="page-branch-admin-create-school">
+   <ion-card class="section">
+      <form *ngIf='!!createSchoolForm' [formGroup]="createSchoolForm">
+         <ion-list>
+            <ion-item>
+               <ion-label stacked>{{"Name" | translate}}</ion-label>
+               <ion-input type="text" formControlName="name"></ion-input>
+            </ion-item>
+
+            <ion-item>
+               <ion-label stacked>{{"Building Address" | translate}}</ion-label>
+               <ion-input type="text" formControlName="buildingAddress"></ion-input>
+            </ion-item>
+
+            <ion-item>
+               <ion-label stacked>{{"Manager Name" | translate}}</ion-label>
+               <ion-input type="text" formControlName="managerName"></ion-input>
+            </ion-item>
+
+            <ion-item>
+               <ion-label stacked>{{"Manager Tel" | translate}}</ion-label>
+               <ion-input type="text" formControlName="managerTel"></ion-input>
+            </ion-item>
+
+            <ion-item>
+               <ion-label stacked>{{"Activation Email" | translate}}</ion-label>
+               <ion-input type="text" formControlName="activationEmail"></ion-input>
+            </ion-item>
+
+            <ion-item>
+               <ion-label stacked>{{"School Telephone" | translate}}</ion-label>
+               <ion-input type="text" formControlName="schoolTelephone"></ion-input>
+            </ion-item>
+
+            <ion-item>
+               <ion-label stacked>{{"Second Contact Person Name" | translate}}</ion-label>
+               <ion-input type="text" formControlName="secondContactPersonName"></ion-input>
+            </ion-item>
+
+            <ion-item>
+               <ion-label stacked>{{"Second Contact Person Tel" | translate}}</ion-label>
+               <ion-input type="text" formControlName="secondContactTelNo"></ion-input>
+            </ion-item>
+
+            <ion-item>
+               <ion-label>{{"Activated" | translate}}</ion-label>
+               <ion-select formControlName="isActivated">
+                  <ion-option [value]="True">{{"True" | translate}}</ion-option>
+                  <ion-option [value]="False">{{"False" | translate}}</ion-option>
+               </ion-select>
+            </ion-item>
+
+            <ion-item>
+               <ion-label stacked>{{"membershipEnd" | translate}}</ion-label>
+               <ion-input type="text" formControlName="membershipEnd"></ion-input>
+            </ion-item>
+
+            <ion-item>
+               <ion-label stacked>{{"membershipStart" | translate}}</ion-label>
+               <ion-input type="text" formControlName="membershipStart"></ion-input>
+            </ion-item>
+
+            <ion-item>
+               <ion-label stacked>{{"School Admin Invitation Email" | translate}}</ion-label>
+               <ion-input type="text" formControlName="schoolAdminEmail"></ion-input>
+            </ion-item>
+         </ion-list>
+
+         <ion-buttons class="create-school-button">
+            <button ion-button block (click)="createSchoolButtonClicked()">
+               {{'Create School' | translate}}
+            </button>
+         </ion-buttons>
+      </form>
+   </ion-card>
+</ion-content>

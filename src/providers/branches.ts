@@ -1,5 +1,7 @@
 import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/first';
 
 import {AngularFire} from 'angularfire2';
 import {BranchModel} from '../models/branch-model';
@@ -29,46 +31,51 @@ export class Branches {
       this.translate = translator.translatePipe;
    }
 
-   public getUserBranches() {
+   public getBranchAdminBranches(): Promise<BranchModel[]> {
       var userId = this.authData.getUserId();
 
-      return this.af.database.list('/branches', {
-         query: {
-            orderByChild: 'adminUserId',
-            equalTo: userId
-         }
-      });
+      return this.af.database
+         .list('/branches', {
+            query: {
+               orderByChild: 'branchAdminId',
+               equalTo: userId
+            }
+         })
+         .map(obj => {
+            var branch = this.castToBranchModel(obj)
+
+            return branch
+         })
+         .first()
+         .toPromise()
    }
 
-   public getBranch(branchId: string) {
-      return this.af.database.object('/branches/' + branchId);
+   public getBranch(branchId: string): Promise<BranchModel> {
+      return this.af.database.object('/branches/' + branchId).map(obj => {
+         var branch = this.castObjectToBranchModel(obj)
+         return branch
+      })
+          .first()
+          .toPromise()
    }
 
-   public getAllBranches() {
-      return this.af.database.list('/branches/');
+   public getAllBranches(): Promise<BranchModel[]> {
+      return this.af.database.list('/branches/')
+          .map(obj => {
+             var branch = this.castToBranchModel(obj)
+             return branch
+          })
+          .first()
+          .toPromise()
    }
 
    public addBranch(branch: BranchModel) {
-      branch.adminUserId = this.authData.getUserId();
+      branch.branchAdminId = this.authData.getUserId();
       return this.branches.push(branch).key;
-      // var pushedBranch = this.branches.push(branch);
-      // var branchId = pushedBranch.key;
-      //console.log("branchId: " + branchId);
-
-      // var userId = this.authData.getUserId();
-      // var user_branches = this.af.database.list('/user-branches/'+userId);
-      // user_branches.push({'branchId':branchId});
    }
 
    public updateBranch(branch: BranchModel) {
       this.af.database.object('/branches/' + branch.id).set(branch);
-   }
-
-   addSchoolToBranch(branchId: string, schoolId: string) {
-      // schoollar zaten branch'larini tutuyor, buna gerek yok o yuzden.
-      // duplicate data olunca duzenlemeler, silmeler eklemeler biraz zor oluyor.
-      // let branchSchoolsList = this.af.database.list('/branches/' + branchId + '/schools');
-      // branchSchoolsList.push(schoolId);
    }
 
    deleteBranch(branchId: string) {
@@ -126,5 +133,19 @@ export class Branches {
       }, (err) => {
          // Handle error
       });
+   }
+
+   // Conversion: FirebaseListObservable -> Model
+   private castToBranchModel(objs: any[]): BranchModel[] {
+      let modelArray: Array<BranchModel> = []
+      for (let obj of objs) {
+         modelArray.push(new BranchModel().fromObject(obj))
+      }
+      return modelArray
+   }
+
+   // Conversion: FirebaseObjectObservable -> Model
+   private castObjectToBranchModel(obj: any): BranchModel {
+      return new BranchModel().fromObject(obj);
    }
 }

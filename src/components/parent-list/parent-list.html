@@ -1,0 +1,23 @@
+
+<ion-list>
+  <ion-card *ngFor="let parent of parents">
+    <ion-grid>
+      <ion-row>
+        <ion-col width-20>
+          <div class="avatar-class">
+            <img src="{{parent.profileImageUrl}}"/>
+          </div>
+        </ion-col>
+        <ion-col width-80>
+          <h2>{{"Student Name" | translate}}: {{parent.studentName}}</h2>
+          <h3>{{"Student Surname" | translate}}: {{parent.studentSurname}}</h3>
+          <p>{{"studentAddress" | translate}}: {{parent.studentAddress}}</p>
+          <p>{{"parentTelephone" | translate}}: {{parent.parentTelephone}}</p>
+          <p>{{"parentName" | translate}}: {{parent.parentName}}</p>
+          <p>{{"parentSurname" | translate}}: {{parent.parentSurname}}</p>
+          <p>{{"studentBirthDate" | translate}}: {{parent.studentBirthDate}}</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+</ion-list>

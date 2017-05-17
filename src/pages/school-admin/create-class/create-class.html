@@ -1,0 +1,10 @@
+<ion-header>
+   <ion-navbar>
+      <ion-title>{{"Create Class in School" | translate}}: {{(school)?.name}}</ion-title>
+   </ion-navbar>
+</ion-header>
+
+<ion-content class="page-school-admin-create-class">
+
+   <create-class *ngIf="!!school" [role]="'school-admin'" [school]="school"></create-class>
+</ion-content>

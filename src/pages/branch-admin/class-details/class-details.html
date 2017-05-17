@@ -1,0 +1,9 @@
+<ion-header>
+   <ion-navbar>
+      <ion-title>{{"Edit Class" | translate}}: {{(_class)?.name}}</ion-title>
+   </ion-navbar>
+</ion-header>
+
+<ion-content class="page-branch-admin-class-details">
+<class-details-admin [role]="'branch-admin'" [_class]="_class"></class-details-admin>
+</ion-content>
