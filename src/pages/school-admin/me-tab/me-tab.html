@@ -3,6 +3,6 @@
 
 <ion-content padding>
 
-  <p>School Admin Me Page</p>
+  <school-details *ngIf='!!school' [school]="school"></school-details>
 
 </ion-content>

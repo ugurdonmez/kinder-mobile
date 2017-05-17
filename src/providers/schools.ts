@@ -49,6 +49,22 @@ export class Schools {
          .toPromise()
    }
 
+   public getSchoolBySchoolAdminId(): Promise<SchoolModel[]> {
+
+      var userId = this.authData.getUserId();
+
+      return this.af.database
+         .list('/schools', {
+            query: {
+               orderByChild: 'schoolAdminId',
+               equalTo: userId
+            }
+         })
+         .map(this.castToSchoolModel)
+         .first()
+         .toPromise()
+   }
+
    public addSchool(school) {
       if (!!school.schoolAdminEmail){
          let schoolAdmin = new UserModel()

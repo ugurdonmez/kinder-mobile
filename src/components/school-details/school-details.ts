@@ -23,9 +23,9 @@ import {UserModel} from "../../models/user-model";
 
 export class SchoolDetailsDirective implements OnInit {
 
-   @Input() role: string;
+   @Input() school: SchoolModel;
    private listedClasses: ClassModel[];
-   private school: SchoolModel;
+   // private school: SchoolModel;
    private schoolDetailsForm: FormGroup;
    private translate: TranslateService;
    private listedTeachers: Promise<TeacherModel[]>;
@@ -46,7 +46,7 @@ export class SchoolDetailsDirective implements OnInit {
 
    ngOnInit(): void {
       this.translate = this.translator.translatePipe;
-      this.school = this.navParams.get('school');
+      // this.school = this.navParams.get('school');
       this.schoolDetailsForm = this.formBuilder.group({
          'id': [this.school.id, Validators.required],
          'name': [this.school.name, Validators.required],
