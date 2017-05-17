@@ -14,6 +14,8 @@ import {AuthData} from "../../providers/auth-data";
 import {BranchAdminCreateClassPage} from "../../pages/branch-admin/create-class/create-class";
 import {BranchAdminClassDetailsPage} from "../../pages/branch-admin/class-details/class-details";
 import {UserModel} from "../../models/user-model";
+import {SchoolAdminCreateClassPage} from "../../pages/school-admin/create-class/create-class";
+import {SchoolAdminClassDetailsPage} from "../../pages/school-admin/class-details/class-details";
 
 @Component({
    selector: 'school-details',
@@ -24,11 +26,13 @@ import {UserModel} from "../../models/user-model";
 export class SchoolDetailsDirective implements OnInit {
 
    @Input() school: SchoolModel;
+   @Input() role: string;
    private listedClasses: ClassModel[];
    // private school: SchoolModel;
    private schoolDetailsForm: FormGroup;
    private translate: TranslateService;
    private listedTeachers: Promise<TeacherModel[]>;
+   private user: UserModel;
 
    constructor(public navCtrl: NavController,
                public navParams: NavParams,
@@ -73,6 +77,10 @@ export class SchoolDetailsDirective implements OnInit {
       })
 
       this.listedTeachers = this.teacherProvider.getTeachersOfSchool(this.school.id)
+
+      this.authData.getUser().then( user => {
+         this.user = user
+      })
    }
 
    ionViewDidLoad() {
@@ -80,11 +88,21 @@ export class SchoolDetailsDirective implements OnInit {
    }
 
    private addClassButtonClicked():void{
-      this.navCtrl.push(BranchAdminCreateClassPage, {'school': this.school})
+      if (this.role == 'branch-admin'){
+         this.navCtrl.push(BranchAdminCreateClassPage, {'school': this.school})
+      }
+      else if(this.role == 'school-admin'){
+         this.navCtrl.push(SchoolAdminCreateClassPage, {'school': this.school})
+      }
    }
 
    private openClassPage(_class): void{
-      this.navCtrl.push(BranchAdminClassDetailsPage, {'class': _class})
+      if (this.role == 'branch-admin'){
+         this.navCtrl.push(BranchAdminClassDetailsPage, {'class': _class})
+      }
+      else if(this.role == 'school-admin'){
+         this.navCtrl.push(SchoolAdminClassDetailsPage, {'class': _class})
+      }
    }
 
    private getClassesOfTeachers(teacherId){

@@ -5,11 +5,11 @@ import {Translator} from "../../../app/translator";
 import {TranslateService} from "ng2-translate";
 
 @Component({
-   selector: 'page-branch-admin-create-class',
+   selector: 'page-school-admin-create-class',
    templateUrl: 'create-class.html'
 })
 
-export class BranchAdminCreateClassPage {
+export class SchoolAdminCreateClassPage {
 
    private school: SchoolModel;
    private translate: TranslateService;

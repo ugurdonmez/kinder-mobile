@@ -1,0 +1,63 @@
+<ion-card class="section">
+   <form *ngIf='!!editClassForm' [formGroup]="editClassForm">
+      <ion-list>
+         <ion-item>
+            <ion-label stacked>{{"Class Name" | translate}}</ion-label>
+            <ion-input type="text" formControlName="name"></ion-input>
+         </ion-item>
+
+         <ion-item>
+            <ion-label>{{"TeacherStr" | translate}}</ion-label>
+            <ion-select formControlName="teacher_id">
+               <ion-option *ngFor="let a_teacher of teachersOfSchool" [value]="a_teacher.id">{{a_teacher
+                  .name}} {{a_teacher.surname}}
+               </ion-option>
+            </ion-select>
+         </ion-item>
+
+         <ion-item>
+            <ion-label stacked>{{"Age" | translate}}</ion-label>
+            <ion-input type="text" formControlName="age"></ion-input>
+         </ion-item>
+
+         <ion-item>
+            <ion-label stacked>{{"Total Size" | translate}}</ion-label>
+            <ion-input type="text" formControlName="maximum"></ion-input>
+         </ion-item>
+      </ion-list>
+
+      <ion-buttons class="edit-class-button">
+         <button ion-button block (click)="editClassButtonClicked()">
+            {{'Update Class' | translate}}
+         </button>
+      </ion-buttons>
+   </form>
+</ion-card>
+
+
+<ion-card class="section">
+   <h1 class="parents-title section-title">{{"Students" | translate}}</h1>
+
+   <ion-list>
+      <button ion-item *ngFor="let parent of parentsOfClass">
+         <ion-col width-20 item-left>
+            <img class="parent-thumbnail" src="{{parent?.profileImageUrl}}"/>
+         </ion-col>
+         <ion-col width-80>
+            <h2>{{"Student Name" | translate}}: {{parent.studentName}}</h2>
+            <h3>{{"Student Surname" | translate}}: {{parent.studentSurname}}</h3>
+            <p>{{"studentAddress" | translate}}: {{parent.studentAddress}}</p>
+            <p>{{"parentTelephone" | translate}}: {{parent.parentTelephone}}</p>
+            <p>{{"parentName" | translate}}: {{parent.parentName}}</p>
+            <p>{{"parentSurname" | translate}}: {{parent.parentSurname}}</p>
+            <p>{{"studentBirthDate" | translate}}: {{parent.studentBirthDate}}</p>
+         </ion-col>
+      </button>
+   </ion-list>
+
+   <ion-buttons class="invite-parent-button">
+      <button ion-button block (click)="inviteParentButtonClicked()">
+         {{'Invite Parent' | translate}}
+      </button>
+   </ion-buttons>
+</ion-card>
