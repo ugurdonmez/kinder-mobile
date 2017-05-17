@@ -24,14 +24,18 @@ export class SchoolListDirective implements OnInit {
    }
 
    ngOnInit(): void {
-      this.schoolProvider.getSchoolByBranchAdminId()
-         .then(res => {
-            // console.log('SchoolListDirective: constructor schools')
-            // console.log(res)
-            this.schools = res
-         })
-      // console.log('SchoolListDirective called with role:')
-      // console.log(this.role)
+      if (this.role == 'branch-admin') {
+         this.schoolProvider.getSchoolByBranchAdminId()
+            .then(res => {
+               this.schools = res
+            })
+      }
+      else if (this.role == 'school-admin') {
+         this.schoolProvider.getSchoolBySchoolAdminId()
+            .then(res => {
+               this.schools = res
+            })
+      }
    }
 
    private schoolClicked(school): void {
