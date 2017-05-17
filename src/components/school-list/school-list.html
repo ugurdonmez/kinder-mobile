@@ -1,6 +1,6 @@
 
 <ion-list>
-  <ion-card *ngFor="let school of schools">
+  <ion-card *ngFor="let school of schools | async">
     <ion-grid>
       <ion-row (click)="schoolClicked(school)">
         <ion-col width-20>

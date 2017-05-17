@@ -14,7 +14,7 @@ import {BranchAdminCreateSchoolPage} from "../../pages/branch-admin/create-schoo
 
 export class SchoolListDirective implements OnInit {
 
-   private schools: Array<SchoolModel>
+   private schools: Promise<SchoolModel[]>;
    @Input() role: string;
 
    constructor(public schoolProvider: Schools,
@@ -25,17 +25,19 @@ export class SchoolListDirective implements OnInit {
 
    ngOnInit(): void {
       if (this.role == 'branch-admin') {
-         this.schoolProvider.getSchoolByBranchAdminId()
-            .then(res => {
-               this.schools = res
-            })
+         this.schools = this.schoolProvider.getSchoolByBranchAdminId()
       }
       else if (this.role == 'school-admin') {
-         this.schoolProvider.getSchoolBySchoolAdminId()
-            .then(res => {
-               this.schools = res
-            })
+         this.schools = this.schoolProvider.getSchoolBySchoolAdminId()
       }
+   }
+
+   ionViewDidEnter(){
+      this.ngOnInit()
+   }
+
+   ionViewWillEnter(){
+      this.ngOnInit()
    }
 
    private schoolClicked(school): void {

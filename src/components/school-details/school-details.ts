@@ -170,4 +170,28 @@ export class SchoolDetailsDirective implements OnInit {
       this.schoolProvider.newPhoto(this.school.id)
    }
 
+   private deleteSchoolButtonClicked(){
+      let confirm = this.alertCtrl.create({
+         title: this.translate.instant('Delete School?'),
+         message: this.translate.instant('Sure you want to delete this school? ' +
+            'This will also remove the classes in this school. ' +
+            'A delete operation is irreversible.'),
+         buttons: [
+            {
+               text: this.translate.instant('Cancel'),
+               handler: () => {
+               }
+            },
+            {
+               text: this.translate.instant('Ok'),
+               handler: () => {
+                  this.schoolProvider.deleteSchool(this.school.id);
+                  this.navCtrl.pop();
+               }
+            }
+         ]
+      });
+      confirm.present();
+   }
+
 }

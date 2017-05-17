@@ -142,4 +142,25 @@ export class ClassDetailsDirective implements OnInit {
       prompt.present();
    }
 
+   private deleteClassButtonClicked(){
+      let confirm = this.alertCtrl.create({
+         title: this.translate.instant('Delete Class?'),
+         message: this.translate.instant('Sure you want to delete this class? A delete operation is irreversible.'),
+         buttons: [
+            {
+               text: this.translate.instant('Cancel'),
+               handler: () => {
+               }
+            },
+            {
+               text: this.translate.instant('Ok'),
+               handler: () => {
+                  this.classProvider.deleteClass(this._class.id);
+                  this.navCtrl.pop();
+               }
+            }
+         ]
+      });
+      confirm.present();
+   }
 }
