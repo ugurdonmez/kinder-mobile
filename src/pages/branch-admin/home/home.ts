@@ -1,11 +1,11 @@
 
 import {Component} from '@angular/core';
 
-import {BranchAdminTeacherPage} from "../teacher/teacher";
-import {BranchAdminStudentPage} from "../student/student";
-import {BranchAdminMePage} from "../me/me";
-import {BranchAdminSchoolPage} from "../school/school";
-import {BranchAdminClassPage} from "../class/class";
+import {BranchAdminTeacherPage} from "../teacher-tab/teacher-tab";
+import {BranchAdminStudentPage} from "../student-tab/student-tab";
+import {BranchAdminMePage} from "../me-tab/me-tab";
+import {BranchAdminSchoolPage} from "../school-tab/school-tab";
+import {BranchAdminClassPage} from "../class-tab/class-tab";
 
 @Component({
    selector: 'page-school-admin-home',

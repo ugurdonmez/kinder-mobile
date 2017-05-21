@@ -60,6 +60,10 @@ export class Message {
             .toPromise()
     }
 
+   public deletePostFromClassWall(classId: string, postId: string){
+      return this.af.database.object("classes/" + classId + "/" + "wall" + "/conversation/" + postId).remove();
+   }
+
     // Conversion: FirebaseObjectObservable -> Model
     private castClassWallObjectToModel(obj: any): ClassWallModel {
         return new ClassWallModel().fromObject(obj);
@@ -69,9 +73,9 @@ export class Message {
     ////////////// PRIVATE MESSAGING
     // call this when user sends a message to another user.
     public sendMessage(receiverUserId: string, message: string): void{
-        console.log("Hello message provider sendMessage function");
-        console.log(receiverUserId);
-        console.log(message);
+        // console.log("Hello message provider sendMessage function");
+        // console.log(receiverUserId);
+        // console.log(message);
         let time = new Date().getTime();
         this.af.database.list("user-messages/" + this.userId + "/" + receiverUserId + "/conversation").push(
             {

@@ -21,8 +21,8 @@ export class ParentListDirective implements OnInit {
    }
 
    ngOnInit(): void {
-      console.log('ParentListDirective: onInit()')
-      console.log(this.role)
+      // console.log('ParentListDirective: onInit()')
+      // console.log(this.role)
 
       if (this.role == 'branch-admin') {
          this.parentProvider.getParentsByBranchAdminId()

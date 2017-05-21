@@ -18,7 +18,7 @@ export class ClassModel {
 
     public fromObject(obj: any):ClassModel {
         // checking if this exists. because there are some cases where this property doesn't
-        // exist. but we can't push to firebase if a property of invitedUser is undefined.
+        // exist. but we can't push to firebase if a property is undefined.
         if(!!obj.$key){this.id = obj.$key;}
         else if(!!obj.id){this.id = obj.id;}
         this.name = obj.name;
@@ -30,7 +30,7 @@ export class ClassModel {
         this.branchAdminId = obj.branchAdminId;
         this.schoolAdminId = obj.schoolAdminId;
         // checking if this exists. because there are some cases where this property doesn't
-        // exist. but we can't push to firebase if a property of invitedUser is undefined.
+        // exist. but we can't push to firebase if a property is undefined.
         if(!!obj.attendance){this.attendance = obj.attendance;}
         if(!!obj.teacher_name){this.teacher_name = obj.teacher_name;}
         if(!!obj.gallery){this.gallery = obj.gallery;}

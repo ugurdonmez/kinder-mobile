@@ -55,9 +55,12 @@ export function createTranslateLoader(http: Http) {
       page.SchoolAdminStudentPage,
       page.SchoolAdminTeacherPage,
       page.SchoolAdminClassPage,
+      page.SchoolAdminClassDetailsPage,
+      page.SchoolAdminCreateClassPage,
       page.BranchAdminSchoolDetailsPage,
       page.BranchAdminCreateClassPage,
       page.BranchAdminClassDetailsPage,
+      page.BranchAdminCreateSchoolPage,
       page.ParentHomePage,
       page.TeacherHomePage,
 
@@ -69,6 +72,9 @@ export function createTranslateLoader(http: Http) {
       cmp.BranchDetailsDirective,
       cmp.ClassListDirective,
       cmp.ParentListDirective,
+      cmp.SchoolDetailsDirective,
+      cmp.ClassDetailsDirective,
+      cmp.CreateClassDirective,
    ],
    imports: [
       IonicModule.forRoot(MyApp),
@@ -100,6 +106,9 @@ export function createTranslateLoader(http: Http) {
       page.BranchAdminClassDetailsPage,
       page.ParentHomePage,
       page.TeacherHomePage,
+      page.BranchAdminCreateSchoolPage,
+      page.SchoolAdminClassDetailsPage,
+      page.SchoolAdminCreateClassPage,
    ],
    providers: [
       {provide: ErrorHandler, useClass: IonicErrorHandler},

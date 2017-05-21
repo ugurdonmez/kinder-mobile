@@ -41,7 +41,7 @@ export class BranchDetailsDirective implements OnInit {
    }
 
    ngOnInit(): void {
-      console.log('TeacherListDirective: onInit()')
+      // console.log('TeacherListDirective: onInit()')
    }
 
    private updateBranchButtonClicked(): void {

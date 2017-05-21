@@ -21,8 +21,8 @@ export class TeacherListDirective implements OnInit {
    }
 
    ngOnInit(): void {
-      console.log('TeacherListDirective: onInit()')
-      console.log(this.role)
+      // console.log('TeacherListDirective: onInit()')
+      // console.log(this.role)
 
       if (this.role == 'branch-admin') {
          this.teacherProvider.getTeacherByBranchAdminId()

@@ -10,6 +10,6 @@ export class HomeHeaderDirective {
     @Input() titleTextEn: string;
 
     constructor() {
-        console.log('Hello HomeHeader');
+        // console.log('Hello HomeHeader');
     }
 }

@@ -23,7 +23,7 @@ export class LoginPage {
    }
 
    ionViewDidLoad() {
-      console.log('ionViewDidLoad Login');
+      // console.log('ionViewDidLoad Login');
    }
 
    showLoginButton() {

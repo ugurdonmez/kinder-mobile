@@ -100,7 +100,9 @@ export class AuthData {
     }
 
     public getUser(): Promise<UserModel>{
-        let userId = this.getUserId();
+       if (!userId){
+          var userId:string = this.getUserId();
+       }
         return this.af.database.object('/users/'+userId)
             .map(obj => {
                 return this.castObjectToModel(obj, this.getUserEmail())

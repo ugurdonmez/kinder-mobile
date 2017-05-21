@@ -11,6 +11,7 @@ import * as firebase from 'firebase';
 import {Translator} from "../app/translator";
 import {TranslateService} from "ng2-translate";
 import {Classes} from "./classes";
+import {UserModel} from "../models/user-model";
 
 
 @Injectable()
@@ -33,8 +34,8 @@ export class Schools {
 
       var userId = this.authData.getUserId();
 
-      console.log('Schools: getSchoolByBranchAdminId')
-      console.log('userId ' + userId)
+      // console.log('Schools: getSchoolByBranchAdminId')
+      // console.log('userId ' + userId)
 
       return this.af.database
          .list('/schools', {
@@ -48,8 +49,32 @@ export class Schools {
          .toPromise()
    }
 
-   public addSchool(school: SchoolModel) {
-      school.schoolAdminId = this.authData.getUserId();
+   public getSchoolBySchoolAdminId(): Promise<SchoolModel[]> {
+
+      var userId = this.authData.getUserId();
+
+      return this.af.database
+         .list('/schools', {
+            query: {
+               orderByChild: 'schoolAdminId',
+               equalTo: userId
+            }
+         })
+         .map(this.castToSchoolModel)
+         .first()
+         .toPromise()
+   }
+
+   public addSchool(school) {
+      if (!!school.schoolAdminEmail){
+         let schoolAdmin = new UserModel()
+         schoolAdmin.branchId = school.branchId
+         schoolAdmin.branchAdminId = school.branchAdminId
+         schoolAdmin.role = 'school-admin'
+         schoolAdmin.email = school.schoolAdminEmail
+         this.authData.newInvitation(schoolAdmin)
+         delete school.schoolAdminEmail
+      }
       return this.schools.push(school).key;
    }
 

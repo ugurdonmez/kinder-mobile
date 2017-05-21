@@ -1,0 +1,50 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>{{"Message" | translate}}</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+    <ion-list>
+        <ion-item *ngFor="let message of messagesOfConversation | async">
+            <ion-row>
+                <ion-col width-10>
+                    <ion-avatar>
+                        <img [src]="getImageLink(message.sender)"/>
+                    </ion-avatar>
+                </ion-col>
+                <ion-col width-90>
+                    <ion-row>
+                        <ion-col width-80>
+                            <p>{{getName(message?.sender)}}</p>
+                            <p>Message:</p>
+                            <div style="white-space: normal;">{{message?.message}}</div>
+                        </ion-col>
+                        <ion-col width-20>
+                            <p>Time:</p>
+                            <p>{{getDateTimeHumanReadable(message?.timestamp)}}</p>
+                        </ion-col>
+                    </ion-row>
+                </ion-col>
+            </ion-row>
+        </ion-item>
+    </ion-list>
+
+</ion-content>
+
+
+<!--footer to send message.-->
+<ion-footer>
+    <ion-toolbar>
+        <ion-input type="text" [(ngModel)]="newMessageText" placeholder="Click To Send Message..."></ion-input>
+        <ion-buttons end>
+            <button (click)="sendMessage()" ion-button icon-left>
+                <ion-icon name="send"></ion-icon>
+                Send
+            </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-footer>
