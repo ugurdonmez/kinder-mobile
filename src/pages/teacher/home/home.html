@@ -20,33 +20,32 @@
   <ion-row>
 
     <ion-col width-20>
-      <div class="student-list">
-        student list
+
+      <div class="teacherHome__student-list">
+        <ion-list>
+          <button ion-item *ngFor="let student of students" (click)="openPage(p)">
+
+            <div class="avatar-circle">
+              <img src="{{student.photo_url}}">
+            </div>
+
+            <div>
+              {{student.name}}
+            </div>
+
+            <div>
+              {{student.surname}}
+            </div>
+
+          </button>
+        </ion-list>
       </div>
-
-      <ion-list>
-        <button ion-item *ngFor="let student of students" (click)="openPage(p)">
-
-          <div class="avatar-circle">
-            <img src="{{student.photo_url}}">
-          </div>
-
-          <div>
-            {{student.name}}
-          </div>
-
-          <div>
-            {{student.surname}}
-          </div>
-
-        </button>
-      </ion-list>
 
     </ion-col>
 
     <ion-col width-80>
       <div class="menu">
-        menu
+
       </div>
     </ion-col>
 
