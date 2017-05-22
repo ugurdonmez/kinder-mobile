@@ -23,6 +23,25 @@
       <div class="student-list">
         student list
       </div>
+
+      <ion-list>
+        <button ion-item *ngFor="let student of students" (click)="openPage(p)">
+
+          <div class="avatar-circle">
+            <img src="{{student.photo_url}}">
+          </div>
+
+          <div>
+            {{student.name}}
+          </div>
+
+          <div>
+            {{student.surname}}
+          </div>
+
+        </button>
+      </ion-list>
+
     </ion-col>
 
     <ion-col width-80>
