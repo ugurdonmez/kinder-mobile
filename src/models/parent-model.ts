@@ -13,7 +13,7 @@ export class ParentModel {
     schoolAdminId: string;
 
     public fromObject(obj: any):ParentModel {
-        this.id = obj.id;
+        this.id = obj.$key;
         this.classId = obj.classId
         this.parentName = obj.parentName
         this.parentSurname = obj.parentSurname
