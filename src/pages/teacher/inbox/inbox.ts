@@ -1,15 +1,13 @@
 
 import {Component, OnInit} from '@angular/core';
 import {StudentModel} from "../../../models/student-model";
-import {NavController} from "ionic-angular";
-import {TeacherInboxPage} from "../inbox/inbox";
 
 @Component({
-   selector: 'page-teacher-home',
-   templateUrl: 'home.html',
+   selector: 'page-teacher-messages',
+   templateUrl: 'messages.html',
 })
 
-export class TeacherHomePage implements OnInit {
+export class TeacherMessagesPage implements OnInit {
 
    private schoolName: string
    private classLogoURL: string
@@ -17,8 +15,7 @@ export class TeacherHomePage implements OnInit {
 
    private students: Array<StudentModel>
 
-   constructor(
-      public navCtrl: NavController,) {
+   constructor() {
       this.students = []
    }
 
@@ -52,9 +49,11 @@ export class TeacherHomePage implements OnInit {
       this.students.push(student1)
       this.students.push(student2)
       this.students.push(student3)
+
+      this.messageTests()
    }
 
-   private openInboxClicked(): void {
-      this.navCtrl.push(TeacherInboxPage)
+   private messageTests() {
+
    }
 }

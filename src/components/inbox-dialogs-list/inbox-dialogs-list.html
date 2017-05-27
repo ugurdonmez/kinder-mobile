@@ -1,0 +1,19 @@
+
+<ion-list>
+   <button ion-item *ngFor="let person of conversations | async" (click)="openDialog(person.id)">
+      <div item-left>
+         <ion-avatar item-left>
+            <img src="{{parents[person.id]?.profileImageUrl}}"/>
+         </ion-avatar>
+      </div>
+      <div>
+         <h2>
+            <ion-icon name="alert" color="danger" [hidden]="!(person.isUnread)"></ion-icon>
+            Name: {{parents[person.id]?.parentName}} {{parents[person.id]?.parentSurname}}
+         </h2>
+      </div>
+      <div item-right>
+         {{person?.timestamp}}
+      </div>
+   </button>
+</ion-list>

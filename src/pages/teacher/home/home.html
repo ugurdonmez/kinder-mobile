@@ -1,5 +1,5 @@
 <ion-header home-header [titleTextEn]="'Teacher Home'"></ion-header>
-
+<ion-content>
 <ion-grid>
 
   <ion-row>
@@ -52,7 +52,15 @@
 
   </ion-row>
 
+  <!--open inbox button-->
+  <ion-buttons class="open-inbox-button">
+    <button ion-button (click)="openInboxClicked()">
+      {{'Inbox' | translate}}
+    </button>
+  </ion-buttons>
+
 </ion-grid>
 
+</ion-content>
 
 
