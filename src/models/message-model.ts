@@ -1,12 +1,14 @@
 export class MessageModel {
     id: string;
-    isUnread: string;
-    conversation: any;
+    message: string;
+    sender: string;
+    timestamp: number;
 
     public fromObject(obj: any):MessageModel {
         this.id = obj.$key
-        this.isUnread = obj.isUnread
-        this.conversation = obj.conversation
+        this.message = obj.message
+        this.sender = obj.sender
+        this.timestamp = obj.timestamp
 
         return this;
     }
