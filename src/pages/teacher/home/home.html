@@ -19,9 +19,11 @@
 
     <ion-row>
       <ion-col width-20>
-        <div class="teacherHome__student-list">
+        <button class="teacherHome__student-list">
           <div>
-            <div *ngFor="let student of students" (click)="selectStudent(index)">
+            <div *ngFor="let student of students"
+                 (click)="selectStudent(index)"
+                 class="teacherHome__studentButton">
               <div class="avatar-circle">
                 <img src="{{student.photo_url}}">
               </div>
@@ -35,7 +37,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </button>
       </ion-col>
 
       <ion-col width-80>
