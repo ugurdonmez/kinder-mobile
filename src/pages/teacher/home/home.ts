@@ -15,6 +15,8 @@ export class TeacherHomePage implements OnInit {
    private classLogoURL: string
    private className: string
 
+   private selectedStudent: number
+
    private students: Array<StudentModel>
 
    constructor(
@@ -23,6 +25,8 @@ export class TeacherHomePage implements OnInit {
    }
 
    ngOnInit(): void {
+      this.selectedStudent = 0
+
       // this is fake now
       this.schoolName = 'Muhittin Okullari'
       this.classLogoURL = 'https://tr-static.eodev.com/files/ddd/0c7d58879d3fbd88329301579d3f91a1.jpg'
@@ -55,4 +59,14 @@ export class TeacherHomePage implements OnInit {
    private openInboxClicked(): void {
       this.navCtrl.push(TeacherInboxPage)
    }
+
+   private selectStudent(p: any): void {
+      console.log('select student')
+      console.log(p)
+   }
+
+   private openCalendar(): void {
+      console.log('open calendar')
+   }
+
 }

@@ -20,8 +20,8 @@
     <ion-row>
       <ion-col width-20>
         <div class="teacherHome__student-list">
-          <ion-list>
-            <button ion-item *ngFor="let student of students" (click)="openPage(p)">
+          <div>
+            <div *ngFor="let student of students" (click)="selectStudent(index)">
               <div class="avatar-circle">
                 <img src="{{student.photo_url}}">
               </div>
@@ -33,15 +33,14 @@
               <div>
                 {{student.surname}}
               </div>
-
-            </button>
-          </ion-list>
+            </div>
+          </div>
         </div>
       </ion-col>
 
       <ion-col width-80>
         <div class="teacherHome__menuFlexContainer">
-          <div class="teacherHome__menuFlexItem">
+          <div class="teacherHome__menuFlexItem" (click)="openCalendar()">
             <ion-icon name="ios-calendar"></ion-icon>
             <div class="teacherHome__iconText">Calendar</div>
           </div>
