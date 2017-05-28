@@ -4,7 +4,7 @@
   text-align: center;
 }
 
-.teacherHome_menuFlexContainer {
+.teacherHome__menuFlexContainer {
   padding: 0;
   margin: 0;
   list-style: none;
@@ -18,18 +18,19 @@
   -webkit-flex-flow: row wrap;
   justify-content: space-around;
 }
-.teacherHome_menuFlexItem {
-  background: tomato;
+.teacherHome__menuFlexItem {
+  // background: tomato;
   padding: 5px;
   width: 30%;
   max-width: 120px;
-  height: auto;
-  // height: 80px;
   margin-top: 10px;
+  border: solid;
 
-  line-height: 150px;
-  color: white;
+  // color: white;
   font-weight: bold;
-  font-size: 3em;
   text-align: center;
+
+  ion-icon {
+    font-size: 5em;
+  }
 }
