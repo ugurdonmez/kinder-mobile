@@ -21,9 +21,10 @@
       <ion-col width-20>
         <button class="teacherHome__student-list">
           <div>
-            <div *ngFor="let student of students"
-                 (click)="selectStudent(index)"
-                 class="teacherHome__studentButton">
+            <div *ngFor="let student of students; let i = index"
+                 (click)="selectStudent(i)"
+                 class="teacherHome__studentButton"
+                 [ngClass]="{'teacherHome__studentButton--selected': i == selectedStudent}">
               <div class="avatar-circle">
                 <img src="{{student.photo_url}}">
               </div>

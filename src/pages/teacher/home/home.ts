@@ -60,9 +60,11 @@ export class TeacherHomePage implements OnInit {
       this.navCtrl.push(TeacherInboxPage)
    }
 
-   private selectStudent(p: any): void {
+   private selectStudent(p: number): void {
       console.log('select student')
       console.log(p)
+
+      this.selectedStudent = p
    }
 
    private openCalendar(): void {
