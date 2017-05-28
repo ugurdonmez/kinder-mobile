@@ -1,66 +1,54 @@
 <ion-header home-header [titleTextEn]="'Teacher Home'"></ion-header>
 <ion-content>
-<ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        {{schoolName}}
+      </ion-col>
 
-  <ion-row>
-    <ion-col>
-      {{schoolName}}
-    </ion-col>
+      <ion-col>
+        <div class="avatar-circle">
+          <img src="{{classLogoURL}}">
+        </div>
+      </ion-col>
 
-    <ion-col>
-      <div class="avatar-circle">
-        <img src="{{classLogoURL}}">
-      </div>
-    </ion-col>
+      <ion-col>
+        {{className}}
+      </ion-col>
+    </ion-row>
 
-    <ion-col>
-      {{className}}
-    </ion-col>
-  </ion-row>
+    <ion-row>
+      <ion-col width-20>
+        <div class="teacherHome__student-list">
+          <ion-list>
+            <button ion-item *ngFor="let student of students" (click)="openPage(p)">
+              <div class="avatar-circle">
+                <img src="{{student.photo_url}}">
+              </div>
 
-  <ion-row>
+              <div>
+                {{student.name}}
+              </div>
 
-    <ion-col width-20>
+              <div>
+                {{student.surname}}
+              </div>
 
-      <div class="teacherHome__student-list">
-        <ion-list>
-          <button ion-item *ngFor="let student of students" (click)="openPage(p)">
+            </button>
+          </ion-list>
+        </div>
+      </ion-col>
 
-            <div class="avatar-circle">
-              <img src="{{student.photo_url}}">
-            </div>
+      <ion-col width-80>
+        <div class="menu"></div>
+      </ion-col>
+    </ion-row>
 
-            <div>
-              {{student.name}}
-            </div>
-
-            <div>
-              {{student.surname}}
-            </div>
-
-          </button>
-        </ion-list>
-      </div>
-
-    </ion-col>
-
-    <ion-col width-80>
-      <div class="menu">
-
-      </div>
-    </ion-col>
-
-  </ion-row>
-
-  <!--open inbox button-->
-  <ion-buttons class="open-inbox-button">
-    <button ion-button (click)="openInboxClicked()">
-      {{'Inbox' | translate}}
-    </button>
-  </ion-buttons>
-
-</ion-grid>
-
+    <!--open inbox button-->
+    <ion-buttons class="open-inbox-button">
+      <button ion-button (click)="openInboxClicked()">
+        {{'Inbox' | translate}}
+      </button>
+    </ion-buttons>
+  </ion-grid>
 </ion-content>
-
-

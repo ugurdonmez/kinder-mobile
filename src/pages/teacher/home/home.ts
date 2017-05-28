@@ -23,7 +23,6 @@ export class TeacherHomePage implements OnInit {
    }
 
    ngOnInit(): void {
-
       // this is fake now
       this.schoolName = 'Muhittin Okullari'
       this.classLogoURL = 'https://tr-static.eodev.com/files/ddd/0c7d58879d3fbd88329301579d3f91a1.jpg'
@@ -47,8 +46,7 @@ export class TeacherHomePage implements OnInit {
       student3.name = 'anna'
       student3.surname = 'donmez'
       student3.photo_url = 'http://c12.incisozluk.com.tr/res/incisozluk//11507/8/1020948_o563d.jpg'
-
-
+      
       this.students.push(student1)
       this.students.push(student2)
       this.students.push(student3)
