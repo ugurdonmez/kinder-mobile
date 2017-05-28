@@ -46,7 +46,7 @@ export class TeacherHomePage implements OnInit {
       student3.name = 'anna'
       student3.surname = 'donmez'
       student3.photo_url = 'http://c12.incisozluk.com.tr/res/incisozluk//11507/8/1020948_o563d.jpg'
-      
+
       this.students.push(student1)
       this.students.push(student2)
       this.students.push(student3)

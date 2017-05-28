@@ -1,7 +1,35 @@
 
 .teacherHome__student-list {
-
   border: solid #d9d9d9;
   text-align: center;
+}
 
+.teacherHome_menuFlexContainer {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+
+  -webkit-flex-flow: row wrap;
+  justify-content: space-around;
+}
+.teacherHome_menuFlexItem {
+  background: tomato;
+  padding: 5px;
+  width: 30%;
+  max-width: 120px;
+  height: auto;
+  // height: 80px;
+  margin-top: 10px;
+
+  line-height: 150px;
+  color: white;
+  font-weight: bold;
+  font-size: 3em;
+  text-align: center;
 }
