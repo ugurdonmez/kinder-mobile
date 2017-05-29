@@ -17,6 +17,11 @@ export class Message {
     ////////////// CLASS MESSAGING
     // sends new message to class wall
     public postToClassWall(classId: string, message: string): void{
+       if (!/\S/.test(message)) { // if empty string or all whitespaces
+          console.log('message provider error: users cannot send empty messages.')
+          return
+       }
+
         let time = new Date().getTime();
         this.af.database.list("classes/" + classId + "/wall" + "/conversation").push(
             {
