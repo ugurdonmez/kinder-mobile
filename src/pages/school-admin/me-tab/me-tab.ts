@@ -10,7 +10,6 @@ import {SchoolModel} from "../../../models/school-model";
 })
 
 export class SchoolAdminMePage {
-   private pageTitleTextEn: string = "School Admin Home Page";
    private school: SchoolModel;
 
    constructor(public navCtrl: NavController,

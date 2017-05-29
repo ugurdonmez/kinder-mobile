@@ -9,7 +9,6 @@ import {Translator} from "../../../app/translator";
 
 export class BranchAdminSchoolPage {
 
-   private pageTitleTextEn: string = "Branch Admin Home Page";
 
    constructor(public translator: Translator) {
 

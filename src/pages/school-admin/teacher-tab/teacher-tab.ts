@@ -9,7 +9,6 @@ import {AuthData} from "../../../providers/auth-data";
 
 export class SchoolAdminTeacherPage {
 
-   private pageTitleTextEn: string = "School Admin Home Page";
 
    constructor(public navCtrl: NavController,
                public navParams: NavParams) {
