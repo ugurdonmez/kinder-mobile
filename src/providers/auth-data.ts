@@ -99,7 +99,7 @@ export class AuthData {
         });
     }
 
-    public getUser(): Promise<UserModel>{
+    public getUser(userId?:string): Promise<UserModel>{
        if (!userId){
           var userId:string = this.getUserId();
        }

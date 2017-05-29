@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 
 import { AngularFire } from 'angularfire2';
 import {AuthData} from "./auth-data";
-import {MessageModel} from "../models/message-model";
+import {ConversationModel} from "../models/conversation-model";
 import {ClassWallModel} from "../models/class-wall-model";
+import {MessageModel} from "../models/message-model";
 
 @Injectable()
 export class Message {
@@ -16,6 +17,11 @@ export class Message {
     ////////////// CLASS MESSAGING
     // sends new message to class wall
     public postToClassWall(classId: string, message: string): void{
+       if (!/\S/.test(message)) { // if empty string or all whitespaces
+          console.log('message provider error: users cannot send empty messages.')
+          return
+       }
+
         let time = new Date().getTime();
         this.af.database.list("classes/" + classId + "/wall" + "/conversation").push(
             {
@@ -31,7 +37,7 @@ export class Message {
     // gets class wall
     // TODO we can add pagination
     // TODO refactor
-    public getClassWall(classId: string){
+    public getClassWall(classId: string): Promise<ClassWallModel>{
         return this.af.database.object("classes/" + classId + "/wall")
             .map(obj => {
                 return this.castClassWallObjectToModel(obj)
@@ -39,6 +45,15 @@ export class Message {
             .first()
             .toPromise()
     }
+
+   public getMessagesOfClassWall(classId: string):Promise<MessageModel[]>{
+      return this.af.database.list("classes/" + classId + "/wall" + "/conversation")
+         .map(obj => {
+            return this.castMessageListToModel(obj)
+         })
+         .first()
+         .toPromise()
+   }
 
     //sets class wall unread for all users
     private setClassWallUnreadForAll(classId: string): void{
@@ -99,7 +114,7 @@ export class Message {
     // in the current design (10th of Apr, 2017), for parents, this function returns an array with only one element.
     // that one element is the conversation with class teacher.
     // TODO we can add pagination
-    getAllConversations():Promise<MessageModel[]>{
+    getAllConversations():Promise<ConversationModel[]>{
         return this.af.database.list("user-messages/" + this.userId)
             .map(obj => {
                 return this.castDialogListToModel(obj)
@@ -110,10 +125,19 @@ export class Message {
 
     // returns whole conversation with a user.
     // TODO we can add pagination
-    getConversation(interactionUserId: string):Promise<MessageModel>{
+    public getConversation(interactionUserId: string):Promise<ConversationModel>{
         return this.af.database.object("user-messages/" + this.userId + "/" + interactionUserId)
             .map(obj => {
                 return this.castDialogObjectToModel(obj)
+            })
+            .first()
+            .toPromise()
+    }
+
+   public getMessagesOfConversation(interactionUserId: string):Promise<MessageModel[]>{
+        return this.af.database.list("user-messages/" + this.userId + "/" + interactionUserId + "/conversation")
+            .map(obj => {
+                return this.castMessageListToModel(obj)
             })
             .first()
             .toPromise()
@@ -141,17 +165,26 @@ export class Message {
     // }
 
     // Conversion: FirebaseListObservable -> Model
-    private castDialogListToModel(objs: any[]): MessageModel[] {
-        let modelArray: Array<MessageModel> = [];
+    private castDialogListToModel(objs: any[]): ConversationModel[] {
+        let modelArray: Array<ConversationModel> = [];
         for (let obj of objs) {
-            var model = new MessageModel().fromObject(obj);
+            var model = new ConversationModel().fromObject(obj);
             modelArray.push(model);
         }
         return modelArray;
     }
 
     // Conversion: FirebaseObjectObservable -> Model
-    private castDialogObjectToModel(obj: any): MessageModel {
-        return new MessageModel().fromObject(obj);
+    private castDialogObjectToModel(obj: any): ConversationModel {
+        return new ConversationModel().fromObject(obj);
+    }
+
+    private castMessageListToModel(objs: any): MessageModel[]{
+       let modelArray: Array<MessageModel> = [];
+       for (let obj of objs) {
+          var model = new MessageModel().fromObject(obj);
+          modelArray.push(model);
+       }
+       return modelArray;
     }
 }

@@ -4,7 +4,8 @@ import {Message} from "../../providers/message";
 import {Parents} from "../../providers/parents";
 import {TranslateService} from "ng2-translate";
 import {NavController} from "ionic-angular";
-import {MessageModel} from "../../models/message-model";
+import {ConversationModel} from "../../models/conversation-model";
+import {TeacherDialogPage} from "../../pages/teacher/dialog/dialog";
 
 @Component({
    selector: 'inbox-dialogs-list',
@@ -14,7 +15,7 @@ import {MessageModel} from "../../models/message-model";
 
 export class InboxDialogsListDirective implements OnInit {
    private translate: TranslateService;
-   private conversations: Promise<MessageModel[]>;
+   private conversations: Promise<ConversationModel[]>;
    private parents: {};
 
    constructor(
@@ -38,8 +39,7 @@ export class InboxDialogsListDirective implements OnInit {
    }
 
    private openDialog(dialogPartnerId){
-      // this.navCtrl.push(TeacherDialogPage, {dialogPartnerId: dialogPartnerId});
-      // this.messageProvider.setDialogRead(dialogPartnerId);
+      this.navCtrl.push(TeacherDialogPage, {dialogPartnerId: dialogPartnerId});
    }
 
    private loadParent(parentId: string){

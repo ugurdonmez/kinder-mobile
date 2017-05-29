@@ -136,6 +136,15 @@ export class Teachers {
       });
    }
 
+   public getTeacher(teacherId: string):Promise<TeacherModel> {
+      return this.af.database.object('/teachers/' + teacherId)
+         .map(obj => {
+            return this.castListToModel([obj])[0]
+         })
+         .first()
+         .toPromise()
+   }
+
    // Conversion: FirebaseListObservable -> Model
    private castListToModel(objs: any[]): TeacherModel[] {
       return objs.map(o => {

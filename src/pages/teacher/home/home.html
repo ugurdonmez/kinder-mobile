@@ -53,7 +53,7 @@
             <div class="teacherHome__iconText">Attendance</div>
           </button>
 
-          <button class="teacherHome__menuFlexItem">
+          <button class="teacherHome__menuFlexItem" (click)="openInboxClicked()">
             <ion-icon name="ios-paper"></ion-icon>
             <div class="teacherHome__iconText">Message</div>
           </button>
@@ -101,11 +101,10 @@
       </ion-col>
     </ion-row>
 
-    <!--open inbox button-->
-    <!--TODO: move it to correct button-->
-    <ion-buttons class="open-inbox-button">
-      <button ion-button (click)="openInboxClicked()">
-        {{'Inbox' | translate}}
+    <ion-buttons>
+      <button ion-button (click)="openClassWallClicked('-Ketn4qOsNQOA0vSjZRC')">
+        {{'Open A Class Wall<br>
+        (This button will be placed on every class page)' | translate}}
       </button>
     </ion-buttons>
   </ion-grid>

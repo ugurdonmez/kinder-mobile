@@ -9,6 +9,8 @@ import {Parents} from "../../../providers/parents";
 import {FirebaseListObservable} from "angularfire2";
 import {Teachers} from "../../../providers/teachers";
 import {HumanReadableDateTime} from "../../../helpers/humanReadableDateTime";
+import {ConversationModel} from "../../../models/conversation-model";
+import {MessageModel} from "../../../models/message-model";
 
 @Component({
     selector: 'page-dialog',
@@ -18,9 +20,8 @@ import {HumanReadableDateTime} from "../../../helpers/humanReadableDateTime";
 
 // this page works only for a teacher interacting with a parent.
 // to make it work for the others, we should keep all user names, surnames and profile picture urls together under /user.
-export class DialogPage {
+export class TeacherDialogPage {
     private translate: TranslateService;
-    private messagesOfConversation: FirebaseListObservable<any[]>;
     private newMessageText: string;
 
     private userId: string;
@@ -30,6 +31,7 @@ export class DialogPage {
     private dialogPartnerId: string;
     private dialogPartnerName: string;
     private dialogPartnerImage: string;
+    private messagesOfConversation: Promise<MessageModel[]>;
 
     constructor(public navCtrl: NavController, public translator: Translator, private messageProvider: Message,
                 private authData: AuthData, private classProvider: Classes, private parentProvider: Parents,
@@ -38,25 +40,27 @@ export class DialogPage {
         this.translate = translator.translatePipe;
         this.userId = this.authData.getUserId();
         this.dialogPartnerId = navParams.get('dialogPartnerId');
-        this.messagesOfConversation = this.messageProvider.getConversation(this.dialogPartnerId);
+        this.messagesOfConversation = this.messageProvider.getMessagesOfConversation(this.dialogPartnerId);
+        console.log('messagesOfConversation')
+        console.log(this.messagesOfConversation)
+        this.messageProvider.setDialogRead(this.dialogPartnerId);
 
         this.loadUser();
     }
 
     private loadUser() {
-        this.teacherProvider.getTeacher(this.userId).subscribe( teacherSnapshot => {
+        this.teacherProvider.getTeacher(this.userId).then( teacherSnapshot => {
             this.userName = teacherSnapshot.name + " " + teacherSnapshot.surname;
             this.userImage = teacherSnapshot.profileImageUrl;
         });
 
-        this.parentProvider.getParent(this.dialogPartnerId).subscribe( parentSnapshot => {
+        this.parentProvider.getParent(this.dialogPartnerId).then( parentSnapshot => {
             this.dialogPartnerImage = parentSnapshot.profileImageUrl;
             this.dialogPartnerName = parentSnapshot.parentName + " " + parentSnapshot.parentSurname;
         })
     }
 
     ionViewDidLoad() {
-        console.log('Hello MessagePage Page');
     }
 
     private getImageLink(userId) {
@@ -90,6 +94,7 @@ export class DialogPage {
     private sendMessage(): void {
         this.messageProvider.sendMessage(this.dialogPartnerId, this.newMessageText);
         this.newMessageText = "";
+        this.messagesOfConversation = this.messageProvider.getMessagesOfConversation(this.dialogPartnerId);
     }
 
 }

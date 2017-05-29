@@ -3,6 +3,7 @@ import {Component, OnInit} from '@angular/core';
 import {StudentModel} from "../../../models/student-model";
 import {NavController} from "ionic-angular";
 import {TeacherInboxPage} from "../inbox/inbox";
+import {TeacherClassWallPage} from "../class-wall/class-wall";
 
 @Component({
    selector: 'page-teacher-home',
@@ -58,6 +59,11 @@ export class TeacherHomePage implements OnInit {
 
    private openInboxClicked(): void {
       this.navCtrl.push(TeacherInboxPage)
+   }
+
+   private openClassWallClicked(classId): void {
+      console.log('opening class wall with class id:' + classId)
+      this.navCtrl.push(TeacherClassWallPage, {classId: classId})
    }
 
    private selectStudent(p: number): void {
