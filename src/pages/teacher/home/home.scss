@@ -1,7 +1,48 @@
 
 .teacherHome__student-list {
-
   border: solid #d9d9d9;
   text-align: center;
+  margin-top: 10px;
+  background: white;
+}
 
+.teacherHome__studentButton {
+  margin: 10px auto;
+}
+
+.teacherHome__studentButton--selected {
+  background: greenyellow;
+}
+
+.teacherHome__menuFlexContainer {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+
+  -webkit-flex-flow: row wrap;
+  justify-content: space-around;
+
+  button {
+    background: white;
+  }
+}
+.teacherHome__menuFlexItem {
+  padding: 5px;
+  width: 30%;
+  max-width: 120px;
+  margin-top: 10px;
+  border: solid;
+
+  font-weight: bold;
+  text-align: center;
+
+  ion-icon {
+    font-size: 5em;
+  }
 }

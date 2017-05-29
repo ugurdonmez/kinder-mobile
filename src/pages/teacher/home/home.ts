@@ -15,6 +15,8 @@ export class TeacherHomePage implements OnInit {
    private classLogoURL: string
    private className: string
 
+   private selectedStudent: number
+
    private students: Array<StudentModel>
 
    constructor(
@@ -23,6 +25,7 @@ export class TeacherHomePage implements OnInit {
    }
 
    ngOnInit(): void {
+      this.selectedStudent = 0
 
       // this is fake now
       this.schoolName = 'Muhittin Okullari'
@@ -48,7 +51,6 @@ export class TeacherHomePage implements OnInit {
       student3.surname = 'donmez'
       student3.photo_url = 'http://c12.incisozluk.com.tr/res/incisozluk//11507/8/1020948_o563d.jpg'
 
-
       this.students.push(student1)
       this.students.push(student2)
       this.students.push(student3)
@@ -57,4 +59,16 @@ export class TeacherHomePage implements OnInit {
    private openInboxClicked(): void {
       this.navCtrl.push(TeacherInboxPage)
    }
+
+   private selectStudent(p: number): void {
+      console.log('select student')
+      console.log(p)
+
+      this.selectedStudent = p
+   }
+
+   private openCalendar(): void {
+      console.log('open calendar')
+   }
+
 }
