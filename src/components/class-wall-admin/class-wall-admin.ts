@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {Component, OnInit, Input} from '@angular/core';
+import {NavController} from 'ionic-angular';
 
 import {Classes} from "../../providers/classes";
-import {FirebaseObjectObservable, FirebaseListObservable} from "angularfire2";
 import {SchoolAdminEditClassPage} from "../school-admin-edit-class/school-admin-edit-class";
 import {Teachers} from "../../providers/teachers";
 import {Translator} from "../../app/translator";
@@ -10,39 +9,41 @@ import {TranslateService} from "ng2-translate";
 import {AuthData} from "../../providers/auth-data";
 import {InviteOthersPage} from "../invite-others/invite-others";
 import {Parents} from "../../providers/parents";
-import {Attendance} from "../../providers/attendance";
 import {Message} from "../../providers/message";
 import {HumanReadableDateTime} from "../../helpers/humanReadableDateTime";
+import {ClassModel} from "../../models/class-model";
+import {MessageModel} from "../../models/message-model";
 
 @Component({
-  selector: 'page-school-admin-wall',
-  templateUrl: 'school-admin-class-wall.html',
+  selector: 'class-wall-admin',
+  templateUrl: 'class-wall-admin.html',
     providers: [Classes, Teachers, Translator, Message, HumanReadableDateTime, Parents, AuthData]
 })
 
 
-export class SchoolAdminWallPage {
-    private classId: string;
-    private _class: FirebaseObjectObservable<any>;
+export class ClassWallAdminDirective implements OnInit{
+    @Input() classId: string;
     private translate: TranslateService;
     private userDetails: {};
 
-    private classWallPosts: FirebaseListObservable<any[]>;
     private newClassPost: string;
+    private _class: Promise<ClassModel>;
+    private classWallPosts: Promise<MessageModel[]>;
 
     constructor(public navCtrl: NavController, public classesProvider: Classes,
-                private navParams: NavParams, private teachersProvider: Teachers, public translator: Translator,
+                private teachersProvider: Teachers, public translator: Translator,
                 private authData: AuthData, private messageProvider: Message,
                 private humanReadableDateTime: HumanReadableDateTime, private parentsProvider: Parents) {
-        this.translate = translator.translatePipe;
-        this.classId = navParams.get('classId');
+    }
+
+    ngOnInit(): void {
+        this.translate = this.translator.translatePipe;
         this.userDetails = {};
 
         // get class
-        this._class = classesProvider.getClass(this.classId);
+        this._class = this.classesProvider.getClass(this.classId);
 
-        this.classWallPosts = this.messageProvider.getClassWall(this.classId);
-        this.loadAllUsersPostedOnWall();
+        this.loadWall()
     }
 
     private getDateTimeHumanReadable(messageTimestamp): string {
@@ -52,10 +53,11 @@ export class SchoolAdminWallPage {
     private postToClassWall(): void {
         this.messageProvider.postToClassWall(this.classId, this.newClassPost);
         this.newClassPost = "";
+        this.loadWall()
     }
 
     private loadAllUsersPostedOnWall():void {
-        this.classWallPosts.subscribe( posts => {
+        this.classWallPosts.then( posts => {
             posts.forEach( post => {
                 let senderUserId:string = post.sender;
                 if (senderUserId in this.userDetails){
@@ -69,16 +71,16 @@ export class SchoolAdminWallPage {
     }
 
     private loadUser(userId: string) {
-        this.authData.getUser(userId).subscribe( userSnapshot => {
+        this.authData.getUser(userId).then( userSnapshot => {
             if (userSnapshot.role == 'teacher'){
-                this.teachersProvider.getTeacher(userId).subscribe( teacherSnapshot => {
+                this.teachersProvider.getTeacher(userId).then( teacherSnapshot => {
                     this.userDetails[userId] = {};
                     this.userDetails[userId]['name'] = teacherSnapshot.name + " " + teacherSnapshot.surname;
                     this.userDetails[userId]['imageUrl'] = teacherSnapshot.profileImageUrl;
                 })
             }
             else if(userSnapshot.role == 'parent'){
-                this.parentsProvider.getParent(userId).subscribe( parentSnapshot => {
+                this.parentsProvider.getParent(userId).then( parentSnapshot => {
                     this.userDetails[userId] = {};
                     this.userDetails[userId]['name'] = parentSnapshot.parentName + " " + parentSnapshot.parentSurname;
                     this.userDetails[userId]['imageUrl'] = parentSnapshot.profileImageUrl;
@@ -103,5 +105,11 @@ export class SchoolAdminWallPage {
 
     private deleteWallPost(postId){
         this.messageProvider.deletePostFromClassWall(this.classId, postId);
+        this.loadWall()
+    }
+
+    private loadWall() {
+        this.classWallPosts = this.messageProvider.getMessagesOfClassWall(this.classId);
+        this.loadAllUsersPostedOnWall();
     }
 }
