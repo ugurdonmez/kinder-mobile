@@ -32,7 +32,7 @@ export class Message {
     // gets class wall
     // TODO we can add pagination
     // TODO refactor
-    public getClassWall(classId: string){
+    public getClassWall(classId: string): Promise<ClassWallModel>{
         return this.af.database.object("classes/" + classId + "/wall")
             .map(obj => {
                 return this.castClassWallObjectToModel(obj)
@@ -40,6 +40,15 @@ export class Message {
             .first()
             .toPromise()
     }
+
+   public getMessagesOfClassWall(classId: string):Promise<MessageModel[]>{
+      return this.af.database.list("classes/" + classId + "/wall" + "/conversation")
+         .map(obj => {
+            return this.castMessageListToModel(obj)
+         })
+         .first()
+         .toPromise()
+   }
 
     //sets class wall unread for all users
     private setClassWallUnreadForAll(classId: string): void{
