@@ -81,6 +81,7 @@ export function createTranslateLoader(http: Http) {
       cmp.CreateClassDirective,
       cmp.InboxDialogsListDirective,
       cmp.ClassWallAdminDirective,
+      cmp.CalendarComponent,
    ],
    imports: [
       IonicModule.forRoot(MyApp),
