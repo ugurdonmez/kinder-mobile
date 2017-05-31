@@ -4,6 +4,7 @@ import {StudentModel} from "../../../models/student-model";
 import {NavController} from "ionic-angular";
 import {TeacherInboxPage} from "../inbox/inbox";
 import {TeacherClassWallPage} from "../class-wall/class-wall";
+import {TeacherCalendarPage} from "../calender/calendar";
 
 @Component({
    selector: 'page-teacher-home',
@@ -73,8 +74,10 @@ export class TeacherHomePage implements OnInit {
       this.selectedStudent = p
    }
 
-   private openCalendar(): void {
+   private openCalendarClicked(): void {
       console.log('open calendar')
+
+      this.navCtrl.push(TeacherCalendarPage)
    }
 
 }
