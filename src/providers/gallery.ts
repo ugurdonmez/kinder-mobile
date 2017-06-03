@@ -53,26 +53,23 @@ export class Gallery {
 
     /////////////////// IMAGES //////////////////////////////
     // adds new image
-    public addImage(classId: string, imageSource, albumId ?: string): void{
-        Camera.getPicture({
+    public uploadImage(classId: string, imageSource){
+        return Camera.getPicture({
             sourceType : imageSource,
             saveToPhotoAlbum: false
         }).then((image) => {
             let imageData = image;
             let profilePictureRef = firebase.storage().ref('/gallery/images/' + classId).child(new Date().getDate() + " @ " + new Date().getTime() + ".png");
-            profilePictureRef.putString(imageData, 'base64', {contentType: 'image/png'})
+            return profilePictureRef.putString(imageData, 'base64', {contentType: 'image/png'})
                 .then((savedPicture) => {
-                    let imageId = this.af.database.list("/classes/" + classId + '/gallery/images/')
-                        .push({
-                            imgUrl: savedPicture.downloadURL,
-                        }).key;
-                    if (albumId){
-                        this.af.database.object("/classes/" + classId + '/gallery/images/' + imageId + '/albumId').set(albumId);
-                    }
+                    return savedPicture.downloadURL
                 });
-        }, (err) => {
-            // Handle error
         });
+    }
+
+    // save an image to a class
+    public saveImage(classId: string, imageUrl: string){
+        this.af.database.list("/classes/" + classId + '/gallery/images/').push({imgUrl: imageUrl}).key;
     }
 
     // deletes an image
