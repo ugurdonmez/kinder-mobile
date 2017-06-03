@@ -1,0 +1,14 @@
+<ion-header>
+   <ion-navbar>
+      <ion-title>{{"Save Photo?" | translate}}</ion-title>
+      <ion-buttons end>
+         <button ion-button end (click)="saveImage()">{{"Save" | translate}}</button>
+      </ion-buttons>
+   </ion-navbar>
+</ion-header>
+
+<ion-content class="take-photo-component">
+   <ion-card>
+      <img [src]="imageUrl" center>
+   </ion-card>
+</ion-content>

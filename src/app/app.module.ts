@@ -86,6 +86,7 @@ export function createTranslateLoader(http: Http) {
       cmp.ClassWallAdminDirective,
       cmp.CalendarComponent,
       cmp.PhotosGridComponent,
+      cmp.TakePhotoComponent,
    ],
    imports: [
       IonicModule.forRoot(MyApp),

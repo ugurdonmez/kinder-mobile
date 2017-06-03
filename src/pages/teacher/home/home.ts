@@ -87,7 +87,7 @@ export class TeacherHomePage implements OnInit {
    }
 
    private openTakePhotoPageClicked(): void {
-      this.navCtrl.push(TeacherTakePhotoPage);
+      this.navCtrl.push(TeacherTakePhotoPage, {classId: '-Ketn4qOsNQOA0vSjZRC'});
    }
 
 }
