@@ -1,0 +1,16 @@
+<ion-grid class="view-photo-component">
+   <ion-row>
+      <ion-card class="viewed-photo">
+         <img [src]="photo.imgUrl" center class="center">
+      </ion-card>
+   </ion-row>
+
+   <ion-row>
+      <ion-col *ngFor="let student of studens | async">
+         <ion-avatar>
+            <img [src]='student.profileImageUrl'>
+         </ion-avatar>
+      </ion-col>
+   </ion-row>
+
+</ion-grid>

@@ -14,12 +14,14 @@ export class TeacherGalleryPage implements OnInit {
 
    private translate: TranslateService;
    private photos: Promise<ImageModel[]>;
+   private classId: string;
 
    constructor(private galleryProvider: Gallery,
                public translator: Translator,
    ) {
+      this.classId = '-Ketn4qOsNQOA0vSjZRC'
       this.translate = translator.translatePipe;
-      this.photos = this.galleryProvider.getImagesOfClass('-Ketn4qOsNQOA0vSjZRC')
+      this.photos = this.galleryProvider.getImagesOfClass(this.classId)
    }
 
    ngOnInit(): void {
