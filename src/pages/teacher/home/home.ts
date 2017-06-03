@@ -6,6 +6,7 @@ import {TeacherInboxPage} from "../inbox/inbox";
 import {TeacherClassWallPage} from "../class-wall/class-wall";
 import {TeacherCalendarPage} from "../calender/calendar";
 import {TeacherGalleryPage} from "../gallery/gallery";
+import {TeacherTakePhotoPage} from "../take-photo/take-photo";
 
 @Component({
    selector: 'page-teacher-home',
@@ -83,6 +84,10 @@ export class TeacherHomePage implements OnInit {
 
    private openGalleryClicked(): void {
       this.navCtrl.push(TeacherGalleryPage);
+   }
+
+   private openTakePhotoPageClicked(): void {
+      this.navCtrl.push(TeacherTakePhotoPage);
    }
 
 }

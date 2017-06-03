@@ -12,6 +12,7 @@ export class Gallery {
     constructor(public af: AngularFire){
     }
 
+    /////////////////// ALBUMS //////////////////////////////
     // creates a new empty album and returns albumId.
     public addAlbum(classId: string, albumName: string): string{
         return this.af.database.list("/classes/" + classId + "/gallery/albums").push(albumName).key;
@@ -50,6 +51,7 @@ export class Gallery {
         });
     }
 
+    /////////////////// IMAGES //////////////////////////////
     // adds new image
     public addImage(classId: string, imageSource, albumId ?: string): void{
         Camera.getPicture({
