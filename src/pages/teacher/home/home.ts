@@ -5,6 +5,7 @@ import {NavController} from "ionic-angular";
 import {TeacherInboxPage} from "../inbox/inbox";
 import {TeacherClassWallPage} from "../class-wall/class-wall";
 import {TeacherCalendarPage} from "../calender/calendar";
+import {TeacherGalleryPage} from "../gallery/gallery";
 
 @Component({
    selector: 'page-teacher-home',
@@ -78,6 +79,10 @@ export class TeacherHomePage implements OnInit {
       console.log('open calendar')
 
       this.navCtrl.push(TeacherCalendarPage)
+   }
+
+   private openGalleryClicked(): void {
+      this.navCtrl.push(TeacherGalleryPage);
    }
 
 }
