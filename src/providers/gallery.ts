@@ -122,6 +122,16 @@ export class Gallery {
         this.af.database.object("/classes/" + classId + "/gallery/student-images/" + studentId + "/" + imageId).remove();
     }
 
+    public isStudentTaggedInImage(classId: string, imageId: string, studentId: string): Promise<boolean>{
+        return this.af.database.object("/classes/" + classId + "/gallery/student-images/" + studentId + "/" + imageId)
+           .map(obj => {
+               let result = !!obj.$value
+               return result
+           })
+           .first()
+           .toPromise()
+    }
+
     // I couldn't find any better way using angularfire2. :(
     // usage: Get imageIds from here, and retrieve those images separately.
     public getImageIdsOfStudent(classId: string, studentId: string): Promise<string[]>{
