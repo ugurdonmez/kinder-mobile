@@ -7,11 +7,38 @@
 <ion-content class="page-teacher-gallery">
    <ion-grid>
       <ion-row>
-         <ion-col width-20>
-            studens will be listed here
+         <ion-col class="teacherHome__student-list-container">
+            <button class="teacherHome__student-list">
+               <div>
+                  <div (click)="selectStudent('all')"
+                       class="teacherHome__studentButton"
+                       [ngClass]="{'teacherHome__studentButton--selected': 'all' === selectedStudent}">
+                     <div class="avatar-circle">
+                        <img src="https://cdn2.iconfinder.com/data/icons/user-23/512/User_Group.png">
+                     </div>
+
+                     <h2 class="studentNameSurname">
+                        All Students
+                     </h2>
+                  </div>
+
+                  <div *ngFor="let student of students;"
+                       (click)="selectStudent(student.id)"
+                       class="teacherHome__studentButton"
+                       [ngClass]="{'teacherHome__studentButton--selected': student.id == selectedStudent}">
+                     <div class="avatar-circle">
+                        <img src="{{student.profileImageUrl}}">
+                     </div>
+
+                     <h2 class="studentNameSurname">
+                        {{student.studentName}} {{student.studentSurname}}
+                     </h2>
+                  </div>
+               </div>
+            </button>
          </ion-col>
 
-         <ion-col width-80>
+         <ion-col>
             <photos-grid-component [photos]="photos" [role]="'teacher'" [classId]="classId"></photos-grid-component>
          </ion-col>
       </ion-row>
