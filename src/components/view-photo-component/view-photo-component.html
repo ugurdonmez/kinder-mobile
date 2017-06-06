@@ -1,0 +1,23 @@
+<ion-grid class="view-photo-component">
+   <ion-row>
+      <ion-card class="viewed-photo">
+         <img [src]="photo.imgUrl" center class="center">
+      </ion-card>
+   </ion-row>
+
+   <ion-row *ngIf="!!isStudentTaggedDictionary">
+      <ion-col col-4 col-sm-4 col-md-3 col-lg-3 col-xl-2 *ngFor="let student of students | async">
+         <ion-item no-lines>
+            <ion-icon *ngIf="isStudentTaggedDictionary[student.id]" class='tag-student-icon' name="ios-add-circle"
+                      isActive="true" (click)="untagStudent(student.id)"></ion-icon>
+            <ion-icon *ngIf="!isStudentTaggedDictionary[student.id]" class='tag-student-icon' name="ios-add-circle"
+                      isActive="false" (click)="tagStudent(student.id)"></ion-icon>
+            <ion-avatar>
+               <img [src]='student?.profileImageUrl'>
+            </ion-avatar>
+            <h2 class="studentNameSurname">{{student.studentName}} {{student.studentSurname}}</h2>
+         </ion-item>
+      </ion-col>
+   </ion-row>
+
+</ion-grid>

@@ -68,6 +68,9 @@ export function createTranslateLoader(http: Http) {
       page.TeacherChatPage,
       page.TeacherClassWallPage,
       page.TeacherCalendarPage,
+      page.TeacherGalleryPage,
+      page.TeacherTakePhotoPage,
+      page.TeacherViewPhotoPage,
 
       // components
       cmp.HomeHeaderDirective,
@@ -83,6 +86,9 @@ export function createTranslateLoader(http: Http) {
       cmp.InboxDialogsListDirective,
       cmp.ClassWallAdminDirective,
       cmp.CalendarComponent,
+      cmp.PhotosGridComponent,
+      cmp.TakePhotoComponent,
+      cmp.ViewPhotoComponent,
    ],
    imports: [
       IonicModule.forRoot(MyApp),
@@ -122,6 +128,9 @@ export function createTranslateLoader(http: Http) {
       page.TeacherChatPage,
       page.TeacherClassWallPage,
       page.TeacherCalendarPage,
+      page.TeacherGalleryPage,
+      page.TeacherTakePhotoPage,
+      page.TeacherViewPhotoPage,
    ],
    providers: [
       {provide: ErrorHandler, useClass: IonicErrorHandler},

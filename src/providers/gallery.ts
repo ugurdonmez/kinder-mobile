@@ -12,6 +12,7 @@ export class Gallery {
     constructor(public af: AngularFire){
     }
 
+    /////////////////// ALBUMS //////////////////////////////
     // creates a new empty album and returns albumId.
     public addAlbum(classId: string, albumName: string): string{
         return this.af.database.list("/classes/" + classId + "/gallery/albums").push(albumName).key;
@@ -50,27 +51,25 @@ export class Gallery {
         });
     }
 
+    /////////////////// IMAGES //////////////////////////////
     // adds new image
-    public addImage(classId: string, imageSource, albumId ?: string): void{
-        Camera.getPicture({
+    public uploadImage(classId: string, imageSource){
+        return Camera.getPicture({
             sourceType : imageSource,
             saveToPhotoAlbum: false
         }).then((image) => {
             let imageData = image;
             let profilePictureRef = firebase.storage().ref('/gallery/images/' + classId).child(new Date().getDate() + " @ " + new Date().getTime() + ".png");
-            profilePictureRef.putString(imageData, 'base64', {contentType: 'image/png'})
+            return profilePictureRef.putString(imageData, 'base64', {contentType: 'image/png'})
                 .then((savedPicture) => {
-                    let imageId = this.af.database.list("/classes/" + classId + '/gallery/images/')
-                        .push({
-                            imgUrl: savedPicture.downloadURL,
-                        }).key;
-                    if (albumId){
-                        this.af.database.object("/classes/" + classId + '/gallery/images/' + imageId + '/albumId').set(albumId);
-                    }
+                    return savedPicture.downloadURL
                 });
-        }, (err) => {
-            // Handle error
         });
+    }
+
+    // save an image to a class
+    public saveImage(classId: string, imageUrl: string){
+        this.af.database.list("/classes/" + classId + '/gallery/images/').push({imgUrl: imageUrl}).key;
     }
 
     // deletes an image
@@ -121,6 +120,16 @@ export class Gallery {
     // untags student from image
     public untagStudentInImage(classId: string, imageId: string, studentId: string): void{
         this.af.database.object("/classes/" + classId + "/gallery/student-images/" + studentId + "/" + imageId).remove();
+    }
+
+    public isStudentTaggedInImage(classId: string, imageId: string, studentId: string): Promise<boolean>{
+        return this.af.database.object("/classes/" + classId + "/gallery/student-images/" + studentId + "/" + imageId)
+           .map(obj => {
+               let result = !!obj.$value
+               return result
+           })
+           .first()
+           .toPromise()
     }
 
     // I couldn't find any better way using angularfire2. :(

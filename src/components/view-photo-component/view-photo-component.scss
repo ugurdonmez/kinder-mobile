@@ -1,0 +1,34 @@
+.view-photo-component {
+  .viewed-photo{
+    max-height: 800px;
+    width: auto;
+    display: block;
+    margin: 0 auto;
+  }
+
+  ion-avatar {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+  }
+
+  ion-avatar img {
+    max-width: 120px;
+    max-height: 120px;
+  }
+
+  .studentNameSurname{
+    text-align: center;
+    white-space: normal;
+    word-wrap: break-word;
+  }
+
+  .tag-student-icon{
+    color: green;
+    font-size: 150%;
+    display: block;
+    z-index: 2;
+    margin-left: auto;
+    text-align: center;
+  }
+}
