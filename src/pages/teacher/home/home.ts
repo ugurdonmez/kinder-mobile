@@ -7,6 +7,13 @@ import {TeacherClassWallPage} from "../class-wall/class-wall";
 import {TeacherCalendarPage} from "../calender/calendar";
 import {TeacherGalleryPage} from "../gallery/gallery";
 import {TeacherTakePhotoPage} from "../take-photo/take-photo";
+import {AuthData} from "../../../providers/auth-data";
+import {Classes} from "../../../providers/classes";
+import {ClassModel} from "../../../models/class-model";
+import {Schools} from "../../../providers/schools";
+import {TeacherModel} from "../../../models/teacher-model";
+import {Teachers} from "../../../providers/teachers";
+import {SchoolModel} from "../../../models/school-model";
 
 @Component({
    selector: 'page-teacher-home',
@@ -15,6 +22,10 @@ import {TeacherTakePhotoPage} from "../take-photo/take-photo";
 
 export class TeacherHomePage implements OnInit {
 
+   private teacherId: string
+   private teacher: TeacherModel
+   private school: SchoolModel
+
    private schoolName: string
    private classLogoURL: string
    private className: string
@@ -22,18 +33,53 @@ export class TeacherHomePage implements OnInit {
    private selectedStudent: number
 
    private students: Array<StudentModel>
+   private class: ClassModel
 
-   constructor(public navCtrl: NavController) {
+   constructor(public navCtrl: NavController,
+               public authData: AuthData,
+               public classesProvider: Classes,
+               public schoolProvider: Schools,
+               public teacherProvider: Teachers) {
       this.students = []
    }
 
    ngOnInit(): void {
       this.selectedStudent = 0
 
+      this.teacherId = this.authData.getUserId();
+
+      console.log("teacher id")
+      console.log(this.teacherId)
+
+      this.classesProvider.getClassesOfTeacher(this.teacherId)
+         .then(res => {
+            this.class = res[0]
+            console.log("classes of teacher:")
+            console.log(this.class)
+
+            this.className = this.class.name
+         })
+
+      this.teacherProvider.getTeacher(this.teacherId)
+         .then(res => {
+            this.teacher = res
+            console.log("teacher model")
+            console.log(this.teacher)
+
+            this.schoolProvider.getSchool(this.teacher.schoolId)
+               .then(res => {
+                  this.school = res
+                  console.log("school model")
+                  console.log(this.school)
+                  this.schoolName = this.school.name
+                  this.classLogoURL = this.school.logoURL
+               })
+         })
+
       // this is fake now
-      this.schoolName = 'Muhittin Okullari'
-      this.classLogoURL = 'https://tr-static.eodev.com/files/ddd/0c7d58879d3fbd88329301579d3f91a1.jpg'
-      this.className = 'Ari Sinifi'
+      //this.schoolName = 'Muhittin Okullari'
+      //this.classLogoURL = 'https://tr-static.eodev.com/files/ddd/0c7d58879d3fbd88329301579d3f91a1.jpg'
+      //this.className = 'Ari Sinifi'
 
       // students
       let student1 = new StudentModel()
