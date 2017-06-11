@@ -23,8 +23,7 @@ export class TeacherHomePage implements OnInit {
 
    private students: Array<StudentModel>
 
-   constructor(
-      public navCtrl: NavController,) {
+   constructor(public navCtrl: NavController) {
       this.students = []
    }
 
@@ -79,7 +78,9 @@ export class TeacherHomePage implements OnInit {
    private openCalendarClicked(): void {
       console.log('open calendar')
 
-      this.navCtrl.push(TeacherCalendarPage)
+      let studentStr: string = JSON.stringify(this.students[this.selectedStudent])
+
+      this.navCtrl.push(TeacherCalendarPage, {studentStr})
    }
 
    private openGalleryClicked(): void {
