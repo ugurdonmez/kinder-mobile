@@ -71,6 +71,7 @@ export function createTranslateLoader(http: Http) {
       page.TeacherGalleryPage,
       page.TeacherTakePhotoPage,
       page.TeacherViewPhotoPage,
+      page.TeacherAlbumsPage,
 
       // components
       cmp.HomeHeaderDirective,
@@ -89,6 +90,7 @@ export function createTranslateLoader(http: Http) {
       cmp.PhotosGridComponent,
       cmp.TakePhotoComponent,
       cmp.ViewPhotoComponent,
+      cmp.AlbumsGridComponent,
    ],
    imports: [
       IonicModule.forRoot(MyApp),
@@ -131,6 +133,7 @@ export function createTranslateLoader(http: Http) {
       page.TeacherGalleryPage,
       page.TeacherTakePhotoPage,
       page.TeacherViewPhotoPage,
+      page.TeacherAlbumsPage,
    ],
    providers: [
       {provide: ErrorHandler, useClass: IonicErrorHandler},
