@@ -16,6 +16,7 @@ import {Teachers} from "../../../providers/teachers";
 import {SchoolModel} from "../../../models/school-model";
 import {ParentModel} from "../../../models/parent-model";
 import {Parents} from "../../../providers/parents";
+import {TeacherParentPage} from "../teacher-parent/teacher-parent.page";
 
 @Component({
    selector: 'page-teacher-home',
@@ -34,7 +35,6 @@ export class TeacherHomePage implements OnInit {
 
    private selectedStudent: number
 
-   private students: Array<StudentModel>
    private class: ClassModel
    private parents: Array<ParentModel>
 
@@ -44,7 +44,6 @@ export class TeacherHomePage implements OnInit {
                public schoolProvider: Schools,
                public teacherProvider: Teachers,
                public parentProvider: Parents) {
-      this.students = []
    }
 
    ngOnInit(): void {
@@ -62,7 +61,7 @@ export class TeacherHomePage implements OnInit {
             console.log(this.class)
 
             this.className = this.class.name
-            
+
             this.parentProvider.getParentsOfClass(this.class.id)
                .then(res => {
                   this.parents = res
@@ -86,35 +85,6 @@ export class TeacherHomePage implements OnInit {
                   this.classLogoURL = this.school.logoURL
                })
          })
-
-
-      // this is fake now
-      //this.schoolName = 'Muhittin Okullari'
-      //this.classLogoURL = 'https://tr-static.eodev.com/files/ddd/0c7d58879d3fbd88329301579d3f91a1.jpg'
-      //this.className = 'Ari Sinifi'
-
-      // students
-      let student1 = new StudentModel()
-
-      student1.name = 'merve'
-      student1.surname = 'donmez'
-      student1.photo_url = 'http://c12.incisozluk.com.tr/res/incisozluk//11507/8/1020948_o563d.jpg'
-
-      let student2 = new StudentModel()
-
-      student2.name = 'sofia'
-      student2.surname = 'donmez'
-      student2.photo_url = 'http://c12.incisozluk.com.tr/res/incisozluk//11507/8/1020948_o563d.jpg'
-
-      let student3 = new StudentModel()
-
-      student3.name = 'anna'
-      student3.surname = 'donmez'
-      student3.photo_url = 'http://c12.incisozluk.com.tr/res/incisozluk//11507/8/1020948_o563d.jpg'
-
-      this.students.push(student1)
-      this.students.push(student2)
-      this.students.push(student3)
    }
 
    private openInboxClicked(): void {
@@ -136,7 +106,7 @@ export class TeacherHomePage implements OnInit {
    private openCalendarClicked(): void {
       console.log('open calendar')
 
-      let studentStr: string = JSON.stringify(this.students[this.selectedStudent])
+      let studentStr: string = JSON.stringify(this.parents[this.selectedStudent])
 
       this.navCtrl.push(TeacherCalendarPage, {studentStr})
    }
@@ -147,6 +117,19 @@ export class TeacherHomePage implements OnInit {
 
    private openTakePhotoPageClicked(): void {
       this.navCtrl.push(TeacherTakePhotoPage, {classId: '-Ketn4qOsNQOA0vSjZRC'});
+   }
+
+   private openParentsPageClicked(): void {
+      console.log('open parent page')
+
+      let parent = this.parents[this.selectedStudent]
+
+      let parentStr: string = JSON.stringify(parent)
+
+      console.log('parent json')
+      console.log(parentStr)
+
+      this.navCtrl.push(TeacherParentPage, {parentStr})
    }
 
 }
