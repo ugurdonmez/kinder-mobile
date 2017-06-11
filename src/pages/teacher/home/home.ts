@@ -14,6 +14,8 @@ import {Schools} from "../../../providers/schools";
 import {TeacherModel} from "../../../models/teacher-model";
 import {Teachers} from "../../../providers/teachers";
 import {SchoolModel} from "../../../models/school-model";
+import {ParentModel} from "../../../models/parent-model";
+import {Parents} from "../../../providers/parents";
 
 @Component({
    selector: 'page-teacher-home',
@@ -34,12 +36,14 @@ export class TeacherHomePage implements OnInit {
 
    private students: Array<StudentModel>
    private class: ClassModel
+   private parents: Array<ParentModel>
 
    constructor(public navCtrl: NavController,
                public authData: AuthData,
                public classesProvider: Classes,
                public schoolProvider: Schools,
-               public teacherProvider: Teachers) {
+               public teacherProvider: Teachers,
+               public parentProvider: Parents) {
       this.students = []
    }
 
@@ -58,6 +62,13 @@ export class TeacherHomePage implements OnInit {
             console.log(this.class)
 
             this.className = this.class.name
+            
+            this.parentProvider.getParentsOfClass(this.class.id)
+               .then(res => {
+                  this.parents = res
+                  console.log("parents of class:")
+                  console.log(this.parents)
+               })
          })
 
       this.teacherProvider.getTeacher(this.teacherId)
@@ -75,6 +86,7 @@ export class TeacherHomePage implements OnInit {
                   this.classLogoURL = this.school.logoURL
                })
          })
+
 
       // this is fake now
       //this.schoolName = 'Muhittin Okullari'
