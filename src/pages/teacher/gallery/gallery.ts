@@ -6,6 +6,8 @@ import {Translator} from "../../../app/translator";
 import {ImageModel} from "../../../models/image-model";
 import {Parents} from "../../../providers/parents";
 import {ParentModel} from "../../../models/parent-model";
+import {NavController} from "ionic-angular";
+import {TeacherAlbumsPage} from "../albums/albums";
 
 @Component({
    selector: 'page-teacher-gallery',
@@ -21,7 +23,8 @@ export class TeacherGalleryPage implements OnInit {
    private students: ParentModel[];
    // private photos: ImageModel[];
 
-   constructor(private galleryProvider: Gallery,
+   constructor(public navCtrl: NavController,
+               private galleryProvider: Gallery,
                public translator: Translator,
                public parentProvider: Parents,
    ) {
@@ -38,9 +41,11 @@ export class TeacherGalleryPage implements OnInit {
 
    }
 
+   private openAlbumsPage(){
+      this.navCtrl.push(TeacherAlbumsPage, {classId: this.classId})
+   }
+
    private selectStudent(studentId: string): void {
-      console.log('select student')
-      console.log(studentId)
 
       this.selectedStudent = studentId
       if (studentId == 'all'){
