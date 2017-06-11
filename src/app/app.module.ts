@@ -1,4 +1,4 @@
-import {NgModule, ErrorHandler} from '@angular/core';
+import {NgModule, ErrorHandler, LOCALE_ID} from '@angular/core';
 import {IonicApp, IonicModule, IonicErrorHandler} from 'ionic-angular';
 import {MyApp} from './app.component';
 
@@ -6,7 +6,6 @@ import {AngularFireModule, AuthProviders, AuthMethods} from 'angularfire2';
 
 // Localization
 import {TranslateModule, TranslateStaticLoader, TranslateLoader} from 'ng2-translate/ng2-translate';
-import {Http} from '@angular/http';
 import {Translator} from './translator';
 
 // Importing pages
@@ -17,6 +16,16 @@ import * as provider from '../providers';
 
 // Importing components
 import * as cmp from '../components';
+
+import { Http } from "@angular/http";
+
+import { NgCalendarModule  } from 'ionic2-calendar';
+
+// import { NgCalendarModule } from "ionic2-calendar";
+// import {Http} from "@angular/http";
+// import 'intl';
+// import 'intl/locale-data/jsonp/en';
+
 
 // AF2 Settings
 export const firebaseConfig = {
@@ -91,6 +100,8 @@ export function createTranslateLoader(http: Http) {
       cmp.ViewPhotoComponent,
    ],
    imports: [
+      // NgCalendarModule,
+      NgCalendarModule,
       IonicModule.forRoot(MyApp),
       AngularFireModule.initializeApp(firebaseConfig, myFirebaseAuthConfig),
       TranslateModule.forRoot({
@@ -134,6 +145,7 @@ export function createTranslateLoader(http: Http) {
    ],
    providers: [
       {provide: ErrorHandler, useClass: IonicErrorHandler},
+      { provide: LOCALE_ID, useValue: undefined },
       Translator,
       provider.AuthService,
       provider.AuthData,
