@@ -28,6 +28,28 @@ export class Gallery {
             .toPromise()
     }
 
+    // returns list of albums
+    public getAlbums(classId: string, albumIds: string[]): Promise<AlbumModel[]>{
+        return this.af.database.list("/classes/" + classId + "/gallery/albums")
+            .map(obj => {
+                let selectedAlbums:AlbumModel[] = []
+                this.castListOfAlbumsToModel(obj).forEach(album => {
+                    // console.log('gallery provider foreach album:')
+                    // console.log(album)
+                    if (albumIds.indexOf(album.id) > -1){
+                        selectedAlbums.push(album)
+                    }
+                })
+                // console.log('gallery provider getalbums albumIds:')
+                // console.log(albumIds)
+                // console.log('gallery provider getalbums result:')
+                // console.log(selectedAlbums)
+                return selectedAlbums
+            })
+            .first()
+            .toPromise()
+    }
+
     // deletes an album and all images in it.
     public deleteAlbum(classId: string, albumId: string): void{
         this.getImagesInAlbum(classId, albumId).then(snapshots => {
