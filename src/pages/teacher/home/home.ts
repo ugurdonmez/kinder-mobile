@@ -1,6 +1,5 @@
 
 import {Component, OnInit} from '@angular/core';
-import {StudentModel} from "../../../models/student-model";
 import {NavController} from "ionic-angular";
 import {TeacherInboxPage} from "../inbox/inbox";
 import {TeacherClassWallPage} from "../class-wall/class-wall";
@@ -17,6 +16,7 @@ import {SchoolModel} from "../../../models/school-model";
 import {ParentModel} from "../../../models/parent-model";
 import {Parents} from "../../../providers/parents";
 import {TeacherParentPage} from "../teacher-parent/teacher-parent.page";
+import {TeacherAttendancePage} from "../attendance/attendance";
 
 @Component({
    selector: 'page-teacher-home',
@@ -132,4 +132,7 @@ export class TeacherHomePage implements OnInit {
       this.navCtrl.push(TeacherParentPage, {parentStr})
    }
 
+   private openAttendanceClicked(): void {
+      this.navCtrl.push(TeacherAttendancePage);
+   }
 }

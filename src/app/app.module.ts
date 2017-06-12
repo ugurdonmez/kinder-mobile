@@ -81,6 +81,7 @@ export function createTranslateLoader(http: Http) {
       page.TeacherTakePhotoPage,
       page.TeacherViewPhotoPage,
       page.TeacherParentPage,
+      page.TeacherAttendancePage,
 
       // components
       cmp.HomeHeaderDirective,
@@ -143,7 +144,8 @@ export function createTranslateLoader(http: Http) {
       page.TeacherGalleryPage,
       page.TeacherTakePhotoPage,
       page.TeacherViewPhotoPage,
-      page.TeacherParentPage
+      page.TeacherParentPage,
+      page.TeacherAttendancePage,
    ],
    providers: [
       {provide: ErrorHandler, useClass: IonicErrorHandler},
