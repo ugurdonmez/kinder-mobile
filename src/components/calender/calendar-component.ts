@@ -61,6 +61,8 @@ export class CalendarComponent implements OnInit {
 
       console.log('Calendar Component: onInit()')
       console.log(this.student)
+
+      this.loadEvents()
    }
 
 
