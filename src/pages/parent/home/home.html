@@ -1,11 +1,69 @@
+
 <ion-header home-header [titleTextEn]="'Parent Home'"></ion-header>
-<p>Parent Home</p>
 
 <ion-content>
-<!--open teacher chat button-->
-<ion-buttons class="open-teacher-chat-button">
-   <button ion-button (click)="openTeacherChatClicked()">
-      {{'Teacher Chat' | translate}}
-   </button>
-</ion-buttons>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <div class="parentHome__menuFlexContainer">
+          <button class="parentHome__menuFlexItem" (click)="openCalendarClicked()">
+            <ion-icon name="ios-calendar"></ion-icon>
+            <div class="parentHome__iconText">Calendar</div>
+          </button>
+
+          <button class="parentHome__menuFlexItem" (click)="openAttendanceClicked()">
+            <ion-icon name="ios-clipboard"></ion-icon>
+            <div class="parentHome__iconText">Attendance</div>
+          </button>
+
+          <button class="parentHome__menuFlexItem" (click)="openInboxClicked()">
+            <ion-icon name="ios-paper"></ion-icon>
+            <div class="parentHome__iconText">Message</div>
+          </button>
+
+          <button class="parentHome__menuFlexItem">
+            <ion-icon name="ios-pizza"></ion-icon>
+            <div class="parentHome__iconText">Weekly Menu</div>
+          </button>
+
+          <button class="parentHome__menuFlexItem" (click)="openGalleryClicked()">
+            <ion-icon name="ios-albums"></ion-icon>
+            <div class="parentHome__iconText">Gallery</div>
+          </button>
+
+          <button class="parentHome__menuFlexItem">
+            <ion-icon name="ios-create"></ion-icon>
+            <div class="parentHome__iconText">Homework</div>
+          </button>
+
+          <button class="parentHome__menuFlexItem">
+            <ion-icon name="ios-body"></ion-icon>
+            <div class="parentHome__iconText">Weekly Activity Plan</div>
+          </button>
+
+          <button class="parentHome__menuFlexItem">
+            <ion-icon name="ios-body"></ion-icon>
+            <div class="parentHome__iconText">Daily feedback of teacher</div>
+          </button>
+
+          <button class="parentHome__menuFlexItem">
+            <ion-icon name="ios-body"></ion-icon>
+            <div class="parentHome__iconText">Daily feedback of parent</div>
+          </button>
+
+          <button class="parentHome__menuFlexItem">
+            <ion-icon name="ios-settings"></ion-icon>
+            <div class="parentHome__iconText">Profile</div>
+          </button>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-buttons>
+      <button ion-button (click)="openClassWallClicked('-Ketn4qOsNQOA0vSjZRC')">
+        {{'Open A Class Wall<br>
+        (This button will be placed on every class page)' | translate}}
+      </button>
+    </ion-buttons>
+  </ion-grid>
 </ion-content>

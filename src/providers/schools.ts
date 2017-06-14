@@ -65,6 +65,25 @@ export class Schools {
          .toPromise()
    }
 
+   public getSchool(schoolId: string):Promise<SchoolModel> {
+      return this.af.database.object('/schools/' + schoolId)
+         .map(obj => {
+            console.log("get school")
+            console.log(schoolId)
+            console.log(obj)
+            return this.castListToModel([obj])[0]
+         })
+         .first()
+         .toPromise()
+   }
+
+   // Conversion: FirebaseListObservable -> Model
+   private castListToModel(objs: any[]): SchoolModel[] {
+      return objs.map(o => {
+         return new SchoolModel().fromObject(o);
+      })
+   }
+
    public addSchool(school) {
       if (!!school.schoolAdminEmail){
          let schoolAdmin = new UserModel()
@@ -82,7 +101,6 @@ export class Schools {
       this.af.database.object('/schools/' + school.id).set(school);
    }
 
-
    deleteSchool(schoolId: string) {
       this.af.database.object('/schools/' + schoolId).remove();
       var classesOfSchool = this.af.database.list('/classes', {
@@ -98,7 +116,6 @@ export class Schools {
          })
       })
    }
-
 
    public newPhoto(schoolId: string) {
       {

@@ -4,13 +4,10 @@ import {Translator} from "../../../app/translator";
 import {TranslateService} from "ng2-translate";
 import {AuthData} from "../../../providers/auth-data";
 import {Classes} from "../../../providers/classes";
-import {FirebaseListObservable, FirebaseObjectObservable} from "angularfire2";
 import {Message} from "../../../providers/message";
 import {Parents} from "../../../providers/parents";
 import {Teachers} from "../../../providers/teachers";
 import {HumanReadableDateTime} from "../../../helpers/humanReadableDateTime";
-import {ClassWallModel} from "../../../models/class-wall-model";
-import {ConversationModel} from "../../../models/conversation-model";
 import {MessageModel} from "../../../models/message-model";
 
 @Component({
@@ -19,7 +16,7 @@ import {MessageModel} from "../../../models/message-model";
     providers: [Translator, Message, HumanReadableDateTime, Parents, Teachers]
 })
 
-export class TeacherChatPage {
+export class ParentChatPage {
     private translate: TranslateService;
     private classId: string;
     private newMessageText: string;

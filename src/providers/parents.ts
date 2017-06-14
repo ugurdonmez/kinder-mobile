@@ -101,7 +101,6 @@ export class Parents {
             .toPromise()
     }
 
-
     public getParentsByBranchAdminId(): Promise<ParentModel[]> {
         var userId = this.authData.getUserId();
 

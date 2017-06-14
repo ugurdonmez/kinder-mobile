@@ -151,6 +151,4 @@ export class Teachers {
          return new TeacherModel().fromObject(o);
       })
    }
-
-
 }

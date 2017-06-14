@@ -1,4 +1,6 @@
+
 <ion-header home-header [titleTextEn]="'Teacher Home'"></ion-header>
+
 <ion-content>
   <ion-grid>
     <ion-row>
@@ -21,20 +23,20 @@
       <ion-col width-20>
         <button class="teacherHome__student-list">
           <div>
-            <div *ngFor="let student of students; let i = index"
+            <div *ngFor="let parent of parents; let i = index"
                  (click)="selectStudent(i)"
                  class="teacherHome__studentButton"
                  [ngClass]="{'teacherHome__studentButton--selected': i == selectedStudent}">
               <div class="avatar-circle">
-                <img src="{{student.photo_url}}">
+                <img src="{{parent.profileImageUrl}}">
               </div>
 
               <div>
-                {{student.name}}
+                {{parent.studentName}}
               </div>
 
               <div>
-                {{student.surname}}
+                {{parent.studentSurname}}
               </div>
             </div>
           </div>
@@ -48,7 +50,7 @@
             <div class="teacherHome__iconText">Calendar</div>
           </button>
 
-          <button class="teacherHome__menuFlexItem">
+          <button class="teacherHome__menuFlexItem" (click)="openAttendanceClicked()">
             <ion-icon name="ios-clipboard"></ion-icon>
             <div class="teacherHome__iconText">Attendance</div>
           </button>
@@ -83,7 +85,7 @@
             <div class="teacherHome__iconText">Take Photo</div>
           </button>
 
-          <button class="teacherHome__menuFlexItem">
+          <button class="teacherHome__menuFlexItem" (click)="openParentsPageClicked()">
             <ion-icon name="ios-people"></ion-icon>
             <div class="teacherHome__iconText">Parents</div>
           </button>
