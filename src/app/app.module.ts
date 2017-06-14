@@ -21,12 +21,6 @@ import { Http } from "@angular/http";
 
 import { NgCalendarModule  } from 'ionic2-calendar';
 
-// import { NgCalendarModule } from "ionic2-calendar";
-// import {Http} from "@angular/http";
-// import 'intl';
-// import 'intl/locale-data/jsonp/en';
-
-
 // AF2 Settings
 export const firebaseConfig = {
    apiKey: "AIzaSyC3ZHNBANkIOGZsJwv4iZyhqUzXnYrz2sk",
@@ -74,7 +68,6 @@ export function createTranslateLoader(http: Http) {
       page.TeacherHomePage,
       page.TeacherInboxPage,
       page.TeacherDialogPage,
-      page.TeacherChatPage,
       page.TeacherClassWallPage,
       page.TeacherCalendarPage,
       page.TeacherGalleryPage,
@@ -82,6 +75,14 @@ export function createTranslateLoader(http: Http) {
       page.TeacherViewPhotoPage,
       page.TeacherParentPage,
       page.TeacherAttendancePage,
+      page.ParentAttendancePage,
+      page.ParentCalendarPage,
+      page.ParentClassWallPage,
+      page.ParentGalleryPage,
+      page.ParentHomePage,
+      page.ParentInboxPage,
+      page.ParentChatPage,
+      page.ParentViewPhotoPage,
 
       // components
       cmp.HomeHeaderDirective,
@@ -138,7 +139,6 @@ export function createTranslateLoader(http: Http) {
       page.SchoolAdminCreateClassPage,
       page.TeacherInboxPage,
       page.TeacherDialogPage,
-      page.TeacherChatPage,
       page.TeacherClassWallPage,
       page.TeacherCalendarPage,
       page.TeacherGalleryPage,
@@ -146,6 +146,14 @@ export function createTranslateLoader(http: Http) {
       page.TeacherViewPhotoPage,
       page.TeacherParentPage,
       page.TeacherAttendancePage,
+      page.ParentAttendancePage,
+      page.ParentCalendarPage,
+      page.ParentClassWallPage,
+      page.ParentGalleryPage,
+      page.ParentHomePage,
+      page.ParentInboxPage,
+      page.ParentChatPage,
+      page.ParentViewPhotoPage
    ],
    providers: [
       {provide: ErrorHandler, useClass: IonicErrorHandler},

@@ -1,0 +1,10 @@
+<!-- header -->
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            {{"Class Wall: " | translate}}{{(_class | async)?.name}}
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<class-wall-admin [classId]="classId"></class-wall-admin>

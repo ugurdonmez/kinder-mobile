@@ -1,0 +1,19 @@
+<ion-header>
+   <ion-navbar>
+      <ion-title>{{"Gallery" | translate}}</ion-title>
+   </ion-navbar>
+</ion-header>
+
+<ion-content class="page-teacher-gallery">
+   <ion-grid>
+      <ion-row>
+         <ion-col width-20>
+            studens will be listed here
+         </ion-col>
+
+         <ion-col width-80>
+            <photos-grid-component [photos]="photos" [role]="'teacher'" [classId]="classId"></photos-grid-component>
+         </ion-col>
+      </ion-row>
+   </ion-grid>
+</ion-content>
