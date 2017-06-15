@@ -8,6 +8,7 @@ import {InviteOthersPage} from "../invite-others/invite-others";
 import {TeacherViewPhotoPage} from "../../pages/teacher/view-photo/view-photo";
 import {ImageModel} from "../../models/image-model";
 import {AlbumModel} from "../../models/album-model";
+import {TeacherAlbumPage} from "../../pages/teacher/album/album";
 
 @Component({
   selector: 'albums-grid-component',
@@ -17,7 +18,7 @@ import {AlbumModel} from "../../models/album-model";
 
 
 export class AlbumsGridComponent implements OnInit{
-    @Input() albums: AlbumModel;
+    @Input() albums: AlbumModel[];
     @Input() role: string;
     @Input() classId: string;
     private translate: TranslateService;
@@ -33,9 +34,9 @@ export class AlbumsGridComponent implements OnInit{
         this.translate = this.translator.translatePipe;
     }
 
-    private openAlbumPage(photo){
+    private openAlbumPage(album){
        if(this.role == 'teacher'){
-          // this.navCtrl.push(TeacherAlbumPage, {classId: this.classId, album: album})
+          this.navCtrl.push(TeacherAlbumPage, {classId: this.classId, album: album})
        }
     }
 
