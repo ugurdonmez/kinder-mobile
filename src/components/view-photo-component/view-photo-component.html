@@ -19,5 +19,14 @@
          </ion-item>
       </ion-col>
    </ion-row>
+   <ion-row *ngIf="role=='teacher'">
+      <ion-item>
+         <ion-label>{{"Album" | translate}}</ion-label>
+         <ion-select [(ngModel)]="selectedAlbumId" (ngModelChange)="onSelectedAlbumChange($event)">
+            <ion-option [value]="''"></ion-option>
+            <ion-option *ngFor="let album of allAlbums | async" [value]="album.id">{{album.name}}</ion-option>
+         </ion-select>
+      </ion-item>
+   </ion-row>
 
 </ion-grid>
