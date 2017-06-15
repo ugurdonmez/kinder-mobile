@@ -134,6 +134,11 @@ export class Gallery {
             .toPromise()
     }
 
+    // assigns a new album to an image.
+    public updateAlbumOfImage(classId: string, imageId: string, albumId: string): void{
+        this.af.database.object("/classes/" + classId + "/gallery/images/" + imageId+ "/albumId").set(albumId);
+    }
+
     // tags student to image
     public tagStudentInImage(classId: string, imageId: string, studentId: string): void{
         this.af.database.object("/classes/" + classId + "/gallery/student-images/" + studentId + "/" + imageId).set(true);
