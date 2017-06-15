@@ -42,5 +42,10 @@
             <photos-grid-component [photos]="images" [role]="'teacher'" [classId]="classId"></photos-grid-component>
          </ion-col>
       </ion-row>
+      <ion-row>
+         <button ion-button block color="danger" (click)="deleteAlbumClicked()">
+            {{"Delete Album" | translate}}
+         </button>
+      </ion-row>
    </ion-grid>
 </ion-content>

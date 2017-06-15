@@ -5,7 +5,7 @@ import {Translator} from "../../../app/translator";
 import {ImageModel} from "../../../models/image-model";
 import {Parents} from "../../../providers/parents";
 import {ParentModel} from "../../../models/parent-model";
-import {NavController, NavParams} from "ionic-angular";
+import {NavController, NavParams, AlertController} from "ionic-angular";
 import {TeacherAlbumsPage} from "../albums/albums";
 import {AlbumModel} from "../../../models/album-model";
 
@@ -27,7 +27,9 @@ export class TeacherAlbumPage implements OnInit {
                public translator: Translator,
                public parentProvider: Parents,
                private galleryProvider: Gallery,
-               public navParams: NavParams,) {
+               public navParams: NavParams,
+               private alertCtrl: AlertController,
+   ) {
       this.album = navParams.get('album');
       this.classId = navParams.get('classId');
       this.translate = translator.translatePipe;
@@ -39,6 +41,31 @@ export class TeacherAlbumPage implements OnInit {
 
    ngOnInit(): void {
 
+   }
+
+   private deleteAlbumClicked(){
+      let prompt = this.alertCtrl.create({
+         title: this.translate.instant('Delete Album?'),
+         message: this.translate.instant("This operation will not delete the images in this album."),
+         buttons: [
+            {
+               text: this.translate.instant('Cancel'),
+               handler: () => {
+               }
+            },
+            {
+               text: this.translate.instant('Delete'),
+               handler: () => {
+                  // console.log('albumName:');
+                  // console.log(albumName);
+                  this.galleryProvider.deleteAlbum(this.classId, this.album.id)
+                  // this.selectStudent('all')
+                  this.navCtrl.pop()
+               }
+            }
+         ]
+      });
+      prompt.present();
    }
 
    private selectStudent(studentId: string): void {
