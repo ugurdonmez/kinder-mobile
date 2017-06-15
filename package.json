@@ -1,7 +1,7 @@
 {
-  "name": "ionic-hello-world",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+  "name": "kinder-mobile",
+  "author": "",
+  "homepage": "",
   "private": true,
   "scripts": {
     "ionic:build": "ionic-app-scripts build",
@@ -55,7 +55,8 @@
       "platform": "ios",
       "version": "",
       "locator": "ios"
-    }
+    },
+    "android"
   ],
   "description": "kinder-mobile: An Ionic project"
 }

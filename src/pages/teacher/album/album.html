@@ -1,16 +1,11 @@
 <ion-header>
    <ion-navbar>
-      <ion-title>{{"Gallery" | translate}}</ion-title>
+      <ion-title>{{"Album: " | translate}}{{album?.name}}</ion-title>
    </ion-navbar>
 </ion-header>
 
-<ion-content class="page-teacher-gallery">
+<ion-content class="page-teacher-album">
    <ion-grid>
-      <ion-row>
-         <button ion-button (click)="openAlbumsPage()">
-            {{"Albums" | translate}}
-         </button>
-      </ion-row>
       <ion-row>
          <ion-col class="teacherHome__student-list-container">
             <button class="teacherHome__student-list">
@@ -44,8 +39,13 @@
          </ion-col>
 
          <ion-col>
-            <photos-grid-component [photos]="photos" [role]="'teacher'" [classId]="classId"></photos-grid-component>
+            <photos-grid-component [photos]="images" [role]="'teacher'" [classId]="classId"></photos-grid-component>
          </ion-col>
+      </ion-row>
+      <ion-row>
+         <button ion-button block color="danger" (click)="deleteAlbumClicked()">
+            {{"Delete Album" | translate}}
+         </button>
       </ion-row>
    </ion-grid>
 </ion-content>
