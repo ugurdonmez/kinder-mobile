@@ -133,6 +133,12 @@ export class TeacherHomePage implements OnInit {
    }
 
    private openAttendanceClicked(): void {
-      this.navCtrl.push(TeacherAttendancePage);
+      console.log('open teacher attendance')
+
+      let parentsStr: string = JSON.stringify(this.parents)
+      console.log('parents json')
+      console.log(parentsStr)
+
+      this.navCtrl.push(TeacherAttendancePage, {parentsStr});
    }
 }
