@@ -1,11 +1,17 @@
 <ion-header>
    <ion-navbar>
-      <ion-title>{{"Gallery" | translate}}</ion-title>
+      <ion-title>{{"Albums" | translate}}</ion-title>
    </ion-navbar>
 </ion-header>
 
 <ion-content class="page-teacher-albums">
    <ion-grid>
+      <ion-row>
+         <button ion-button icon-left (click)="createAlbumClicked()">
+            <ion-icon name="add-circle"></ion-icon>
+            {{"Create Album" | translate}}
+         </button>
+      </ion-row>
       <ion-row>
          <ion-col class="teacherHome__student-list-container">
             <button class="teacherHome__student-list">

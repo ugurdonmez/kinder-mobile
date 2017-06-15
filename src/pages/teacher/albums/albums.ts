@@ -7,6 +7,7 @@ import {ImageModel} from "../../../models/image-model";
 import {Parents} from "../../../providers/parents";
 import {ParentModel} from "../../../models/parent-model";
 import {AlbumModel} from "../../../models/album-model";
+import {AlertController} from "ionic-angular";
 
 @Component({
    selector: 'page-teacher-albums',
@@ -24,14 +25,45 @@ export class TeacherAlbumsPage implements OnInit {
    constructor(private galleryProvider: Gallery,
                public translator: Translator,
                public parentProvider: Parents,
+               private alertCtrl: AlertController,
    ) {
       this.classId = '-Ketn4qOsNQOA0vSjZRC'
       this.parentProvider.getParentsOfClass(this.classId).then(students => {
          this.students = students
       })
       this.translate = translator.translatePipe;
-      // this.photos = this.galleryProvider.getImagesOfClass(this.classId)
       this.selectStudent('all')
+   }
+
+   private createAlbumClicked(){
+      let prompt = this.alertCtrl.create({
+         title: this.translate.instant('Create Album'),
+         message: this.translate.instant("Enter a title for this new album"),
+         inputs: [
+            {
+               name: 'title',
+               placeholder: this.translate.instant('Title')
+            },
+         ],
+         buttons: [
+            {
+               text: this.translate.instant('Cancel'),
+               handler: data => {
+                  // console.log('Cancel clicked');
+               }
+            },
+            {
+               text: this.translate.instant('Create'),
+               handler: data => {
+                  // console.log('albumName:');
+                  // console.log(albumName);
+                  this.galleryProvider.addAlbum(this.classId, data.title)
+                  this.selectStudent('all')
+               }
+            }
+         ]
+      });
+      prompt.present();
    }
 
    ngOnInit(): void {
