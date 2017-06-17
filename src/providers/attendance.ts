@@ -1,24 +1,28 @@
+
 import { Injectable } from '@angular/core';
 
 import { AngularFire } from 'angularfire2';
 
-import {Parents} from "./parents";
-import {AttendanceModel} from "../models/attendance-model";
+import { Parents } from "./parents";
+import { AttendanceModel } from "../models/attendance-model";
 
 @Injectable()
 export class Attendance {
 
-    constructor(public af: AngularFire, private parentsProvider: Parents){
+    constructor(public af: AngularFire,
+                private parentsProvider: Parents){
     }
+
 
 
     public markAllStudentsHere(classId:string, date:string): void{
         // this should be called by the teacher. marks all the students as here.
         // also it overwrites "absent" students as all "here".
-        this.parentsProvider.getParentsOfClass(classId).then(studentsOfClass => {
-            // console.log(studentsOfClass);
-            studentsOfClass.forEach( student => {
-                this.markStudentHere(student.id, classId, date, true);
+        this.parentsProvider.getParentsOfClass(classId)
+           .then(studentsOfClass => {
+               // console.log(studentsOfClass);
+               studentsOfClass.forEach( student => {
+                   this.markStudentHere(student.id, classId, date, true);
             })
         })
     }

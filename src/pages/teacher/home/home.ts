@@ -139,6 +139,10 @@ export class TeacherHomePage implements OnInit {
       console.log('parents json')
       console.log(parentsStr)
 
-      this.navCtrl.push(TeacherAttendancePage, {parentsStr});
+      let classStr: string = JSON.stringify(this.class)
+      console.log('class str')
+      console.log(classStr)
+
+      this.navCtrl.push(TeacherAttendancePage, {parentsStr, classStr});
    }
 }
