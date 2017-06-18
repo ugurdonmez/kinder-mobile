@@ -180,7 +180,7 @@ export function createTranslateLoader(http: Http) {
       provider.Homework,
       provider.Gallery,
       provider.Feedback,
-      provider.Attendance,
+      provider.AttendanceProvider,
       provider.Message,
    ]
 })

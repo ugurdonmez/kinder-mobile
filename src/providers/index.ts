@@ -1,6 +1,6 @@
 
 export * from './activity'
-export * from './attendance'
+export * from './attendance-provider'
 export * from './auth-data'
 export * from './auth-service'
 export * from './birthday'
