@@ -17,6 +17,7 @@ import {ParentModel} from "../../../models/parent-model";
 import {Parents} from "../../../providers/parents";
 import {TeacherParentPage} from "../teacher-parent/teacher-parent.page";
 import {TeacherAttendancePage} from "../attendance/attendance";
+import {TeacherWeeklyMealMenuPage} from "../weekly-meal-menu/weekly-meal-menu";
 
 @Component({
    selector: 'page-teacher-home',
@@ -113,6 +114,12 @@ export class TeacherHomePage implements OnInit {
 
    private openGalleryClicked(): void {
       this.navCtrl.push(TeacherGalleryPage);
+   }
+
+   private openGWeeklyMealMenuClicked(): void {
+      this.navCtrl.push(TeacherWeeklyMealMenuPage, {
+         _class: this.class
+      });
    }
 
    private openTakePhotoPageClicked(): void {
