@@ -1,10 +1,22 @@
 
-<ion-grid>
+<ion-grid class="weekly-meal-menu-grid-component">
    <ion-row>
       <button ion-button icon-left (click)="addWeeklyMenuPhoto()">
          <ion-icon name="add-circle"></ion-icon>
          {{"Add" | translate}}
       </button>
    </ion-row>
-</ion-grid>
 
+   <ion-row>
+      <ion-col col-4 col-sm-4 col-md-3 col-lg-3 col-xl-2 *ngFor="let week of weeklyMeals">
+         <div (click)="openWeeklyMealPage(week)">
+            <div class='meal-image'>
+               <ion-icon *ngIf="!(week | async)?.imgUrl" name="images"></ion-icon>
+               <img *ngIf="!!(week | async)?.imgUrl" [src]="(week | async)?.imgUrl" />
+            </div>
+            <div class="meal-name">{{getMealName((week | async)?.date)}}</div>
+         </div>
+      </ion-col>
+   </ion-row>
+
+</ion-grid>
