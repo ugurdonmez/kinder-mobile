@@ -86,6 +86,7 @@ export function createTranslateLoader(http: Http) {
       page.ParentViewPhotoPage,
       page.TeacherAlbumPage,
       page.TeacherWeeklyMealMenuPage,
+      page.TeacherViewWeeklyMealMenuPage,
 
       // components
       cmp.HomeHeaderDirective,
@@ -106,6 +107,7 @@ export function createTranslateLoader(http: Http) {
       cmp.ViewPhotoComponent,
       cmp.AlbumsGridComponent,
       cmp.WeeklyMealMenuComponent,
+      cmp.ViewWeeklyMealMenuComponent,
    ],
    imports: [
       // NgCalendarModule,
@@ -162,6 +164,7 @@ export function createTranslateLoader(http: Http) {
       page.ParentViewPhotoPage,
       page.TeacherAlbumPage,
       page.TeacherWeeklyMealMenuPage,
+      page.TeacherViewWeeklyMealMenuPage,
    ],
    providers: [
       {provide: ErrorHandler, useClass: IonicErrorHandler},

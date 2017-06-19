@@ -1,12 +1,13 @@
 
 import {Component, OnInit, Input} from '@angular/core';
-import {AlertController} from "ionic-angular";
+import {AlertController, NavController} from "ionic-angular";
 import moment from 'moment';
 import {Translator} from "../../app/translator";
 import {TranslateService} from "ng2-translate";
 import {WeeklyMealMenu} from "../../providers/weeklymealmenu";
 import {Camera} from "ionic-native";
 import {WeeklyMealMenuModel} from "../../models/weekly-meal-menu-model";
+import {TeacherViewWeeklyMealMenuPage} from "../../pages/teacher/view-weekly-meal-menu/view-weekly-meal-menu";
 
 @Component({
    selector: 'weekly-meal-menu-component',
@@ -23,7 +24,7 @@ export class WeeklyMealMenuComponent implements OnInit {
    constructor(private alertCtrl: AlertController,
                public translator: Translator,
                public weeklyMealMenuProvider: WeeklyMealMenu,
-
+               private navCtrl: NavController,
    ) {
 
    }
@@ -51,7 +52,6 @@ export class WeeklyMealMenuComponent implements OnInit {
       alert.addButton({
          text: 'Okay',
          handler: data => {
-            console.log('Checkbox data:', data);
             this.weeklyMealMenuProvider.addMenuImage(Camera.PictureSourceType.CAMERA, this.classId, data)
          }
       });
@@ -59,12 +59,8 @@ export class WeeklyMealMenuComponent implements OnInit {
    }
 
    private getMealName(mealDate){
-      console.log('getMealName(mealDate: ')
-      console.log(mealDate)
       mealDate = parseInt(mealDate)
-      console.log('getMealName week start for this date: ')
       let weekStart = moment(mealDate).local().day(1).startOf('day').format('L')
-      console.log(weekStart)
       let weekEnd = moment(mealDate).local().day(5).startOf('day').format('L')
 
       return weekStart + ' - ' + weekEnd
@@ -99,9 +95,13 @@ export class WeeklyMealMenuComponent implements OnInit {
    }
 
    private openWeeklyMealPage(week: Promise<WeeklyMealMenuModel>){
-      week.then(subs => {
-         console.log('openWeeklyMealPage load:')
-         console.log(subs)
+      week.then(subscribedWeek => {
+         if(!!subscribedWeek.imgUrl){
+            this.navCtrl.push(TeacherViewWeeklyMealMenuPage, {
+               classId: this.classId,
+               weeklyMealMenu: subscribedWeek
+            })
+         }
       })
    }
 }
