@@ -3,7 +3,7 @@ export class AttendanceModel {
    id: string
    parentId: string
    classId: string
-   hereStatus: string
+   hereStatus: boolean
    day: string
    here: boolean
    comment: string
