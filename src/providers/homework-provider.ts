@@ -1,12 +1,13 @@
+
 import { Injectable } from '@angular/core';
 
 import { AngularFire } from 'angularfire2';
-import {Camera} from "ionic-native";
+import { Camera } from "ionic-native";
 import * as firebase from 'firebase';
-import {HomeworkModel} from "../models/homework-model";
+import { HomeworkModel } from "../models/homework-model";
 
 @Injectable()
-export class Homework {
+export class HomeworkProvider {
 
     constructor(public af: AngularFire){
     }
