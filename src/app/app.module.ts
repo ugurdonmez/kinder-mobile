@@ -89,6 +89,7 @@ export function createTranslateLoader(http: Http) {
       page.TeacherWeeklyMealMenuPage,
       page.TeacherViewWeeklyMealMenuPage,
       page.TeacherHomeworkPage,
+      page.TeacherAddHomeworkPage,
 
       // components
       cmp.HomeHeaderDirective,
@@ -167,7 +168,8 @@ export function createTranslateLoader(http: Http) {
       page.TeacherAlbumPage,
       page.TeacherWeeklyMealMenuPage,
       page.TeacherViewWeeklyMealMenuPage,
-      page.TeacherHomeworkPage
+      page.TeacherHomeworkPage,
+      page.TeacherAddHomeworkPage
    ],
    providers: [
       {provide: ErrorHandler, useClass: IonicErrorHandler},

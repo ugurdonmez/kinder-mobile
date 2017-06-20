@@ -1,13 +1,9 @@
 
-
 import { Component, OnInit } from '@angular/core';
 import { ParentModel } from "../../../models/parent-model";
 import { NavParams } from "ionic-angular";
 import { ClassModel } from "../../../models/class-model";
-import { AttendanceModel } from "../../../models/attendance-model";
-import { AttendanceProvider } from "../../../providers/attendance-provider";
-import {HomeworkModel} from "../../../models/homework-model";
-import {HomeworkProvider} from "../../../providers/homework-provider";
+import { HomeworkProvider } from "../../../providers/homework-provider";
 
 @Component({
    selector: 'teacher-homework-page',
@@ -17,11 +13,9 @@ import {HomeworkProvider} from "../../../providers/homework-provider";
 
 export class TeacherHomeworkPage implements OnInit {
 
-   private myDate:string
    private parents: Array<ParentModel>
-   private class:ClassModel
+   private class: ClassModel
    private selectedStudent: number
-   private commentText: string
 
    constructor(
       public navParams: NavParams,
@@ -41,10 +35,6 @@ export class TeacherHomeworkPage implements OnInit {
       //
       // this.myDate = new Date(date).toISOString();
 
-      this.myDate = new Date().toISOString();
-
-      console.log('myDate ' + this.myDate)
-
       this.parents = JSON.parse(this.navParams.get('parentsStr'))
       console.log(this.parents)
 
@@ -52,7 +42,6 @@ export class TeacherHomeworkPage implements OnInit {
       console.log(this.class)
 
       this.selectedStudent = 0
-      this.commentText = ''
    }
 
    private selectStudent(p: number): void {
