@@ -1,9 +1,11 @@
 
 import { Component, OnInit } from '@angular/core';
 import { ParentModel } from "../../../models/parent-model";
-import { NavParams } from "ionic-angular";
+import {NavController, NavParams} from "ionic-angular";
 import { ClassModel } from "../../../models/class-model";
 import { HomeworkProvider } from "../../../providers/homework-provider";
+import {TeacherAddHomeworkPage} from "./add-homework/add-homework";
+import {HomeworkModel} from "../../../models/homework-model";
 
 @Component({
    selector: 'teacher-homework-page',
@@ -14,12 +16,14 @@ import { HomeworkProvider } from "../../../providers/homework-provider";
 export class TeacherHomeworkPage implements OnInit {
 
    private parents: Array<ParentModel>
+   private homeworks: Array<HomeworkModel>
    private class: ClassModel
    private selectedStudent: number
 
    constructor(
-      public navParams: NavParams,
-      public homeworkProvider: HomeworkProvider
+      private navCtrl: NavController,
+      private navParams: NavParams,
+      private homeworkProvider: HomeworkProvider
    ) {
 
    }
@@ -35,13 +39,19 @@ export class TeacherHomeworkPage implements OnInit {
       //
       // this.myDate = new Date(date).toISOString();
 
+      this.selectedStudent = 0
+
       this.parents = JSON.parse(this.navParams.get('parentsStr'))
       console.log(this.parents)
 
       this.class = JSON.parse(this.navParams.get('classStr'))
       console.log(this.class)
 
-      this.selectedStudent = 0
+      this.homeworkProvider.getHomeworksNew(this.parents[this.selectedStudent].id)
+         .then(res => {
+            this.homeworks = res
+            console.log(this.homeworks)
+         })
    }
 
    private selectStudent(p: number): void {
@@ -49,32 +59,25 @@ export class TeacherHomeworkPage implements OnInit {
       console.log(p)
 
       this.selectedStudent = p
+
+      this.homeworkProvider.getHomeworksNew(this.parents[this.selectedStudent].id)
+         .then(res => {
+            this.homeworks = res
+            console.log(this.homeworks)
+         })
    }
 
-   private submit(): void {
+   private addHomework(): void {
+      console.log('open teacher homework')
 
-      // let hw: HomeworkModel = new HomeworkModel()
-      //
-      // hw.parentId = this.parents[this.selectedStudent].id
-      // hw.content = "example content"
-      // hw.creationDate = "2017"
-      // hw.dueDate = "2016"
-      // hw.subject = "asda"
-      //
-      // this.homeworkProvider.addHomeworkNew(hw)
+      let parentStr: string = JSON.stringify(this.parents[this.selectedStudent])
+      console.log('parent json')
+      console.log(parentStr)
 
-      // let dateKey:string = 'dateKey' + this.myDate.split('T')[0]
-      //
-      // let attendanceModel: AttendanceModel = new AttendanceModel()
-      //
-      // attendanceModel.parentId = this.parents[this.selectedStudent].id
-      // attendanceModel.classId =this.class.id
-      // attendanceModel.hereStatus = this.here
-      // attendanceModel.day = dateKey
-      // attendanceModel.comment = this.commentText
-      //
-      // this.attendanceProvider.setStudentAttendance(attendanceModel)
-      //
-      // console.log('attendance submit')
+      let classStr: string = JSON.stringify(this.class)
+      console.log('class str')
+      console.log(classStr)
+
+      this.navCtrl.push(TeacherAddHomeworkPage, {parentStr, classStr});
    }
 }

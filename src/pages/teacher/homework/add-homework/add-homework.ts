@@ -4,20 +4,21 @@ import { ParentModel } from "../../../../models/parent-model";
 import { ClassModel } from "../../../../models/class-model";
 import { NavParams } from "ionic-angular";
 import { HomeworkProvider } from "../../../../providers/homework-provider";
+import {HomeworkModel} from "../../../../models/homework-model";
 
 @Component({
-   selector: 'teacher-homework-page',
-   templateUrl: 'teacher-homework.html',
+   selector: 'teacher-add-homework-page',
+   templateUrl: 'add-homework.html',
    providers: []
 })
 
 export class TeacherAddHomeworkPage implements OnInit {
 
    private myDate: string
-   private parents: Array<ParentModel>
+   private subject: string
+   private content: string
+   private parent: ParentModel
    private class: ClassModel
-   private selectedStudent: number
-   private commentText: string
 
    constructor(public navParams: NavParams,
                public homeworkProvider: HomeworkProvider) {
@@ -39,13 +40,27 @@ export class TeacherAddHomeworkPage implements OnInit {
 
       console.log('myDate ' + this.myDate)
 
-      this.parents = JSON.parse(this.navParams.get('parentsStr'))
-      console.log(this.parents)
+      this.parent = JSON.parse(this.navParams.get('parentStr'))
+      console.log(this.parent)
 
       this.class = JSON.parse(this.navParams.get('classStr'))
       console.log(this.class)
+   }
 
-      this.selectedStudent = 0
-      this.commentText = ''
+   private submit(): void {
+      let hw: HomeworkModel = new HomeworkModel()
+
+      hw.parentId = this.parent.id
+      hw.creationDate = new Date().getTime()
+      hw.dueDate = new Date(this.myDate).getTime()
+      hw.subject = this.subject
+      hw.content = this.content
+
+      this.homeworkProvider.addHomeworkNew(hw)
+
+      // TODO: make in promise
+      alert("homework added")
+
+      console.log('homework added submit')
    }
 }

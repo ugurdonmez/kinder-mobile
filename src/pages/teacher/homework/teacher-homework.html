@@ -8,11 +8,19 @@
 <ion-content>
 
   <ion-row>
-    <ion-item>
-      <ion-label color="primary">Comments</ion-label>
+    <ion-card  *ngFor="let hw of homeworks">
+      <ion-card-content>
+        <ion-list>
+          <ion-item>Subject: {{hw.subject}}</ion-item>
 
-      <ion-input type="text" [(ngModel)]="commentText" name="commentText"></ion-input>
-    </ion-item>
+          <ion-item>Content: {{hw.content}}</ion-item>
+
+          <ion-item>Created: {{hw.creationDate | date:'dd/MM/yyyy'}}</ion-item>
+
+          <ion-item>Due: {{hw.dueDate | date:'dd/MM/yyyy'}}</ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
   </ion-row>
 
   <ion-row>
@@ -38,6 +46,6 @@
   </ion-row>
 
   <ion-row>
-    <button ion-button round margin (click)="submit()">Submit</button>
+    <button ion-button round margin (click)="addHomework()">Add Homework</button>
   </ion-row>
 </ion-content>

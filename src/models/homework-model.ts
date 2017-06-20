@@ -2,10 +2,10 @@
 export class HomeworkModel {
    id: string;
    content: string;
-   creationDate: string;
+   creationDate: number;
    // timestamp
    dueDate: number;
-   subject: number;
+   subject: string;
    completedStudents: any;
    parentId: string
 
