@@ -9,7 +9,7 @@ import { HomeworkModel } from "../models/homework-model";
 @Injectable()
 export class HomeworkProvider {
 
-   constructor(public af: AngularFire) {
+   constructor(private af: AngularFire) {
    }
 
    public addHomeworkNew (homework: HomeworkModel): any {
@@ -17,6 +17,16 @@ export class HomeworkProvider {
          .list("/homework/" + '/' + homework.parentId + '/')
          .push(homework)
          .key
+   }
+
+   public getHomeworksNew (parentId: string): Promise<HomeworkModel[]> {
+      return this.af.database
+         .list("/homework/" + '/' + parentId + '/')
+         .map(obj => {
+            return this.castListToModel(obj)
+         })
+         .first()
+         .toPromise()
    }
 
    // adds a homework to a class, returns key of added element.

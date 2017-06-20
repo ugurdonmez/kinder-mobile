@@ -6,6 +6,8 @@ import { NavParams } from "ionic-angular";
 import { ClassModel } from "../../../models/class-model";
 import { AttendanceModel } from "../../../models/attendance-model";
 import { AttendanceProvider } from "../../../providers/attendance-provider";
+import {HomeworkModel} from "../../../models/homework-model";
+import {HomeworkProvider} from "../../../providers/homework-provider";
 
 @Component({
    selector: 'teacher-homework-page',
@@ -23,7 +25,7 @@ export class TeacherHomeworkPage implements OnInit {
 
    constructor(
       public navParams: NavParams,
-      public attendanceProvider: AttendanceProvider
+      public homeworkProvider: HomeworkProvider
    ) {
 
    }
@@ -61,6 +63,16 @@ export class TeacherHomeworkPage implements OnInit {
    }
 
    private submit(): void {
+
+      // let hw: HomeworkModel = new HomeworkModel()
+      //
+      // hw.parentId = this.parents[this.selectedStudent].id
+      // hw.content = "example content"
+      // hw.creationDate = "2017"
+      // hw.dueDate = "2016"
+      // hw.subject = "asda"
+      //
+      // this.homeworkProvider.addHomeworkNew(hw)
 
       // let dateKey:string = 'dateKey' + this.myDate.split('T')[0]
       //

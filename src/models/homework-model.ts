@@ -3,8 +3,9 @@ export class HomeworkModel {
    id: string;
    content: string;
    creationDate: string;
-   dueDate: string;
-   subject: string;
+   // timestamp
+   dueDate: number;
+   subject: number;
    completedStudents: any;
    parentId: string
 
