@@ -20,7 +20,7 @@ export class WeeklyMealMenuComponent implements OnInit {
    private translate: TranslateService;
    @Input() classId: string;
    private weeklyMeals: any;
-   
+
    constructor(private alertCtrl: AlertController,
                public translator: Translator,
                public weeklyMealMenuProvider: WeeklyMealMenu,
@@ -108,12 +108,12 @@ export class WeeklyMealMenuComponent implements OnInit {
    private takePhotoForWeek(week){
       // console.log('takePhotoForWeek week:')
       // console.log(week)
-      week.then(subscribedWeek => {
-         this.weeklyMealMenuProvider.addMenuImage(Camera.PictureSourceType.CAMERA, this.classId, subscribedWeek.date)
-            .then(()=>{
-               // this.loadWeeklyMeals()
-            })
-
-      })
+      // week.then(subscribedWeek => {
+      //    this.weeklyMealMenuProvider.addMenuImage(Camera.PictureSourceType.CAMERA, this.classId, subscribedWeek.date)
+      //       .then(()=>{
+      //          // this.loadWeeklyMeals()
+      //       })
+      //
+      // })
    }
 }
