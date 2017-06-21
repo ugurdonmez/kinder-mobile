@@ -19,6 +19,7 @@ import {TeacherParentPage} from "../teacher-parent/teacher-parent.page";
 import {TeacherAttendancePage} from "../attendance/attendance";
 import {TeacherWeeklyMealMenuPage} from "../weekly-meal-menu/weekly-meal-menu";
 import {TeacherHomeworkPage} from "../homework/teacher-homework";
+import {TeacherWeeklyActivitiesPage} from "../weekly-activities/weekly-activities";
 
 @Component({
    selector: 'page-teacher-home',
@@ -119,6 +120,12 @@ export class TeacherHomePage implements OnInit {
 
    private openGWeeklyMealMenuClicked(): void {
       this.navCtrl.push(TeacherWeeklyMealMenuPage, {
+         _class: this.class
+      });
+   }
+
+   private openWeeklyActivityPlanClicked(): void {
+      this.navCtrl.push(TeacherWeeklyActivitiesPage, {
          _class: this.class
       });
    }
