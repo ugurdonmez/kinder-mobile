@@ -1,0 +1,36 @@
+
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{"Add Homework" | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+    <ion-item>
+      <ion-label color="primary">Subject</ion-label>
+
+      <ion-input placeholder="Enter subject" [(ngModel)]="subject"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="primary">Content</ion-label>
+
+      <ion-input placeholder="Enter content" [(ngModel)]="content"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Due Date</ion-label>
+
+      <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="myDate"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <button ion-button round margin (click)="submit()">Add Homework</button>
+    </ion-item>
+  </ion-list>
+
+
+
+</ion-content>

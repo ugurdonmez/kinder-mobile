@@ -1,12 +1,13 @@
-import {NgModule, ErrorHandler, LOCALE_ID} from '@angular/core';
-import {IonicApp, IonicModule, IonicErrorHandler} from 'ionic-angular';
-import {MyApp} from './app.component';
 
-import {AngularFireModule, AuthProviders, AuthMethods} from 'angularfire2';
+import { NgModule, ErrorHandler, LOCALE_ID } from '@angular/core';
+import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { MyApp} from './app.component';
+
+import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 
 // Localization
-import {TranslateModule, TranslateStaticLoader, TranslateLoader} from 'ng2-translate/ng2-translate';
-import {Translator} from './translator';
+import { TranslateModule, TranslateStaticLoader, TranslateLoader } from 'ng2-translate/ng2-translate';
+import { Translator} from './translator';
 
 // Importing pages
 import * as page from '../pages';
@@ -87,6 +88,8 @@ export function createTranslateLoader(http: Http) {
       page.TeacherAlbumPage,
       page.TeacherWeeklyMealMenuPage,
       page.TeacherViewWeeklyMealMenuPage,
+      page.TeacherHomeworkPage,
+      page.TeacherAddHomeworkPage,
 
       // components
       cmp.HomeHeaderDirective,
@@ -165,6 +168,8 @@ export function createTranslateLoader(http: Http) {
       page.TeacherAlbumPage,
       page.TeacherWeeklyMealMenuPage,
       page.TeacherViewWeeklyMealMenuPage,
+      page.TeacherHomeworkPage,
+      page.TeacherAddHomeworkPage
    ],
    providers: [
       {provide: ErrorHandler, useClass: IonicErrorHandler},
@@ -183,14 +188,13 @@ export function createTranslateLoader(http: Http) {
       provider.Birthday,
       provider.Reminder,
       provider.WeeklyMealMenu,
-      provider.Homework,
+      provider.HomeworkProvider,
       provider.Gallery,
       provider.Feedback,
       provider.AttendanceProvider,
       provider.Message,
    ]
 })
-
 
 export class AppModule {
 }

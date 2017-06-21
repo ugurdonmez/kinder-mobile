@@ -18,6 +18,7 @@ import {Parents} from "../../../providers/parents";
 import {TeacherParentPage} from "../teacher-parent/teacher-parent.page";
 import {TeacherAttendancePage} from "../attendance/attendance";
 import {TeacherWeeklyMealMenuPage} from "../weekly-meal-menu/weekly-meal-menu";
+import {TeacherHomeworkPage} from "../homework/teacher-homework";
 
 @Component({
    selector: 'page-teacher-home',
@@ -151,5 +152,19 @@ export class TeacherHomePage implements OnInit {
       console.log(classStr)
 
       this.navCtrl.push(TeacherAttendancePage, {parentsStr, classStr});
+   }
+
+   private openHomeworkClicked(): void {
+      console.log('open teacher homework')
+
+      let parentsStr: string = JSON.stringify(this.parents)
+      console.log('parents json')
+      console.log(parentsStr)
+
+      let classStr: string = JSON.stringify(this.class)
+      console.log('class str')
+      console.log(classStr)
+
+      this.navCtrl.push(TeacherHomeworkPage, {parentsStr, classStr});
    }
 }

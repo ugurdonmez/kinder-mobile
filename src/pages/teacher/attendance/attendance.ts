@@ -73,7 +73,7 @@ export class TeacherAttendancePage implements OnInit {
       let dateKey:string = 'dateKey' + this.myDate.split('T')[0]
 
       let attendanceModel: AttendanceModel = new AttendanceModel()
-      
+
       attendanceModel.parentId = this.parents[this.selectedStudent].id
       attendanceModel.classId =this.class.id
       attendanceModel.hereStatus = this.here
