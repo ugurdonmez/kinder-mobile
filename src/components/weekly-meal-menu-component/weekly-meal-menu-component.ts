@@ -110,9 +110,6 @@ export class WeeklyMealMenuComponent implements OnInit {
       // console.log(week)
       week.then(subscribedWeek => {
          this.weeklyMealMenuProvider.addMenuImage(Camera.PictureSourceType.CAMERA, this.classId, subscribedWeek.date)
-            .then(()=>{
-               // this.loadWeeklyMeals()
-            })
 
       })
    }
