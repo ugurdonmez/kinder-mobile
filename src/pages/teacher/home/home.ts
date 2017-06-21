@@ -118,7 +118,7 @@ export class TeacherHomePage implements OnInit {
       this.navCtrl.push(TeacherGalleryPage);
    }
 
-   private openGWeeklyMealMenuClicked(): void {
+   private openWeeklyMealMenuClicked(): void {
       this.navCtrl.push(TeacherWeeklyMealMenuPage, {
          _class: this.class
       });
