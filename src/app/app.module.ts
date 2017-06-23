@@ -94,6 +94,8 @@ export function createTranslateLoader(http: Http) {
       page.TeacherWeeklyActivitiesPage,
       page.ParentAlbumsPage,
       page.ParentAlbumPage,
+      page.ParentWeeklyActivitiesPage,
+      page.ParentViewWeeklyActivityPage,
 
       // components
       cmp.HomeHeaderDirective,
@@ -120,6 +122,8 @@ export function createTranslateLoader(http: Http) {
       cmp.ParentPhotosGridComponent,
       cmp.ParentViewPhotoComponent,
       cmp.ParentAlbumsGridComponent,
+      cmp.ParentWeeklyActivitiesComponent,
+      cmp.ParentViewWeeklyActivityComponent,
    ],
    imports: [
       // NgCalendarModule,
@@ -183,6 +187,8 @@ export function createTranslateLoader(http: Http) {
       page.TeacherWeeklyActivitiesPage,
       page.ParentAlbumsPage,
       page.ParentAlbumPage,
+      page.ParentWeeklyActivitiesPage,
+      page.ParentViewWeeklyActivityPage,
    ],
    providers: [
       {provide: ErrorHandler, useClass: IonicErrorHandler},

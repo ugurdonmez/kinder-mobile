@@ -1,11 +1,5 @@
 
-<ion-grid class="weekly-activities-component">
-   <ion-row>
-      <button ion-button icon-left (click)="addWeeklyActivityPhoto()">
-         <ion-icon name="add-circle"></ion-icon>
-         {{"Add" | translate}}
-      </button>
-   </ion-row>
+<ion-grid class="parent-weekly-activities-component">
 
    <ion-row>
       <ion-col col-4 col-sm-4 col-md-3 col-lg-3 col-xl-2 *ngFor="let activity of weeklyActivities">

@@ -9,6 +9,11 @@ import {TeacherParentPage} from "../teacher-parent/teacher-parent.page";
 import {ParentCalendarPage} from "../calender/calendar";
 import {ParentGalleryPage} from "../gallery/gallery";
 import {ParentAttendancePage} from "../attendance/attendance";
+import {Parents} from "../../../providers/parents";
+import {Classes} from "../../../providers/classes";
+import {ParentModel} from "../../../models/parent-model";
+import {ParentWeeklyActivitiesPage} from "../weekly-activities/weekly-activities";
+import {ClassModel} from "../../../models/class-model";
 
 @Component({
    selector: 'page-teacher-home',
@@ -16,9 +21,21 @@ import {ParentAttendancePage} from "../attendance/attendance";
 })
 
 export class ParentHomePage implements OnInit {
-
+   private class: ClassModel;
+   private userId: string;
+   private parent: ParentModel;
    constructor(public navCtrl: NavController,
-               public authData: AuthData) {
+               public authData: AuthData,
+               private parentProvider: Parents,
+               private classProvider: Classes,
+   ) {
+      this.userId = this.authData.getUserId();
+      this.parentProvider.getParent(this.userId).then(parent => {
+         this.parent = parent
+         this.classProvider.getClass(this.parent.classId).then(_class => {
+            this.class = _class;
+         })
+      })
    }
 
    ngOnInit(): void {
@@ -32,6 +49,12 @@ export class ParentHomePage implements OnInit {
    private openClassWallClicked(classId): void {
       console.log('opening class wall with class id:' + classId)
       this.navCtrl.push(ParentClassWallPage, {classId: classId})
+   }
+
+   private openWeeklyActivityPlanClicked(): void {
+      this.navCtrl.push(ParentWeeklyActivitiesPage, {
+         _class: this.class
+      });
    }
 
    private openCalendarClicked(): void {
