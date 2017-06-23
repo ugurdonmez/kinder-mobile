@@ -23,8 +23,6 @@ export class ParentViewPhotoPage implements OnInit {
       this.translate = translator.translatePipe;
       this.classId = navParams.get('classId');
       this.photo = navParams.get('photo');
-      console.log('TeacherViewPhotoPage photo is:')
-      console.log(this.photo)
    }
 
    ngOnInit(): void {

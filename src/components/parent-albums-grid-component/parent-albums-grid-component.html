@@ -1,0 +1,13 @@
+<ion-grid class="parent-albums-grid-component">
+   <ion-row>
+      <ion-col col-4 col-sm-4 col-md-3 col-lg-3 col-xl-2 *ngFor="let album of albums | async">
+         <div (click)="openAlbumPage(album)">
+            <div class='album-icon'>
+               <ion-icon name="images"></ion-icon>
+            </div>
+            <div class="icon-text">{{album.name}}</div>
+         </div>
+      </ion-col>
+   </ion-row>
+
+</ion-grid>
