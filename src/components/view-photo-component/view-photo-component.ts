@@ -45,9 +45,9 @@ export class ViewPhotoComponent implements OnInit {
       this.loadStudentsTaggedInThisImage()
       this.allAlbums = this.galleryProvider.getAllAlbums(this.classId)
       this.selectedAlbumId = this.photo.albumId
-      if (!!this.photo.albumId){
+      if (!this.photo.albumId){
          this.selectedAlbumId = ''
-         this.galleryProvider.updateAlbumOfImage(this.classId, this.photo.id, '')
+         this.onSelectedAlbumChange(null)
       }
    }
 
