@@ -14,6 +14,7 @@ import {Classes} from "../../../providers/classes";
 import {ParentModel} from "../../../models/parent-model";
 import {ParentWeeklyActivitiesPage} from "../weekly-activities/weekly-activities";
 import {ClassModel} from "../../../models/class-model";
+import {ParentWeeklyMealMenuPage} from "../weekly-meal-menu/weekly-meal-menu";
 
 @Component({
    selector: 'page-teacher-home',
@@ -53,6 +54,12 @@ export class ParentHomePage implements OnInit {
 
    private openWeeklyActivityPlanClicked(): void {
       this.navCtrl.push(ParentWeeklyActivitiesPage, {
+         _class: this.class
+      });
+   }
+
+   private openWeeklyMealMenuClicked(): void {
+      this.navCtrl.push(ParentWeeklyMealMenuPage, {
          _class: this.class
       });
    }
