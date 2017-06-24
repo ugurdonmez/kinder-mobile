@@ -5,7 +5,8 @@ import {Parents} from "../../providers/parents";
 import {TranslateService} from "ng2-translate";
 import {NavController} from "ionic-angular";
 import {ConversationModel} from "../../models/conversation-model";
-import {TeacherDialogPage} from "../../pages/teacher/dialog/dialog";
+import {Teachers} from "../../providers/teachers";
+import {ParentDialogPage} from "../../pages/parent/dialog/dialog";
 
 @Component({
    selector: 'inbox-dialogs-list',
@@ -16,22 +17,27 @@ import {TeacherDialogPage} from "../../pages/teacher/dialog/dialog";
 export class InboxDialogsListDirective implements OnInit {
    private translate: TranslateService;
    private conversations: Promise<ConversationModel[]>;
-   private parents: {};
+   private persons: {};
+   @Input() role: string;
 
    constructor(
       public translator: Translator,
       public navCtrl: NavController,
       private messageProvider: Message,
       private parentProvider: Parents,
+      private teacherProvider: Teachers,
    ) {
       this.translate = this.translator.translatePipe;
       this.conversations = this.messageProvider.getAllConversations();
       this.conversations.then(convs => {
          convs.forEach(conv => {
-            this.loadParent(conv.id)
+            if(this.role=='teacher')//teachers can message to only parents
+               this.loadParent(conv.id)
+            else//parents can message to only teachers
+               this.loadTeacher(conv.id)
          })
       })
-      this.parents = {};
+      this.persons = {};
    }
 
    ngOnInit(): void {
@@ -39,7 +45,7 @@ export class InboxDialogsListDirective implements OnInit {
    }
 
    private openDialog(dialogPartnerId){
-      this.navCtrl.push(TeacherDialogPage, {dialogPartnerId: dialogPartnerId});
+      this.navCtrl.push(ParentDialogPage, {dialogPartnerId: dialogPartnerId});
    }
 
    private loadParent(parentId: string){
@@ -49,11 +55,20 @@ export class InboxDialogsListDirective implements OnInit {
       this.parentProvider.getParent(parentId).then(subs => {
          console.log('subs is:')
          console.log(subs)
-         this.parents[parentId] = {}
-         this.parents[parentId].parentName = subs.parentName
-         this.parents[parentId].parentSurname = subs.parentSurname
-         this.parents[parentId].profileImageUrl = subs.profileImageUrl
+         this.persons[parentId] = {}
+         this.persons[parentId].parentName = subs.parentName
+         this.persons[parentId].parentSurname = subs.parentSurname
+         this.persons[parentId].profileImageUrl = subs.profileImageUrl
       })
    }
 
+   private loadTeacher(id: string) {
+      this.teacherProvider.getTeacher(id).then(teacher => {
+         this.persons[id] = {}
+         this.persons[id].name = teacher.name
+         this.persons[id].surname = teacher.surname
+         this.persons[id].profileImageUrl = teacher.profileImageUrl
+
+      })
+   }
 }

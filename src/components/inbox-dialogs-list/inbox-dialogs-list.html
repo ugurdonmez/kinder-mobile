@@ -3,13 +3,13 @@
    <button ion-item *ngFor="let person of conversations | async" (click)="openDialog(person.id)">
       <div item-left>
          <ion-avatar item-left>
-            <img src="{{parents[person.id]?.profileImageUrl}}"/>
+            <img src="{{persons[person.id]?.profileImageUrl}}"/>
          </ion-avatar>
       </div>
       <div>
          <h2>
             <ion-icon name="alert" color="danger" [hidden]="!(person.isUnread)"></ion-icon>
-            Name: {{parents[person.id]?.parentName}} {{parents[person.id]?.parentSurname}}
+            Name: {{persons[person.id]?.name}} {{persons[person.id]?.surname}}
          </h2>
       </div>
       <div item-right>
