@@ -21,6 +21,11 @@
             <div class="parentHome__iconText">Message</div>
           </button>
 
+          <button class="parentHome__menuFlexItem" (click)="openClassWallClicked(class.id)">
+            <ion-icon name="ios-paper"></ion-icon>
+            <div class="parentHome__iconText">Class Wall</div>
+          </button>
+
           <button class="parentHome__menuFlexItem" (click)="openWeeklyMealMenuClicked()">
             <ion-icon name="ios-pizza"></ion-icon>
             <div class="parentHome__iconText">Weekly Menu</div>
@@ -58,12 +63,5 @@
         </div>
       </ion-col>
     </ion-row>
-
-    <ion-buttons>
-      <button ion-button (click)="openClassWallClicked('-Ketn4qOsNQOA0vSjZRC')">
-        {{'Open A Class Wall<br>
-        (This button will be placed on every class page)' | translate}}
-      </button>
-    </ion-buttons>
   </ion-grid>
 </ion-content>
