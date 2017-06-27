@@ -22,8 +22,8 @@ export class AttendanceProvider {
          })
    }
 
-   public getStudentAtendance(parentId: string, attendanceDay: string): Promise<AttendanceModel> {
-      return this.af.database.object("/attendance/" + parentId + attendanceDay)
+   public getStudentAtendance(parentId: string, attendanceDateKey: string): Promise<AttendanceModel> {
+      return this.af.database.object("/attendance/" + parentId + attendanceDateKey)
          .map(obj => {
             return this.castObjectToModel(obj)
          })
