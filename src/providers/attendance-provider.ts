@@ -22,6 +22,15 @@ export class AttendanceProvider {
          })
    }
 
+   public getStudentAtendance(parentId: string, attendanceDateKey: string): Promise<AttendanceModel> {
+      return this.af.database.object("/attendance/" + parentId + attendanceDateKey)
+         .map(obj => {
+            return this.castObjectToModel(obj)
+         })
+         .first()
+         .toPromise()
+   }
+
    public markAllStudentsHere(classId: string, date: string): void {
       // this should be called by the teacher. marks all the students as here.
       // also it overwrites "absent" students as all "here".
