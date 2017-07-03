@@ -129,6 +129,7 @@ export function createTranslateLoader(http: Http) {
       cmp.ParentViewWeeklyActivityComponent,
       cmp.ParentWeeklyMealMenuComponent,
       cmp.ParentViewWeeklyMealMenuComponent,
+      cmp.ParentCalendarComponent,
    ],
    imports: [
       // NgCalendarModule,

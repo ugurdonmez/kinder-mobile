@@ -68,7 +68,7 @@ export class ParentHomePage implements OnInit {
       console.log('open calendar')
 
       // let studentStr: string = JSON.stringify(this.parents[this.selectedStudent])
-      let studentStr: string = ""
+      let studentStr: string = "{}"
 
       this.navCtrl.push(ParentCalendarPage, {studentStr})
    }
