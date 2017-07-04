@@ -3,10 +3,10 @@ import { NgModule, ErrorHandler, LOCALE_ID } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp} from './app.component';
 
-import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
+import {AuthProviders, AuthMethods, AngularFireModule} from 'angularfire2';
 
 // Localization
-import { TranslateModule, TranslateStaticLoader, TranslateLoader } from 'ng2-translate/ng2-translate';
+import { TranslateModule,  TranslateLoader } from '@ngx-translate/core';
 import { Translator} from './translator';
 
 // Importing pages

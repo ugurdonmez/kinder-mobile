@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
 
+import { Injectable } from '@angular/core';
 import { AngularFire } from 'angularfire2';
 import {AuthData} from "./auth-data";
 import {ReminderModel} from "../models/reminder-model";
