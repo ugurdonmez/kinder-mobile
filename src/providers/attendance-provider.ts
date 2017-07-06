@@ -4,7 +4,7 @@ import {FirebaseApp} from 'angularfire2';
 
 import {Parents} from "./parents";
 import {AttendanceModel} from "../models/attendance-model";
-import {AngularFireDatabase} from "angularfire2/database";
+import {AngularFireDatabase, FirebaseObjectObservable} from "angularfire2/database";
 
 @Injectable()
 export class AttendanceProvider {
@@ -27,12 +27,22 @@ export class AttendanceProvider {
 
    public getStudentAtendance(parentId: string, attendanceDateKey: string): Promise<AttendanceModel> {
 
-      this.afd.list("/attendance/" + parentId + attendanceDateKey)
+      return this.afd.list("/attendance/" + parentId + attendanceDateKey)
          .map(obj => {
             return this.castObjectToModel(obj)
          })
          .first()
+         .toPromise()
    }
+
+   // TODO: ugur try to use this methodß
+   public getStudentAttendanceObservable(parentId: string, attendanceDateKey: string): FirebaseObjectObservable<AttendanceModel> {
+      return this.afd.list("/attendance/" + parentId + attendanceDateKey)
+         .map(obj => {
+            return this.castObjectToModel(obj)
+         })
+   }
+   
    //
    // public markAllStudentsHere(classId: string, date: string): void {
    //    // this should be called by the teacher. marks all the students as here.
