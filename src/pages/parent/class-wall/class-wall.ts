@@ -4,7 +4,7 @@ import {NavParams} from 'ionic-angular';
 import {Classes} from "../../providers/classes";
 import {SchoolAdminEditClassPage} from "../school-admin-edit-class/school-admin-edit-class";
 import {Teachers} from "../../providers/teachers";
-import {TranslateService} from "ng2-translate";
+import {TranslateService} from "@ngx-translate/core";
 import {AuthData} from "../../providers/auth-data";
 import {InviteOthersPage} from "../invite-others/invite-others";
 import {Parents} from "../../providers/parents";

@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Translator} from "../../app/translator";
 import {Message} from "../../providers/message";
 import {Parents} from "../../providers/parents";
-import {TranslateService} from "ng2-translate";
+import {TranslateService} from "@ngx-translate/core";
 import {NavController} from "ionic-angular";
 import {ConversationModel} from "../../models/conversation-model";
 import {Teachers} from "../../providers/teachers";

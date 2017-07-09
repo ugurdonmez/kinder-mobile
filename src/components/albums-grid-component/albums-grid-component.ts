@@ -3,7 +3,7 @@ import {NavController} from 'ionic-angular';
 
 import {SchoolAdminEditClassPage} from "../school-admin-edit-class/school-admin-edit-class";
 import {Translator} from "../../app/translator";
-import {TranslateService} from "ng2-translate";
+import {TranslateService} from "@ngx-translate/core";
 import {InviteOthersPage} from "../invite-others/invite-others";
 import {TeacherViewPhotoPage} from "../../pages/teacher/view-photo/view-photo";
 import {ImageModel} from "../../models/image-model";

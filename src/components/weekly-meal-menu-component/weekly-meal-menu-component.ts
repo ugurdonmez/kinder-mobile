@@ -3,7 +3,7 @@ import {Component, OnInit, Input} from '@angular/core';
 import {AlertController, NavController} from "ionic-angular";
 import moment from 'moment';
 import {Translator} from "../../app/translator";
-import {TranslateService} from "ng2-translate";
+import {TranslateService} from "@ngx-translate/core";
 import {WeeklyMealMenu} from "../../providers/weeklymealmenu";
 import {Camera} from "ionic-native";
 import {WeeklyMealMenuModel} from "../../models/weekly-meal-menu-model";

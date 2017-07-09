@@ -3,7 +3,7 @@ import {Branches} from "../../providers/branches";
 import {Translator} from "../../app/translator";
 import {ClassModel} from "../../models/class-model";
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
-import {TranslateService} from "ng2-translate";
+import {TranslateService} from "@ngx-translate/core";
 import {TeacherModel} from "../../models/teacher-model";
 import {NavController, NavParams, AlertController} from "ionic-angular";
 import {Classes} from "../../providers/classes";

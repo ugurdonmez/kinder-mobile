@@ -9,7 +9,7 @@ import {Camera} from "ionic-native";
 import {AlertController} from "ionic-angular";
 import * as firebase from 'firebase';
 import {Translator} from "../app/translator";
-import {TranslateService} from "ng2-translate";
+import {TranslateService} from "@ngx-translate/core";
 
 @Injectable()
 export class Teachers {

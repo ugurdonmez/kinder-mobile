@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Gallery} from "../../../providers/gallery";
-import {TranslateService} from "ng2-translate";
+import {TranslateService} from "@ngx-translate/core";
 import {Translator} from "../../../app/translator";
 import {ImageModel} from "../../../models/image-model";
 import {Parents} from "../../../providers/parents";
