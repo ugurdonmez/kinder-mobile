@@ -1,0 +1,44 @@
+
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{"Homework" | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-row>
+    <ion-card  *ngFor="let hw of homeworks">
+      <ion-card-content>
+        <ion-list>
+          <ion-item>Subject: {{hw.subject}}</ion-item>
+
+          <ion-item>Content: {{hw.content}}</ion-item>
+
+          <ion-item>Created: {{hw.creationDate | date:'dd/MM/yyyy'}}</ion-item>
+
+          <ion-item>Due: {{hw.dueDate | date:'dd/MM/yyyy'}}</ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </ion-row>
+
+  <ion-row>
+    <div class="parentAttendance__student-list">
+      <button class="parentAttendance__studentButton parentHome__studentButton--selected">
+
+        <div class="avatar-circle">
+          <img src="{{parent.profileImageUrl}}">
+        </div>
+
+        <div>
+          {{parent.studentName}}
+        </div>
+
+        <div>
+          {{parent.studentSurname}}
+        </div>
+      </button>
+    </div>
+  </ion-row>
+</ion-content>

@@ -15,6 +15,7 @@ import {ParentModel} from "../../../models/parent-model";
 import {ParentWeeklyActivitiesPage} from "../weekly-activities/weekly-activities";
 import {ClassModel} from "../../../models/class-model";
 import {ParentWeeklyMealMenuPage} from "../weekly-meal-menu/weekly-meal-menu";
+import {ParentHomeworkPage} from "../homework/parent-homework";
 
 @Component({
    selector: 'page-teacher-home',
@@ -79,5 +80,17 @@ export class ParentHomePage implements OnInit {
 
    private openAttendanceClicked(): void {
       this.navCtrl.push(ParentAttendancePage);
+   }
+
+   private openHomeworkClicked(): void {
+      // let parentsStr: string = JSON.stringify(this.parents)
+      // console.log('parents json')
+      // console.log(parentsStr)
+      //
+      // let classStr: string = JSON.stringify(this.class)
+      // console.log('class str')
+      // console.log(classStr)
+
+      this.navCtrl.push(ParentHomeworkPage, {parent:this.parent, _class:this.class});
    }
 }
