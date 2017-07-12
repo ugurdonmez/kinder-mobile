@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 
-import { AngularFire } from 'angularfire2';
+import { FirebaseApp } from 'angularfire2';
+import { AngularFireDatabase } from 'angularfire2/database';
 import {ClassModel} from '../models/class-model';
 import { AuthData } from './auth-data';
 
@@ -10,17 +11,17 @@ export class Classes {
 
     classes: any;
 
-    constructor(public af: AngularFire, public authData: AuthData){
+    constructor(public af: FirebaseApp, public authData: AuthData, private afd: AngularFireDatabase){
         this.classes = af.database.list('/classes');
     }
 
     public getClass(classId: string): Promise<ClassModel> {
-        return this.af.database.object('/classes/' + classId)
+        this.afd.list('/classes/' + classId)
             .map(obj => {
                 return this.castObjectToModel(obj)
             })
             .first()
-            .toPromise()
+            
     }
 
     public addClass(_class) {
@@ -38,7 +39,7 @@ export class Classes {
     }
 
     public updateClass(_class) {
-        this.af.database.object('/classes/'+_class.id).set(_class);
+        this.af.database().ref('/classes/'+_class.id).set(_class);
     }
 
     getClassesOfSchool(schoolId: string): Promise<ClassModel[]> {
@@ -56,7 +57,7 @@ export class Classes {
     }
 
     deleteClass(classId: string){
-        this.af.database.object('/classes/' + classId).remove();
+        this.af.database().ref('/classes/' + classId).remove();
     }
 
     public getClassesOfTeacher(teacherId: string): Promise<ClassModel[]>{

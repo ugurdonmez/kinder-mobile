@@ -32,6 +32,7 @@ export class AttendanceProvider {
             return this.castObjectToModel(obj)
          })
          .first()
+         
    }
    //
    // public markAllStudentsHere(classId: string, date: string): void {

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/map';
 
-import {AngularFire} from 'angularfire2';
+import {FirebaseApp} from 'angularfire2';
 import {TeacherModel} from '../models/teacher-model';
 import {AuthData} from './auth-data';
 
@@ -18,7 +18,7 @@ export class Teachers {
    teachers: any;
    private translate: TranslateService;
 
-   constructor(public af: AngularFire,
+   constructor(public af: FirebaseApp,
                public authData: AuthData,
                private alertCtrl: AlertController,
                public translator: Translator) {
@@ -62,16 +62,16 @@ export class Teachers {
 
    public registerThisUserAsTeacher(teacher: TeacherModel) {
       let userId = this.authData.getUserId();
-      this.af.database.object('/teachers/' + userId).set(teacher);
+      this.af.database().ref('/teachers/' + userId).set(teacher);
       return userId;
    }
 
    deleteTeacher(teacherId: string) {
-      this.af.database.object('/teachers/' + teacherId).remove();
+      this.af.database().ref('/teachers/' + teacherId).remove();
    }
 
    public updateTeacher(teacher: TeacherModel) {
-      this.af.database.object('/teachers/' + teacher.id).set(teacher);
+      this.af.database().ref('/teachers/' + teacher.id).set(teacher);
    }
 
    public newPhoto(teacherId: string) {
@@ -128,7 +128,7 @@ export class Teachers {
          var profilePictureRef = firebase.storage().ref('/teacher-images/namedByTeacherId/').child(teacherId + "_" + new Date().getDate() + " @ " + new Date().getTime() + ".png");
          profilePictureRef.putString(imageData, 'base64', {contentType: 'image/png'})
             .then((savedPicture) => {
-               this.af.database.object('/teachers/' + teacherId + "/profileImageUrl")
+               this.af.database().ref('/teachers/' + teacherId + "/profileImageUrl")
                   .set(savedPicture.downloadURL);
             });
       }, (err) => {

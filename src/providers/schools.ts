@@ -1,7 +1,7 @@
 import {Injectable, Component} from '@angular/core';
 import 'rxjs/add/operator/map';
 
-import {AngularFire} from 'angularfire2';
+import {FirebaseApp} from 'angularfire2';
 import {SchoolModel} from '../models/school-model';
 import {AuthData} from './auth-data';
 import {Camera} from "ionic-native";
@@ -20,7 +20,7 @@ export class Schools {
    schools: any;
    private translate: TranslateService;
 
-   constructor(public af: AngularFire,
+   constructor(public af: FirebaseApp,
                public authData: AuthData,
                private alertCtrl: AlertController,
                public translator: Translator,
@@ -98,11 +98,11 @@ export class Schools {
    }
 
    public updateSchool(school: SchoolModel) {
-      this.af.database.object('/schools/' + school.id).set(school);
+      this.af.database().ref('/schools/' + school.id).set(school);
    }
 
    deleteSchool(schoolId: string) {
-      this.af.database.object('/schools/' + schoolId).remove();
+      this.af.database().ref('/schools/' + schoolId).remove();
       var classesOfSchool = this.af.database.list('/classes', {
          query: {
             orderByChild: 'schoolId',
@@ -150,7 +150,7 @@ export class Schools {
          var profilePictureRef = firebase.storage().ref('/school-images/namedBySchoolId/').child(schoolId + "_" + new Date().getDate() + " @ " + new Date().getTime() + ".png");
          profilePictureRef.putString(imageData, 'base64', {contentType: 'image/png'})
             .then((savedPicture) => {
-               this.af.database.object('/schools/' + schoolId + "/logoURL")
+               this.af.database().ref('/schools/' + schoolId + "/logoURL")
                   .set(savedPicture.downloadURL);
             });
       }, (err) => {

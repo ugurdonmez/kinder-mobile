@@ -3,7 +3,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/first';
 
-import {AngularFire} from 'angularfire2';
+import {FirebaseApp} from 'angularfire2';
 import {BranchModel} from '../models/branch-model';
 import {AuthData} from './auth-data';
 
@@ -17,11 +17,11 @@ import {Schools} from "./schools";
 
 @Injectable()
 export class Branches {
-
+   
    branches: any;
    private translate: TranslateService;
 
-   constructor(public af: AngularFire,
+   constructor(public af: FirebaseApp,
                public authData: AuthData,
                private alertCtrl: AlertController,
                public translator: Translator,
@@ -51,7 +51,7 @@ export class Branches {
    }
 
    public getBranch(branchId: string): Promise<BranchModel> {
-      return this.af.database.object('/branches/' + branchId).map(obj => {
+      return this.af.database.('/branches/' + branchId).map(obj => {
          var branch = this.castObjectToBranchModel(obj)
          return branch
       })
@@ -75,11 +75,11 @@ export class Branches {
    }
 
    public updateBranch(branch: BranchModel) {
-      this.af.database.object('/branches/' + branch.id).set(branch);
+      this.af.database().ref('/branches/' + branch.id).set(branch);
    }
 
    deleteBranch(branchId: string) {
-      this.af.database.object('/branches/' + branchId).remove();
+      this.af.database().ref('/branches/' + branchId).remove();
       var schoolsOfBranch = this.af.database.list('/schools', {
          query: {
             orderByChild: 'branchId',
@@ -127,7 +127,7 @@ export class Branches {
          var profilePictureRef = firebase.storage().ref('/branch-images/namedById/').child(branchId + "_" + new Date().getDate() + " @ " + new Date().getTime() + ".png");
          profilePictureRef.putString(imageData, 'base64', {contentType: 'image/png'})
             .then((savedPicture) => {
-               this.af.database.object('/branches/' + branchId + "/logoURL")
+               this.af.database().ref('/branches/' + branchId + "/logoURL")
                   .set(savedPicture.downloadURL);
             });
       }, (err) => {

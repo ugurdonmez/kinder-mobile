@@ -1,13 +1,13 @@
 
 import { Injectable } from '@angular/core';
-import { AngularFire } from 'angularfire2';
+import { FirebaseApp } from 'angularfire2';
 import {AuthData} from "./auth-data";
 import {ReminderModel} from "../models/reminder-model";
 
 @Injectable()
 export class Reminder {
 
-    constructor(public af: AngularFire, private authDataProvider: AuthData){
+    constructor(public af: FirebaseApp, private authDataProvider: AuthData){
     }
 
     public createReminderForThisUser(message, datetime){
@@ -44,7 +44,7 @@ export class Reminder {
 
     // deletes a reminder of a user, given userId.
     public deleteReminder(userId, reminderId){
-        return this.af.database.object("/user-reminders/" + userId + "/" + reminderId).remove();
+        return this.af.database().ref("/user-reminders/" + userId + "/" + reminderId).remove();
     }
 
     // Conversion: FirebaseListObservable -> Model

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { AngularFire } from 'angularfire2';
+import { FirebaseApp } from 'angularfire2';
 import {AuthData} from "./auth-data";
 import {Camera} from "ionic-native";
 import * as firebase from 'firebase';
@@ -10,7 +10,7 @@ import {PromiseObservable} from "rxjs/observable/PromiseObservable";
 @Injectable()
 export class WeeklyMealMenu {
 
-    constructor(public af: AngularFire, private authDataProvider: AuthData){
+    constructor(public af: FirebaseApp, private authDataProvider: AuthData){
     }
 
     // uploads the image. upload method is chosen by imageSource parameter.
@@ -46,7 +46,7 @@ export class WeeklyMealMenu {
 
     // removes menu image link from db. note: .png image file is not deleted from firebase storage. only the link is removed.
     public deleteMenuImage(classId:string, date:string){
-        this.af.database.list("/classes/" + classId + "/weeklyMenu/"+date).remove();
+        this.af.database().ref("/classes/" + classId + "/weeklyMenu/"+date).remove();
     }
 
     // Conversion: FirebaseListObservable -> Model

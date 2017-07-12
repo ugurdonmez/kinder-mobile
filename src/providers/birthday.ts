@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { AngularFire } from 'angularfire2';
+import { FirebaseApp } from 'angularfire2';
 import {AuthData} from "./auth-data";
 import {Parents} from "./parents";
 import {ParentModel} from "../models/parent-model";
@@ -8,7 +8,7 @@ import {ParentModel} from "../models/parent-model";
 @Injectable()
 export class Birthday {
 
-    constructor(public af: AngularFire, private authDataProvider: AuthData, private parentsProvider: Parents){
+    constructor(public af: FirebaseApp, private authDataProvider: AuthData, private parentsProvider: Parents){
     }
 
     // TODO if we use subscribe, this function can't return. if not subscribe, we can't query the birthdays.

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 
-import { AngularFire } from 'angularfire2';
+import { FirebaseApp } from 'angularfire2';
 import {ParentModel} from '../models/parent-model';
 import { AuthData } from './auth-data';
 import {AlertController} from "ionic-angular";
@@ -16,7 +16,7 @@ export class Parents {
     parents: any;
     private translate: TranslateService;
 
-    constructor(public af: AngularFire, public authData: AuthData, private alertCtrl: AlertController,
+    constructor(public af: FirebaseApp, public authData: AuthData, private alertCtrl: AlertController,
                 public translator: Translator){
         this.parents = af.database.list('/parents');
         this.translate = translator.translatePipe;
@@ -33,12 +33,12 @@ export class Parents {
 
     public addParent(parent: ParentModel) {
         let userId = this.authData.getUserId();
-        this.af.database.object('/parents/'+userId).set(parent);
+        this.af.database().ref('/parents/'+userId).set(parent);
         return userId;
     }
 
     public updateParent(parent: ParentModel) {
-        this.af.database.object('/parents/'+parent.id).set(parent);
+        this.af.database().ref('/parents/'+parent.id).set(parent);
     }
 
     newPhoto(parentId: string){
@@ -79,7 +79,7 @@ export class Parents {
             var profilePictureRef = firebase.storage().ref('/parent-images/namedByParentId/').child(parentId+"_"+new Date().getDate() + " @ " + new Date().getTime() + ".png");
             profilePictureRef.putString(imageData, 'base64', {contentType: 'image/png'})
                 .then((savedPicture) => {
-                    this.af.database.object('/parents/'+parentId+"/profileImageUrl")
+                    this.af.database().ref('/parents/'+parentId+"/profileImageUrl")
                         .set(savedPicture.downloadURL);
                 });
         }, (err) => {

@@ -3,7 +3,7 @@ import {Component} from '@angular/core';
 import {Platform} from 'ionic-angular';
 import {StatusBar, Splashscreen} from 'ionic-native';
 
-import {AngularFire} from 'angularfire2';
+import {FirebaseApp} from 'angularfire2';
 import {LoginPage} from '../pages/login/login';
 import {AuthData} from '../providers/auth-data';
 import {BranchAdminHomePage} from "../pages/branch-admin/home/home";
@@ -20,7 +20,7 @@ export class MyApp {
    rootPage: any;
 
    constructor(platform: Platform,
-               af: AngularFire,
+               af: FirebaseApp,
                private authData: AuthData) {
 
       console.log('my app constructor called')

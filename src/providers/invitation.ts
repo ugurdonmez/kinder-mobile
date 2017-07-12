@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 
-import { AngularFire } from 'angularfire2';
+import { FirebaseApp } from 'angularfire2';
 import {AuthData} from "./auth-data";
 import {InvitationModel} from "../models/invitation-model";
 
 @Injectable()
 export class Invitation {
 
-    constructor(public af: AngularFire, private authDataProvider: AuthData){
+    constructor(public af: FirebaseApp, private authDataProvider: AuthData){
     }
 
     // adds invitation to class and returns invitationId
@@ -46,7 +46,7 @@ export class Invitation {
 
     // deletes an invitation, given classId and invitationId.
     public deleteInvitation(classId, invitationId){
-        return this.af.database.object("/classes/" + classId + "/invitations/" + invitationId).remove();
+        return this.af.database().ref("/classes/" + classId + "/invitations/" + invitationId).remove();
     }
 
     // Conversion: FirebaseListObservable -> Model

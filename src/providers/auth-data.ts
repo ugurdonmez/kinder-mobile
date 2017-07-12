@@ -1,16 +1,18 @@
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 
-import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
+import { FirebaseApp } from 'angularfire2';
+import { FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 import {UserModel} from "../models/user-model";
-
+import { AngularFireDatabase } from 'angularfire2/database';
 
 @Injectable()
 export class AuthData {
 
     public user: any;
 
-    constructor(public af: AngularFire) {
+    constructor(public af: FirebaseApp,private afd: AngularFireDatabase) {
         af.auth.subscribe( user => {
             if (user) {
                 this.user = user;
@@ -33,7 +35,7 @@ export class AuthData {
     }
 
     logoutUser(): any {
-        return this.af.auth.logout();
+        return this.afAuth.auth.signOut();
     }
 
     signupUser(newEmail: string, newPassword: string): any {
@@ -64,7 +66,7 @@ export class AuthData {
             }
             else{ // // proceed if mail is not registered or invited yet
                 console.log('invitation successful')
-                this.af.database.list('/invited-users/').push(invitationJson);
+                this.afd.list('/invited-users/').push(invitationJson);
                 this.af.database.list('/all-registered-emails/').push({email: invitationJson.email});
             }
         })
@@ -79,22 +81,22 @@ export class AuthData {
             }
         }).subscribe(snapshots => {
             snapshots.forEach(userInvitation => {
-                this.af.database.object('/users/' + this.getUserId() + '/role').set(userInvitation.role);
+                this.af.database().ref('/users/' + this.getUserId() + '/role').set(userInvitation.role);
                 if (userInvitation.role == 'school-admin'){
-                    this.af.database.object('/users/' + this.getUserId() + '/branchId').set(userInvitation.branchId);
-                    this.af.database.object('/users/' + this.getUserId() + '/branchAdminId').set(userInvitation.branchAdminId);
+                    this.af.database().ref('/users/' + this.getUserId() + '/branchId').set(userInvitation.branchId);
+                    this.af.database().ref('/users/' + this.getUserId() + '/branchAdminId').set(userInvitation.branchAdminId);
                 }
                 else if (userInvitation.role == 'teacher'){
-                    this.af.database.object('/users/' + this.getUserId() + '/schoolId').set(userInvitation.schoolId);
-                    this.af.database.object('/users/' + this.getUserId() + '/branchAdminId').set(userInvitation.branchAdminId);
-                    this.af.database.object('/users/' + this.getUserId() + '/schoolAdminId').set(userInvitation.schoolAdminId);
+                    this.af.database().ref('/users/' + this.getUserId() + '/schoolId').set(userInvitation.schoolId);
+                    this.af.database().ref('/users/' + this.getUserId() + '/branchAdminId').set(userInvitation.branchAdminId);
+                    this.af.database().ref('/users/' + this.getUserId() + '/schoolAdminId').set(userInvitation.schoolAdminId);
                 }
                 else if (userInvitation.role == 'parent'){
-                    this.af.database.object('/users/' + this.getUserId() + '/classId').set(userInvitation.classId);
-                    this.af.database.object('/users/' + this.getUserId() + '/branchAdminId').set(userInvitation.branchAdminId);
-                    this.af.database.object('/users/' + this.getUserId() + '/schoolAdminId').set(userInvitation.schoolAdminId);
+                    this.af.database().ref('/users/' + this.getUserId() + '/classId').set(userInvitation.classId);
+                    this.af.database().ref('/users/' + this.getUserId() + '/branchAdminId').set(userInvitation.branchAdminId);
+                    this.af.database().ref('/users/' + this.getUserId() + '/schoolAdminId').set(userInvitation.schoolAdminId);
                 }
-                this.af.database.object('/invited-users/' + userInvitation.$key).remove(); // remove invitation
+                this.af.database().ref('/invited-users/' + userInvitation.$key).remove(); // remove invitation
             })
         });
     }
@@ -103,7 +105,7 @@ export class AuthData {
        if (!userId){
           var userId:string = this.getUserId();
        }
-        return this.af.database.object('/users/'+userId)
+        return this.af.database().ref('/users/'+userId)
             .map(obj => {
                 return this.castObjectToModel(obj, this.getUserEmail())
             })

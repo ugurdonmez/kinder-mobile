@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 
-import { AngularFire } from 'angularfire2';
+import { FirebaseApp } from 'angularfire2';
 import {AuthData} from "./auth-data";
 import {ConversationModel} from "../models/conversation-model";
 import {ClassWallModel} from "../models/class-wall-model";
 import {MessageModel} from "../models/message-model";
+import { AngularFireDatabase } from 'angularfire2/database';
 
 @Injectable()
 export class Message {
     private userId: string;
 
-    constructor(public af: AngularFire, private authData: AuthData){
+    constructor(public af: FirebaseApp, private authData: AuthData, private afd: AngularFireDatabase){
         this.userId = this.authData.getUserId();
     }
 
@@ -38,16 +39,16 @@ export class Message {
     // TODO we can add pagination
     // TODO refactor
     public getClassWall(classId: string): Promise<ClassWallModel>{
-        return this.af.database.object("classes/" + classId + "/wall")
+        this.afd.list("classes/" + classId + "/wall")
             .map(obj => {
                 return this.castClassWallObjectToModel(obj)
             })
             .first()
-            .toPromise()
+            
     }
 
    public getMessagesOfClassWall(classId: string):Promise<MessageModel[]>{
-      return this.af.database.list("classes/" + classId + "/wall" + "/conversation")
+      this.af.database.list("classes/" + classId + "/wall" + "/conversation")
          .map(obj => {
             return this.castMessageListToModel(obj)
          })
@@ -57,12 +58,12 @@ export class Message {
 
     //sets class wall unread for all users
     private setClassWallUnreadForAll(classId: string): void{
-        this.af.database.object("classes/" + classId + "/wall" + "/wallRead").remove(); // sets class wall unread at all users
+        this.af.database().ref("classes/" + classId + "/wall" + "/wallRead").remove(); // sets class wall unread at all users
     }
 
     //sets class wall as read
     public setClassWallReadForThisUser(classId: string): void{
-        this.af.database.object("classes/" + classId + "/wall" + "/wallRead/" + this.userId).set(true)
+        this.af.database().ref("classes/" + classId + "/wall" + "/wallRead/" + this.userId).set(true)
     }
 
     //returns if class wall is read for this user or not
@@ -145,17 +146,17 @@ export class Message {
 
     // deletes one message from the conversation.
     deleteMessage(interactionUserId: string, messageId: string): void{
-        this.af.database.object("user-messages/" + this.userId + "/" + interactionUserId + "/conversation"+ messageId).remove();
+        this.af.database().ref("user-messages/" + this.userId + "/" + interactionUserId + "/conversation"+ messageId).remove();
     }
 
     // call this when user marks a dialog as unread, or, when user sends a message.
     public setDialogUnread(receiverUserId: string, senderUserId: string): void{
-        this.af.database.object("user-messages/" + receiverUserId + "/" + senderUserId + "/isUnread").set(true)
+        this.af.database().ref("user-messages/" + receiverUserId + "/" + senderUserId + "/isUnread").set(true)
     }
 
     // call this when user reads an unread message
     public setDialogRead(interactionUserId: string): void{
-        this.af.database.object("user-messages/" + this.userId + "/" + interactionUserId + "/isUnread").set(false)
+        this.af.database().ref("user-messages/" + this.userId + "/" + interactionUserId + "/isUnread").set(false)
     }
 
     // Warning: this function is replaced by this.getConversation()
