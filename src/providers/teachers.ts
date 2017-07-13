@@ -10,6 +10,7 @@ import {AlertController} from "ionic-angular";
 import * as firebase from 'firebase';
 import {Translator} from "../app/translator";
 import {TranslateService} from "@ngx-translate/core";
+import {AngularFireDatabase} from "angularfire2/database/database";
 
 @Injectable()
 export class Teachers {
@@ -21,16 +22,17 @@ export class Teachers {
    constructor(public af: FirebaseApp,
                public authData: AuthData,
                private alertCtrl: AlertController,
-               public translator: Translator) {
-      this.teachers = af.database.list('/teachers');
+               public translator: Translator,
+               private afd: AngularFireDatabase
+   ) {
+      this.teachers = afd.list('/teachers');
       this.translate = translator.translatePipe;
    }
 
    public getTeacherByBranchAdminId(): Promise<TeacherModel[]> {
       var userId = this.authData.getUserId();
 
-      return this.af.database
-         .list('/teachers', {
+      return this.afd.list('/teachers', {
             query: {
                orderByChild: 'branchAdminId',
                equalTo: userId
@@ -44,8 +46,7 @@ export class Teachers {
    public getTeacherBySchoolAdminId(): Promise<TeacherModel[]> {
       var userId = this.authData.getUserId();
 
-      return this.af.database
-         .list('/teachers', {
+      return this.afd.list('/teachers', {
             query: {
                orderByChild: 'schoolAdminId',
                equalTo: userId
@@ -62,16 +63,16 @@ export class Teachers {
 
    public registerThisUserAsTeacher(teacher: TeacherModel) {
       let userId = this.authData.getUserId();
-      this.af.database().ref('/teachers/' + userId).set(teacher);
+      this.afd.object('/teachers/' + userId).set(teacher);
       return userId;
    }
 
    deleteTeacher(teacherId: string) {
-      this.af.database().ref('/teachers/' + teacherId).remove();
+      this.afd.object('/teachers/' + teacherId).remove();
    }
 
    public updateTeacher(teacher: TeacherModel) {
-      this.af.database().ref('/teachers/' + teacher.id).set(teacher);
+      this.afd.object('/teachers/' + teacher.id).set(teacher);
    }
 
    public newPhoto(teacherId: string) {
@@ -109,7 +110,7 @@ export class Teachers {
    }
 
    getTeachersOfSchool(schoolId: string):Promise<TeacherModel[]> {
-      return this.af.database.list('/teachers/', {
+      return this.afd.list('/teachers/', {
          query: {
             orderByChild: 'schoolId',
             equalTo: schoolId
@@ -128,7 +129,7 @@ export class Teachers {
          var profilePictureRef = firebase.storage().ref('/teacher-images/namedByTeacherId/').child(teacherId + "_" + new Date().getDate() + " @ " + new Date().getTime() + ".png");
          profilePictureRef.putString(imageData, 'base64', {contentType: 'image/png'})
             .then((savedPicture) => {
-               this.af.database().ref('/teachers/' + teacherId + "/profileImageUrl")
+               this.afd.object('/teachers/' + teacherId + "/profileImageUrl")
                   .set(savedPicture.downloadURL);
             });
       }, (err) => {
@@ -137,7 +138,7 @@ export class Teachers {
    }
 
    public getTeacher(teacherId: string):Promise<TeacherModel> {
-      return this.af.database.object('/teachers/' + teacherId)
+      return this.afd.object('/teachers/' + teacherId)
          .map(obj => {
             return this.castListToModel([obj])[0]
          })

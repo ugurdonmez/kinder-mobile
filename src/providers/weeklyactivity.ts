@@ -5,11 +5,12 @@ import {AuthData} from "./auth-data";
 import {Camera} from "ionic-native";
 import * as firebase from 'firebase';
 import {WeeklyActivityModel} from "../models/weekly-activity-model";
+import {AngularFireDatabase} from "angularfire2/database/database";
 
 @Injectable()
 export class WeeklyActivity {
 
-    constructor(public af: FirebaseApp, private authDataProvider: AuthData){
+    constructor(public afd: AngularFireDatabase, private authDataProvider: AuthData){
     }
 
     // uploads the image. upload method is chosen by imageSource parameter.
@@ -22,7 +23,7 @@ export class WeeklyActivity {
             var profilePictureRef = firebase.storage().ref('/activity-images/' + classId).child(new Date().getDate() + " @ " + new Date().getTime() + ".png");
             profilePictureRef.putString(imageData, 'base64', {contentType: 'image/png'})
                 .then((savedPicture) => {
-                    this.af.database().ref('/classes/'+classId+"/weeklyactivities/"+date)
+                    this.afd.object('/classes/'+classId+"/weeklyactivities/"+date)
                         .set(
                             savedPicture.downloadURL
                         );
@@ -34,7 +35,7 @@ export class WeeklyActivity {
 
     // returns url of requested activity image
     public getActivityImage(classId:string, date:string): Promise<WeeklyActivityModel> {
-        return this.af.database.object('/classes/'+classId+"/weeklyactivities/"+date)
+        return this.afd.object('/classes/'+classId+"/weeklyactivities/"+date)
             .map(obj => {
                 return this.castObjectToModel(obj)
             })
@@ -44,7 +45,7 @@ export class WeeklyActivity {
 
     // removes weekly activity image link from db. note: .png image file is not deleted from firebase storage. only the link is removed.
     public deleteActivityImage(classId:string, date:string){
-        this.af.database().ref("/classes/" + classId + "/weeklyactivities/"+date).remove();
+        this.afd.object("/classes/" + classId + "/weeklyactivities/"+date).remove();
     }
 
     // Conversion: FirebaseObjectObservable -> Model

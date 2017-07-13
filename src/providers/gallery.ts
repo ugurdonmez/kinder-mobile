@@ -16,7 +16,7 @@ export class Gallery {
     /////////////////// ALBUMS //////////////////////////////
     // creates a new empty album and returns albumId.
     public addAlbum(classId: string, albumName: string): string{
-        return this.af.database().ref("/classes/" + classId + "/gallery/albums").push(albumName).key;
+        return this.afd.list("/classes/" + classId + "/gallery/albums").push(albumName).key;
     }
 
     // returns list of albums
@@ -31,7 +31,7 @@ export class Gallery {
 
     // returns list of albums
     public getAlbums(classId: string, albumIds: string[]): Promise<AlbumModel[]>{
-        return this.af.database.list("/classes/" + classId + "/gallery/albums")
+        return this.afd.list("/classes/" + classId + "/gallery/albums")
             .map(obj => {
                 let selectedAlbums:AlbumModel[] = []
                 this.castListOfAlbumsToModel(obj).forEach(album => {
@@ -56,9 +56,9 @@ export class Gallery {
         this.getImagesInAlbum(classId, albumId).then(snapshots => {
             snapshots.forEach(snapshot => {
                 this.deleteImage(classId, snapshot.id);
-                // this.af.database.object("/classes/" + classId + '/gallery/images/'+snapshot.$key).remove();
+                // this.afd.object("/classes/" + classId + '/gallery/images/'+snapshot.$key).remove();
             });
-            this.af.database().ref("/classes/" + classId + '/gallery/albums/'+albumId).remove();
+            this.afd.object("/classes/" + classId + '/gallery/albums/'+albumId).remove();
         })
     }
 
@@ -92,12 +92,12 @@ export class Gallery {
 
     // save an image to a class
     public saveImage(classId: string, imageUrl: string){
-        this.af.database().ref("/classes/" + classId + '/gallery/images/').push({imgUrl: imageUrl}).key;
+        this.afd.list("/classes/" + classId + '/gallery/images/').push({imgUrl: imageUrl}).key;
     }
 
     // deletes an image
     public deleteImage(classId: string, imageId: string): void{
-        this.af.database().ref("/classes/" + classId + '/gallery/images/' + imageId).remove();
+        this.afd.object("/classes/" + classId + '/gallery/images/' + imageId).remove();
     }
 
     // returns all images of album
@@ -137,32 +137,33 @@ export class Gallery {
 
     // assigns a new album to an image.
     public updateAlbumOfImage(classId: string, imageId: string, albumId: string): void{
-        this.af.database().ref("/classes/" + classId + "/gallery/images/" + imageId+ "/albumId").set(albumId);
+        this.afd.object("/classes/" + classId + "/gallery/images/" + imageId+ "/albumId").set(albumId);
     }
 
     // tags student to image
     public tagStudentInImage(classId: string, imageId: string, studentId: string): void{
-        this.af.database().ref("/classes/" + classId + "/gallery/student-images/" + studentId + "/" + imageId).set(true);
+        this.afd.object("/classes/" + classId + "/gallery/student-images/" + studentId + "/" + imageId).set(true);
     }
 
     // untags student from image
     public untagStudentInImage(classId: string, imageId: string, studentId: string): void{
-        this.af.database().ref("/classes/" + classId + "/gallery/student-images/" + studentId + "/" + imageId).remove();
+        this.afd.object("/classes/" + classId + "/gallery/student-images/" + studentId + "/" + imageId).remove();
     }
 
     public isStudentTaggedInImage(classId: string, imageId: string, studentId: string): Promise<boolean>{
-        this.afd.list("/classes/" + classId + "/gallery/student-images/" + studentId + "/" + imageId)
+        return this.afd.list("/classes/" + classId + "/gallery/student-images/" + studentId + "/" + imageId)
            .map(obj => {
                let result = !!obj.$value
                return result
            })
            .first()
+           .toPromise()
     }
 
     // I couldn't find any better way using angularfire2. :(
     // usage: Get imageIds from here, and retrieve those images separately.
     public getImageIdsOfStudent(classId: string, studentId: string): Promise<string[]>{
-        return this.af.database.list("/classes/" + classId + "/gallery/student-images/" + studentId)
+        return this.afd.list("/classes/" + classId + "/gallery/student-images/" + studentId)
             .map(obj => {
                 return this.castListOfImageIdsToModel(obj)
             })

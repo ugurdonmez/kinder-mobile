@@ -34,7 +34,7 @@ export class Activity {
 
     // deletes an activity, given classId and activityId.
     public deleteActivity(classId, activityId){
-        return this.af.database().ref("/classes/" + classId + "/activities/" + activityId).remove();
+        return this.afd.object("/classes/" + classId + "/activities/" + activityId).remove();
     }
 
     // Conversion: FirebaseListObservable -> Model

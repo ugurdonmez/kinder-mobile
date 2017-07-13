@@ -6,11 +6,14 @@ import {Camera} from "ionic-native";
 import * as firebase from 'firebase';
 import {WeeklyMealMenuModel} from "../models/weekly-meal-menu-model";
 import {PromiseObservable} from "rxjs/observable/PromiseObservable";
+import {AngularFireDatabase} from "angularfire2/database/database";
 
 @Injectable()
 export class WeeklyMealMenu {
 
-    constructor(public af: FirebaseApp, private authDataProvider: AuthData){
+    constructor(public af: FirebaseApp, private authDataProvider: AuthData,
+                private afd: AngularFireDatabase
+    ){
     }
 
     // uploads the image. upload method is chosen by imageSource parameter.
@@ -24,7 +27,7 @@ export class WeeklyMealMenu {
             var profilePictureRef = firebase.storage().ref('/weekly-meal-menu-images/' + classId).child(new Date().getDate() + " @ " + new Date().getTime() + ".png");
             profilePictureRef.putString(imageData, 'base64', {contentType: 'image/png'})
                 .then((savedPicture) => {
-                    this.af.database.object('/classes/'+classId+"/weeklyMenu/"+date)
+                    this.afd.object('/classes/'+classId+"/weeklyMenu/"+date)
                         .set(
                             savedPicture.downloadURL
                         );
@@ -36,7 +39,7 @@ export class WeeklyMealMenu {
 
     // returns url of requested menu image
     public getMenuImage(classId:string, date:string): Promise<WeeklyMealMenuModel>{
-        return this.af.database.object('/classes/'+classId+"/weeklyMenu/"+date)
+        return this.afd.object('/classes/'+classId+"/weeklyMenu/"+date)
             .map(obj => {
                 return this.castObjectToModel(obj)
             })
@@ -46,7 +49,7 @@ export class WeeklyMealMenu {
 
     // removes menu image link from db. note: .png image file is not deleted from firebase storage. only the link is removed.
     public deleteMenuImage(classId:string, date:string){
-        this.af.database().ref("/classes/" + classId + "/weeklyMenu/"+date).remove();
+        this.afd.object("/classes/" + classId + "/weeklyMenu/"+date).remove();
     }
 
     // Conversion: FirebaseListObservable -> Model

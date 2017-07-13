@@ -11,22 +11,22 @@ export class Feedback {
     }
 
     public sendFeedbackForStudent(classId: string, parentUserId: string, date: string, feedback: FeedbackModel): void{
-        this.af.database().ref("/classes/" + classId + "/dailyfeedback/" + parentUserId + "/" + date).set(
+        this.afd.object("/classes/" + classId + "/dailyfeedback/" + parentUserId + "/" + date).set(
             feedback
         )
     }
 
     public getFeedbackForStudent(classId: string, parentUserId: string, date: string): Promise<FeedbackModel>{
-        this.afd.list("/classes/" + classId + "/dailyfeedback/" + parentUserId + "/" + date)
+        return this.afd.list("/classes/" + classId + "/dailyfeedback/" + parentUserId + "/" + date)
             .map(obj => {
                 return this.castObjectToModel(obj)
             })
             .first()
-            
+           .toPromise()
     }
 
     public deleteFeedbackForStudent(classId: string, parentUserId: string, date: string): void{
-        this.af.database().ref("/classes/" + classId + "/dailyfeedback/" + parentUserId + "/" + date).remove();
+        this.afd.object("/classes/" + classId + "/dailyfeedback/" + parentUserId + "/" + date).remove();
     }
     
     // Conversion: FirebaseListObservable -> Model

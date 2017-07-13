@@ -3,11 +3,14 @@ import { Injectable } from '@angular/core';
 import { FirebaseApp } from 'angularfire2';
 import {AuthData} from "./auth-data";
 import {ReminderModel} from "../models/reminder-model";
+import {AngularFireDatabase} from "angularfire2/database/database";
 
 @Injectable()
 export class Reminder {
 
-    constructor(public af: FirebaseApp, private authDataProvider: AuthData){
+    constructor(public af: FirebaseApp, private authDataProvider: AuthData,
+                private afd: AngularFireDatabase
+    ){
     }
 
     public createReminderForThisUser(message, datetime){
@@ -16,7 +19,7 @@ export class Reminder {
 
     // adds reminder to user and returns reminderId
     public createReminder(userId, message, datetime){
-        return this.af.database.list("/user-reminders/" + userId).push({
+        return this.afd.list("/user-reminders/" + userId).push({
             message: message,
             datetime: datetime
         }).key
@@ -29,7 +32,7 @@ export class Reminder {
 
     // returns all reminders of user
     public getReminders(userId): Promise<ReminderModel[]>{
-        return this.af.database.list("/user-reminders/" + userId)
+        return this.afd.list("/user-reminders/" + userId)
             .map(obj => {
                 return this.castListToModel(obj)
             })
@@ -44,7 +47,7 @@ export class Reminder {
 
     // deletes a reminder of a user, given userId.
     public deleteReminder(userId, reminderId){
-        return this.af.database().ref("/user-reminders/" + userId + "/" + reminderId).remove();
+        return this.afd.object("/user-reminders/" + userId + "/" + reminderId).remove();
     }
 
     // Conversion: FirebaseListObservable -> Model

@@ -17,7 +17,7 @@ export class AttendanceProvider {
 
    public setStudentAttendance(attendance: AttendanceModel): any {
 
-      this.af.database().ref("/attendance/"+attendance.parentId+attendance.day)
+      this.afd.object("/attendance/"+attendance.parentId+attendance.day)
          .set(attendance)
          .then(res => {
             console.log('attendance written')
@@ -26,13 +26,12 @@ export class AttendanceProvider {
    }
 
    public getStudentAtendance(parentId: string, attendanceDateKey: string): Promise<AttendanceModel> {
-
-      this.afd.list("/attendance/" + parentId + attendanceDateKey)
+      return this.afd.object("/attendance/" + parentId + attendanceDateKey)
          .map(obj => {
             return this.castObjectToModel(obj)
          })
          .first()
-         
+         .toPromise()
    }
    //
    // public markAllStudentsHere(classId: string, date: string): void {
@@ -51,7 +50,7 @@ export class AttendanceProvider {
    //    // hereStatus is true if student is here, false if absent. for now, studentId is parentId in our design. (temporarily)
    //    // date is isodate. it can be obtained using "new Date().toISOString().substring(0, 10);"
    //    // console.log("markStudentHere called with: ", studentId, classId, date, hereStatus);
-   //    this.af.database.object("/classes/" + classId + "/attendance/" + date + "/" + studentId).set(
+   //    this.afd.object("/classes/" + classId + "/attendance/" + date + "/" + studentId).set(
    //       hereStatus
    //    )
    // }
@@ -62,14 +61,14 @@ export class AttendanceProvider {
    // public getAttendanceOf(classId: string, date: string, studentId: string): Promise<AttendanceModel>;
    // public getAttendanceOf(classId: string, date: string, studentId?: string) {
    //    if (studentId)
-   //       return this.af.database.object("/classes/" + classId + "/attendance/" + date + "/" + studentId)
+   //       return this.afd.object("/classes/" + classId + "/attendance/" + date + "/" + studentId)
    //          .map(obj => {
    //             return this.castObjectToModel(obj)
    //          })
    //          .first()
    //          .toPromise()
    //    else
-   //       return this.af.database.list("/classes/" + classId + "/attendance/" + date)
+   //       return this.afd.list("/classes/" + classId + "/attendance/" + date)
    //          .map(obj => {
    //             return this.castListToModel(obj)
    //          })

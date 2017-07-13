@@ -6,7 +6,6 @@ import {Message} from "../../../providers/message";
 import {AuthData} from "../../../providers/auth-data";
 import {Classes} from "../../../providers/classes";
 import {Parents} from "../../../providers/parents";
-import {FirebaseListObservable} from "angularfire2";
 import {Teachers} from "../../../providers/teachers";
 import {HumanReadableDateTime} from "../../../helpers/humanReadableDateTime";
 import {ConversationModel} from "../../../models/conversation-model";
