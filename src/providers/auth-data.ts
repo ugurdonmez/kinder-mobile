@@ -3,6 +3,7 @@ import 'rxjs/add/operator/map';
 
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import {UserModel} from "../models/user-model";
+import {UserRoleModel} from "../models/user-role-model";
 
 
 @Injectable()
@@ -111,6 +112,18 @@ export class AuthData {
             .toPromise()
     }
 
+    getUserRoles(userId?:string) : Promise<UserRoleModel[]> {
+        if (!userId){
+            var userId:string = this.getUserId();
+        }
+        return this.af.database.list('/users/'+userId+'/roles')
+           .map(obj => {
+               return this.castRoleListToModel(obj)
+           })
+           .first()
+           .toPromise()
+    }
+
     // // Conversion: FirebaseListObservable -> Model
     // private castListToModel(objs: any[]): UserModel[] {
     //     let modelArray: Array<UserModel> = [];
@@ -124,5 +137,15 @@ export class AuthData {
     // Conversion: FirebaseObjectObservable -> Model
     private castObjectToModel(obj: any, email:string): UserModel {
         return new UserModel().fromObject(obj, email);
+    }
+
+    // Conversion: FirebaseLostObservable -> Model
+    private castRoleListToModel(objs: any[]): UserRoleModel[] {
+       let modelArray: Array<UserRoleModel> = [];
+       for (let obj of objs) {
+          var model = new UserRoleModel().fromObject(obj);
+          modelArray.push(model);
+       }
+       return modelArray;
     }
 }
