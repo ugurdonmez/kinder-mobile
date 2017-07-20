@@ -1,0 +1,14 @@
+<ion-header home-header [titleTextEn]="'Select Role'"></ion-header>
+
+<ion-content class="page-splash-screen">
+
+   <ion-list *ngIf="!!roleSelectorToggle">
+      <ion-item *ngFor="let eachRole in allRolesOfUser" (click)="navigateToRoleHome(eachRole)">
+         <p>{{eachRole.name}}</p>
+         <p *ngIf="eachRole.name == 'school-admin'">Branch: {{eachRole.branchId}}</p>
+         <p *ngIf="eachRole.name == 'teacher'">School: {{eachRole.schoolId}}</p>
+         <p *ngIf="eachRole.name == 'parent'">Class: {{eachRole.classId}}</p>
+      </ion-item>
+   </ion-list>
+
+</ion-content>

@@ -18,6 +18,7 @@ import {BranchAdminHomePage} from "../../branch-admin/home/home";
 import {SchoolAdminHomePage} from "../../school-admin/home/home";
 import {ParentHomePage} from "../../parent/home/home";
 import {TeacherHomePage} from "../../teacher/home/home";
+import {SplashScreenPage} from "../../splash-screen/splash-screen";
 
 
 @Component({
@@ -109,27 +110,11 @@ export class LoginDialog {
 
             this.loading.dismiss()
 
-            if (role == 'branch-admin') {
-               this.nav.setRoot(BranchAdminHomePage)
-                  .then(() => {
-                     this.loading.dismiss()
-                  })
-            } else if (role == 'school-admin') {
-               this.nav.setRoot(SchoolAdminHomePage)
-                  .then(() => {
-                     this.loading.dismiss()
-                  })
-            } else if (role == 'parent') {
-               this.nav.setRoot(ParentHomePage)
-                  .then(() => {
-                     this.loading.dismiss()
-                  })
-            } else if (role == 'teacher') {
-               this.nav.setRoot(TeacherHomePage)
-                  .then(() => {
-                     this.loading.dismiss()
-                  })
-            }
+            this.nav.setRoot(SplashScreenPage)
+               .then(() => {
+                  this.loading.dismiss()
+               })
+
          });
    }
 }

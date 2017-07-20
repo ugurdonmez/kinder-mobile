@@ -7,6 +7,7 @@ export class UserModel {
     branchId ?: string;
     branchAdminId ? : string
     schoolAdminId ? : string
+    roles ?: any
 
     public fromObject(obj: any, email:string):UserModel {
         this.id = obj.$key
@@ -17,6 +18,7 @@ export class UserModel {
         this.branchId = obj.branchId
         this.branchAdminId = obj.branchAdminId
         this.schoolAdminId = obj.schoolAdminId
+        this.roles = obj.roles
 
         return this;
     }
