@@ -34,9 +34,14 @@ export class SplashScreenPage {
       this.authData.getUser()
          .then(snapshot => {
             this.allRolesOfUser = snapshot.roles
-            if (snapshot.roles.length <= 1){
-               this.role = snapshot.roles[0]
-               this.navigateToRoleHome(this.role)
+            if (!this.allRolesOfUser)
+               this.allRolesOfUser = [snapshot.role]
+
+            console.log('this.allRolesOfUser: ')
+            console.log(this.allRolesOfUser)
+
+            if (this.allRolesOfUser.length <= 1){
+               this.navigateToRoleHome(this.allRolesOfUser[0])
             }
             else{
                this.roleSelectorToggle = true;

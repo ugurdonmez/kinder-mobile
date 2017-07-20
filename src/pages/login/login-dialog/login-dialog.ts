@@ -103,18 +103,11 @@ export class LoginDialog {
    }
 
    private redirectUser(): void {
-      this.authData.getUser()
-         .then(snapshot => {
+      this.loading.dismiss()
 
-            const role = snapshot.role;
-
+      this.nav.setRoot(SplashScreenPage)
+         .then(() => {
             this.loading.dismiss()
-
-            this.nav.setRoot(SplashScreenPage)
-               .then(() => {
-                  this.loading.dismiss()
-               })
-
-         });
+         })
    }
 }
