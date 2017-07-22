@@ -1,13 +1,13 @@
+import {NgModule, ErrorHandler} from '@angular/core';
+import {IonicApp, IonicModule, IonicErrorHandler} from 'ionic-angular';
+import {MyApp} from './app.component';
 
-import { NgModule, ErrorHandler, LOCALE_ID } from '@angular/core';
-import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-import { MyApp} from './app.component';
-
-import {AuthProviders, AuthMethods, AngularFireModule} from 'angularfire2';
+import {AngularFireModule, AuthProviders, AuthMethods} from 'angularfire2';
 
 // Localization
-import { TranslateModule,  TranslateLoader } from '@ngx-translate/core';
-import { Translator} from './translator';
+import {TranslateModule, TranslateStaticLoader, TranslateLoader} from 'ng2-translate/ng2-translate';
+import {Http} from '@angular/http';
+import {Translator} from './translator';
 
 // Importing pages
 import * as page from '../pages';
@@ -17,10 +17,6 @@ import * as provider from '../providers';
 
 // Importing components
 import * as cmp from '../components';
-
-import { Http } from "@angular/http";
-
-import { NgCalendarModule  } from 'ionic2-calendar';
 
 // AF2 Settings
 export const firebaseConfig = {
@@ -69,36 +65,13 @@ export function createTranslateLoader(http: Http) {
       page.TeacherHomePage,
       page.TeacherInboxPage,
       page.TeacherDialogPage,
+      page.TeacherChatPage,
       page.TeacherClassWallPage,
       page.TeacherCalendarPage,
       page.TeacherGalleryPage,
       page.TeacherTakePhotoPage,
       page.TeacherViewPhotoPage,
-      page.TeacherAlbumsPage,
-      page.TeacherParentPage,
-      page.TeacherAttendancePage,
-      page.ParentAttendancePage,
-      page.ParentCalendarPage,
-      page.ParentClassWallPage,
-      page.ParentGalleryPage,
-      page.ParentHomePage,
-      page.ParentInboxPage,
-      page.ParentChatPage,
-      page.ParentViewPhotoPage,
-      page.TeacherAlbumPage,
-      page.TeacherWeeklyMealMenuPage,
-      page.TeacherViewWeeklyMealMenuPage,
-      page.TeacherHomeworkPage,
-      page.TeacherAddHomeworkPage,
-      page.TeacherViewWeeklyActivityPage,
-      page.TeacherWeeklyActivitiesPage,
-      page.ParentAlbumsPage,
-      page.ParentAlbumPage,
-      page.ParentWeeklyActivitiesPage,
-      page.ParentViewWeeklyActivityPage,
-      page.ParentWeeklyMealMenuPage,
-      page.ParentViewWeeklyMealMenuPage,
-      page.ParentDialogPage,
+      page.SplashScreenPage,
 
       // components
       cmp.HomeHeaderDirective,
@@ -117,23 +90,8 @@ export function createTranslateLoader(http: Http) {
       cmp.PhotosGridComponent,
       cmp.TakePhotoComponent,
       cmp.ViewPhotoComponent,
-      cmp.AlbumsGridComponent,
-      cmp.WeeklyMealMenuComponent,
-      cmp.ViewWeeklyMealMenuComponent,
-      cmp.ViewWeeklyActivityComponent,
-      cmp.WeeklyActivitiesComponent,
-      cmp.ParentPhotosGridComponent,
-      cmp.ParentViewPhotoComponent,
-      cmp.ParentAlbumsGridComponent,
-      cmp.ParentWeeklyActivitiesComponent,
-      cmp.ParentViewWeeklyActivityComponent,
-      cmp.ParentWeeklyMealMenuComponent,
-      cmp.ParentViewWeeklyMealMenuComponent,
-      cmp.ParentCalendarComponent,
    ],
    imports: [
-      // NgCalendarModule,
-      NgCalendarModule,
       IonicModule.forRoot(MyApp),
       AngularFireModule.initializeApp(firebaseConfig, myFirebaseAuthConfig),
       TranslateModule.forRoot({
@@ -168,40 +126,16 @@ export function createTranslateLoader(http: Http) {
       page.SchoolAdminCreateClassPage,
       page.TeacherInboxPage,
       page.TeacherDialogPage,
+      page.TeacherChatPage,
       page.TeacherClassWallPage,
       page.TeacherCalendarPage,
       page.TeacherGalleryPage,
       page.TeacherTakePhotoPage,
       page.TeacherViewPhotoPage,
-      page.TeacherAlbumsPage,
-      page.TeacherParentPage,
-      page.TeacherAttendancePage,
-      page.ParentAttendancePage,
-      page.ParentCalendarPage,
-      page.ParentClassWallPage,
-      page.ParentGalleryPage,
-      page.ParentHomePage,
-      page.ParentInboxPage,
-      page.ParentChatPage,
-      page.ParentViewPhotoPage,
-      page.TeacherAlbumPage,
-      page.TeacherWeeklyMealMenuPage,
-      page.TeacherViewWeeklyMealMenuPage,
-      page.TeacherHomeworkPage,
-      page.TeacherAddHomeworkPage,
-      page.TeacherViewWeeklyActivityPage,
-      page.TeacherWeeklyActivitiesPage,
-      page.ParentAlbumsPage,
-      page.ParentAlbumPage,
-      page.ParentWeeklyActivitiesPage,
-      page.ParentViewWeeklyActivityPage,
-      page.ParentWeeklyMealMenuPage,
-      page.ParentViewWeeklyMealMenuPage,
-      page.ParentDialogPage,
+      page.SplashScreenPage,
    ],
    providers: [
       {provide: ErrorHandler, useClass: IonicErrorHandler},
-      { provide: LOCALE_ID, useValue: undefined },
       Translator,
       provider.AuthService,
       provider.AuthData,
@@ -216,13 +150,14 @@ export function createTranslateLoader(http: Http) {
       provider.Birthday,
       provider.Reminder,
       provider.WeeklyMealMenu,
-      provider.HomeworkProvider,
+      provider.Homework,
       provider.Gallery,
       provider.Feedback,
-      provider.AttendanceProvider,
+      provider.Attendance,
       provider.Message,
    ]
 })
+
 
 export class AppModule {
 }
