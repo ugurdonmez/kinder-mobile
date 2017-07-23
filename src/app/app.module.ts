@@ -65,7 +65,6 @@ export function createTranslateLoader(http: Http) {
       page.TeacherHomePage,
       page.TeacherInboxPage,
       page.TeacherDialogPage,
-      page.TeacherChatPage,
       page.TeacherClassWallPage,
       page.TeacherCalendarPage,
       page.TeacherGalleryPage,
@@ -126,7 +125,6 @@ export function createTranslateLoader(http: Http) {
       page.SchoolAdminCreateClassPage,
       page.TeacherInboxPage,
       page.TeacherDialogPage,
-      page.TeacherChatPage,
       page.TeacherClassWallPage,
       page.TeacherCalendarPage,
       page.TeacherGalleryPage,
@@ -150,11 +148,10 @@ export function createTranslateLoader(http: Http) {
       provider.Birthday,
       provider.Reminder,
       provider.WeeklyMealMenu,
-      provider.Homework,
       provider.Gallery,
       provider.Feedback,
-      provider.Attendance,
       provider.Message,
+      provider.AttendanceProvider,
    ]
 })
 
