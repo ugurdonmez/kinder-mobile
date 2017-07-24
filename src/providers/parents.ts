@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 
-import { AngularFire } from 'angularfire2';
+import { FirebaseApp } from 'angularfire2';
 import {ParentModel} from '../models/parent-model';
 import { AuthData } from './auth-data';
 import {AlertController} from "ionic-angular";
 import {Camera} from "ionic-native";
 import * as firebase from 'firebase';
 import {Translator} from "../app/translator";
-import {TranslateService} from "ng2-translate";
+import {TranslateService} from "@ngx-translate/core";
+import {AngularFireDatabase} from "angularfire2/database/database";
 
 @Injectable()
 export class Parents {
@@ -16,14 +17,16 @@ export class Parents {
     parents: any;
     private translate: TranslateService;
 
-    constructor(public af: AngularFire, public authData: AuthData, private alertCtrl: AlertController,
-                public translator: Translator){
-        this.parents = af.database.list('/parents');
+    constructor(public af: FirebaseApp, public authData: AuthData, private alertCtrl: AlertController,
+                public translator: Translator,
+                private afd: AngularFireDatabase
+    ){
+        this.parents = afd.list('/parents');
         this.translate = translator.translatePipe;
     }
 
     public getParent(parentId: string): Promise<ParentModel> {
-        return this.af.database.object('/parents/' + parentId)
+        return this.afd.object('/parents/' + parentId)
             .map(obj => {
                 return this.castObjectToModel(obj)
             })
@@ -33,12 +36,12 @@ export class Parents {
 
     public addParent(parent: ParentModel) {
         let userId = this.authData.getUserId();
-        this.af.database.object('/parents/'+userId).set(parent);
+        this.afd.object('/parents/'+userId).set(parent);
         return userId;
     }
 
     public updateParent(parent: ParentModel) {
-        this.af.database.object('/parents/'+parent.id).set(parent);
+        this.afd.object('/parents/'+parent.id).set(parent);
     }
 
     newPhoto(parentId: string){
@@ -79,7 +82,7 @@ export class Parents {
             var profilePictureRef = firebase.storage().ref('/parent-images/namedByParentId/').child(parentId+"_"+new Date().getDate() + " @ " + new Date().getTime() + ".png");
             profilePictureRef.putString(imageData, 'base64', {contentType: 'image/png'})
                 .then((savedPicture) => {
-                    this.af.database.object('/parents/'+parentId+"/profileImageUrl")
+                    this.afd.object('/parents/'+parentId+"/profileImageUrl")
                         .set(savedPicture.downloadURL);
                 });
         }, (err) => {
@@ -88,7 +91,7 @@ export class Parents {
     }
 
     getParentsOfClass(classId: string): Promise<ParentModel[]> {
-        return this.af.database.list('/parents', {
+        return this.afd.list('/parents', {
             query: {
                 orderByChild: 'classId',
                 equalTo: classId
@@ -101,12 +104,10 @@ export class Parents {
             .toPromise()
     }
 
-
     public getParentsByBranchAdminId(): Promise<ParentModel[]> {
         var userId = this.authData.getUserId();
 
-        return this.af.database
-           .list('/parents', {
+        return this.afd.list('/parents', {
                query: {
                    orderByChild: 'branchAdminId',
                    equalTo: userId
@@ -120,8 +121,7 @@ export class Parents {
     public getParentsBySchoolAdminId(): Promise<ParentModel[]> {
         var userId = this.authData.getUserId();
 
-        return this.af.database
-           .list('/parents', {
+        return this.afd.list('/parents', {
                query: {
                    orderByChild: 'schoolAdminId',
                    equalTo: userId

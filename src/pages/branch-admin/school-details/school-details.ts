@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {NavParams} from 'ionic-angular';
 import {SchoolModel} from "../../../models/school-model";
 import {Translator} from "../../../app/translator";
-import {TranslateService} from "ng2-translate";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
    selector: 'page-branch-admin-school-details',

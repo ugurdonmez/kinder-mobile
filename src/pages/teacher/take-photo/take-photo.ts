@@ -1,7 +1,7 @@
 
 import {Component, OnInit} from '@angular/core';
 import {Gallery} from "../../../providers/gallery";
-import {TranslateService} from "ng2-translate";
+import {TranslateService} from "@ngx-translate/core";
 import {Translator} from "../../../app/translator";
 import {NavParams} from "ionic-angular";
 

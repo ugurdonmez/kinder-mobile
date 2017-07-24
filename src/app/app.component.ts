@@ -3,7 +3,8 @@ import {Component} from '@angular/core';
 import {Platform} from 'ionic-angular';
 import {StatusBar, Splashscreen} from 'ionic-native';
 
-import {AngularFire} from 'angularfire2';
+import {FirebaseApp} from 'angularfire2';
+import {AngularFireAuth} from 'angularfire2/auth';
 import {LoginPage} from '../pages/login/login';
 import {AuthData} from '../providers/auth-data';
 import {BranchAdminHomePage} from "../pages/branch-admin/home/home";
@@ -20,13 +21,15 @@ export class MyApp {
    rootPage: any;
 
    constructor(platform: Platform,
-               af: AngularFire,
-               private authData: AuthData) {
+               af: FirebaseApp,
+               private authData: AuthData,
+               private afAuth:AngularFireAuth
+   ) {
 
       console.log('my app constructor called')
 
       // TODO: refactor this part
-      af.auth.subscribe(user => {
+      afAuth.authState.subscribe(user => {
          if (user) {
             this.authData.getUser()
                .then(snapshot => {

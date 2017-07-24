@@ -1,0 +1,28 @@
+
+.page-parent-gallery {
+  .studentNameSurname{
+    text-align: center;
+    white-space: normal;
+    word-wrap: break-word;
+  }
+
+  .parentHome__studentButton {
+    margin: 10px auto;
+  }
+
+  .parentHome__studentButton--selected {
+    background: greenyellow;
+  }
+
+  .parentHome__student-list {
+    border: solid #d9d9d9;
+    text-align: center;
+    margin-top: 10px;
+    background: white;
+  }
+
+  .parentHome__student-list-container{
+    max-width: 120px;
+  }
+
+}

@@ -1,31 +1,32 @@
 import { Injectable } from '@angular/core';
 
-import { AngularFire } from 'angularfire2';
+import { FirebaseApp } from 'angularfire2';
 import {FeedbackModel} from "../models/feedback-model";
+import { AngularFireDatabase } from 'angularfire2/database';
 
 @Injectable()
 export class Feedback {
 
-    constructor(public af: AngularFire){
+    constructor(public af: FirebaseApp, private afd: AngularFireDatabase){
     }
 
     public sendFeedbackForStudent(classId: string, parentUserId: string, date: string, feedback: FeedbackModel): void{
-        this.af.database.object("/classes/" + classId + "/dailyfeedback/" + parentUserId + "/" + date).set(
+        this.afd.object("/classes/" + classId + "/dailyfeedback/" + parentUserId + "/" + date).set(
             feedback
         )
     }
 
     public getFeedbackForStudent(classId: string, parentUserId: string, date: string): Promise<FeedbackModel>{
-        return this.af.database.object("/classes/" + classId + "/dailyfeedback/" + parentUserId + "/" + date)
+        return this.afd.list("/classes/" + classId + "/dailyfeedback/" + parentUserId + "/" + date)
             .map(obj => {
                 return this.castObjectToModel(obj)
             })
             .first()
-            .toPromise()
+           .toPromise()
     }
 
     public deleteFeedbackForStudent(classId: string, parentUserId: string, date: string): void{
-        this.af.database.object("/classes/" + classId + "/dailyfeedback/" + parentUserId + "/" + date).remove();
+        this.afd.object("/classes/" + classId + "/dailyfeedback/" + parentUserId + "/" + date).remove();
     }
     
     // Conversion: FirebaseListObservable -> Model

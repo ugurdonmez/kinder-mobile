@@ -1,12 +1,11 @@
 import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import {Translator} from "../../../app/translator";
-import {TranslateService} from "ng2-translate";
+import {TranslateService} from "@ngx-translate/core";
 import {Message} from "../../../providers/message";
 import {AuthData} from "../../../providers/auth-data";
 import {Classes} from "../../../providers/classes";
 import {Parents} from "../../../providers/parents";
-import {FirebaseListObservable} from "angularfire2";
 import {Teachers} from "../../../providers/teachers";
 import {HumanReadableDateTime} from "../../../helpers/humanReadableDateTime";
 import {ConversationModel} from "../../../models/conversation-model";

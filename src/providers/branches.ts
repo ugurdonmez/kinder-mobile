@@ -3,7 +3,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/first';
 
-import {AngularFire} from 'angularfire2';
+import {FirebaseApp} from 'angularfire2';
 import {BranchModel} from '../models/branch-model';
 import {AuthData} from './auth-data';
 
@@ -12,30 +12,32 @@ import {AlertController} from "ionic-angular";
 
 import * as firebase from 'firebase';
 import {Translator} from "../app/translator";
-import {TranslateService} from "ng2-translate";
+import {TranslateService} from "@ngx-translate/core";
 import {Schools} from "./schools";
+import {AngularFireDatabase} from "angularfire2/database/database";
 
 @Injectable()
 export class Branches {
-
+   
    branches: any;
    private translate: TranslateService;
 
-   constructor(public af: AngularFire,
+   constructor(public af: FirebaseApp,
                public authData: AuthData,
                private alertCtrl: AlertController,
                public translator: Translator,
-               private schoolsProvider: Schools) {
+               private schoolsProvider: Schools,
+               private afd: AngularFireDatabase
+   ) {
 
-      this.branches = af.database.list('/branches');
+      this.branches = afd.list('/branches');
       this.translate = translator.translatePipe;
    }
 
    public getBranchAdminBranches(): Promise<BranchModel[]> {
       var userId = this.authData.getUserId();
 
-      return this.af.database
-         .list('/branches', {
+      return this.afd.list('/branches', {
             query: {
                orderByChild: 'branchAdminId',
                equalTo: userId
@@ -51,7 +53,7 @@ export class Branches {
    }
 
    public getBranch(branchId: string): Promise<BranchModel> {
-      return this.af.database.object('/branches/' + branchId).map(obj => {
+      return this.afd.object('/branches/' + branchId).map(obj => {
          var branch = this.castObjectToBranchModel(obj)
          return branch
       })
@@ -60,7 +62,7 @@ export class Branches {
    }
 
    public getAllBranches(): Promise<BranchModel[]> {
-      return this.af.database.list('/branches/')
+      return this.afd.list('/branches/')
           .map(obj => {
              var branch = this.castToBranchModel(obj)
              return branch
@@ -75,12 +77,12 @@ export class Branches {
    }
 
    public updateBranch(branch: BranchModel) {
-      this.af.database.object('/branches/' + branch.id).set(branch);
+      this.afd.object('/branches/' + branch.id).set(branch);
    }
 
    deleteBranch(branchId: string) {
-      this.af.database.object('/branches/' + branchId).remove();
-      var schoolsOfBranch = this.af.database.list('/schools', {
+      this.afd.object('/branches/' + branchId).remove();
+      var schoolsOfBranch = this.afd.list('/schools', {
          query: {
             orderByChild: 'branchId',
             equalTo: branchId
@@ -127,7 +129,7 @@ export class Branches {
          var profilePictureRef = firebase.storage().ref('/branch-images/namedById/').child(branchId + "_" + new Date().getDate() + " @ " + new Date().getTime() + ".png");
          profilePictureRef.putString(imageData, 'base64', {contentType: 'image/png'})
             .then((savedPicture) => {
-               this.af.database.object('/branches/' + branchId + "/logoURL")
+               this.afd.object('/branches/' + branchId + "/logoURL")
                   .set(savedPicture.downloadURL);
             });
       }, (err) => {

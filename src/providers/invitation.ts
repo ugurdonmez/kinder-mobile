@@ -1,18 +1,21 @@
 import { Injectable } from '@angular/core';
 
-import { AngularFire } from 'angularfire2';
+import { FirebaseApp } from 'angularfire2';
 import {AuthData} from "./auth-data";
 import {InvitationModel} from "../models/invitation-model";
+import {AngularFireDatabase} from "angularfire2/database/database";
 
 @Injectable()
 export class Invitation {
 
-    constructor(public af: AngularFire, private authDataProvider: AuthData){
+    constructor(public af: FirebaseApp, private authDataProvider: AuthData,
+                private afd: AngularFireDatabase
+    ){
     }
 
     // adds invitation to class and returns invitationId
     public createInvitation(classId, hostUserId, message, datetime){
-        return this.af.database.list("/classes/" + classId + "/invitations/").push({
+        return this.afd.list("/classes/" + classId + "/invitations/").push({
             hostUserId: hostUserId,
             message: message,
             datetime: datetime
@@ -21,7 +24,7 @@ export class Invitation {
 
     // returns all invitations of class
     public getInvitations(classId): Promise<InvitationModel[]>{
-        return this.af.database.list("/classes/" + classId + "/invitations/")
+        return this.afd.list("/classes/" + classId + "/invitations/")
             .map(obj => {
                 return this.castListToModel(obj)
             })
@@ -31,7 +34,7 @@ export class Invitation {
 
     // returns all invitations filtered by hostId
     getInvitationsOfHost(classId, hostUserId): Promise<InvitationModel[]>{
-        return this.af.database.list("/classes/" + classId + "/invitations/", {
+        return this.afd.list("/classes/" + classId + "/invitations/", {
             query: {
                 orderByChild: 'hostUserId',
                 equalTo: hostUserId
@@ -46,7 +49,7 @@ export class Invitation {
 
     // deletes an invitation, given classId and invitationId.
     public deleteInvitation(classId, invitationId){
-        return this.af.database.object("/classes/" + classId + "/invitations/" + invitationId).remove();
+        return this.afd.object("/classes/" + classId + "/invitations/" + invitationId).remove();
     }
 
     // Conversion: FirebaseListObservable -> Model

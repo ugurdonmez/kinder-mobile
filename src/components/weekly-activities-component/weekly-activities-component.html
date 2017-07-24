@@ -1,0 +1,23 @@
+
+<ion-grid class="weekly-activities-component">
+   <ion-row>
+      <button ion-button icon-left (click)="addWeeklyActivityPhoto()">
+         <ion-icon name="add-circle"></ion-icon>
+         {{"Add" | translate}}
+      </button>
+   </ion-row>
+
+   <ion-row>
+      <ion-col col-4 col-sm-4 col-md-3 col-lg-3 col-xl-2 *ngFor="let activity of weeklyActivities">
+         <div>
+            <div class='activity-image'>
+               <ion-icon *ngIf="!(activity | async)?.imgUrl" name="images" (click)="takePhotoForWeek(activity)"></ion-icon>
+               <img *ngIf="!!(activity | async)?.imgUrl" [src]="(activity | async)?.imgUrl"
+                    (click)="openWeeklyActivityPage(activity)"/>
+            </div>
+            <div class="-name">{{getActivityName((activity | async)?.date)}}</div>
+         </div>
+      </ion-col>
+   </ion-row>
+
+</ion-grid>

@@ -1,0 +1,12 @@
+<ion-grid class="view-weekly-meal-menu-component">
+   <ion-row>
+      <button ion-button block color="danger" (click)="deleteWeeklyMealMenuClicked()">
+         {{"Delete Menu For Week" | translate}}
+      </button>
+   </ion-row>
+   <ion-row>
+      <ion-card class="viewed-photo">
+         <img [src]="weeklyMealMenu.imgUrl" center class="center">
+      </ion-card>
+   </ion-row>
+</ion-grid>

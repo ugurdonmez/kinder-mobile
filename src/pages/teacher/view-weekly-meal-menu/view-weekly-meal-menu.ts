@@ -1,0 +1,30 @@
+
+import {Component, OnInit} from '@angular/core';
+import {TranslateService} from "@ngx-translate/core";
+import {Translator} from "../../../app/translator";
+import {NavParams} from "ionic-angular";
+import {WeeklyMealMenuModel} from "../../../models/weekly-meal-menu-model";
+
+@Component({
+   selector: 'page-teacher-view-weekly-meal-menu',
+   templateUrl: 'view-weekly-meal-menu.html',
+})
+
+export class TeacherViewWeeklyMealMenuPage implements OnInit {
+
+   private translate: TranslateService;
+   private classId: string;
+   private weeklyMealMenu: WeeklyMealMenuModel;
+
+   constructor(public translator: Translator,
+               public navParams: NavParams,
+   ) {
+      this.translate = translator.translatePipe;
+      this.classId = navParams.get('classId');
+      this.weeklyMealMenu = navParams.get('weeklyMealMenu');
+   }
+
+   ngOnInit(): void {
+
+   }
+}

@@ -4,7 +4,7 @@ import {Branches} from "../../providers/branches";
 import {BranchModel} from "../../models/branch-model";
 import {NavController, AlertController} from "ionic-angular";
 import {FormBuilder, Validators, FormGroup} from "@angular/forms";
-import {TranslateService} from "ng2-translate";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
    selector: 'branch-details',

@@ -1,2 +1,14 @@
 
-<p>calendar component</p>
+<!--<button ion-button (click)="loadEvents()">Load Events</button>-->
+<button ion-button>Add Event</button>
+
+
+<calendar [eventSource]="eventSource"
+          [calendarMode]="calendar.mode"
+          [currentDate]="calendar.currentDate"
+          (onCurrentDateChanged)="onCurrentDateChanged($event)"
+          (onEventSelected)="onEventSelected($event)"
+          (onTitleChanged)="onViewTitleChanged($event)"
+          (onTimeSelected)="onTimeSelected($event)"
+          step="30">
+</calendar>

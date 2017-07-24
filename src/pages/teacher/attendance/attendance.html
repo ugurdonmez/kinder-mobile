@@ -1,0 +1,72 @@
+
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{"Attendance" | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-row>
+    <ion-item>
+      <ion-label>Date</ion-label>
+
+      <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="myDate"></ion-datetime>
+    </ion-item>
+  </ion-row>
+
+  <ion-row>
+    <button ion-button round margin>Select All Students</button>
+  </ion-row>
+
+  <ion-row>
+    <div class="teacherAttendance__student-list">
+      <button *ngFor="let parent of parents; let i = index"
+              (click)="selectStudent(i)"
+              class="teacherAttendance__studentButton"
+              [ngClass]="{'teacherHome__studentButton--selected': i == selectedStudent}">
+
+          <div class="avatar-circle">
+            <img src="{{parent.profileImageUrl}}">
+          </div>
+
+          <div>
+            {{parent.studentName}}
+          </div>
+
+          <div>
+            {{parent.studentSurname}}
+          </div>
+      </button>
+    </div>
+  </ion-row>
+
+  <ion-row>
+      <button
+        class=" teacherAttendance__icon"
+        [ngClass]="{'teacherAttendance__icon--selected': here}"
+        (click)="iconClicked(true)">
+
+        <ion-img width="80" height="80" src="/img/smileys/here.png"></ion-img>
+      </button>
+
+      <button
+        class=" teacherAttendance__icon"
+        [ngClass]="{'teacherAttendance__icon--selected': !here}"
+        (click)="iconClicked(false)">
+
+        <ion-img width="80" height="80" src="/img/smileys/absent.png"></ion-img>
+      </button>
+  </ion-row>
+
+  <ion-row>
+    <ion-item>
+      <ion-label color="primary">Comments</ion-label>
+
+      <ion-input type="text" [(ngModel)]="commentText" name="commentText"></ion-input>
+    </ion-item>
+  </ion-row>
+
+  <ion-row>
+    <button ion-button round margin (click)="submit()">Submit</button>
+  </ion-row>
+</ion-content>

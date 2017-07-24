@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { AngularFire } from 'angularfire2';
+import { FirebaseApp } from 'angularfire2';
+import { AngularFireDatabase } from "angularfire2/database";
 import {AuthData} from "./auth-data";
 import {Camera} from "ionic-native";
 import * as firebase from 'firebase';
@@ -9,12 +10,12 @@ import {ActivityModel} from "../models/activity-model";
 @Injectable()
 export class Activity {
 
-    constructor(public af: AngularFire, private authDataProvider: AuthData){
+    constructor(public af: FirebaseApp, private authDataProvider: AuthData, private afd: AngularFireDatabase){
     }
 
     // adds activity to class and returns activityId
     public createActivity(classId, message, datetime){
-        return this.af.database.list("/classes/" + classId + "/activities/").push({
+        return this.afd.list("/classes/" + classId + "/activities/").push({
             message: message,
             datetime: datetime
         }).key
@@ -22,17 +23,18 @@ export class Activity {
 
     // returns all activities of class
     public getActivities(classId): Promise<ActivityModel[]>{
-        return this.af.database.list("/classes/" + classId + "/activities/")
+        return this.afd.list("/classes/" + classId + "/activities/")
             .map(obj => {
                 return this.castListToModel(obj)
             })
             .first()
             .toPromise()
+            
     }
 
     // deletes an activity, given classId and activityId.
     public deleteActivity(classId, activityId){
-        return this.af.database.object("/classes/" + classId + "/activities/" + activityId).remove();
+        return this.afd.object("/classes/" + classId + "/activities/" + activityId).remove();
     }
 
     // Conversion: FirebaseListObservable -> Model

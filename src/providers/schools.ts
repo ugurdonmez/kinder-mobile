@@ -1,7 +1,7 @@
 import {Injectable, Component} from '@angular/core';
 import 'rxjs/add/operator/map';
 
-import {AngularFire} from 'angularfire2';
+import {FirebaseApp} from 'angularfire2';
 import {SchoolModel} from '../models/school-model';
 import {AuthData} from './auth-data';
 import {Camera} from "ionic-native";
@@ -9,9 +9,10 @@ import {AlertController} from "ionic-angular";
 
 import * as firebase from 'firebase';
 import {Translator} from "../app/translator";
-import {TranslateService} from "ng2-translate";
+import {TranslateService} from "@ngx-translate/core";
 import {Classes} from "./classes";
 import {UserModel} from "../models/user-model";
+import {AngularFireDatabase} from "angularfire2/database/database";
 
 
 @Injectable()
@@ -20,13 +21,15 @@ export class Schools {
    schools: any;
    private translate: TranslateService;
 
-   constructor(public af: AngularFire,
+   constructor(public af: FirebaseApp,
                public authData: AuthData,
                private alertCtrl: AlertController,
                public translator: Translator,
-               private classesProvider: Classes) {
+               private classesProvider: Classes,
+               private afd: AngularFireDatabase
+   ) {
 
-      this.schools = af.database.list('/schools');
+      this.schools = afd.list('/schools');
       this.translate = translator.translatePipe;
    }
 
@@ -37,8 +40,7 @@ export class Schools {
       // console.log('Schools: getSchoolByBranchAdminId')
       // console.log('userId ' + userId)
 
-      return this.af.database
-         .list('/schools', {
+      return this.afd.list('/schools', {
             query: {
                orderByChild: 'branchAdminId',
                equalTo: userId
@@ -53,8 +55,7 @@ export class Schools {
 
       var userId = this.authData.getUserId();
 
-      return this.af.database
-         .list('/schools', {
+      return this.afd.list('/schools', {
             query: {
                orderByChild: 'schoolAdminId',
                equalTo: userId
@@ -63,6 +64,25 @@ export class Schools {
          .map(this.castToSchoolModel)
          .first()
          .toPromise()
+   }
+
+   public getSchool(schoolId: string):Promise<SchoolModel> {
+      return this.afd.object('/schools/' + schoolId)
+         .map(obj => {
+            console.log("get school")
+            console.log(schoolId)
+            console.log(obj)
+            return this.castListToModel([obj])[0]
+         })
+         .first()
+         .toPromise()
+   }
+
+   // Conversion: FirebaseListObservable -> Model
+   private castListToModel(objs: any[]): SchoolModel[] {
+      return objs.map(o => {
+         return new SchoolModel().fromObject(o);
+      })
    }
 
    public addSchool(school) {
@@ -79,13 +99,12 @@ export class Schools {
    }
 
    public updateSchool(school: SchoolModel) {
-      this.af.database.object('/schools/' + school.id).set(school);
+      this.afd.object('/schools/' + school.id).set(school);
    }
 
-
    deleteSchool(schoolId: string) {
-      this.af.database.object('/schools/' + schoolId).remove();
-      var classesOfSchool = this.af.database.list('/classes', {
+      this.afd.object('/schools/' + schoolId).remove();
+      var classesOfSchool = this.afd.list('/classes', {
          query: {
             orderByChild: 'schoolId',
             equalTo: schoolId
@@ -98,7 +117,6 @@ export class Schools {
          })
       })
    }
-
 
    public newPhoto(schoolId: string) {
       {
@@ -133,7 +151,7 @@ export class Schools {
          var profilePictureRef = firebase.storage().ref('/school-images/namedBySchoolId/').child(schoolId + "_" + new Date().getDate() + " @ " + new Date().getTime() + ".png");
          profilePictureRef.putString(imageData, 'base64', {contentType: 'image/png'})
             .then((savedPicture) => {
-               this.af.database.object('/schools/' + schoolId + "/logoURL")
+               this.afd.object('/schools/' + schoolId + "/logoURL")
                   .set(savedPicture.downloadURL);
             });
       }, (err) => {

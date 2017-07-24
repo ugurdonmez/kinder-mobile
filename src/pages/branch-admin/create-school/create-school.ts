@@ -5,7 +5,7 @@ import {Classes} from "../../../providers/classes";
 import {Schools} from "../../../providers/schools";
 import {FormBuilder, Validators, FormGroup} from "@angular/forms";
 import {Translator} from "../../../app/translator";
-import {TranslateService} from "ng2-translate";
+import {TranslateService} from "@ngx-translate/core";
 import {Branches} from "../../../providers/branches";
 import {BranchAdminHomePage} from "../home/home";
 
