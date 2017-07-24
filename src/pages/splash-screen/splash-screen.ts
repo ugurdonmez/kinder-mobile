@@ -41,18 +41,6 @@ export class SplashScreenPage {
                return
             }
 
-            console.log('this.allRolesOfUser: ')
-            console.log(this.allRolesOfUser)
-
-            console.log('!this.allRolesOfUser: ')
-            console.log(!this.allRolesOfUser)
-
-            console.log('!!this.allRolesOfUser: ')
-            console.log(!!this.allRolesOfUser)
-
-            console.log('array.length == 0')
-            console.log(this.allRolesOfUser.length == 0)
-
             if (this.allRolesOfUser.length <= 1){
                this.navigateToRoleHome(this.allRolesOfUser[0])
             }
