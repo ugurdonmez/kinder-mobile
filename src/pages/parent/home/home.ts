@@ -15,6 +15,7 @@ import {ParentModel} from "../../../models/parent-model";
 import {ParentWeeklyActivitiesPage} from "../weekly-activities/weekly-activities";
 import {ClassModel} from "../../../models/class-model";
 import {ParentWeeklyMealMenuPage} from "../weekly-meal-menu/weekly-meal-menu";
+import {ParentDailyFeedbackParent} from "../daily-feedback-parent/parent-daliy-feedback-parent";
 
 @Component({
    selector: 'page-teacher-home',
@@ -79,5 +80,9 @@ export class ParentHomePage implements OnInit {
 
    private openAttendanceClicked(): void {
       this.navCtrl.push(ParentAttendancePage);
+   }
+
+   private openDailyFeedbackParentClicked(): void {
+      this.navCtrl.push(ParentDailyFeedbackParent)
    }
 }
